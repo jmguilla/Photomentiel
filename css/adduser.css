@@ -99,3 +99,10 @@ div.addu_body table td.aster {
 input#userSubmit {
 	width:250px;
 }
+
+div#content_created {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	line-height:30px;
+}

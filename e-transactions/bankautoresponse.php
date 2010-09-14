@@ -21,7 +21,7 @@
 	fwrite($log, "cvv_response_code = $cvv_response_code\n");
 	fwrite($log, "response_code = $response_code\n");
 	fwrite($log, "bank_response_code = $bank_response_code\n");
-	fwrite($log, "num_cmd = $caddie\n");
+	fwrite($log, "command_id = $caddie\n");
 	fwrite($log, "customer_id = $customer_id\n");
 	fwrite($log, "customer_ip_address = $customer_ip_address\n");
 	fclose($log);

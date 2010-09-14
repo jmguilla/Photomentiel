@@ -23,11 +23,11 @@ if ($utilisateurObj){
 
 $accountRemoved = false;
 if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
-	//TODO remove account
-	unset($_SESSION['userID']);
+	//T O D O remove account
+	/*unset($_SESSION['userID']);
 	unset($_SESSION['userClass']);
 	$utilisateurObj = false;
-	$accountRemoved = true;
+	$accountRemoved = true;*/
 }
 
 ?>
@@ -68,8 +68,8 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 					if($photographMode) {
 					//TODO afficher fin de quota au lieu du bouton si quota épuisé.
 				?>
-				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
-				<br/>
+				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
+				<center><hr id="separator"/><center>
 				<!--<div id="quotas">
 					si pas de SIREN<br/>
 					quota utilisé : 123/500 &#8364;<br/>
@@ -78,10 +78,11 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 				<?php
 					}
 				?>
-				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
+				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
+				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php';"/><br>
+				<center><hr id="separator"/><center>
 				<input id="view_albums" type="button" class="button" value="Voir les albums publics" onClick="document.location.href='albums.php';"/><br>
 				<input id="view_events" type="button" class="button" value="Voir les évènements" onClick="document.location.href='events.php';"/><br>
-				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php';"/><br>
 			</div>
 			<div id="right">
 				<div class="content_box">

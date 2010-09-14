@@ -293,7 +293,7 @@ $(document).ready(function() {
 						if (nextPage != 'false'){
 							document.location.href = nextPage;
 						} else {
-							history.back();
+							document.location.href = "adduser.php?action=ac";
 						}
 					}else{
 						alert(data.cause);
@@ -326,9 +326,9 @@ $(document).ready(function() {
 						previousMail='';
 						if (nextPage != 'false'){
 							document.location.href = nextPage;
-						} else {
+						}/* else {
 							history.back();
-						}
+						}*/
 					}else{
 						alert(data.cause);
 					}

@@ -23,6 +23,11 @@ if (isset($_SESSION['userID'])){
 	$createMode = true;
 }
 
+$accountCreated = false;
+if (isset($_GET['action']) && $_GET['action'] == 'ac'){
+	$accountCreated = true;
+}
+
 //if next page is set
 if (isset($_GET["np"])){
 	$nextPage = $_GET["np"];
@@ -37,10 +42,22 @@ if (isset($_GET["np"])){
 <div id="full_content_mid">
 	<div class="separator10"></div>
 	<?php
-		/***************************************************************************************/
-		/*********************************** Choose account type *******************************/
-		/***************************************************************************************/
-		if (!$typeSet){
+		if ($accountCreated){
+			/**************************** ACCOUNT CREATED ****************************/
+	?>
+			<div id="content_created">
+				<div class="separator10" style="height:140px;"></div>
+				Votre compte a été créé avec succés.<br/>
+				Nous vous avons envoyé un E-mail contenant les instructions qui vous permettront de l'activer.<br/>
+				<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
+				<div class="separator10" style="height:150px;"></div>
+			</div>
+	<?php
+		
+		} else if (!$typeSet){
+			/***************************************************************************************/
+			/*********************************** Choose account type *******************************/
+			/***************************************************************************************/
 	?>
 		<div class="separator10" style="height:20px"></div>
 		<div id="choices_2">

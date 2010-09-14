@@ -87,7 +87,11 @@ function validForm(update){
 		tmp = checkMinPrice();
 	    	error = error || tmp.error;
 	    	mess += tmp.mess;
+		
 	}
+	//check au moins un format fixé
+	
+	//check mailing list
     	tmp = checkRegexp('mails');
     	error = error || tmp.error;
     	mess += tmp.mess;
