@@ -1,0 +1,122 @@
+div#pictures_content {
+	margin-right:30px;
+	margin-left:30px;
+}
+div#pictures_content table {
+	width:99%;
+	border-spacing: 0px 2px;
+}
+div#pictures_content td {
+	background-color:#E0F8F7;
+	padding:0px;
+	margin:0px;
+}
+div#pictures_content tr {
+	height:20px;
+}
+div#pictures_content tr#title {
+	height:24px;
+	background-color:#32BEED;
+}
+div#pictures_content td.impair {
+	background-color:#CEF6F5;
+}
+div#pictures_content tr#total, div#pictures_content tr#total_ {
+	height:24px;
+}
+div#pictures_content tr#total td{
+	background-color:#32BEED;
+	font-weight:bold;
+	font-size:14px;
+}
+div#pictures_content tr#total_ td{
+	background-color:#CEF6F5;
+	font-weight:normal;
+	font-size:14px;
+}
+div.recap {
+	width:99%;
+	font-size:14px;
+	text-align:left;
+	height:30px;
+	text-decoration:underline;
+}
+div#make_cmd {
+	width:99%;
+	font-size:13px;
+	text-align:left;
+}
+li {
+	margin-left:40px;
+}
+
+div#adresses_content {
+	margin-right:30px;
+	margin-left:30px;
+}
+div#adress_separator, div#adress_left, div#adress_right {
+	float:left;
+	text-align:left;
+}
+div#adress_separator {
+	width:5%;
+	height:50px;
+}
+div#adress_left, div#adress_right {
+	width:44%;
+	padding:5px;
+}
+div#adress_left {
+	border:2px blue solid;
+}
+div#adress_right {
+	width:45%;
+	border:2px white solid;
+}
+div.adr_b {
+	font-weight:bold;
+	margin-left:30px;
+	text-align:left;
+	line-height:18px;
+}
+
+input.textfield {
+	color:black;
+	font-size:12px;
+	height:18px;
+	width:160px;
+}
+input.textfield:hover, input.textfield:focus {
+	color:black;
+}
+input#nom, input#prenom {
+	width:140px;
+}
+input#code_postal {
+	width:50px;
+}
+div.checkform {
+	text-align:left;
+	color:white;
+	background-repeat:no-repeat;
+	height:18px;
+	padding-left:18px;
+	margin-left:5px;
+	width:18px;
+	overflow:hidden;
+}
+input#valid_button {
+	margin-left:200px;
+}
+div.recap_info {
+	margin-right:5px;
+	margin-left:5px;
+	text-align:left;
+	font-size:14px;
+	line-height:18px;
+}
+div.recap_info img {
+	margin-left:20px;
+	margin-right:20px;
+}
+

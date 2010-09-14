@@ -1,0 +1,81 @@
+div#cacontent,div#catitle {
+	margin-left:15px;
+	margin-right:18px;
+	text-align:left;
+	font-size:14px;
+}
+div#catitle2, div#catitle3 {
+	font-weight:bold;
+	text-align:left;
+	font-size:14px;
+	padding:5px;
+	background-color:#AADDAA;
+	border:1px green solid;
+	margin-bottom:15px;
+}
+div#catitle3 {
+	background-color:#FBB933;
+	border:1px #F87217 solid;
+}
+div#catitle {
+	font-weight:bold;
+}
+
+span.note {
+	font-size:12px;
+	color:#000044;
+}
+span.note2 {
+	font-size:11px;
+	color:#000022;
+}
+input#title {
+	width:400px;
+}
+input#public2 {
+	margin-left:30px;
+}
+select#event {
+	width:405px;
+	height:80px;
+}
+input#filter_date {
+	width:70px;
+}
+input#filter_tf {
+	width:280px;
+}
+td.price input.textfield {
+	width:50px;
+	font-size:13px;
+}
+div.checkform {
+	text-align:left;
+	color:red;
+	background-repeat:no-repeat;
+	height:18px;
+	padding-left:18px;
+	margin-left:5px;
+	width:188px;
+}
+input#create_submit,input#update_submit {
+	margin-left:100px;
+}
+table.fandp td {
+	border:1px #BBBBBB solid;
+	text-align:center;
+}
+span.intitule {
+	color:#333333;
+}
+span.prix_conseille {
+	font-size:13px;
+	color:#333333;
+	margin-left:10px;
+}
+
+input#b_gonext{
+	width:120px;
+	margin-left:15px;
+}
+

@@ -1,0 +1,201 @@
+div#square_left, div#square_right {
+	width:484px;
+}
+div#square_right {
+	float:right;
+}
+div#square_left {
+	float:left;
+}
+div#square_top, div#divsquare_top {
+	font-size:17px;
+	font-weight:bold;
+	color:black;
+	letter-spacing:2px;
+}
+div#square_top {
+	text-align:left;
+	background-image:url(../design/backgrounds/square_top.png);
+	background-repeat:no-repeat;
+	width:484px;
+	height:29px;
+	padding-top:6px;
+	padding-left:5px;
+}
+div#square_top a {
+	font-size:12px;
+	font-weight:normal;
+	float:right;
+	margin-top:3px;
+	text-decoration:underline;
+	letter-spacing: 0;
+}
+div#square_mid {
+	background-image:url(../design/backgrounds/square_middle.png);
+	background-repeat:repeat-y;
+	width:484px;
+}
+div#card, div#albums, div#events, div#know_more {
+	height:215px;
+}
+div#albums, div#know_more {
+	height:217px;
+}
+div#card {
+	background:url(../design/misc/card.png) 0 2px no-repeat;
+	background-repeat:no-repeat;
+	width:366px;
+	margin-left:5px;
+	text-align:left;
+}
+input.card_code {
+	border: 1px #000000 solid;
+	background-color : #F0F0F0;
+	color: #003000;
+	padding-top:1px;
+	font-size : 14px;
+	height:17px;
+	width:80px;
+	margin-top:119px;
+	margin-left:195px;
+}
+input.card_code:hover {
+	border:1px #007700 solid;
+}
+div#card a {
+	margin-left:5px;
+	text-decoration:underline;
+	color: #003000;
+}
+div#card a:hover {
+	color: #007700;
+}
+div#square_bot {
+	background-image:url(../design/backgrounds/square_bottom.png);
+	background-repeat:no-repeat;
+	width:484px;
+	height:11px;
+}
+
+div#tl_error {
+	border:2px red solid;
+	width:180px;
+	height:32px;
+	text-align:center;
+	padding-top:3px;
+	color:red;
+	margin-left:270px;
+	margin-top:28px;
+	display:none;
+}
+
+div#albums {
+	width:100%;
+	margin-left:5px;
+	text-align:left;
+}
+span#date, span#event {
+	font-size:12px;
+	color:#444444;
+}
+a.last_album, a.last_event {
+	display:block;
+	width:95%;
+	height:38px;
+	margin-top:1px;
+	padding:1px;
+	font-size:14px;
+	color:black;
+	background-color:#EEEEEE;
+	text-decoration:none;
+}
+a.last_album#impair, a.last_event#impair {
+	background-color:#DDDDDD;
+}
+a.last_album:hover, a.last_event:hover, a.last_album#impair:hover, a.last_event#impair:hover , a.know_more_item:hover{
+	background-color : #CCCCCC;
+	color:blue;
+}
+div#album_pic {
+	float:left;
+}
+div#album_link {
+	float:left;
+	font-size:14px;
+	text-align:left;
+	margin-left:3px;
+}
+div.slide_show {
+	margin-right:12px;
+	height:78px;
+	background-image:url(../design/backgrounds/pellicule.png);
+	background-repeat:no-repeat;
+	overflow:hidden;
+}
+img.slide_show_image {
+	height:48px;
+	margin-top:14px;
+	margin-left:4px;
+	margin-right:4px;
+	border:1px #555500 solid;
+}
+img.slide_show_image:hover {
+	border:1px #0099FF solid;
+}
+
+div#events {
+	width:100%;
+	text-align:left;
+	margin-left:5px;
+}
+div#events_height{
+	height:130px;
+}
+div.event {
+	padding:1px;
+	text-align:left;
+	font-size:14px;
+}
+span#event {
+	margin-right:30px;
+}
+input#dc_from, input#dc_to {
+	width:70px;
+}
+
+input#search_event, input#card_valider {
+	height:20px;
+	width:70px;
+}
+input#card_valider {
+	margin-bottom:4px;
+}
+input#search_event {
+	margin-top:1px;
+}
+
+div#know_more {
+	width:95%;
+	text-align:left;
+	margin-left:10px;
+	font-size:14px;
+}
+div#know_more a {
+	text-decoration:none;
+}
+a.know_more_item img {
+	margin-right:15px;
+}
+a.know_more_item {
+	display:block;
+	margin-bottom:5px;
+	color:black;
+}
+a.know_more_item:hover {
+	display:block;
+}
+a#photographe {
+	font-size:17px;
+	font-weight:bold;
+	color:#FF0080;
+}

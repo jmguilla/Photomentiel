@@ -1,0 +1,101 @@
+div#choices_2 {
+	width:740px;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:14px;
+}
+div#choices_buttons_content {
+	width:700px;
+	margin-left:auto;
+	margin-right:auto;
+}
+div#left_button, div#right_button {
+	border:2px #0099FF solid;
+	width:250px;
+	font-size:16px;
+	font-weight:bold;
+	padding-top:15px;
+	height:56px;
+	color:#0099FF;
+	background-color:#222222;
+}
+div#left_button:hover, div#right_button:hover {
+	border:2px #222222 solid;
+	color:#222222;
+	background-color:#0099FF;
+}
+div#left_button {
+	float:left;
+}
+div#right_button {
+	float:right;
+}
+div.description {
+	text-align:left;
+	border:1px blue solid;
+	background-color:#EEEEEE;
+	font-size:13px;
+	padding:5px;
+}
+
+input.textfield {
+	color:black;
+	font-size:12px;
+	height:18px;
+}
+input.textfield:hover, input.textfield:focus {
+	color:black;
+}
+div#addu_title {
+	margin-left:20px;
+	margin-right:20px;
+	text-align:left;
+	font-weight:bold;
+	font-size:13px;
+}
+div.addu_body {
+	margin-left:100px;
+	margin-right:100px;
+}
+
+div.checkform {
+	text-align:left;
+	color:red;
+	background-repeat:no-repeat;
+	height:18px;
+	padding-left:18px;
+	margin-left:5px;
+	width:250px;
+}
+
+input.textfield {
+	width:220px;
+}
+input#userPWD1, input#userPWD2, input#code_postal, input#ville {
+	width:140px;
+}
+input#code_postal, input#banque, input#guichet {
+	width:50px;
+}
+input#telephone, input#numero_compte {
+	width:120px;
+}
+input#siren, input#bic {
+	width:90px;
+}
+input#cle_rib {
+	width:25px;
+}
+
+div.addu_body table td {
+	text-align:left;
+}
+div.addu_body table td.aster {
+	font-size:11px;
+	font-style:italic;
+	color:#333333;
+}
+
+input#userSubmit {
+	width:250px;
+}

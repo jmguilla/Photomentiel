@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+			<jnlp spec="1.0+" codebase="http://www.photomentiel.fr/client"> 
+  <information> 
+    <title>Photomentiel - Photo Uploader</title> 
+    <vendor>www.photomentiel.fr</vendor> 
+    <!-- <homepage href="docs/help.html"/> --> 
+    <description>Application d upload de photos dediee au site www.photomentiel.fr</description> 
+    <description kind="short">Application d upload de photos dediee au site www.photomentiel.fr</description>
+    <!-- <icon href="images/swingset2.jpg"/> --> 
+    <!-- <icon kind="splash" href="images/splash.gif"/> -->
+  </information> 
+  <security> 
+      <all-permissions/> 
+  </security> 
+  <resources> 
+    <j2se version="1.6"/> 
+    <jar href="http://www.photomentiel.fr/client/client.jar"/>
+  </resources> 
+  <application-desc main-class="photomentiel.controler.Controler"> 
+    <argument>2010091400</argument> 
+    <argument>wgiib7s2</argument>
+  </application-desc> 
+</jnlp>

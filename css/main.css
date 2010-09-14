@@ -1,0 +1,221 @@
+body { 
+  	margin:0;
+  	text-align:center;
+}
+img {
+	border:0px;
+}
+a {
+	color:#0099FF;
+}
+a:hover {
+	color:#00FFFF;
+}
+a.on_blue {
+	color:black;
+}
+a.on_blue:hover {
+	color:blue;
+}
+
+div {
+	text-align:center;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+div.separator2 {
+	clear:both;
+	height:2px;
+}
+div.separator5 {
+	clear:both;
+	height:5px;
+}
+div.separator10 {
+	clear:both;
+	height:10px;
+}
+
+input.button {
+	text-align:center;
+	text-decoration:none;
+	height:24px;
+	width:170px;
+	border:1px aqua solid;
+	color:aqua;
+	background-color:#222222;
+	vertical-align:middle;
+}
+input.button:hover {
+	color:#222222;
+	background-color:aqua;
+	border:1px #222222 solid;
+}
+input.textfield {
+	border:1px blue solid;
+	background-color:white;
+	padding:1px;
+	color:blue;
+	font-size:11px;
+	height:16px;
+	width:100px;
+}
+input.textfield:hover, input.textfield:focus {
+	border:1px #0099FF solid;
+	color:#0099FF;
+}
+select {
+	border:1px blue solid;
+	background-color:white;
+	padding:1px;
+	color:blue;
+	font-size:12px;
+	height:22px;
+	width:100px;
+}
+textarea {
+	border:1px blue solid;
+	background-color:white;
+	padding:1px;
+	color:black;
+	font-size:12px;
+}
+textarea:hover, textarea:focus {
+	border:1px #0099FF solid;
+}
+
+[disabled],[disabled]:hover,[disabled]:focus, input[disabled],input[disabled]:hover,input[disabled]:focus {
+	border:1px #9999FF solid;
+	color:#8888FF;
+	background-color:#DDDDFF;
+}
+
+
+div#header_surround{
+	margin-top:2px;
+	margin-left:auto; 
+	margin-right:auto;
+	width:980px;
+	height:110px;
+}
+div#header {
+	background-image:url(../design/backgrounds/banniere.png);
+	background-repeat:no-repeat;
+	width:980px;
+	height:110px;
+}
+div#menu_barre {
+	margin-left:auto; 
+	margin-right:auto;
+	background-image:url(../design/backgrounds/buttons_barre.png);
+	background-repeat:no-repeat;
+	width:980px;
+	padding-top:1px;
+	height:32px;
+	text-align:right;
+	color:#0099FF;
+	font-size:11px;
+}
+input.email, input.password {
+	border:1px #0099FF solid;
+	background-color:#222222;
+	padding:1px;
+	color:#0099FF;
+	font-size:11px;
+	height:16px;
+	width:150px;
+	margin-top:3px;
+}
+input.email:hover, input.email:focus, input.password:hover, input.password:focus {
+	border:1px aqua solid;
+	color:aqua;
+}
+
+input#valider {
+	text-align:center;
+	text-decoration:none;
+	height:20px;
+	width:30px;
+	padding-left:0px;
+	vertical-align:middle;
+}
+
+span#form_connect_error {
+	color:red;
+	font-size:13px;
+	margin-left:15px;
+	display:none;
+}
+div#user_connected {
+	float:left;
+	color:aqua;
+	font-size:14px;
+	padding-top:5px;
+}
+div#home {
+	float:left;
+	padding-top:2px;
+	margin-right:5px;
+	width:24px;
+	height:24px;
+}
+
+a#lost_pwd, a#deconnexion {
+	padding-right:10px;
+}
+
+div#body_content {
+	margin-left:auto;
+	margin-right:auto;
+	width:980px;
+}
+div#footer {
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:4px;
+	background-image:url(../design/backgrounds/bottom.png);
+	background-repeat:no-repeat;
+	width:980px;
+	height:22px;
+	color:#0099FF;
+	
+}
+div#end {
+	margin-left:auto;
+	margin-right:auto;
+	width:980px;
+}
+div#end a {
+	font-size:10px;
+	color:navy;
+}
+div#end a:hover {
+	font-size:10px;
+	color:#0099FF;
+}
+
+/** other content **/
+div#full_content_top {
+	background-image:url(../design/backgrounds/full_content_top.png);
+	background-repeat:no-repeat;
+	width:980px;
+	height:30px;
+	text-align:left;
+	font-size:17px;
+	font-weight:bold;
+	color:black;
+	letter-spacing:2px;
+	padding-top:6px;
+	padding-left:5px;
+}
+div#full_content_mid {
+	background-image:url(../design/backgrounds/full_content_mid.png);
+	background-repeat:repeat-y;
+	width:980px;
+}
+div#full_content_bot {
+	background-image:url(../design/backgrounds/full_content_bot.png);
+	background-repeat:no-repeat;
+	width:980px;
+	height:11px;
+}
