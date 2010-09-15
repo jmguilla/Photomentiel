@@ -6,24 +6,30 @@ function specialConvertUSDate(USdateStr){
 	var d = tmp[2];
 	return d+"/"+m+"/"+y.substring(2);
 }
-
+/* check that at least one price is set and each price is lesser than or equals to the min value */
 function checkMinPrice(){
-	var errorRegexp = false;
+	var errorMin = false;
 	var mess = '';
+	var oneSet = false;
 	$('input[min]').each(function() {
 		if ($('#'+ this.id).val() != ''){
+			oneSet = true;
 			var minPrice = parseFloat($('#'+ this.id).attr('min'));
 			if (parseFloat($('#'+ this.id).val()) < minPrice){
 				$('#r'+ this.id).css('background-image','url(design/misc/unchecked.gif)');
 				$('#r'+ this.id).html('Le prix doit être supérieur ou égal à '+minPrice);
-				if(!errorRegexp) {
+				if(!errorMin) {
 				    	mess = mess + "\nCertains prix sont en dessous de la limite fixée.";
-				    	errorRegexp = true;
+				    	errorMin = true;
 				}
 			}
 		}
     	});
-    	return { "error" : errorRegexp, "mess" : mess };
+	if (!errorMin && !oneSet){
+		mess = mess + "\nVous devez spécifier le prix d'au moins un format de photos.";
+		errorMin = true;
+	}
+    	return { "error" : errorMin, "mess" : mess };
 }
 
 function filterEvent(){
@@ -82,15 +88,13 @@ function validForm(update){
     	tmp = checkRegexp();
     	error = error || tmp.error;
     	mess += tmp.mess;
-	//pour les champs avec un minimum
+	//pour les champs avec un minimum et au moins 1 set
 	if (!tmp.error){
 		tmp = checkMinPrice();
 	    	error = error || tmp.error;
 	    	mess += tmp.mess;
 		
 	}
-	//check au moins un format fixé
-	
 	//check mailing list
     	tmp = checkRegexp('mails');
     	error = error || tmp.error;
