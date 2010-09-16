@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Mar 14 Septembre 2010 à 07:17
+-- Généré le : Ven 17 Septembre 2010 à 00:24
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS `Activate` (
 -- Contenu de la table `Activate`
 --
 
+INSERT INTO `Activate` (`activateID`, `id_utilisateur`) VALUES
+('f0aa6c9d8adef6cf19dddd71455ed0cc17', 17);
 
 -- --------------------------------------------------------
 
@@ -47,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`adresseID`),
   KEY `fk_adresse_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `Adresse`
@@ -62,7 +64,9 @@ INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `vi
 (6, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 6),
 (7, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 7),
 (8, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 8),
-(14, 'Guillaume', 'jean-michel', '5 rue des Boers', '', 'Nice', '06100', 15);
+(14, 'Guillaume', 'jean-michel', '5 rue des Boers', '', 'Nice', '06100', 15),
+(15, 'ché', 'faire', '2222', '333333', 'Antibes', '06600', 16),
+(16, 'sdfsdhf ', 'sdfjs hd', 'dsjf hsdf', '', 'Antibes', '06600', 17);
 
 -- --------------------------------------------------------
 
@@ -81,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -92,8 +96,17 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (2, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 2),
 (3, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 3),
 (4, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 4),
-(28, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 28),
-(29, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 29);
+(29, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 29),
+(30, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 30),
+(32, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 32),
+(33, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 33),
+(34, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 34),
+(35, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 35),
+(36, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 36),
+(37, 'Tu', 'Fais', 'le', 'Fou', 'Les Arcs', '83460', 37),
+(38, 'guillal', 'mlqksjdf', 'mlkikic', 'mq', 'test', '06000', 38),
+(39, 'scheefer', 'Gérard', '67 Boulevard du val Claret', 'Bat 10', 'Antibes', '06600', 39),
+(40, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 40);
 
 -- --------------------------------------------------------
 
@@ -116,17 +129,19 @@ CREATE TABLE IF NOT EXISTS `Album` (
   PRIMARY KEY  (`albumID`),
   KEY `fk_album_photographe` (`id_photographe`),
   KEY `fk_album_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `Album`
 --
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 1, 3, 2, 'a', 0.00, 0.00, '', '2010-06-28 15:20:25'),
-(2, 'Tunning Jacky', 1, 1, 3, 2, 'a', 0.00, 0.00, '', '2010-08-01 12:46:42'),
-(3, 'Mariage Chris', 1, 2, 3, 2, 'a', 0.00, 0.00, '', '2010-08-01 12:53:00'),
-(4, 'Mariage bien réussi', 1, 3, 3, 2, 'a', 0.00, 0.00, '', '2010-08-01 12:55:17');
+(1, 'Rencontre OK', 1, 1, 3, 2, '', 48.65, 48.65, '', '2010-06-28 15:20:25'),
+(2, 'Tunning Jacky', 1, 1, 3, 2, '', 35.00, 35.00, '', '2010-08-01 12:46:42'),
+(3, 'Mariage Chris', 1, 2, 3, 2, '', 4.55, 4.55, '', '2010-08-01 12:53:00'),
+(4, 'Mariage bien réussi', 1, 3, 3, 2, '', 246.05, 246.05, '', '2010-08-01 12:55:17'),
+(11, 'fgdfg dfg dfg', 0, 9, 7, 0, '', 0.00, 0.00, '', '2010-09-14 14:51:07'),
+(12, 'jkbbjhbjhhkbhkb', 0, 1, 5, 1, '', 0.00, 0.00, '', '2010-09-15 23:38:01');
 
 -- --------------------------------------------------------
 
@@ -138,24 +153,35 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   `commandeID` int(10) unsigned NOT NULL auto_increment,
   `date` datetime NOT NULL,
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
+  `id_album` int(10) unsigned default NULL,
   `etat` smallint(5) unsigned NOT NULL default '0',
   `fdp` float NOT NULL default '0',
   `numero` varchar(15) NOT NULL default '',
   PRIMARY KEY  (`commandeID`),
-  KEY `fk_commande_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+  KEY `fk_commande_utilisateur` (`id_utilisateur`),
+  KEY `id_album` (`id_album`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Contenu de la table `Commande`
 --
 
-INSERT INTO `Commande` (`commandeID`, `date`, `id_utilisateur`, `etat`, `fdp`, `numero`) VALUES
-(1, '2010-08-30 21:57:04', 8, 0, 0, '100830210000'),
-(2, '2010-09-06 16:57:45', 4, 0, 3.5, '100906160000'),
-(3, '2010-09-11 10:47:13', 7, 0, 0, '100911100000'),
-(4, '2010-09-11 14:39:21', 4, 0, 3.5, '100911140000'),
-(28, '2010-09-13 00:04:13', 4, 0, 0, '100913000000'),
-(29, '2010-09-13 09:52:30', 8, 1, 0, '100913090000');
+INSERT INTO `Commande` (`commandeID`, `date`, `id_utilisateur`, `id_album`, `etat`, `fdp`, `numero`) VALUES
+(1, '2010-08-30 21:57:04', 8, NULL, 0, 0, '100830210000'),
+(2, '2010-09-06 16:57:45', 4, NULL, 1, 3.5, '100906160000'),
+(3, '2010-09-11 10:47:13', 7, NULL, 0, 0, '100911100000'),
+(4, '2010-09-11 14:39:21', 4, NULL, 1, 3.5, '100911140000'),
+(29, '2010-09-13 09:52:30', 8, NULL, 1, 0, '100913090000'),
+(30, '2010-09-14 08:09:38', 8, NULL, 1, 0, '100914080000'),
+(32, '2010-09-14 08:34:15', 4, NULL, 1, 0, '100914080002'),
+(33, '2010-09-14 08:35:15', 4, NULL, 1, 0, '100914080003'),
+(34, '2010-09-14 10:07:36', 4, NULL, 1, 0, '100914100000'),
+(35, '2010-09-14 11:14:20', 4, NULL, 0, 3.5, '100914110000'),
+(36, '2010-09-14 13:59:48', 4, NULL, 4, 3.5, '100914130000'),
+(37, '2010-09-14 16:09:02', 7, NULL, 1, 0, '100914160000'),
+(38, '2010-09-14 16:14:06', 7, NULL, 0, 3.5, '100914160001'),
+(39, '2010-09-15 23:16:52', 1, NULL, 1, 0, '100915230000'),
+(40, '2010-09-16 18:33:11', 4, NULL, 0, 3.5, '100916180000');
 
 -- --------------------------------------------------------
 
@@ -171,14 +197,24 @@ CREATE TABLE IF NOT EXISTS `CommandeArchive` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `prix` float(5,2) NOT NULL,
   PRIMARY KEY  (`commandeArchiveID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `CommandeArchive`
 --
 
 INSERT INTO `CommandeArchive` (`commandeArchiveID`, `date`, `id_utilisateur`, `numero`, `id_photographe`, `prix`) VALUES
-(1, '2010-09-13 09:52:30', 8, '100913090000', 3, 80.00);
+(1, '2010-09-13 09:52:30', 8, '100913090000', 3, 80.00),
+(2, '2010-09-14 08:09:38', 8, '100914080000', 1, 32.50),
+(3, '2010-09-14 08:29:16', 4, '100914080001', 1, 49.50),
+(4, '2010-09-14 08:34:15', 4, '100914080002', 1, 80.50),
+(5, '2010-09-14 08:35:15', 4, '100914080003', 1, 50.00),
+(6, '2010-09-11 14:39:21', 4, '100911140000', 2, 6.50),
+(7, '2010-09-06 16:57:45', 4, '100906160000', 3, 11.50),
+(8, '2010-09-14 10:07:36', 4, '100914100000', 3, 80.00),
+(9, '2010-09-14 13:59:48', 4, '100914130000', 1, 33.00),
+(10, '2010-09-14 16:09:02', 7, '100914160000', 3, 260.00),
+(11, '2010-09-15 23:16:52', 1, '100915230000', 1, 36.50);
 
 -- --------------------------------------------------------
 
@@ -202,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `fk_commandePhoto_album` (`id_album`),
   KEY `id_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=124 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=183 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -217,19 +253,61 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (6, '00000000000000_0008.JPG', 3, 3, 1, 2, 1, 4, 24.00),
 (7, '00000000000000_0014.JPG', 3, 3, 1, 4, 1, 4, 48.00),
 (8, '00000000000000_0015.JPG', 1, 4, 1, 1, 1, 3, 3.00),
-(111, '00000000000000_0009.JPG', 2, 28, 1, 2, 1, 4, 16.00),
-(112, '00000000000000_0009.JPG', 1, 28, 1, 3, 1, 4, 12.00),
-(113, '00000000000000_0009.JPG', 2, 28, 1, 4, 1, 4, 32.00),
-(114, '00000000000000_0008.JPG', 2, 28, 1, 2, 1, 4, 16.00),
-(115, '00000000000000_0008.JPG', 1, 28, 1, 3, 1, 4, 12.00),
-(116, '00000000000000_0008.JPG', 2, 28, 1, 4, 1, 4, 32.00),
-(117, '00000000000000_0007.JPG', 2, 28, 1, 2, 1, 4, 16.00),
-(118, '00000000000000_0007.JPG', 1, 28, 1, 3, 1, 4, 12.00),
-(119, '00000000000000_0007.JPG', 4, 28, 1, 4, 1, 4, 64.00),
 (120, '00000000000000_0018.JPG', 2, 29, 1, 1, 1, 4, 8.00),
 (121, '00000000000000_0018.JPG', 2, 29, 1, 2, 1, 4, 16.00),
 (122, '00000000000000_0018.JPG', 2, 29, 1, 3, 1, 4, 24.00),
-(123, '00000000000000_0018.JPG', 2, 29, 1, 4, 1, 4, 32.00);
+(123, '00000000000000_0018.JPG', 2, 29, 1, 4, 1, 4, 32.00),
+(124, '20090913152209.JPG', 2, 30, 1, 1, 1, 1, 3.00),
+(125, '20090913152209.JPG', 1, 30, 1, 2, 1, 1, 2.50),
+(126, '20090913152209.JPG', 2, 30, 1, 4, 1, 1, 12.00),
+(127, '20090913152543.JPG', 2, 30, 1, 1, 1, 1, 3.00),
+(128, '20090913152543.JPG', 2, 30, 1, 4, 1, 1, 12.00),
+(137, '20090913153549.JPG', 2, 32, 1, 1, 1, 1, 3.00),
+(138, '20090913153549.JPG', 1, 32, 1, 2, 1, 1, 2.50),
+(139, '20090913153549.JPG', 2, 32, 1, 3, 1, 1, 8.00),
+(140, '20090913153549.JPG', 2, 32, 1, 4, 1, 1, 12.00),
+(141, '20090913160448.JPG', 1, 32, 1, 1, 1, 1, 1.50),
+(142, '20090913160448.JPG', 3, 32, 1, 2, 1, 1, 7.50),
+(143, '20090913160448.JPG', 5, 32, 1, 4, 1, 1, 30.00),
+(144, '20090913161142.JPG', 1, 32, 1, 1, 1, 1, 1.50),
+(145, '20090913161142.JPG', 1, 32, 1, 2, 1, 1, 2.50),
+(146, '20090913161142.JPG', 3, 32, 1, 3, 1, 1, 12.00),
+(147, '20031102115902.JPG', 2, 33, 1, 1, 1, 2, 4.00),
+(148, '20031102115902.JPG', 2, 33, 1, 2, 1, 2, 8.00),
+(149, '20031102115902.JPG', 1, 33, 1, 3, 1, 2, 6.00),
+(150, '20031102120023.JPG', 2, 33, 1, 2, 1, 2, 8.00),
+(151, '20031102120023.JPG', 1, 33, 1, 3, 1, 2, 6.00),
+(152, '20031102115847.JPG', 3, 33, 1, 2, 1, 2, 12.00),
+(153, '20031102115847.JPG', 1, 33, 1, 3, 1, 2, 6.00),
+(154, '00000000000000_0018.JPG', 2, 34, 1, 1, 1, 4, 8.00),
+(155, '00000000000000_0018.JPG', 2, 34, 1, 2, 1, 4, 16.00),
+(156, '00000000000000_0018.JPG', 2, 34, 1, 3, 1, 4, 24.00),
+(157, '00000000000000_0018.JPG', 2, 34, 1, 4, 1, 4, 32.00),
+(158, '00000000000000_0058.JPG', 3, 35, 1, 1, 1, 4, 12.00),
+(159, '20090913153549.JPG', 2, 36, 1, 1, 1, 1, 3.00),
+(160, '20090913153549.JPG', 1, 36, 1, 2, 1, 1, 2.50),
+(161, '20090913160448.JPG', 2, 36, 1, 1, 1, 1, 3.00),
+(162, '20090913160448.JPG', 2, 36, 1, 3, 1, 1, 8.00),
+(163, '20090913161142.JPG', 2, 36, 1, 2, 1, 1, 5.00),
+(164, '20090913153520.JPG', 2, 36, 1, 1, 1, 1, 3.00),
+(165, '20090913153520.JPG', 2, 36, 1, 2, 1, 1, 5.00),
+(166, '00000000000000_0044.JPG', 4, 37, 1, 1, 1, 4, 16.00),
+(167, '00000000000000_0044.JPG', 3, 37, 1, 2, 1, 4, 24.00),
+(168, '00000000000000_0044.JPG', 5, 37, 1, 4, 1, 4, 80.00),
+(169, '00000000000000_0045.JPG', 5, 37, 1, 3, 1, 4, 60.00),
+(170, '00000000000000_0069.JPG', 5, 37, 1, 4, 1, 4, 80.00),
+(171, '20031102120130.JPG', 1, 38, 1, 4, 1, 2, 8.00),
+(172, '20031102120644.JPG', 1, 38, 1, 4, 1, 2, 8.00),
+(173, '20031102120628.JPG', 1, 38, 1, 4, 1, 2, 8.00),
+(174, '20090913154223.JPG', 5, 39, 1, 2, 1, 1, 12.50),
+(175, '20090913154223.JPG', 1, 39, 1, 3, 1, 1, 4.00),
+(176, '20090913154223.JPG', 1, 39, 1, 4, 1, 1, 6.00),
+(177, '20090913153908.JPG', 1, 39, 1, 1, 1, 1, 1.50),
+(178, '20090913153908.JPG', 1, 39, 1, 3, 1, 1, 4.00),
+(179, '20090913152209.JPG', 1, 39, 1, 2, 1, 1, 2.50),
+(180, '20090913152209.JPG', 1, 39, 1, 4, 1, 1, 6.00),
+(181, '00000000000000_0002.JPG', 2, 40, 1, 1, 1, 4, 8.00),
+(182, '00000000000000_0011.JPG', 2, 40, 1, 1, 1, 4, 8.00);
 
 -- --------------------------------------------------------
 
@@ -418,7 +496,7 @@ CREATE TABLE IF NOT EXISTS `EvenementEcouteur` (
   PRIMARY KEY  (`evenementEcouteurID`),
   KEY `fk_evenementEcouteur_utilisateur` (`id_utilisateur`),
   KEY `fk_evenementEcouteur_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `EvenementEcouteur`
@@ -428,7 +506,8 @@ INSERT INTO `EvenementEcouteur` (`evenementEcouteurID`, `id_evenement`, `id_util
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 2),
-(4, 4, 2);
+(4, 4, 2),
+(5, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -443,6 +522,7 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `telephone` varchar(20) NOT NULL default '',
   `siteWeb` varchar(50) NOT NULL default '',
   `home` varchar(100) NOT NULL default '',
+  `pourcentage` tinyint(3) unsigned NOT NULL default '70',
   `rib_b` varchar(10) NOT NULL default '',
   `rib_g` varchar(10) NOT NULL default '',
   `rib_c` varchar(20) NOT NULL default '',
@@ -452,18 +532,19 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`photographeID`),
   KEY `fk_photographe_user` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `Photographe`
 --
 
-INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
-(1, 'ET tu s''auras pas&', '521000018', '+33620375962', 'www.site2.com', '2010051201', '19106', '00021', '43511041644', '60', '', '', 4),
-(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', '', '', '', '', '', '', 5),
-(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', '', '', '', '', '', '', 6),
-(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', '19106', '00021', '43511041644', '60', '', '', 7),
-(8, '', '521000018', '', '', '2010090700', '19106', '00021', '43511041644', '60', '', '', 15);
+INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
+(1, 'ET tu s''auras pas&', '521000018', '+33620375962', 'www.site2.com', '2010051201', 70, '19106', '00021', '43511041644', '60', '', '', 4),
+(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 70, '', '', '', '', '', '', 5),
+(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', 70, '', '', '', '', '', '', 6),
+(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 70, '19106', '00021', '43511041644', '60', '', '', 7),
+(8, '', '521000018', '', '', '2010090700', 70, '19106', '00021', '43511041644', '60', '', '', 15),
+(9, '', '521000018', '', '', '2010091400', 70, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 16);
 
 -- --------------------------------------------------------
 
@@ -479,7 +560,7 @@ CREATE TABLE IF NOT EXISTS `PrixTaillePapierAlbum` (
   PRIMARY KEY  (`prixTaillePapierAlbumID`),
   KEY `fk_prixtaillepapieralbum_taillepapier` (`id_taillePapier`),
   KEY `fk_prixtaillepapieralbum_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Contenu de la table `PrixTaillePapierAlbum`
@@ -501,7 +582,10 @@ INSERT INTO `PrixTaillePapierAlbum` (`prixTaillePapierAlbumID`, `prix`, `id_tail
 (13, 4.00, 1, 4),
 (14, 8.00, 2, 4),
 (15, 12.00, 3, 4),
-(16, 16.00, 4, 4);
+(16, 16.00, 4, 4),
+(23, 10.00, 1, 11),
+(24, 10.00, 2, 11),
+(25, 10.00, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -562,9 +646,11 @@ CREATE TABLE IF NOT EXISTS `StringID` (
 --
 
 INSERT INTO `StringID` (`stringID`, `homePhotographe`, `id_album`) VALUES
+('3x5uyoz0', '2010051201', 12),
 ('a2c5j7yt', '2010072801', 3),
 ('a5f8t1v5', '2010051201', 1),
 ('r5v7ttri', '2010051201', 2),
+('wgiib7s2', '2010091400', 11),
 ('x442y888', '2010072901', 4);
 
 -- --------------------------------------------------------
@@ -626,7 +712,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateInscription` datetime NOT NULL,
   PRIMARY KEY  (`utilisateurID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Contenu de la table `Utilisateur`
@@ -641,7 +727,9 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (6, 'photographe3.prenom-photographe3@email.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-01 11:56:04'),
 (7, 'guillauj@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-18 18:51:02'),
 (8, 'jl@schee.fr', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-20 01:22:58'),
-(15, 'tchitchoubyne@msn.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-07 00:08:33');
+(15, 'tchitchoubyne@msn.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-07 00:08:33'),
+(16, 'jl@jl.jl', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-14 14:35:23'),
+(17, 'sdsfd@sdfsd.sdf', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-16 15:52:01');
 
 -- --------------------------------------------------------
 
@@ -35219,6 +35307,7 @@ ALTER TABLE `Album`
 -- Contraintes pour la table `Commande`
 --
 ALTER TABLE `Commande`
+  ADD CONSTRAINT `Commande_ibfk_1` FOREIGN KEY (`id_album`) REFERENCES `Album` (`albumID`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_commande_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `Utilisateur` (`utilisateurID`);
 
 --
