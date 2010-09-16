@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile /homez.368/photomen/www/administration/.htpasswd
+Require valid-user
