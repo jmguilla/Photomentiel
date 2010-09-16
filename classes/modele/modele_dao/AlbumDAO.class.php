@@ -11,6 +11,31 @@ class AlbumDAO extends DAO {
 		$dsn = DBTYPE."://".DBUSER.":".DBPWD."@".DBHOST."/".DBPHOTOMENTIEL;
 		parent::__construct($dsn);
 	}
+
+	public function validerListeAlbum($listeAlbum){
+		if(isset($listeAlbum) && !empty($listeAlbum)){
+			$query = "update Album set etat = 2 where ";
+			$length = count($listeAlbum);
+			$current = 0;
+			foreach($listeAlbum as $albumID){
+				$current++;
+				$query .= "albumID = " . mysql_real_escape_string($albumID);
+				if($current < $length){
+					$query .= " or ";
+				}
+			}
+			$this->startTransaction();
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() >= 0){
+				$this->commit();
+				return true;
+			}else{
+				$this->rollback();
+				return false;
+			}
+		}
+		return false;
+	}
 	/**
 	 * Renvoie les n derniers albums publique ou pas, fonction du parametre isPublique
 	 * si n n'est pas fournies, renvoies tous les derniers albums
@@ -26,7 +51,7 @@ class AlbumDAO extends DAO {
 			mysql_real_escape_string($etat);
 		}
 		$query .= " order by date desc";
-		if(isset($n)){
+		if(isset($n) && $n > 0){
 			$query .= " limit " . 
 			mysql_real_escape_string($n);
 		}
