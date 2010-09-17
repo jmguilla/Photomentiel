@@ -51,9 +51,19 @@ function changePrice(rp, rf, p){
 }
 
 function goPrevious(){
-	if (confirm('En retournant sur l\'album, vous perdrez les quantités sélectionnées, continuer quand même ?')){
-		document.location.href='viewalbum.php?al='+album_ID;
-	}
+	//prepare form
+	var form = $('#form_backToAlbum');
+	var index = 0;
+	$.each($('input[class=faq_q]'), function() {
+		var nb = parseInt($(this).val());
+		if (!isNaN(nb) && nb > 0){
+			form.append('<input type="hidden" name="pictur_'+index+'" value="'+$(this).attr('picture')+'"></input>');
+			form.append('<input type="hidden" name="format_'+index+'" value="'+$(this).attr('formatId')+'"></input>');
+			form.append('<input type="hidden" name="number_'+index+'" value="'+$(this).val()+'"></input>');
+			index++;
+		}
+	});
+	form.submit();
 }
 function confirmAndGoNext(){
 	//check total > 0
@@ -62,15 +72,19 @@ function confirmAndGoNext(){
 		return false;
 	}
 	//check pictures to be deleted
-	var checkOnce = false;
+	var checked = 0;
 	var continueAnyway = true;
 	$.each($('span[class=stot]'), function() {
 		var nb = parseFloat($(this).html());
-		if (isNaN(nb) && !checkOnce){
-			checkOnce = true;
-			continueAnyway = confirm("Au moins une photo n'a pas été commandée. Continuer quand même ?");
+		if (isNaN(nb)){
+			checked++;
 		}
 	});
+	if (checked == 1){
+		continueAnyway = confirm(checked+" photo est marquée 'non commandée'.\nElle sera ignorée lors de la commande. Continuer quand même ?");
+	} else if (checked > 1){
+		continueAnyway = confirm(checked+" photos sont marquées 'non commandée'.\nElles seront ignorées lors de la commande. Continuer quand même ?");
+	}
 	if (!continueAnyway){
 		return false;
 	}

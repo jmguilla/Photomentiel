@@ -100,6 +100,24 @@ if (!is_numeric($page) || $page<1 || ($nb_photos_per_page*($page-1)>sizeof($pics
 	$page=1;
 }
 
+
+//if a backToAlbum command has been sent, just store the content in session
+if (isset($_POST["pictur_0"])){
+	//put pictures from POST in SESSION
+	$commandLines = array();
+	$i=0;
+	while (isset($_POST["pictur_$i"])){
+		$cl = array('fileName'=>$_POST["pictur_$i"],'formatID'=>$_POST["format_$i"],'quantity'=>$_POST["number_$i"]);
+		array_push($commandLines, $cl);
+		$i++;
+	}
+	//$commandLines contains every command lines as it is represented in the session
+	$_SESSION['COMMAND_LINES'] = $commandLines;
+} else {
+	unset($_SESSION['COMMAND_LINES']);
+}
+
+//and display
 include("head.php");
 ?>
 	<script language="javascript" src="js/jquery.autopager-1.0.0.js"></script>
