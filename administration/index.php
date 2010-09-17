@@ -2,6 +2,8 @@
 $dir_administration_index_php = dirname(__FILE__);
 include $dir_administration_index_php . "/header.php";
 
+echo $PHP_AUTH_USER . " - ";
+echo $_SERVER['PHP_AUTH_USER'];
 ?>
 <div>
 Rendez-vous dans la section désirée:<br/>
