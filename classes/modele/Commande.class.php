@@ -68,6 +68,13 @@ class Commande{
 		$dao = new CommandeDAO();
 		return $dao->create($this);
 	}
+	/**
+	 * pour deleter une commande
+	 */
+	public function delete(){
+		$dao = new CommandeDAO();
+		return $dao->delete($this);
+	}
 
 	/*#####################################
 	 * Getters & Setters

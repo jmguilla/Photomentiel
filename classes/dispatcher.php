@@ -59,8 +59,11 @@ try{
 		case gr_image_thumb_path:
 			include_once $dir_dispatcher_php . "/controleur/controleur_images.php";
 		break;
+		case s_commande:
+			include_once $dir_dispatcher_php . "/controleur/controleur_commandes.php";
+		break;
 		default:
-			echo "unknown action in dispatcher: " . $action;
+			throw new InvalidArgumentException("Action inconnue dans dispatcher: " . $action);
 		break;
 	}
 }catch(Exception $e){

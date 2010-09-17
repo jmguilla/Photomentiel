@@ -161,7 +161,7 @@ class CommandeDAO extends DAO{
 		}
 	}
 	/**
-	 * Renvoie une commande avec les photos mises � jour
+	 * Renvoie une commande avec les photos mises à jour
 	 * @param int $id
 	 */
 	public function getCommandeEtPhotosDepuisID($id){

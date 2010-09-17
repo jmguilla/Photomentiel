@@ -46,4 +46,7 @@ define("g_sid_p_ida", "get_stringid_par_idalbum");
 
 //en relation avec les images
 define("gr_image_thumb_path", "get_random_image_thumb_path");
+
+//en relation avec les commandes
+define("s_commande", "supprimer_commande");
 ?>
