@@ -116,7 +116,7 @@ include("head.php");
 		picsFullDir = "<?php echo $picturesPath.$picsDir; ?>";
 		albumCookieName = "ptmtl_<?php echo $albumStringID; ?>";
 	</script>
-	<div id="header_alb"><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><div id="header_alb_left"></div></a><div id="header_alb_right"></div></div>
+	<div id="header_alb"><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><div id="header_alb_left"><span id="accueil">Accueil</span></div></a><div id="header_alb_right"></div></div>
 	<div id="leftpanel">
 			<div id="leftpanel_top">
 				<span id="album_title"><?php echo $albumObj->getNom(); ?></span>

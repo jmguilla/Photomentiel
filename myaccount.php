@@ -68,7 +68,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 					if($photographMode) {
 					//TODO afficher fin de quota au lieu du bouton si quota épuisé.
 				?>
-				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
+				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
 				<center><hr id="separator"/><center>
 				<!--<div id="quotas">
 					si pas de SIREN<br/>
@@ -78,7 +78,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 				<?php
 					}
 				?>
-				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
+				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
 				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php';"/><br>
 				<center><hr id="separator"/><center>
 				<input id="view_albums" type="button" class="button" value="Voir les albums publics" onClick="document.location.href='albums.php';"/><br>

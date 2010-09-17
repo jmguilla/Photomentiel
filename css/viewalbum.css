@@ -12,6 +12,10 @@ div#header_alb_left {
 	height:107px;
 	background-image:url(../design/backgrounds/banniere_alb_left.png);
 	background-repeat:no-repeat;
+	padding-top:82px;
+	padding-left:1px;
+	text-align:left;
+	font-size:11px;
 }
 div#header_alb_right {
 	width:auto;
