@@ -5,7 +5,7 @@ include_once $dir_administration_controleur_commande_php . "/../../classes/model
 switch($action){
 	case traiter_commande:
 		$id = $_POST['id'];
-		$result = Commande::setEnCoursDePreparation($id, $PHP_AUTH_USER);
+		$result = Commande::setEnCoursDePreparation($id, $_SERVER['REMOTE_USER']);
 		if($result){
 			$_SESSION['message'] .= "Commande effectuée avec succes.\n";
 		}else{
