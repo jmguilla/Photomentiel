@@ -1,6 +1,7 @@
 <?php
 $dir_administration_index_php = dirname(__FILE__);
 include $dir_administration_index_php . "/header.php";
+
 ?>
 <div>
 Rendez-vous dans la section désirée:<br/>
