@@ -17,6 +17,7 @@ $_SESSION['message'] = '';
 <h3>Commandes</h3>
 <span><h4>Commandes à traiter:</h4>
 <?php
+echo $_SERVER['PHP_AUTH_USER'];
 $commandes = Commande::getCommandeEtPhotosDepuisEtat(1);
 if($commandes){
 	echo '	<table>';
