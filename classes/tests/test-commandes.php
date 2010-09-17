@@ -9,8 +9,8 @@ include_once $dir_test_commandes_php . "/../modele/TaillePapier.class.php";
 include_once $dir_test_commandes_php . "/../modele/PrixTaillePapierAlbum.class.php";
 include_once $dir_test_commandes_php . "/../modele/Couleur.class.php";
 include_once $dir_test_commandes_php . "/../modele/Album.class.php";
-
-//on recup�re utilisateur & photographe
+include_once $dir_test_commandes_php . "/../modele/AdresseCommande.class.php";
+//on recup_re utilisateur & photographe
 $users = Utilisateur::getUtilisateurs();
 $user = $users[rand(0, (count($users) - 1))];
 $photographes = Photographe::getPhotographes();
@@ -26,6 +26,9 @@ $couleurs = Couleur::getCouleurs();
 $albums = Album::getAlbums(false);
 //on ajoute un peu des lignes
 $max = rand(2, 10);
+$commande->setID_Album($albums[rand(0,(count($albums)-1))]->getAlbumID());
+$adresse = new AdresseCommande();
+$commande->setAdresse($adresse);
 for($i = 1; $i < $max; $i++){
 	$commandePhoto = new CommandePhoto();
 	$commandePhoto->setID_Commande($commande->getCommandeID());
@@ -36,16 +39,16 @@ for($i = 1; $i < $max; $i++){
 	$commandePhoto->setID_Couleur($couleurs[rand(0, (count($couleurs)-1))]->getCouleurID());
 	$commandePhoto->setID_Album($albums[rand(0, (count($albums)-1))]->getAlbumID());
 	$prixTaille = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandePhoto->getID_Album(), $commandePhoto->getID_TaillePapier());
-	$prix = $prixTaille[0]->getPrix() * $commandePhoto->getNombre();
+	$prix = 12;
 	$commandePhoto->setPrix($prix);
 	$commande->addCommandePhoto($commandePhoto);
-	echo 'nouvelle photo ajout�e � la commande : ' . $commandePhoto->getCommandePhotoID() . '<br/>';
+	echo 'nouvelle photo ajoutée à la commande : ' . $commandePhoto->getCommandePhotoID() . '<br/>';
 }
 
 $commande = $commande->create();
 if($commande){
-	echo 'commande & commandesPhoto cr��es<br/>';
-	echo 'r�capitulatif:<br/>';
+	echo 'commande & commandesPhoto créées<br/>';
+	echo 'récapitulatif:<br/>';
 	echo 'commande#' . $commande->getCommandeID() . "<br/>";
 	foreach($commande->getCommandesPhoto() as $cp){
 		echo 'cp#' . $cp->getCommandePhotoID() . "<br/>";

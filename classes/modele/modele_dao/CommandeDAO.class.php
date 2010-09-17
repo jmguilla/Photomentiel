@@ -82,14 +82,20 @@ class CommandeDAO extends DAO{
 			break;
 		}
 		$numero = $numTmp . sprintf("%04d", $numDelta);
-		$query = "insert into Commande (date, id_utilisateur, etat, fdp, numero) values (now(), " . 
-		mysql_real_escape_string($commande->getID_Utilisateur()) . ", " . 
+		$id_album = $commande->getID_Album(); 
+		if(isset($id_album)){
+			$query = "insert into Commande (date, id_album, id_utilisateur, etat, fdp, numero) values (now(), ".
+			mysql_real_escape_string($id_album) . ", ";		
+		}else{
+			$query = "insert into Commande (date, id_utilisateur, etat, fdp, numero) values (now(), ";
+		}
+		$query .= mysql_real_escape_string($commande->getID_Utilisateur()) . ", " . 
 		mysql_real_escape_string($commande->getEtat()) . ", " .
 		mysql_real_escape_string($commande->getFDP()) . ", '" .
 		mysql_real_escape_string($numero) . "')";
 		$this->startTransaction();
 		$tmp = $this->update($query);
-		if($tmp){
+		if($tmp && $this->getAffectedRows() >= 0){
 			$commande->setCommandeID($this->lastInsertedID());
 			//maintenant on cree chaque commandePhoto
 			$commandesPhoto = $commande->getCommandesPhoto();
@@ -143,7 +149,7 @@ class CommandeDAO extends DAO{
 		return false;
 	}
 	/**
-	 * Pour effacer la commande de la base de donn�e
+	 * Pour effacer la commande de la base de donnée
 	 * retourne true si succes false sinon
 	 * @param Commande $commande
 	 */
@@ -257,6 +263,7 @@ class CommandeDAO extends DAO{
 		$s = $row->offsetGet("etat");
 		$fdp = $row->offsetGet("fdp");
 		$numero = $row->offsetGet("numero");
+		$id_album = $row->offsetGet("id_album");
 		$result = new Commande();
 		$result->setAdresse($adresse);
 		$result->setFDP($fdp);
@@ -265,6 +272,7 @@ class CommandeDAO extends DAO{
 		$result->setNumero($numero);
 		$result->setID_Utilisateur($idUtilisateur);
 		$result->setEtat($s);
+		$result->setID_Album($id_album);
 		return $result;
 	}
 
