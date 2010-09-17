@@ -665,6 +665,41 @@ class AlbumDAO extends DAO {
 			return false;
 		}
 	}
+	/**
+	 * Sauve seulement gaintotal & balance en BD.
+	 * nécessite l'albumID
+	 */
+	public function saveAmounts($album){
+		$query = "update Album set balance = " .
+		mysql_real_escape_string($album->getBalance()) . ", gainTotal = " .
+		mysql_real_escape_string($album->getGainTotal()) . " where albumID = " .
+		mysql_real_escape_string($album->getAlbumID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() >= 0){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	/**
+	 * Remet la balance à 0 en BD
+	 */
+	public function resetBalance($album){
+		$query = "update Album set balance = 0 where albumID = " .
+		mysql_real_escape_string($album->getAlbumID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() >= 0){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
 
 	/*###################################################
 	 * Helpers

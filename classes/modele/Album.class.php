@@ -346,6 +346,23 @@ class Album {
 		$this->gainTotal = $gt;
 	}
 	/**
+	 * Remet la balance à 0 et sauve en BD
+	 */
+	public function resetBalance(){
+		$this->balance = 0;
+		$dao = new AlbumDAO();
+		return $dao->resetBalance($this);
+	}
+	/**
+	 * Update balance et gaintotal avec le parametre et sauve en BD
+	 */
+	public function updateAmounts($amount){
+		$this->balance += $amount;
+		$this->gainTotal += $amount;
+		$dao = new AlbumDAO();
+		return $dao->saveAmounts($this);
+	}
+	/**
 	 * Cette méthode est uniquement utilisée en pour une éventuelle
 	 * création
 	 * @param PrixTaillePapierAlbum $p
