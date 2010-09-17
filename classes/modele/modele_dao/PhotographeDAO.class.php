@@ -110,7 +110,8 @@ class PhotographeDAO extends UtilisateurDAO{
 		mysql_real_escape_string($photographe->getRIB_c()) . "', rib_k = '" .
 		mysql_real_escape_string($photographe->getRIB_k()) . "', bic = '" . 
 		mysql_real_escape_string($photographe->getBIC()) . "', iban = '" .
-		mysql_real_escape_string($photographe->getIBAN()) . "' where Utilisateur.utilisateurID = " . 
+		mysql_real_escape_string($photographe->getIBAN()) . "', pourcentage = " .
+		mysql_real_escape_string($photographe->getPourcentage()) . " where Utilisateur.utilisateurID = " . 
 		"Photographe.id_utilisateur and Adresse.id_utilisateur = Utilisateur.utilisateurID and Utilisateur.utilisateurID = " .
 		mysql_real_escape_string($photographe->getUtilisateurID()) . " and Photographe.photographeID = " .
 		mysql_real_escape_string($photographe->getPhotographeID());
@@ -149,6 +150,7 @@ class PhotographeDAO extends UtilisateurDAO{
 		$uid = $photographe->getUtilisateurID();
 		$bic = $photographe->getBIC();
 		$iban = $photographe->getIBAN();
+		$pourcentage = $photographe->getPourcentage();
 		$hometmp = date('Ymd');
 		$query = "select count(*) as num from Photographe where home like '" . $hometmp . "%'";
 		$tmp = $this->retrieve($query);
@@ -161,12 +163,13 @@ class PhotographeDAO extends UtilisateurDAO{
 			break;
 		}
 		$home = $hometmp . sprintf("%02d", $homeDelta);
-		$query = "insert into Photographe(nomEntreprise, siren, telephone, siteWeb, home, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values ('" .
+		$query = "insert into Photographe(nomEntreprise, siren, telephone, siteWeb, home, pourcentage, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values ('" .
 		mysql_real_escape_string($ne) . "', '" . 
 		mysql_real_escape_string($siren) . "', '" . 
 		mysql_real_escape_string($tel) . "', '" . 
 		mysql_real_escape_string($web) . "', '" . 
 		mysql_real_escape_string($home) . "', " .
+		mysql_real_escape_string($pourcentage) . ", " .
 		mysql_real_escape_string($uid) . ", '" .
 		mysql_real_escape_string($rib_b) . "', '" .
 		mysql_real_escape_string($rib_g) . "', '" .

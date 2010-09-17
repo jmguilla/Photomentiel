@@ -11,6 +11,7 @@ class Photographe extends Utilisateur{
 	protected $siteweb;
 	protected $nomEntreprise;
 	protected $home;
+	protected $pourcentage = 70;
 	protected $rib_b;
 	protected $rib_g;
 	protected $rib_c;
@@ -168,6 +169,14 @@ class Photographe extends Utilisateur{
 
 	public function getBIC(){
 		return $this->bic;
+	}
+
+	public function getPourcentage(){
+		return $this->pourcentage;
+	}
+
+	public function setPourcentage($p){
+		$this->pourcentage = $p;
 	}
 }
 ?>
