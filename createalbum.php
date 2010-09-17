@@ -175,7 +175,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			</tr>
 			<tr>
 				<td colspan="3" height="84px;">
-					<span class="note">Un événement peut être associé à cet album, le spécifier nous permet d'envoyer un E-mail<br/>
+					<span class="note">Un événement peut être associé à cet album, le spécifier nous permet d'envoyer un E-mail
 					à toutes les personnes qui se sont inscrites à cet événement pour les prévenir de sa disponibilité.<br/>
 					Ceci permet d'augmenter le nombre de visites sur cet album.<br/></span>
 					<u>S'il existe un événement associé, merci de le sélectionner :</u>
@@ -207,8 +207,8 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			</tr>
 			<tr>
 				<td colspan="3" height="100px;">
-					<span class="note">Pour les formats, les prix indiqués sont donnés à titre indicatif et sont, selon nos statistiques, ceux qui offrent<br/>
-					les meilleurs rendements. Ils sont aussi les prix minimum que nous acceptons. Certains peuvent vous paraître bas, mais n'oubliez pas que vos clients préférent<br/>
+					<span class="note">Pour les formats, les prix indiqués sont donnés à titre indicatif et sont, selon nos statistiques, ceux qui offrent
+					les meilleurs rendements. Ils sont aussi les prix minimum que nous acceptons. Certains peuvent vous paraître bas, mais n'oubliez pas que vos clients préférent
 					acheter 5 photos à 6&#8364; plutôt qu'une à 20&#8364;. (les prix ne seront pas modifiables par la suite)</span><br/>
 					<u>Sélectionnez les formats de photos qui seront disponibles pour cet album, ainsi que les prix<br/>
 					que vous souhaitez leur attribuer :</u><br/>
@@ -218,7 +218,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td>
 					Formats & tarifs : <br/>
 					<span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span>
-				</td><td>
+				</td><td colspan="2">
 					<table>
 						<?php
 							$papers = TaillePapier::getTaillePapiers();
@@ -236,8 +236,6 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 							}
 						?>
 					</table>
-				</td><td>
-					<div class="checkform" id="rfota"></div>
 				</td>
 			</tr>
 			<tr>

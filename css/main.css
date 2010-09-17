@@ -103,6 +103,15 @@ div#header {
 	background-repeat:no-repeat;
 	width:980px;
 	height:110px;
+	padding-top:85px;
+	text-align:left;
+	font-size:11px;
+}
+span#accueil {
+	background-color:black;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:1px;
 }
 div#menu_barre {
 	margin-left:auto; 

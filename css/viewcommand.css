@@ -90,11 +90,11 @@ span#not_payed {
 	color:darkred;
 }
 div.state, div.state_ok {
-	height:44px;
+	height:36px;
 	width:100%;
 	margin-bottom:5px;
 	background-repeat:no-repeat;
-	padding-top:20px;
+	padding-top:14px;
 	text-align:left;
 }
 div.state {
