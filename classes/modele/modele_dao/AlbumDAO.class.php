@@ -17,9 +17,9 @@ class AlbumDAO extends DAO {
 			$query = "update Album set etat = 2 where ";
 			$length = count($listeAlbum);
 			$current = 0;
-			foreach($listeAlbum as $albumID){
+			foreach($listeAlbum as $album){
 				$current++;
-				$query .= "albumID = " . mysql_real_escape_string($albumID);
+				$query .= "albumID = " . mysql_real_escape_string($album->getAlbumID());
 				if($current < $length){
 					$query .= " or ";
 				}

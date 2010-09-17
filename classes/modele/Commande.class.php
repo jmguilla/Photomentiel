@@ -13,6 +13,7 @@ class Commande{
 	private $fdp = 0;
 	private $numero = '';
 	private $id_album = NULL;
+	private $preparateur = '';
 
 	public function __construct($i = -1, $idu = -1, $date = NULL, $etat = NULL){
 		$this->id = $i;
@@ -21,6 +22,13 @@ class Commande{
 		global $COMMAND_STATES;
 		$this->etat = 0;
 		$commandesPhoto = array();
+	}
+	public static function setEnCoursDePreparation($id, $prep){
+		if(!isset($id) || !isset($prep)){
+			return false;
+		}
+		$dao = new CommandeDAO();
+		return $dao->setEnCoursDePreparation($id, $prep);
 	}
 	/**
 	 * Renvoie la commande identifée par l'id passé en parametre
@@ -38,7 +46,10 @@ class Commande{
 	public static function getCommandeDepuisID_Utilisateur($id){
 		$dao = new CommandeDAO();
 		return $dao->getCommandeDepuisID_Utilisateur($id);
-		
+	}
+	public static function getCommandeEtPhotosDepuisEtat($etat){
+		$dao = new CommandeDAO();
+		return $dao->getCommandeEtPhotosDepuisEtat($etat);
 	}
 	/**
 	 * renvoie la commande avec les ligne à jour.
@@ -151,6 +162,12 @@ class Commande{
 	}
 	public function setID_Album($ida){
 		$this->id_album = $ida;
+	}
+	public function getPreparateur(){
+		return $this->preparateur;
+	}
+	public function setPreparateur($prep){
+		$this->preparateur = $prep;
 	}
 }
 ?>
