@@ -97,7 +97,10 @@ switch($action){
 		$filtre = array("Utilisateur" => array(
 						"Email" => true
 						),
-				"Evenement" => array(
+						"Photographe" => array(
+						"Email" => true
+						),
+						"Evenement" => array(
 						"EvenementID" => true,
 						"Date" => true,
 						"Web" => true,
