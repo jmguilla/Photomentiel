@@ -25,6 +25,7 @@ include_once("classes/modele/AdresseCommande.class.php");
 if (!isSet($_SESSION['albumStringID'])){
 	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"));
 }
+$albumStringID = $_SESSION['albumStringID'];
 
 //checked commands
 if (!isset($_POST["pictur_0"]) && !isset($_SESSION['COMMAND_LINES'])){
@@ -187,15 +188,21 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 				<?php
 					if (!$utilisateurObj){
 				?>
+						<div id="div_continue">
 						<ul>
-							<br/>
 							<b>Afin de poursuivre votre commande, vous devez vous identifier ou créer un compte :</b>
 							<br/><br/>
 							<li>Si vous venez de créer un compte, veuillez l'activer en suivant le lien qui vous a été envoyé par E-mail, puis connectez vous en utilisant les champs ci-dessus.</li>
 							<li>Pour vous connecter à votre compte, veuillez vous identifier en utilisant les champs ci-dessus, sous la bannière.</li>
 							<li>Pour créer un compte, <a href="adduser.php?type=cl&np=confirmbag.php">cliquez ici.</a></li>
 						</ul>
-						<div class="separator10" style="height:50px"></div>
+						</div>
+						<div class="separator10" style="height:20px"></div>
+						<center>
+							<input style="width:260px;" type="button" class="button" value="Abandonner - Retour à l'accueil" onClick="document.location.href='index.php'"/>
+							<input style="width:260px;" type="button" class="button" value="Retour - Modifier ma sélection" onClick="history.back();" id="back_button"/>
+						</center>
+						<div class="separator10" style="height:20px"></div>
 				<?php
 					} else {
 						
@@ -325,8 +332,8 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 								<div class="separator10" style="height:20px"></div>
 								<input type="hidden" name="payment" value="true"/>
 								<center>
-									<input type="button" class="button" value="Retour" onClick="history.back();"/>
-									<input type="submit" class="button" value="Continuer" id="valid_button"/>
+									<input style="width:250px;" type="button" class="button" value="Retour - Annuler ma commande" onClick="document.location.href='viewalbum.php?al=<?php echo $albumStringID; ?>';"/>
+									<input style="width:250px;" type="submit" class="button" value="Continuer - Valider ma commande" id="valid_button"/>
 								</center>
 							</form>
 							<div class="separator10"></div>

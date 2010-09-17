@@ -96,20 +96,25 @@ if ($utilisateurObj && $commandObj){
 		<div id="make_cmd">
 			<div class="separator10"></div>
 			<div class="recap_info">
-				Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
-				<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.<br/><br/>
-				Vos photos vous <?php echo ($commandObj->getEtat() == 4)?'ont été':'seront'; ?> livrées à l'adresse suivante : <br/><br/>
-				<div class="adr_b" style="font-size:14px;">
-					<?php
-						$adresseObj = $commandObj->getAdresse();
-						echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
-						echo $adresseObj->getNomRue()."<br/>";
-						if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
-							echo $adresseObj->getComplement()."<br/>";
-						}
-						echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
-						echo 'France';
-					?>
+				<div id="b1">
+					Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
+					<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.
+				</div>
+				<br/>
+				<div id="b1">
+					Vos photos vous <?php echo ($commandObj->getEtat() == 4)?'ont été':'seront'; ?> livrées à l'adresse suivante : <br/><br/>
+					<div class="adr_b" style="font-size:14px;">
+						<?php
+							$adresseObj = $commandObj->getAdresse();
+							echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
+							echo $adresseObj->getNomRue()."<br/>";
+							if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
+								echo $adresseObj->getComplement()."<br/>";
+							}
+							echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
+							echo 'France';
+						?>
+					</div>
 				</div>
 				<br/>
 				<?php

@@ -46,6 +46,13 @@ div#make_cmd {
 	font-size:13px;
 	text-align:left;
 }
+div#div_continue {
+	width:97%;
+	font-size:14px;
+	text-align:left;
+	border:1px blue solid;
+	padding:12px;	
+}
 li {
 	margin-left:40px;
 }
@@ -105,7 +112,7 @@ div.checkform {
 	width:18px;
 	overflow:hidden;
 }
-input#valid_button {
+input#valid_button, input#back_button {
 	margin-left:200px;
 }
 div.recap_info {

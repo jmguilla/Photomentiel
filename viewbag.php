@@ -169,6 +169,7 @@ include("header.php");
 				<td><input style="width:300px" class="button" type="button" value="Confirmer le panier et commander &gt;&gt;" onClick="confirmAndGoNext();"/></td>
 			</tr>
 		</table>
+		<div class="separator10" style="height:20px"></div>
 	</div>
 	<form id="form_confirmbag" method="POST" action="confirmbag.php">
 		<!-- filled by js -->
