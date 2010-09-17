@@ -73,6 +73,9 @@ div.faq_f, input.faq_q {
 	width:40px;
 	margin-left:5px;
 }
+div.faq_f {
+	margin-top:4px;
+}
 input.faq_q {
 	width:25px;
 	text-align:center;

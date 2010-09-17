@@ -142,7 +142,9 @@ include("head.php");
 			<div id="leftpanel_mid">
 				<div class="separator5"></div>
 				<div id="album_infos">
-					<span>Date :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
+					<span>Code :</span> <?php echo $albumStringID; ?>
+					<br/>
+					<span>Création :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
 					<br/>
 					<?php 
 					$adresseObj = $photographObj->getAdresse();

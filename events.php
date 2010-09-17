@@ -176,7 +176,7 @@ if (isset($_POST['ftype'])){
 									$idi = '';
 								}
 								echo '<div '.$idi.' class="event">';
-								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$tmp->getType().'</span><br/><span class="content">';
+								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$tmp->getType()].'</span><br/><span class="content">';
 								echo '<span class="intitule"><a class="intitule" href="events.php?ev='.$tmp->getEvenementID().'"><b>Intitulé</b> : '.toNchar($tmp->getDescription(),84).'</a></span><br/>';
 								echo '<b>Posté par</b> : <a href="mailto:'.$utilisateur->getEmail().'">'.$utilisateur->getEmail().'</a><br/>';
 								if ($tmp->getWeb() != ''){

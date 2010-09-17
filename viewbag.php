@@ -76,7 +76,9 @@ include("header.php");
 			<div id="album_infos">
 				<span>Album :</span> <b><?php echo $albumObj->getNom(); ?></b>
 				<br/>
-				<span>Date :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
+				<span>Code :</span> <?php echo $albumStringID; ?>
+				<br/>
+				<span>Création :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
 				<br/>
 				<?php 
 				$adresseObj = $photographObj->getAdresse();
@@ -157,7 +159,7 @@ include("header.php");
 					<span>
 				</td><td align="right">Total photos :</td><td><span id="total_pic"><?php echo sprintf('%.2f',$total_cmd); ?></span> &#8364;</td></tr>
 				<tr id="total_"><td colspan="3" style="background-color:white;"></td><td align="right">Frais de port * :</td><td><span id="shipping_rate"><?php echo sprintf('%.2f',($total_cmd<=SHIPPING_RATE_UNTIL && $total_cmd!=0)?SHIPPING_RATE:0); ?></span> &#8364;</td></tr>
-				<tr id="total"><td colspan="3" style="background-color:white;"></td><td align="right">Total :</td><td><span id="total_total"><?php echo sprintf('%.2f',$total_cmd+(($total_cmd<=SHIPPING_RATE_UNTIL && $total_cmd!=0))); ?></span> &#8364;</td></tr>
+				<tr id="total"><td colspan="3" style="background-color:white;"></td><td align="right">Total :</td><td><span id="total_total"><?php echo sprintf('%.2f',$total_cmd+(($total_cmd<=SHIPPING_RATE_UNTIL && $total_cmd!=0)?SHIPPING_RATE:0)); ?></span> &#8364;</td></tr>
 			</table>
 		</div>
 		<div class="separator10"></div>
