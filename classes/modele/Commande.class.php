@@ -12,6 +12,7 @@ class Commande{
 	private $adresse = NULL;
 	private $fdp = 0;
 	private $numero = '';
+	private $id_album = NULL;
 
 	public function __construct($i = -1, $idu = -1, $date = NULL, $etat = NULL){
 		$this->id = $i;
@@ -67,6 +68,13 @@ class Commande{
 	public function create(){
 		$dao = new CommandeDAO();
 		return $dao->create($this);
+	}
+	/**
+	 * pour deleter une commande
+	 */
+	public function delete(){
+		$dao = new CommandeDAO();
+		return $dao->delete($this);
 	}
 
 	/*#####################################
@@ -137,6 +145,12 @@ class Commande{
 	}
 	public function setNumero($n){
 		$this->numero = $n;
+	}
+	public function getID_Album(){
+		return $this->id_album;
+	}
+	public function setID_Album($ida){
+		$this->id_album = $ida;
 	}
 }
 ?>

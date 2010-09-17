@@ -62,14 +62,14 @@ class Album {
 	/**
 	 * Retourne le tableaux des albums pour l'evenement donné
 	 */
-	public static function getAlbumEtImageEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($id, $isPublique = true){
+	public static function getAlbumEtImageEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($id, $isPublique = true, $etat = 2){
 		if(!isset($id)){
 			throw new InvalidArgumentException("Fournir l'id de l'évenement");
 		}
 		$dir_album_class_php = dirname(__FILE__);
 		include_once $dir_album_class_php . "/Image.class.php";
 		$daoAlbum = new AlbumDAO();
-		$tmp =  $daoAlbum->getAlbumEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($id, $isPublique);
+		$tmp =  $daoAlbum->getAlbumEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($id, $isPublique, $etat);
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
@@ -344,6 +344,23 @@ class Album {
 
 	public function setGainTotal($gt){
 		$this->gainTotal = $gt;
+	}
+	/**
+	 * Remet la balance à 0 et sauve en BD
+	 */
+	public function resetBalance(){
+		$this->balance = 0;
+		$dao = new AlbumDAO();
+		return $dao->resetBalance($this);
+	}
+	/**
+	 * Update balance et gaintotal avec le parametre et sauve en BD
+	 */
+	public function updateAmounts($amount){
+		$this->balance += $amount;
+		$this->gainTotal += $amount;
+		$dao = new AlbumDAO();
+		return $dao->saveAmounts($this);
 	}
 	/**
 	 * Cette méthode est uniquement utilisée en pour une éventuelle

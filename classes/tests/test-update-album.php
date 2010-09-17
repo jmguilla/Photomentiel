@@ -11,6 +11,7 @@ $album = Album::getAlbumDepuisID(1);
 echo "balance: " . $album->getBalance() . " gain total: " . $album->getGainTotal(). "<br/>";
 $album->updateAmounts(6);
 echo "balance: " . $album->getBalance() . " gain total: " . $album->getGainTotal(). "<br/>";
+$album->resetBalance();
 $album->updateAmounts(123);
 echo "balance: " . $album->getBalance() . " gain total: " . $album->getGainTotal(). "<br/>";
 ?>

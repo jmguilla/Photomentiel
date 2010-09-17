@@ -78,7 +78,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -164,7 +164,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -238,7 +238,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -312,7 +312,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -654,6 +654,41 @@ class AlbumDAO extends DAO {
 	public function saveMailing($album){
 		$query = "update Album set mailing = '" .
 		mysql_real_escape_string($album->getMailing()) . "' where albumID = " .
+		mysql_real_escape_string($album->getAlbumID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() >= 0){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	/**
+	 * Sauve seulement gaintotal & balance en BD.
+	 * nécessite l'albumID
+	 */
+	public function saveAmounts($album){
+		$query = "update Album set balance = " .
+		mysql_real_escape_string($album->getBalance()) . ", gainTotal = " .
+		mysql_real_escape_string($album->getGainTotal()) . " where albumID = " .
+		mysql_real_escape_string($album->getAlbumID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() >= 0){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	/**
+	 * Remet la balance à 0 en BD
+	 */
+	public function resetBalance($album){
+		$query = "update Album set balance = 0 where albumID = " .
 		mysql_real_escape_string($album->getAlbumID());
 		$this->startTransaction();
 		$tmp = $this->update($query);

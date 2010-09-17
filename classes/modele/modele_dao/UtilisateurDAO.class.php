@@ -290,6 +290,11 @@ class UtilisateurDAO extends DAO{
 			}else{
 				$iban = $row->offsetGet("iban");
 			}
+			if($setPre){
+				$pourcentage = $row->offsetGet($prefix . "pourcentage");
+			}else{
+				$pourcentage = $row->offsetGet("pourcentage");
+			}
 			$result->setHome($home);
 			$result->setPhotographeID($pid);
 			$result->setNomEntreprise($ne);
@@ -302,6 +307,7 @@ class UtilisateurDAO extends DAO{
 			$result->setRIB_k($rib_k);
 			$result->setBIC($bic);
 			$result->setIBAN($iban);
+			$result->setPourcentage($pourcentage);
 		}else{
 			$result = new Utilisateur();
 		}

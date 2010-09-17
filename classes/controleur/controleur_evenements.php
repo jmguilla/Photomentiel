@@ -73,7 +73,7 @@ switch($action){
 						"Evenement" => array(
 								"Description" => true
 								));
-		$albums = Album::smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($query, $d2, $d2, true, 2);
+		$albums = Album::smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($query, $d1, $d2, true, 2);
 		ControleurUtils::serialize_assoc_array_json($albums, true, NULL, $filtre);
 	break;
 	case ss_evt: 
