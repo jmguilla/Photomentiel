@@ -55,9 +55,9 @@ class Evenement {
 	 * @param int $id_region
 	 * @param string $type
 	 */
-	public static function smartRechercheEvenementEtUtilisateur($query = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL){
+	public static function smartRechercheEvenementEtUtilisateur($query = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL, $n = NULL){
 		$dao = new EvenementDAO();
-		return $dao->smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $id_region, $type);
+		return $dao->smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $id_region, $type, $n);
 	}
 	/**
 	 * Renvoie les n prochains evenements

@@ -172,7 +172,7 @@ class AlbumDAO extends DAO {
 	 * @param $d2
 	 * @param $isPublique
 	 */
-	public function smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL){
+	public function smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL, $n = NULL){
 		if(str_word_count($search) > 1){
 			$words = explode(' ', $search);
 		}else{
@@ -226,7 +226,11 @@ class AlbumDAO extends DAO {
 		if(isset($etat)){
 			$query .= " and etat = " . mysql_real_escape_string($etat);
 		}
-		$query .= " order by a.date desc";
+		$query .= " order by a.date desc ";
+		if(isset($n) && $n > 0){
+			$query .= " limit " .
+			mysql_real_escape_string($n);
+		}
 		$tmp = $this->retrieve($query);
 		if(!$tmp || $tmp->getNumRows() <= 0){
 			return false;

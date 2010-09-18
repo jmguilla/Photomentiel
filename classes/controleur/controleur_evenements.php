@@ -53,6 +53,10 @@ switch($action){
 		}
 		if(isset($_POST['d2'])){
 			$d2 = $_POST['d2'];
+		}if(isset($_POST['n'])){
+			$n = $_POST['n'];
+		}else{
+			$n = 10;
 		}
 		$filtre = array("Album" => array(
 								"Date" => true,
@@ -73,7 +77,7 @@ switch($action){
 						"Evenement" => array(
 								"Description" => true
 								));
-		$albums = Album::smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($query, $d1, $d2, true, 2);
+		$albums = Album::smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($query, $d1, $d2, true, 2, $n);
 		ControleurUtils::serialize_assoc_array_json($albums, true, NULL, $filtre);
 	break;
 	case ss_evt: 
@@ -93,11 +97,19 @@ switch($action){
 		if(isset($_POST['type'])){
 			$type = $_POST['type'];
 		}
-		$assocs = Evenement::smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $idr, $type);
+		if(isset($POST['n'])){
+			$n = $_POST['n'];
+		}else{
+			$n = 10;
+		}
+		$assocs = Evenement::smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $idr, $type, $n);
 		$filtre = array("Utilisateur" => array(
 						"Email" => true
 						),
-				"Evenement" => array(
+						"Photographe" => array(
+						"Email" => true
+						),
+						"Evenement" => array(
 						"EvenementID" => true,
 						"Date" => true,
 						"Web" => true,

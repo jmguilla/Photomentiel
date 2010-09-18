@@ -53,7 +53,7 @@ class EvenementDAO extends DAO {
 		return $this->extractArrayQuery($tmp, $this, "buildEvenementEtLieuxEtUtilisateurFromRow");
 	}
 
-	public function smartRechercheEvenementEtUtilisateur($search = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL){
+	public function smartRechercheEvenementEtUtilisateur($search = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL, $n = NULL){
 		if(str_word_count($search) > 1){
 			$words = explode(' ', $search);
 		}else{
@@ -94,7 +94,11 @@ class EvenementDAO extends DAO {
 			$query .= " and e.date <= '" . 
 			mysql_real_escape_string($d2) . " 23:59:59' ";
 		}
-		$query .= " order by e.date asc";
+		$query .= " order by e.date asc ";
+		if(isset($n) && $n > 0){
+			$query .= " limit " .
+			mysql_real_escape_string($n);
+		}
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildEvenementEtLieuxEtUtilisateurFromRow");
 	}
