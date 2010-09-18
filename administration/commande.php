@@ -54,7 +54,7 @@ if($commandes){
 				$prix += $commandePhoto->getPrix();
 			}
 		}
-		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td></tr>' . "\n";
+		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td></tr>' . "\n";
 	}
 	echo '	</table>';
 ?>

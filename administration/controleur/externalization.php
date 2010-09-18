@@ -9,4 +9,5 @@ define("supprimer_evenement", "supprimer_evenement");
 
 //commande
 define("traiter_commande", "traiter_commande");
+define("down_xml", "download_commande_xml");
 ?>
