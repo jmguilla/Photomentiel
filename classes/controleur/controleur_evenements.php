@@ -104,6 +104,11 @@ switch($action){
 						"Type" => true,
 						"Description" => true
 						));
+		if($assocs){
+			foreach($assocs as $assoc){
+				$assoc['Evenement']->setType($EVENTS_TYPES[$assoc['Evenement']->getType()]);
+			}
+		}
 		ControleurUtils::serialize_assoc_array_json($assocs, true, NULL, $filtre);
 	break;
 	case a_m_evt:
