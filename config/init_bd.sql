@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Sam 18 Septembre 2010 à 01:46
+-- Généré le : Sam 18 Septembre 2010 à 09:10
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -478,9 +478,9 @@ CREATE TABLE IF NOT EXISTS `Evenement` (
 INSERT INTO `Evenement` (`evenementID`, `description`, `id_region`, `id_departement`, `id_ville`, `type`, `date`, `mailing`, `web`, `id_utilisateur`) VALUES
 (1, 'Un mariage presque parfait', 21, 6, 1906, 1, '2011-07-28 15:02:25', '', '', 1),
 (2, 'Une description un peu inutile', 21, 6, 1906, 2, '2010-08-28 15:02:25', '', '', 2),
-(3, 'Lancée de pizzas fraichement préparées', 21, 6, 1906, 0, '2010-09-28 15:02:25', '', '', 3),
-(4, 'Hockey : France vs Espagne', 21, 6, 1906, 2, '2010-09-28 15:20:25', '', '', 4),
-(5, 'Visite chez les hobbits', 21, 6, 1906, 0, '2010-09-28 15:45:25', '', '', 5),
+(3, 'Lancée de pizzas fraichement préparées', 21, 6, 1906, 0, '2010-06-10 00:00:00', '', '', 3),
+(4, 'Hockey : France vs Espagne', 21, 6, 1906, 2, '2010-06-10 00:00:00', '', '', 4),
+(5, 'Visite chez les hobbits', 21, 6, 1906, 0, '2010-06-10 00:00:00', '', '', 5),
 (6, 'Un autre mariage mais mieux réussi :)', 21, 6, 1906, 1, '2011-01-28 15:55:25', '', '', 1),
 (7, 'Et voilà le premier événement en ligne via la form !! wouhaiiii', 13, 38, 8095, 3, '2010-12-12 22:00:00', '', '', 8);
 
@@ -35301,7 +35301,7 @@ ALTER TABLE `AdresseCommande`
 -- Contraintes pour la table `Album`
 --
 ALTER TABLE `Album`
-  ADD CONSTRAINT `fk_album_evenement` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`),
+  ADD CONSTRAINT `fk_album_evenement` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_album_photographe` FOREIGN KEY (`id_photographe`) REFERENCES `Photographe` (`photographeID`);
 
 --

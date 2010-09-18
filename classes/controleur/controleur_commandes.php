@@ -28,6 +28,10 @@ switch($action){
 			ControleurUtils::serialize_object_json(false, false,"La commande #" . $id . " n'appartient pas à l'utilisateur #" . $user_id);
 			return;	
 		}
+		if($commande->getEtat()!=0 && $commande->getEtat()!=4){
+			ControleurUtils::serialize_object_json(false, false,"La commande #" . $id . " ne peut pas être supprimée à cause de son état");
+			return;
+		}
 		$result = $commande->delete();
 		ControleurUtils::serialize_object_json($result, true, NULL);
 		return;

@@ -7,13 +7,13 @@ switch($action){
 		$id = $_POST['id'];
 		$result = Commande::setEnCoursDePreparation($id, $_SERVER['REMOTE_USER']);
 		if($result){
-			$_SESSION['message'] .= "Commande effectuée avec succes.\n";
+			$_SESSION['message'] .= "Commande effectuée avec succes.<br/>";
 		}else{
-			$_SESSION['message'] .= "Impossible de changer l'état de la commande #" . $id . ".\n";
+			$_SESSION['message'] .= "Impossible de changer l'état de la commande #" . $id . ".<br/>";
 		}
 	break;
 	default:
-		echo "action inconnue dans controleur_album " . $action;
+		$_SESSION['message'] .= "action inconnue dans controleur_album " . $action . "<br/>";
 	break;
 }
 header('Location: commande.php');

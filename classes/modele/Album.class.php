@@ -226,6 +226,14 @@ class Album {
 		$dao = new AlbumDAO();
 		return $dao->validerListeAlbum($listeAlbum);
 	}
+	/**
+	 * Change l'état d'une liste d'album à 2 et sauve le changement en BD.
+	 * @param unknown_type $listeAlbum
+	 */
+	public static function activerListeAlbum($listeAlbum){
+		$dao = new AlbumDAO();
+		return $dao->activerListeAlbum($listeAlbum);
+	}
 
 	/*#########################################
 	 * Getters & Setters

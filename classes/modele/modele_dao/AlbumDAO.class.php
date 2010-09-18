@@ -11,10 +11,9 @@ class AlbumDAO extends DAO {
 		$dsn = DBTYPE."://".DBUSER.":".DBPWD."@".DBHOST."/".DBPHOTOMENTIEL;
 		parent::__construct($dsn);
 	}
-
-	public function validerListeAlbum($listeAlbum){
+	public function activerListeAlbum($listeAlbum){
 		if(isset($listeAlbum) && !empty($listeAlbum)){
-			$query = "update Album set etat = 2 where ";
+			$query = "update Album set etat = 2 where etat = 3 and ( ";
 			$length = count($listeAlbum);
 			$current = 0;
 			foreach($listeAlbum as $album){
@@ -24,6 +23,32 @@ class AlbumDAO extends DAO {
 					$query .= " or ";
 				}
 			}
+			$query .= " )";
+			$this->startTransaction();
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() >= 0){
+				$this->commit();
+				return true;
+			}else{
+				$this->rollback();
+				return false;
+			}
+		}
+		return false;
+	}
+	public function validerListeAlbum($listeAlbum){
+		if(isset($listeAlbum) && !empty($listeAlbum)){
+			$query = "update Album set etat = 2 where etat = 1 and ( ";
+			$length = count($listeAlbum);
+			$current = 0;
+			foreach($listeAlbum as $album){
+				$current++;
+				$query .= "albumID = " . mysql_real_escape_string($album->getAlbumID());
+				if($current < $length){
+					$query .= " or ";
+				}
+			}
+			$query .= " )";
 			$this->startTransaction();
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
