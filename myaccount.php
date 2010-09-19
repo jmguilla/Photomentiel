@@ -79,7 +79,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 					}
 				?>
 				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
-				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php';"/><br>
+				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php?np=myaccount.php';"/><br>
 				<center><hr id="separator"/><center>
 				<input id="view_albums" type="button" class="button" value="Voir les albums publics" onClick="document.location.href='albums.php';"/><br>
 				<input id="view_events" type="button" class="button" value="Voir les évènements" onClick="document.location.href='events.php';"/><br>
@@ -179,7 +179,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 									} else {
 										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain total : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
 									}
-									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img height="38px" src="'.$alb["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
+									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img height="38px" src="'.$alb["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
 									$i++;
 								}
 							} else {

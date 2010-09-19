@@ -37,7 +37,7 @@ if (isset($_GET["np"])){
 
 ?>
 <div id="full_content_top">
-		<?php echo $createMode?'Création':'Modification'; ?> de compte <?php if ($photographMode){echo 'Photographe';} ?>
+		<?php echo ($createMode||$accountCreated)?'Création':'Modification'; ?> de compte <?php if ($photographMode){echo 'Photographe';} ?>
 </div>
 <div id="full_content_mid">
 	<div class="separator10"></div>
@@ -49,7 +49,13 @@ if (isset($_GET["np"])){
 				<div class="separator10" style="height:140px;"></div>
 				Votre compte a été créé avec succés.<br/>
 				Nous vous avons envoyé un E-mail contenant les instructions qui vous permettront de l'activer.<br/>
+				<div class="separator10"></div>
 				<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
+				<?php
+					if ($nextPage != 'false'){
+						echo '<input style="width:210px;margin-left:50px;" type="button" class="button" value="Retour page précédente" onClick="document.location.href=\''.$nextPage.'\'"></input>';
+					}
+				?>
 				<div class="separator10" style="height:150px;"></div>
 			</div>
 	<?php

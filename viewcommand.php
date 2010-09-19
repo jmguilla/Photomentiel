@@ -30,7 +30,7 @@ if ($utilisateurObj && $commandObj){
 	$lines = CommandePhoto::getCommandePhotosDepuisID_Commande($commandObj->getCommandeID());
 	foreach($lines as $line){
 		$cl = array('fileName'=>$line->getPhoto(),
-					'formatID'=>$line->getID_TypePapier(),
+					'formatID'=>$line->getID_TaillePapier(),
 					'quantity'=>$line->getNombre(),
 					'total'=>$line->getPrix());
 		array_push($commandLines,$cl);
@@ -121,6 +121,7 @@ if ($utilisateurObj && $commandObj){
 					$etatc = $commandObj->getEtat();
 					if ($etatc == 0){
 						?>
+						<div id="b1" style="border:2px darkred solid;">
 							<span id="not_payed">Vous n'avez pas encore payé cette commande, vous pouvez :</span><br/><br/>
 							<ul>
 							<li>La payer en choisissant un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
@@ -132,6 +133,7 @@ if ($utilisateurObj && $commandObj){
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>
 							</ul>
+						</div>
 							<div class="separator10"></div>
 						<?php
 					} else {

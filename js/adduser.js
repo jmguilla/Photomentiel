@@ -291,7 +291,7 @@ $(document).ready(function() {
 						alert("Votre compte vient d'être créé.\nVous allez recevoir un email de confirmation pour activer votre compte.");
 						previousMail='';
 						if (nextPage != 'false'){
-							document.location.href = nextPage;
+							document.location.href = "adduser.php?action=ac&np="+nextPage;
 						} else {
 							document.location.href = "adduser.php?action=ac";
 						}

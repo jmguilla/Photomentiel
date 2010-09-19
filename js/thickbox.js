@@ -515,7 +515,10 @@ if(typeof thickox == 'undefined') {
 			width : TB_WIDTH+'px'
 		});
 		
-		$.browser.valid = !$.browser.msie || /MSIE 7\.0/i.test(window.navigator.userAgent) || /MSIE 8\.0/i.test(window.navigator.userAgent);
+		$.browser.valid = 	!$.browser.msie || 
+							/MSIE 7\.0/i.test(window.navigator.userAgent) || 
+							/MSIE 8\.0/i.test(window.navigator.userAgent) || 
+							/MSIE 9\.0/i.test(window.navigator.userAgent);
 	
 		if($.browser.valid) { //do nothing for ie < 8
 			var borderTop = parseInt($TB_window.css('border-top-width'), 10);
