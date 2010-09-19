@@ -96,4 +96,10 @@ fieldset legend {
 	padding-left:10px;
 	padding-right:10px;
 }
+a#card_pdf {
+	color:darkgreen;
+}
+a#card_pdf:hover {
+	color:green;
+}
 

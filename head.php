@@ -9,7 +9,7 @@
  * Since : 1.0.0
  *
  */
-include("functions.php");
+include_once("functions.php");
 include_once("classes/Utils.php");
 @session_start();
 ini_set('url_rewriter.tags','');

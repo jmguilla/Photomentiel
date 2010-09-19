@@ -285,7 +285,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td>
 					Code : 
 				</td><td colspan="2">
-					<font color="blue"><?php echo $sidObj->getStringID(); ?></font>
+					<font color="blue"><?php echo $sidObj->getStringID(); ?></font> - <a id="card_pdf" href="card_pdf.php?al=<?php echo $sidObj->getStringID(); ?>">Télécharger vos cartes de visites</a>
 				</td>
 			</tr>
 			<tr>
