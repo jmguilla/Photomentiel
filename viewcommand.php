@@ -140,7 +140,7 @@ if ($utilisateurObj && $commandObj){
 						?>
 							<div class="state_ok" id="cmd1">
 								<span class="state_title_ok">Votre paiement a été validé</span> 
-								(<?php if($etatc == 1){echo 'La commande sera préparée sous peu - ';} ?><a href="factures_pdf.php?cmd=<?php echo $commandObj->getCommandeID(); ?>">Télécharger ma facture</a>)
+								(<?php if($etatc == 1){echo 'La commande sera préparée sous peu - ';} ?><a href="facture-<?php echo $commandObj->getCommandeID(); ?>.pdf">Télécharger ma facture</a>)
 							</div>
 							<div class="<?php echo ($etatc >= 2)?'state_ok':'state'; ?>" id="cmd2">
 								<span class="<?php echo ($etatc >= 2)?'state_title_ok':'state_title'; ?>">Votre commande est en cours de préparation</span>
