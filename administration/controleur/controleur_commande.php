@@ -25,19 +25,19 @@ switch($action){
 		$adresse = $commande->getAdresse();
 	    header("Content-Type: text/xml");
 		echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-		echo "<commande id=\"" . $commande->getCommandeID() . "\">\n";
+		echo '<commande id="'.$commande->getCommandeID().'" numero="'.$commande->getNumero().'">'."\n";
 		echo "	<adresse>\n";
-		echo "		<prenom>" . $adresse->getPrenom() . "</prenom>\n";
 		echo "		<nom>" . $adresse->getNom() . "</nom>\n";
-		echo "		<nomRue>" . $adresse->getNomRue() . "</nomRue>\n";
-		echo "		<complement>" . $adresse->getComplement() . "</complement>\n";
+		echo "		<prenom>" . $adresse->getPrenom() . "</prenom>\n";
+		echo "		<adresse1>" . $adresse->getNomRue() . "</adresse1>\n";
+		echo "		<adresse2>" . $adresse->getComplement() . "</adresse2>\n";
 		echo "		<codePostal>" . $adresse->getCodePostal() . "</codePostal>\n";
 		echo "		<ville>" . $adresse->getVille() . "</ville>\n";
-		echo "	</adresse>";
+		echo "	</adresse>\n";
 		echo "	<photos>\n";
 		$photos = $commande->getCommandesPhoto();
 		foreach($photos as $photo){
-			echo "		<photo nombre=\"" . $photo->getNombre() . "\" dimensions=\"" . $taillesPapier[$photo->getID_TaillePapier()]->getDimensions() . "\">" . $photo->getPhoto() . "</photo>\n";
+			echo '		<photo quantite="'.$photo->getNombre().'" dimensions="'.$taillesPapier[$photo->getID_TaillePapier()]->getDimensions().'">'.$photo->getPhoto()."</photo>\n";
 		}
 		echo "	</photos>\n";
 		echo "</commande>\n";
@@ -50,3 +50,4 @@ switch($action){
 header('Location: commande.php');
 exit();
 ?>
+
