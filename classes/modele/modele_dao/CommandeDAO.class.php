@@ -65,8 +65,11 @@ class CommandeDAO extends DAO{
 		include_once $dir_commandedao_class_php . "/../Album.class.php";
 		include_once $dir_commandedao_class_php . "/../Photographe.class.php";
 		$query = "update Commande set etat = " .
-		mysql_real_escape_string($commande->getEtat()) .
-		" where commandeID = " .
+		mysql_real_escape_string($commande->getEtat());
+		if($commande->getEtat() == 1){
+			$query .= ", datePaiement = now() ";
+		}
+		$query .= " where commandeID = " .
 		mysql_real_escape_string($commande->getCommandeID());
 		$this->startTransaction();
 		$tmp = $this->update($query);
@@ -297,6 +300,7 @@ class CommandeDAO extends DAO{
 		$adresse = $adao->buildAdresseCommandeFromRow($row);
 		$id = $row->offsetGet("commandeID");
 		$date = $row->offsetGet("date");
+		$dp = $row->offsetGet("datePaiement");
 		$idUtilisateur = $row->offsetGet("id_utilisateur");
 		$s = $row->offsetGet("etat");
 		$fdp = $row->offsetGet("fdp");
@@ -308,6 +312,7 @@ class CommandeDAO extends DAO{
 		$result->setFDP($fdp);
 		$result->setCommandeID($id);
 		$result->setDate($date);
+		$result->setDatePaiement($dp);
 		$result->setNumero($numero);
 		$result->setID_Utilisateur($idUtilisateur);
 		$result->setEtat($s);

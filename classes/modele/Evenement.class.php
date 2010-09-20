@@ -7,6 +7,7 @@ class Evenement {
 	private $type;
 	private $date;
 	private $description;
+	private $adresse = '';
 	private $region;
 	private $departement;
 	private $ville;
@@ -252,6 +253,12 @@ class Evenement {
 	}
 	public function setWeb($w){
 		$this->web = $w;
+	}
+	public function getAdresse(){
+		return $this->adresse;
+	}
+	public function setAdresse($adresse){
+		$this->adresse = $adresse;
 	}
 }
 ?>

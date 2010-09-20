@@ -6,6 +6,7 @@ include_once $dir_commande_class_php . "/../Config.php";
 class Commande{
 	private $id;
 	private $date;
+	private $datePaiement = NULL;
 	private $idutilisateur;
 	private $commandesPhoto;
 	private $etat;
@@ -168,6 +169,12 @@ class Commande{
 	}
 	public function setPreparateur($prep){
 		$this->preparateur = $prep;
+	}
+	public function getDatePaiement(){
+		return $this->datePaiement;
+	}
+	public function setDatePaiement($dp){
+		$this->datePaiement = $dp;
 	}
 }
 ?>
