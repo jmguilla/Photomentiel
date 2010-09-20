@@ -90,8 +90,14 @@ include("header.php");
 				<?php } ?>
 				<br/>
 				<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"><?php echo $photographObj->getEmail(); ?></a>
-				<br/>
-				<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+				<?php
+					if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
+				?>
+					<br/>
+					<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+				<?php
+					}
+				?>
 				<div class="separator5"></div>
 				<span style="font-size:11px;">
 					* Frais de port (<?php echo sprintf('%.2f',SHIPPING_RATE); ?>&#8364;), offert à partir de <?php echo SHIPPING_RATE_UNTIL; ?>&#8364; d'achat.

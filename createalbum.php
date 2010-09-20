@@ -290,10 +290,10 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td>
 					Code : 
 				</td><td colspan="2">
-					<font color="blue"><?php echo $sidObj->getStringID(); ?></font>
+					<font color="blue"><?php echo $sid; ?></font>
 					<?php
 						if ($albumObj->getEtat() <= 2) {
-							echo ' - <a id="card_pdf" href="cartes-de-visite-'.$sidObj->getStringID().'.pdf">Télécharger vos cartes de visites</a>';
+							echo ' - <a id="card_pdf" href="cartes-de-visite-'.$sid.'.pdf">Télécharger vos cartes de visites</a>';
 						}
 					?>
 				</td>
@@ -363,7 +363,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td colspan="3" height="66px;">
 					<span class="note">La zone suivante vous permet de gérer votre liste de mails.<br/>
 					Photomentiel enverra un E-mail à toutes ces personnes dès que l'album sera prêt, ainsi qu'un rappel 2 semaines plus tard.</span><br/>
-					<u>Si vous avez de nouveaux mails, veuillez les insérer maintenant :</u>
+					<u>Si vous avez de nouveaux contacts, vous pouvez les insérer maintenant :</u>
 				</td>
 			</tr>
 			<tr>

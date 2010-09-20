@@ -58,6 +58,11 @@ $thumbsDir = THUMB_DIRECTORY;
 $picsDir = PICTURE_DIRECTORY;
 //get the corresponding album
 $albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
+//check if it is opened
+if ($albumObj->getEtat() != 2){
+	//TODO mieux que ça -> proposer de mettre son mail
+	photomentiel_die(new PMError("L'album n'est pas encore prêt !","Cet album n'est pas encore visualisable ou a été fermé."));
+}
 $_SESSION['photographID'] = $albumObj->getID_Photographe();
 //get the corresponding photographe
 $photographObj = Photographe::getPhotographeDepuisID($albumObj->getID_Photographe());
@@ -156,8 +161,14 @@ include("head.php");
 					<?php } ?>
 					<br/>
 					<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"> <?php echo $photographObj->getEmail(); ?></a>
-					<br/>
-					<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+					<?php
+						if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
+					?>
+						<br/>
+						<span>Evénement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+					<?php
+						}
+					?>
 				</div>
 				<div class="separator10"></div>
 				<u>Formats disponibles et tarifs :</u>
