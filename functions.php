@@ -64,29 +64,40 @@ function getHashFromCommand($cmdArray){
 }
 
 /*
+ * Remove the filename extension in the given filename
+ */
+function removeExtension($fileName){
+	return substr($fileName,0,sizeof($fileName)-5);
+}
+
+/*
  * Create pdf file from command, and user.
  * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
  */
-function makePDF($command, $user, $dest=null){
+function makePDF($command, $user, $photosFormatDim, $dest=null){
 	$adresse = $user->getAdresse();
 	$PDF = new phpToPDF();
 	$PDF->AddPage();
 	//Photomentiel informations
-	$x = 25;$y = 10;
+	$x = 15;$y = 10;
 	$PDF->SetFont('Times','B',12);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "PHOTOMENTIEL");
-	$y+=5;
-	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "www.photomentiel.fr");
+	$PDF->Write(10, "PHOTOMENTIEL - www.photomentiel.fr");
 	$y+=5;
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "contact@photomentiel.fr");
 	$y+=5;
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "SIREN 132456789");
+	$PDF->Write(10, "SIREN No 123456789");
+	$y+=5;
+	$PDF->SetFont('Times','',9);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Dispensé d’immatriculation au registre du commerce");
+	$y+=5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "et des sociétés (RCS) et au répertoire des métiers (RM)");
 	//User informations
-	$x = 140;$y = 20;
+	$x = 130;$y = 25;
 	$PDF->SetFont('Times','',13);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, $adresse->getNom()." ".$adresse->getPrenom());
@@ -102,12 +113,19 @@ function makePDF($command, $user, $dest=null){
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, $adresse->getCodePostal()." ". $adresse->getVille());
 	//date
-	/*$PDF->SetXY(35,64);
-	$PDF->Write(10, "Date : ".$date."\n");
+	$PDF->SetFont('Times','B',12);
+	$x = 102;$y += 8;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Commande du ".date("d/m/Y à H:i",strtotime($command->getDate())));
+	//numero de facture
+	$PDF->SetFont('Times','B',14);
+	$x = 15;$y += 12;
+	$PDF->SetXY($x,$y);
+	$PDF->Cell(70,10,'Facture N°'.$command->getNumero(),1,1,'C');
 	// Définition des propriétés du tableau.
 	$proprietesTableau = array(
 		'TB_ALIGN' => 'C',
-		'L_MARGIN' => 6,
+		'L_MARGIN' => 1,
 		'BRD_COLOR' => array(0,92,177),
 		'BRD_SIZE' => '0.3',
 		);
@@ -129,8 +147,8 @@ function makePDF($command, $user, $dest=null){
 		);
 	// Contenu du header du tableau.
 	$contenuHeader = array(
-		60, 30, 30, 30,
-		"Numéro", "Format", "Quantité", "Total",
+		80, 34, 34, 34,
+		"Référence", "Format", "Quantité", "Total",
 	);
 	// Définition des propriétés du reste du contenu du tableau.
 	$proprieteContenu = array(
@@ -150,24 +168,52 @@ function makePDF($command, $user, $dest=null){
 		'BRD_TYPE_NEW_PAGE' => '',
 	);
 	// Contenu du tableau.
-	$contenuTableau = array();
+	$tabContent = array();
 	$index = 0;
 	$tot = 0;
-	for ($i=0;$i<count($pictures);$i++){
-		$tmp = split($property_separator,$pictures[$i]);
-		$contenuTableau[$index++] = $tmp[0];
-		$contenuTableau[$index++] = $tmp[1];
-		$contenuTableau[$index++] = $tmp[2];
-		$contenuTableau[$index++] = $_prices[$tmp[1]]*$tmp[2]." €";
-		$tot += $_prices[$tmp[1]]*$tmp[2];
+	$lines = $command->getCommandesPhoto();
+	foreach ($lines as $line){
+		$tabContent[$index++] = removeExtension($line->getPhoto());
+		$tabContent[$index++] = $photosFormatDim[$line->getID_TaillePapier()];
+		$tabContent[$index++] = $line->getNombre();
+		$tabContent[$index++] = sprintf('%.2f',$line->getPrix())." €";
+		$tot += $line->getPrix();
 	}
-	$contenuTableau[$index++] = "";
-	$contenuTableau[$index++] = "";
-	$contenuTableau[$index++] = "TOTAL :";
-	$contenuTableau[$index++] = $tot." €";
-	$PDF->SetXY(0,78);
-	$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $contenuTableau);
-	*/
+	//display tab
+	$y += 12;
+	$PDF->SetXY($x,$y);
+	$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $tabContent);
+	//FDP
+	$x = 137;$y+=sizeof($lines)*6+7;
+	$PDF->SetFont('Times','',11);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Frais de port : ");
+	$PDF->SetFont('Times','',11);
+	$PDF->SetXY($x+26,$y+2);
+	$PDF->Cell(34,6,$command->getFDP()==0?"Offert!":sprintf('%.2f',$command->getFDP())." €",1,1,'C');
+	//Total
+	$y+=7;
+	$PDF->SetFont('Times','',12);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Total : ");
+	$PDF->SetFont('Times','B',12);
+	$PDF->SetXY($x+26,$y+2);
+	$PDF->Cell(34,6,sprintf('%.2f',$command->getFDP()+$tot)." €",1,1,'C');
+	//mention
+	$PDF->SetFont('Times','',8);
+	$y += 6;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "TVA non applicable, art. 293 B du CGI");
+	//payment date
+	$x = 15;$y+=5;
+	$PDF->SetFont('Times','',9);
+	$PDF->SetXY(15,$y);
+	$PDF->Write(10, "Date de paiement : JJ/MM/AAAA HH:MM");
+	//footer
+	$x = 78;$y = 266;
+	$PDF->SetFont('Times','',8);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "www.photomentiel.fr - Tous droits réservés");
 	//Print
 	if ($dest==null){
 		$PDF->Output();
@@ -189,33 +235,33 @@ function makeCard($stringID, $album, $photographe, $dest=null){
 	$PDF->SetFont('Times','B',9);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "www.photomentiel.fr");
-	$x = 25;$y += 3;
+	$x = 25;$y += 4;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "Vous pouvez imprimer et découper ces cartes sur du papier cartonné afin de les distribuer lors de votre évènement.");
 	//cards
 	$x = 20;$y += 15;
 	for ($i=0;$i<5;$i++){
-		$yy = $y + $i*47;
+		$yy = $y + $i*50;
 		for ($j=0;$j<2;$j++){
-			$xx = $x + $j*86;
+			$xx = $x + $j*85;
 			//cards png
-			$PDF->Image("design/misc/card_pdf.png", $xx, $yy, 86, 48);
+			$PDF->Image("design/misc/card_pdf.png", $xx, $yy, 85, 50);
 			//cards content
 			$PDF->SetFont('Times','',10);
-			$PDF->SetXY($xx+2,$yy+17);
+			$PDF->SetXY($xx+2,$yy+18);
 			$PDF->Write(10, "Photographe : ".$adresse->getNom()." ".$adresse->getPrenom());
-			$PDF->SetXY($xx+2,$yy+22);
-			$PDF->Write(10, "E-mail : ".$photographe->getEmail());
+			$PDF->SetXY($xx+2,$yy+23);
+			$PDF->Write(10, "Contact : ".$photographe->getEmail());
 			$PDF->SetFont('Times','B',9);
-			$PDF->SetXY($xx+2,$yy+29);
+			$PDF->SetXY($xx+2,$yy+32);
 			$PDF->Write(10, "Rendez vous sur www.photomentiel.fr");
 			$PDF->SetFont('Times','B',11);
-			$PDF->SetXY($xx+2,$yy+36);
+			$PDF->SetXY($xx+2,$yy+38);
 			$PDF->Write(10, "Code album :");
 			$PDF->SetFont('Arial','B',12);
-			$PDF->SetXY($xx+26,$yy+36);
-			$PDF->Write(10,$stringID);
+			$PDF->SetXY($xx+27,$yy+40);
+			$PDF->Cell(30,6,$stringID,1,1,'C');
 		}
 	}
 	//Print

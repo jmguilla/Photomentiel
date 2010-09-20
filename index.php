@@ -122,7 +122,7 @@ include_once("classes/modele/Evenement.class.php");
 								$idi = '';
 							}
 							$date_e = date("d/m/Y à G\hi",strtotime($event->getDate()));
-							echo '<a '.$idi.' class="last_event" href="events.php?ev='.$event->getEvenementID().'"><div class="event"><span id="event">Date : '.$date_e.'</span><span id="event">Lieu : '.$event->getVille()->getNom().'('.$event->getDepartement()->getNom().')</span><br/>'.toNchar($event->getDescription(),65).'</div></a>';
+							echo '<a '.$idi.' class="last_event" href="events.php?ev='.$event->getEvenementID().'"><div class="event"><span id="event">Date : '.$date_e.'</span><span id="event">Lieu : '.$event->getVille()->getNom().'('.$event->getDepartement()->getNom().')</span><br/>'.toNchar($event->getDescription(),70).'</div></a>';
 							if ($i == $nb_events) {break;}
 							$i++;
 						}

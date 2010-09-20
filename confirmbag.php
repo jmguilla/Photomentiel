@@ -134,7 +134,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 } else {
 	$cmdConfirmed = false;
 }
-
+//TODO search 'substr' and replace by removeExtension(...)
 ?>
 	<div id="full_content_top">
 		Confirmation de votre commande
@@ -158,7 +158,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 					$imp = ($i%2==0)?'pair':'impair';
 					echo '<tr>';
 					//ref
-					echo '<td class="'.$imp.'">'.substr($current['fileName'],0,sizeof($current['fileName'])-5).'</td>';
+					echo '<td class="'.$imp.'">'.removeExtension($current['fileName']).'</td>';
 					//format
 					echo '<td class="'.$imp.'">'.$photoFormatsDim[$current['formatID']].'</td>';
 					//quantity

@@ -80,23 +80,24 @@ input#b_gonext{
 }
 
 fieldset {
-    padding:10px;
-    background-color: #F9F9F9;
-    border: 2px solid #5555FF;
-    display: block;
+	padding:10px;
+	background-color: #F9F9F9;
+	border: 2px solid #5555FF;
+	display: block;
 	margin-top:15px;
 }
   
 fieldset legend {
 	font-weight:bold;
-    color: #5555FF;
+	color: #5555FF;
 	background-color: #F9F9F9;
-    margin-left:10px;
-    margin-right:10px;
+	margin-left:10px;
+	margin-right:10px;
 	padding-left:10px;
 	padding-right:10px;
 }
 a#card_pdf {
+	font-size:15px;
 	color:darkgreen;
 }
 a#card_pdf:hover {

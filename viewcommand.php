@@ -22,7 +22,7 @@ if ($utilisateurObj && isset($_GET['cmd'])){
 		photomentiel_die(new PMError("Commande inapropriée","Cette commande ne vous appartient pas, que faites vous là ?"),false);
 	}
 } else {
-	photomentiel_die(new PMError("Commande non spécifiée","Aucun code commande n'a été spécifié ou vous n'êtes pas connecté, que faites vous là ?"),false);
+	photomentiel_die(new PMError("Utilisateur non connecté","Vous n'êtes pas connecté, pour accéder à votre commande, veuillez vous connecter en utilisant les champs ci-dessus."),false);
 }
 
 if ($utilisateurObj && $commandObj){
@@ -140,7 +140,7 @@ if ($utilisateurObj && $commandObj){
 						?>
 							<div class="state_ok" id="cmd1">
 								<span class="state_title_ok">Votre paiement a été validé</span> 
-								<?php if($etatc == 1){echo '(La commande sera préparée sous peu - <a href="">Télécharger ma facture</a>)';} ?>
+								(<?php if($etatc == 1){echo 'La commande sera préparée sous peu - ';} ?><a href="factures_pdf.php?cmd=<?php echo $commandObj->getCommandeID(); ?>">Télécharger ma facture</a>)
 							</div>
 							<div class="<?php echo ($etatc >= 2)?'state_ok':'state'; ?>" id="cmd2">
 								<span class="<?php echo ($etatc >= 2)?'state_title_ok':'state_title'; ?>">Votre commande est en cours de préparation</span>

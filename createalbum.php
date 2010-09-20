@@ -37,6 +37,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 	}
 	//get album obj	
 	$albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
+	//check album owner
+	if ($albumObj->getID_Photographe() != $utilisateurObj->getPhotographeID()){
+		photomentiel_die(new PMError("Album inaproprié !","Cet album ne vous appartient pas, que faites vous là ?"), false);
+	}
+	//update mailing if needed
 	if(isset($_POST['mails']) && $_POST['mails'] != $albumObj->getMailing()){
 		$albumObj->setMailing($_POST['mails']);
 		$albumObj->save();
@@ -285,7 +290,12 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td>
 					Code : 
 				</td><td colspan="2">
-					<font color="blue"><?php echo $sidObj->getStringID(); ?></font> - <a id="card_pdf" href="card_pdf.php?al=<?php echo $sidObj->getStringID(); ?>">Télécharger vos cartes de visites</a>
+					<font color="blue"><?php echo $sidObj->getStringID(); ?></font>
+					<?php
+						if ($albumObj->getEtat() <= 2) {
+							echo ' - <a id="card_pdf" href="card_pdf.php?al='.$sidObj->getStringID().'">Télécharger vos cartes de visites</a>';
+						}
+					?>
 				</td>
 			</tr>
 			<tr>
