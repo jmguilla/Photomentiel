@@ -107,7 +107,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -193,7 +193,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -271,7 +271,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -345,7 +345,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
