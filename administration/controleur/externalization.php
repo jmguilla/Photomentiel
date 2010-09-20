@@ -11,4 +11,3 @@ define("supprimer_evenement", "supprimer_evenement");
 define("traiter_commande", "traiter_commande");
 define("down_xml", "download_commande_xml");
 ?>
-
