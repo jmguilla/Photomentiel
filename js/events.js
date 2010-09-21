@@ -37,9 +37,9 @@ function getEvents(){
 	} else if (d2 != '') {
 		d2 = convertDate(d2);
 	}
-	//TODO mettre limit 20
 	var param = new Object();
 	param.action = 'smart_search_evenement';
+	param.n=20;
 	if (d1!='') {param.d1=d1;}
 	if (d2!='') {param.d2=d2;}
 	if (kw!='') {param.query=kw;}

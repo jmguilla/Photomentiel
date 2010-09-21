@@ -106,14 +106,14 @@ a.last_album, a.last_event {
 	padding:1px;
 	font-size:14px;
 	color:black;
-	background-color:#EEEEEE;
+	background-color:#DDEEFF;
 	text-decoration:none;
 }
 a.last_album#impair, a.last_event#impair {
-	background-color:#DDDDDD;
+	background-color:#CCEEFF;
 }
 a.last_album:hover, a.last_event:hover, a.last_album#impair:hover, a.last_event#impair:hover , a.know_more_item:hover{
-	background-color : #CCCCCC;
+	background-color : #99EEFF;
 	color:blue;
 }
 div#album_pic {

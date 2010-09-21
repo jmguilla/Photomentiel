@@ -14,8 +14,8 @@ div#left {
 	margin-left:3px;
 	margin-right:20px;
 	width:180px;
-	border:1px #777777 solid;
-	background-color:#DDDDDD;
+	border:1px blue solid;
+	background-color:#DDEEFF;
 	padding-top:5px;
 	padding-bottom:5px;
 }
@@ -48,7 +48,7 @@ div.content_box {
 	margin-bottom:10px;
 	text-align:left;
 	font-size:14px;
-	border-bottom:1px #777777 solid;
+	border-bottom:2px blue solid;
 }
 div.content_box div.title {
 	width:100%;
@@ -88,14 +88,14 @@ a.album, a.event {
 	padding:1px;
 	font-size:14px;
 	color:black;
-	background-color:#EEEEEE;
+	background-color:#DDEEFF;
 	text-decoration:none;
 }
 a.album#impair, a.event#impair {
-	background-color:#DDDDDD;
+	background-color:#CCEEFF;
 }
 a.album:hover, a.event:hover, a.album#impair:hover, a.event#impair:hover {
-	background-color : #CCCCCC;
+	background-color : #99EEFF;
 	color:blue;
 }
 div.event, div.album {

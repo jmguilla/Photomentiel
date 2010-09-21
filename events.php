@@ -68,6 +68,7 @@ if (isset($_POST['ftype'])){
 		$event->setDepartement(new Departement($_POST['fdepartement']));
 		$event->setVille(new Ville($_POST['fville']));
 		$event->setDescription($_POST['fdesc']);
+		$event->setAdresse($_POST['faddr']);
 		$event->setWeb($_POST['fweb']);
 		$d = $event->create();
 		if (!$d){
@@ -205,7 +206,8 @@ if (isset($_POST['ftype'])){
 								<tr><td><b>Région : </b></td><td>'.$evt->getRegion()->getNom().'</td></tr>
 								<tr><td><b>Département : &nbsp;&nbsp;</b></td><td>'.$evt->getDepartement()->getNom().'</td></tr>
 								<tr><td><b>Ville : </b></td><td><span class="highlight">'.$evt->getVille()->getNom().'</span></td></tr>
-								<tr><td><b>Date & heure : </b></td><td><span class="highlight">'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'</span></td></tr></table><br/>';
+								<tr><td><b>Date & heure : </b></td><td><span class="highlight">'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'</span></td></tr>
+								<tr><td><b>Adresse : </b></td><td><span class="highlight">'.$evt->getAdresse().'</span></td></tr></table><br/>';
 								if ($evt->getWeb() != ''){
 							echo   '<b>Lien vers l\'événement officiel : </b></td><td><a target="_blank" href="'.$evt->getWeb().'">'.toNchar($evt->getWeb(),60).'</a><br/>';
 								}
@@ -326,6 +328,14 @@ if (isset($_POST['ftype'])){
 									<input id="fdesc" name="fdesc" class="textfield" type="text" required="required"/>
 								</td><td>
 									<div class="checkform" id="rfdesc"></div>
+								</td>
+							</tr><tr>
+								<td>
+									Adresse physique :
+								</td><td>
+									<input id="faddr" name="faddr" class="textfield" type="text"/>
+								</td><td>
+									<div class="checkform" id="raddr"></div>
 								</td>
 							</tr><tr>
 								<td>

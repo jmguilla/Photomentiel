@@ -30,7 +30,7 @@ div#pictures_content table {
 	border-spacing: 0px 5px;
 }
 div#pictures_content td {
-	background-color:#E0F8F7;
+	background-color:#DDEEFF;
 	padding:0px;
 	margin:0px;
 }
@@ -46,7 +46,7 @@ div#pictures_content tr#title {
 	background-color:#32BEED;
 }
 div#pictures_content td.impair {
-	background-color:#CEF6F5;
+	background-color:#CCEEFF;
 }
 div#pictures_content tr#total, div#pictures_content tr#total_ {
 	height:24px;
@@ -57,7 +57,7 @@ div#pictures_content tr#total td{
 	font-size:14px;
 }
 div#pictures_content tr#total_ td{
-	background-color:#CEF6F5;
+	background-color:#CCEEFF;
 	font-weight:normal;
 	font-size:14px;
 }
