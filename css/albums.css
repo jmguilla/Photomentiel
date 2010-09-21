@@ -9,14 +9,14 @@ div#search {
 	padding:5px;
 	text-align:left;
 	line-height:18px;
-	border:1px #777777 solid;
-	background-color:#DDDDDD;
+	border:1px blue solid;
+	background-color:#DDEEFF;
 }
 div#right {
 	margin-left:15px;
 	float:left;
 	width:695px;
-	border:1px #DDDDDD solid;
+	border:1px blue solid;
 	padding-right:5px;
 	padding-left:5px;
 	height:500px;
@@ -76,18 +76,18 @@ span.intitule, span.intitule a {
 div.album {
 	width:99%;
 	height:94px;
-	margin-top:1px;
+	margin-top:2px;
 	padding:1px;
 	font-size:14px;
 	color:black;
-	background-color:#EEEEEE;
+	background-color:#DDEEFF;
 	text-decoration:none;
 }
 div.album#impair {
-	background-color:#DDDDDD;
+	background-color:#CCEEFF;
 }
 div.album:hover, div.album#impair:hover {
-	background-color : #CCCCCC;
+	background-color : #99EEFF;
 }
 div.album img {
 	border:1px #BBBBBB solid;
