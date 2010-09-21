@@ -1,0 +1,11 @@
+input#gohome {
+	margin-left:50px;
+	margin-right:50px;
+}
+div#content_validate {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	line-height:30px;
+}
+

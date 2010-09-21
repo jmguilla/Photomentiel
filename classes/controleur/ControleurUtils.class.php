@@ -79,11 +79,13 @@ class ControleurUtils{
 	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 	     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
-			"Validez votre compte photomentiel",
+			"Photomentiel - Validez votre compte !",
+			"Bienvenue sur Photomentiel !\n\n".
+			"Ce message vous a été envoyé suite à la création de votre compte sur www.photomentiel.fr.\n".
+			"Pour activer votre compte, veuillez cliquer sur le lien suivant :\n" .
+			"http://".$_SERVER['SERVER_NAME']."/active-".$activateID.$utilisateur->getUtilisateurID()."\n\n".
+			"Vous pouvez également copier et coller cette adresse dans votre navigateur.\n\n\n" .
 			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n" .
-			"Pour activer votre compte, veuillez cliquer sur le lien suivant:\n" .
-			"http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . "/classes/dispatcher.php?action=" . a_usr . "&uid=" . $activateID . $utilisateur->getUtilisateurID() . "\n\n" .
-			"Vous pouvez également copier et coller cette adresse dans votre navigateur.\n\n" .
 			"Merci d'utiliser photomentiel.fr",
 			$headers
 			);

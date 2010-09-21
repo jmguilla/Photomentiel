@@ -31,7 +31,6 @@ define("a_m_album", "add_mail_to_album");
 define("logon", "logon");
 define("c_usr", "create_utilisateur");
 define("u_usr", "update_utilisateur");
-define("a_usr", "activate_utilisateur");
 define("c_photographe", "create_photographe");
 define("u_photographe", "update_photographe");
 define("check_email", "check_email");

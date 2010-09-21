@@ -21,7 +21,6 @@ try{
 		case logon:
 		case c_usr:
 		case u_usr:
-		case a_usr:
 		case c_photographe:
 		case u_photographe:
 		case check_email:

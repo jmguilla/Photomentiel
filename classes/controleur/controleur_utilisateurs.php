@@ -102,15 +102,6 @@ switch($action){
 			return;
 		}
 	break;
-	case a_usr:
-		$id = $_GET['uid'];
-		$boolean = Utilisateur::activerUtilisateur($id);
-		if($boolean){
-			echo "Votre compte a bien été activé. Rendez-vous sur http://www.photomentiel.fr pour vous identifier!!";			
-		}else{
-			echo "Votre compte n'a pas pu être activé.";
-		}
-	break;
 	case check_email:
 		$email = trim($_GET['email']);
 		$isValid = Utilisateur::controleEmail($email);

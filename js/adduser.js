@@ -288,7 +288,7 @@ $(document).ready(function() {
 						return;
 					}
 					if(data.value.klass == "Utilisateur" || data.value.klass == "Photographe"){
-						alert("Votre compte vient d'être créé.\nVous allez recevoir un email de confirmation pour activer votre compte.");
+						//alert("Votre compte vient d'être créé.\nVous allez recevoir un email de confirmation pour activer votre compte.");
 						previousMail='';
 						if (nextPage != 'false'){
 							document.location.href = "adduser.php?action=ac&np="+nextPage;
