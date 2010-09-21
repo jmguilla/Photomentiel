@@ -29,7 +29,7 @@ if(!$activated){
 	<div id="content_validate">
 		<div class="separator10" style="height:140px;"></div>
 		Votre compte a été validé avec succés, nous vous souhaitons la bienvenue parmi nous.<br/>
-		Vous pouvez maintenant vous identifier en utilisant les champs ci-dessus.
+		Vous pouvez maintenant vous identifier en utilisant les champs ci-dessus.<br/>
 		<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
 		<div class="separator10" style="height:150px;"></div>
 	</div>

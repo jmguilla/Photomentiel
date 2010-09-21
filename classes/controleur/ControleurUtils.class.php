@@ -82,11 +82,11 @@ class ControleurUtils{
 			"Photomentiel - Validez votre compte !",
 			"Bienvenue sur Photomentiel !\n\n".
 			"Ce message vous a été envoyé suite à la création de votre compte sur www.photomentiel.fr.\n".
-			"Pour activer votre compte, veuillez cliquer sur le lien suivant :\n" .
+			"Afin de le rendre actif, veuillez cliquer sur le lien suivant :\n" .
 			"http://".$_SERVER['SERVER_NAME']."/active-".$activateID.$utilisateur->getUtilisateurID()."\n\n".
-			"Vous pouvez également copier et coller cette adresse dans votre navigateur.\n\n\n" .
-			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n" .
-			"Merci d'utiliser photomentiel.fr",
+			"Vous pouvez également copier et coller cette adresse dans votre navigateur.\n\n" .
+			"Merci d'utiliser photomentiel.fr\n\n\n".
+			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
 			$headers
 			);
 		}
