@@ -6,7 +6,10 @@ var re_mail = new RegExp('^.+@.+[.].+$');
 //create data regexp
 var re_date = new RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}$');
 //check username//pwd is correct and connect if so
-function checkUserOrConnect(){
+function checkUserOrConnect(scriptname){
+	if (scriptname != null && scriptname == 'validaccount'){
+		$('#form_connect').attr('action','index.php?');
+	}
 	var email = $("#user_email").val();
 	var pwd = $("#user_pwd").val();
 	if (email == "" || pwd == ""){

@@ -42,7 +42,7 @@ function getAlbums(){
 	} else if (d2 != '') {
 		d2 = convertDate(d2);
 	}
-	var param = new Object();
+	var param = new Object();//TODO mettre limit 20
 	param.action = 'smart_search_album';
 	if (d1!='') {param.d1=d1;}
 	if (d2!='') {param.d2=d2;}
