@@ -122,7 +122,7 @@ class CommandeDAO extends DAO{
 			$numDelta = $count['num'];
 			break;
 		}
-		$numero = $numTmp . sprintf("%04d", $numDelta);
+		$numero = $numTmp . $numDelta;
 		$id_album = $commande->getID_Album(); 
 		if(isset($id_album)){
 			$query = "insert into Commande (date, id_album, id_utilisateur, etat, fdp, numero) values (now(), ".
