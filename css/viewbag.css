@@ -73,6 +73,9 @@ div.faq_f, input.faq_q {
 	width:40px;
 	margin-left:5px;
 }
+div.faq_f {
+	margin-top:4px;
+}
 input.faq_q {
 	width:25px;
 	text-align:center;
@@ -89,6 +92,7 @@ a.a_minus, a.a_plus {
 	width:15px;
 	margin:1px;
 	margin-left:5px;
+	margin-top:3px;
 }
 a.a_minus:link, a.a_minus:visited {background:url(../design/buttons/minus.png) 0 0px no-repeat;}
 a.a_minus:hover, a.a_minus:active {background:url(../design/buttons/minus.png) 0 -15px no-repeat;}

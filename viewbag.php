@@ -46,6 +46,17 @@ $pictures = preg_split("[-]",$_POST['pics']);
 $photoFormatsDim = $_SESSION['photoFormatsDim'];
 $photoFormatsPrice = $_SESSION['photoFormatsPrice'];
 
+if (isset($_SESSION['COMMAND_LINES'])){
+	$commandLines = $_SESSION['COMMAND_LINES'];
+	$formats = array();
+	$quantities = array();
+	for ($i=0;$i<sizeof($commandLines);$i++){
+		$current = $commandLines[$i];
+		$formats[$current['fileName']] = $current['formatID'];
+		$quantities[$current['fileName'].$current['formatID']] = $current['quantity'];
+	}
+}
+
 include("header.php");
 ?>
 	<script language="javascript" src="js/thickbox.js"></script>
@@ -65,7 +76,9 @@ include("header.php");
 			<div id="album_infos">
 				<span>Album :</span> <b><?php echo $albumObj->getNom(); ?></b>
 				<br/>
-				<span>Date :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
+				<span>Code :</span> <?php echo $albumStringID; ?>
+				<br/>
+				<span>Création :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
 				<br/>
 				<?php 
 				$adresseObj = $photographObj->getAdresse();
@@ -77,8 +90,14 @@ include("header.php");
 				<?php } ?>
 				<br/>
 				<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"><?php echo $photographObj->getEmail(); ?></a>
-				<br/>
-				<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+				<?php
+					if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
+				?>
+					<br/>
+					<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+				<?php
+					}
+				?>
 				<div class="separator5"></div>
 				<span style="font-size:11px;">
 					* Frais de port (<?php echo sprintf('%.2f',SHIPPING_RATE); ?>&#8364;), offert à partir de <?php echo SHIPPING_RATE_UNTIL; ?>&#8364; d'achat.
@@ -107,6 +126,7 @@ include("header.php");
 					<th width="140px">Total (&#8364; TTC)</th>
 				</tr>
 			<?php
+				$total_cmd = 0;
 				for ($i=0;$i<sizeof($pictures);$i++){
 					$imp = ($i%2==0)?'pair':'impair';
 					$ref = substr($pictures[$i],0,sizeof($pictures[$i])-5);
@@ -116,41 +136,51 @@ include("header.php");
 					//format + quantity
 					$formatStr = "";
 					foreach ($photoFormatsPrice as $id => $p) {
+						$text_value = isset($quantities[$pictures[$i].$id])?'value="'.$quantities[$pictures[$i].$id].'"':'';
 						$f = $photoFormatsDim[$id];
 						$ref_nb = $ref.$f.'nb';
-						$formatStr .= '<br/><div class="faq_f">'.$f.'</div><a class="a_minus" title="Retirer 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\',-'.$p.');"></a><input type="text" class="faq_q" id="'.$ref_nb.'" picture="'.$pictures[$i].'" format="'.$f.'" formatId="'.$id.'" readonly="true"></div><a class="a_plus" title="Ajouter 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\','.$p.');"></a>';
+						$formatStr .= '<br/><div class="faq_f">'.$f.'</div><a class="a_minus" title="Retirer 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\',-'.$p.');"></a><input type="text" class="faq_q" id="'.$ref_nb.'" picture="'.$pictures[$i].'" format="'.$f.'" formatId="'.$id.'" '.$text_value.' readonly="true"></div><a class="a_plus" title="Ajouter 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\','.$p.');"></a>';
 					}
 					echo '<td class="'.$imp.'" width="180px">'.(substr($formatStr,5)).'</td>';
 					//ss tot
+					$sstot_tot = 0;
 					$formatStr = "";
 					foreach ($photoFormatsPrice as $id => $p) {
+						$sstot_price = isset($quantities[$pictures[$i].$id])?$quantities[$pictures[$i].$id]*$photoFormatsPrice[$id]:'0';
+						$sstot_tot += $sstot_price;
 						$ref_stot = $ref.$photoFormatsDim[$id].'stot';
-						$formatStr .= '<br/><span class="span_lh" id="'.$ref_stot.'">'.sprintf('%.2f',0).'</span>';
+						$formatStr .= '<br/><span class="span_lh" id="'.$ref_stot.'">'.sprintf('%.2f',$sstot_price).'</span>';
 					}
 					echo '<td class="'.$imp.'">'.(substr($formatStr,5)).'</td>';
 					//tot
+					$total_cmd += $sstot_tot;
+					$tot_text = ($sstot_tot > 0)?sprintf('%.2f',$sstot_tot):'<img src="design/misc/trash.png""></img><br/><font size="1">Non commandée</font>';
 					$ref_tot = $ref.'tot';
-					echo '<td class="'.$imp.'"><span class="stot" id="'.$ref_tot.'"><img src="design/misc/trash.png""></img><br/><font size="1">Non commandée</font></span></td></tr>';
+					echo '<td class="'.$imp.'"><span class="stot" id="'.$ref_tot.'">'.$tot_text.'</span></td></tr>';
 				}
 			?>
 				<tr id="total_"><td colspan="3" style="text-align:left;background-color:white;">
 					<span style="font-size:11px;color:#333333;">
 					* Frais de port (<?php echo sprintf('%.2f',SHIPPING_RATE); ?>&#8364;), offert à partir de <?php echo SHIPPING_RATE_UNTIL; ?>&#8364; d'achat.
 					<span>
-				</td><td align="right">Total photos :</td><td><span id="total_pic"><?php echo sprintf('%.2f',0); ?></span> &#8364;</td></tr>
-				<tr id="total_"><td colspan="3" style="background-color:white;"></td><td align="right">Frais de port * :</td><td><span id="shipping_rate"><?php echo sprintf('%.2f',0); ?></span> &#8364;</td></tr>
-				<tr id="total"><td colspan="3" style="background-color:white;"></td><td align="right">Total :</td><td><span id="total_total"><?php echo sprintf('%.2f',0); ?></span> &#8364;</td></tr>
+				</td><td align="right">Total photos :</td><td><span id="total_pic"><?php echo sprintf('%.2f',$total_cmd); ?></span> &#8364;</td></tr>
+				<tr id="total_"><td colspan="3" style="background-color:white;"></td><td align="right">Frais de port * :</td><td><span id="shipping_rate"><?php echo sprintf('%.2f',($total_cmd<=SHIPPING_RATE_UNTIL && $total_cmd!=0)?SHIPPING_RATE:0); ?></span> &#8364;</td></tr>
+				<tr id="total"><td colspan="3" style="background-color:white;"></td><td align="right">Total :</td><td><span id="total_total"><?php echo sprintf('%.2f',$total_cmd+(($total_cmd<=SHIPPING_RATE_UNTIL && $total_cmd!=0)?SHIPPING_RATE:0)); ?></span> &#8364;</td></tr>
 			</table>
 		</div>
 		<div class="separator10"></div>
 		<table width="90%" style="margin:auto;" id="buttons">
 			<tr>
 				<td><input class="button" type="button" value="&lt;&lt; retour à l'album" onClick="goPrevious();"/></td>
-				<td><input class="button" type="button" value="Confirmer le panier &gt;&gt;" onClick="confirmAndGoNext();"/></td>
+				<td><input style="width:300px" class="button" type="button" value="Confirmer le panier et commander &gt;&gt;" onClick="confirmAndGoNext();"/></td>
 			</tr>
 		</table>
+		<div class="separator10" style="height:20px"></div>
 	</div>
 	<form id="form_confirmbag" method="POST" action="confirmbag.php">
+		<!-- filled by js -->
+	</form>
+	<form id="form_backToAlbum" method="POST" action="viewalbum.php?al=<?php echo $albumStringID; ?>">
 		<!-- filled by js -->
 	</form>
 	<div id="full_content_bot"></div>

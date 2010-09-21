@@ -11,7 +11,9 @@ function checkMinPrice(){
 	var errorMin = false;
 	var mess = '';
 	var oneSet = false;
+	var numberExist = 0;
 	$('input[min]').each(function() {
+		numberExist++;
 		if ($('#'+ this.id).val() != ''){
 			oneSet = true;
 			var minPrice = parseFloat($('#'+ this.id).attr('min'));
@@ -25,7 +27,7 @@ function checkMinPrice(){
 			}
 		}
     	});
-	if (!errorMin && !oneSet){
+	if (!errorMin && numberExist>0 && !oneSet){
 		mess = mess + "\nVous devez spécifier le prix d'au moins un format de photos.";
 		errorMin = true;
 	}

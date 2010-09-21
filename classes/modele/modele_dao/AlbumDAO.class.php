@@ -11,19 +11,44 @@ class AlbumDAO extends DAO {
 		$dsn = DBTYPE."://".DBUSER.":".DBPWD."@".DBHOST."/".DBPHOTOMENTIEL;
 		parent::__construct($dsn);
 	}
-
-	public function validerListeAlbum($listeAlbum){
+	public function activerListeAlbum($listeAlbum){
 		if(isset($listeAlbum) && !empty($listeAlbum)){
-			$query = "update Album set etat = 2 where ";
+			$query = "update Album set etat = 2 where etat = 3 and ( ";
 			$length = count($listeAlbum);
 			$current = 0;
-			foreach($listeAlbum as $albumID){
+			foreach($listeAlbum as $album){
 				$current++;
-				$query .= "albumID = " . mysql_real_escape_string($albumID);
+				$query .= "albumID = " . mysql_real_escape_string($album->getAlbumID());
 				if($current < $length){
 					$query .= " or ";
 				}
 			}
+			$query .= " )";
+			$this->startTransaction();
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() >= 0){
+				$this->commit();
+				return true;
+			}else{
+				$this->rollback();
+				return false;
+			}
+		}
+		return false;
+	}
+	public function validerListeAlbum($listeAlbum){
+		if(isset($listeAlbum) && !empty($listeAlbum)){
+			$query = "update Album set etat = 2 where etat = 1 and ( ";
+			$length = count($listeAlbum);
+			$current = 0;
+			foreach($listeAlbum as $album){
+				$current++;
+				$query .= "albumID = " . mysql_real_escape_string($album->getAlbumID());
+				if($current < $length){
+					$query .= " or ";
+				}
+			}
+			$query .= " )";
 			$this->startTransaction();
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
@@ -82,7 +107,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -147,7 +172,7 @@ class AlbumDAO extends DAO {
 	 * @param $d2
 	 * @param $isPublique
 	 */
-	public function smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL){
+	public function smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL, $n = NULL){
 		if(str_word_count($search) > 1){
 			$words = explode(' ', $search);
 		}else{
@@ -168,7 +193,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -201,7 +226,11 @@ class AlbumDAO extends DAO {
 		if(isset($etat)){
 			$query .= " and etat = " . mysql_real_escape_string($etat);
 		}
-		$query .= " order by a.date desc";
+		$query .= " order by a.date desc ";
+		if(isset($n) && $n > 0){
+			$query .= " limit " .
+			mysql_real_escape_string($n);
+		}
 		$tmp = $this->retrieve($query);
 		if(!$tmp || $tmp->getNumRows() <= 0){
 			return false;
@@ -242,7 +271,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table
@@ -316,7 +345,7 @@ class AlbumDAO extends DAO {
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
-		"e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
+		"e.adresse as e_adresse, e.mailing as e_mailing, e.evenementID as e_evenementID, e.description as e_description, e.id_region as e_id_region, e.id_departement as e_id_departement, e.id_ville as e_id_ville, e.web as e_web, e.type as e_type, e.date as e_date, e.id_utilisateur as e_id_utilisateur, " .
 		//table ville
 		"v.id_ville as vid_ville, v.id_departement as vid_departement, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		//table

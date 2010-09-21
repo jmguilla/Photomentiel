@@ -1,13 +1,28 @@
 function deleteCommand(idCmd){
-	//TODO
-	//AJAX delete commande pour un id command donné
-	//method POST
-	//condition pour la suppresion (protection) : 
-	//   $_SESSION['userID'] existe
-	//   la commande appartient a $_SESSION['userID'] ( le ID_user de la commande == $_SESSION['userID'])
-	//   l'état de la commande est 0 ou 4
 	if(confirm("Souhaitez vous réellement supprimer cette commande ?")){
-		alert('Votre commande a été supprimée avec succés !');
-		document.location.href = 'myaccount.php';
+		var param = new Object();
+		param.action = 'supprimer_commande';
+		param.id=idCmd;
+		$.ajax({
+			type:"POST",
+			url: "classes/dispatcher.php",
+			data:param,
+			dataType:"json",
+			success:function(data){
+				if (data.result == false){
+					return;
+				}
+				if(data.value == false){
+					alert("Une erreur est survenue lors de la suppression de cette commande.");
+					return;
+				} else {
+					alert('Votre commande a été supprimée avec succés !');
+					document.location.href = 'myaccount.php';
+				}
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert('Error with code 14');
+			}
+		});
 	}
 }

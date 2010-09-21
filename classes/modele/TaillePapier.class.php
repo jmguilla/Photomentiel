@@ -18,7 +18,15 @@ class TaillePapier{
 	 */
 	public static function getTaillePapiers(){
 		$dao = new TaillePapierDAO();
-		return $dao->getTaillePapiers();
+		$tmp = $dao->getTaillePapiers();
+		if($tmp){
+			$result = array();
+			foreach($tmp as $entry){
+				$result[$entry->getTaillePapierID()] = $entry;
+			}
+			return $result;
+		}
+		return $tmp;
 	}
 	/**
 	 * Renvoie la taille papier identifi� par $id

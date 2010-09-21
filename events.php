@@ -23,7 +23,6 @@ include_once("classes/modele/EvenementEcouteur.class.php");
 include_once("classes/modele/StringID.class.php");
 include_once("classes/modele/Album.class.php");
 //TODO virer les évènements quand l'album relié est fermé
-//TODO un probleme dans le retour d'événement en AJAX, des emails sont undefined
 $eventSelected = false;
 if (isset($_GET['ev'])) {
 	$eventSelected = $_GET['ev'];
@@ -176,7 +175,7 @@ if (isset($_POST['ftype'])){
 									$idi = '';
 								}
 								echo '<div '.$idi.' class="event">';
-								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$tmp->getType().'</span><br/><span class="content">';
+								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$tmp->getType()].'</span><br/><span class="content">';
 								echo '<span class="intitule"><a class="intitule" href="events.php?ev='.$tmp->getEvenementID().'"><b>Intitulé</b> : '.toNchar($tmp->getDescription(),84).'</a></span><br/>';
 								echo '<b>Posté par</b> : <a href="mailto:'.$utilisateur->getEmail().'">'.$utilisateur->getEmail().'</a><br/>';
 								if ($tmp->getWeb() != ''){
@@ -194,16 +193,13 @@ if (isset($_POST['ftype'])){
 							$utilisateur = Utilisateur::getUtilisateurDepuisID($evt->getID_Utilisateur());
 							if ($utilisateur){
 								$alb = Album::getAlbumEtImageEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($evt->getEvenementID());
-								/*if ($alb) {
-									$alb = $alb[0]['Album'];
-								}*/
 							} else {
 								$evt = false;
 							}
 						}
 						if ($evt){
 							echo '<div class="event_desc">
-								<div class="mailing"><b>Date : </b>'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : './*$EVENTS_TYPES[*/$evt->getType().'<br/>
+								<div class="mailing"><b>Date : </b>'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$evt->getType()].'<br/>
 								<span class="desc"><b>Description : </b>'.$evt->getDescription().'</span></div><br/><br/>
 								<table CELLSPACING="4px;"><tr><td><b>Posté par : </b></td><td><a href="mailto:'.$utilisateur->getEmail().'">'.$utilisateur->getEmail().'</a></td></tr>
 								<tr><td><b>Région : </b></td><td>'.$evt->getRegion()->getNom().'</td></tr>

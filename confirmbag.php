@@ -25,6 +25,7 @@ include_once("classes/modele/AdresseCommande.class.php");
 if (!isSet($_SESSION['albumStringID'])){
 	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"));
 }
+$albumStringID = $_SESSION['albumStringID'];
 
 //checked commands
 if (!isset($_POST["pictur_0"]) && !isset($_SESSION['COMMAND_LINES'])){
@@ -133,7 +134,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 } else {
 	$cmdConfirmed = false;
 }
-
+//TODO search 'substr' and replace by removeExtension(...)
 ?>
 	<div id="full_content_top">
 		Confirmation de votre commande
@@ -157,7 +158,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 					$imp = ($i%2==0)?'pair':'impair';
 					echo '<tr>';
 					//ref
-					echo '<td class="'.$imp.'">'.substr($current['fileName'],0,sizeof($current['fileName'])-5).'</td>';
+					echo '<td class="'.$imp.'">'.removeExtension($current['fileName']).'</td>';
 					//format
 					echo '<td class="'.$imp.'">'.$photoFormatsDim[$current['formatID']].'</td>';
 					//quantity
@@ -187,15 +188,23 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 				<?php
 					if (!$utilisateurObj){
 				?>
+						<div id="div_continue">
 						<ul>
-							<br/>
 							<b>Afin de poursuivre votre commande, vous devez vous identifier ou créer un compte :</b>
 							<br/><br/>
 							<li>Si vous venez de créer un compte, veuillez l'activer en suivant le lien qui vous a été envoyé par E-mail, puis connectez vous en utilisant les champs ci-dessus.</li>
+							<br/>
 							<li>Pour vous connecter à votre compte, veuillez vous identifier en utilisant les champs ci-dessus, sous la bannière.</li>
+							<br/>
 							<li>Pour créer un compte, <a href="adduser.php?type=cl&np=confirmbag.php">cliquez ici.</a></li>
 						</ul>
-						<div class="separator10" style="height:50px"></div>
+						</div>
+						<div class="separator10" style="height:20px"></div>
+						<center>
+							<input style="width:260px;" type="button" class="button" value="Abandonner - Retour à l'accueil" onClick="document.location.href='index.php'"/>
+							<input style="width:260px;" type="button" class="button" value="Retour - Modifier ma sélection" onClick="history.back();" id="back_button"/>
+						</center>
+						<div class="separator10" style="height:20px"></div>
 				<?php
 					} else {
 						
@@ -205,38 +214,46 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 				?>
 							<div class="separator10"></div>
 							<div class="recap_info">
-								Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
-								<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.<br/><br/>
-								Vos photos vous seront livrées à l'adresse suivante : <br/><br/>
-								<div class="adr_b" style="font-size:14px;">
-									<?php
-										if ($_POST['adresses'] == "1"){
-											$adresseObj = $utilisateurObj->getAdresse();
-											echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
-											echo $adresseObj->getNomRue()."<br/>";
-											if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
-												echo $adresseObj->getComplement()."<br/>";
-											}
-											echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
-											echo 'France';
-										} else {
-											echo $_POST['nom']." ".$_POST['prenom']."<br/>";
-											echo $_POST['adresse1']."<br/>";
-											if ($_POST['adresse2'] != ''){
-												echo $_POST['adresse2']."<br/>";
-											}
-											echo $_POST['code_postal']." ".$_POST['ville']."<br/>";
-											echo 'France';
-										}
-									?>
+								<div id="div_continue">
+									Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
+									<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.<br/>
 								</div>
 								<br/>
-								Veuillez choisir un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
-								<?php
-									$_SESSION['last_command'] = $commande->getCommandeID();
-									include("e-transactions/selectcard.php");
-									displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
-								?>
+								<div id="div_continue">
+									Vos photos vous seront livrées à l'adresse suivante : <br/><br/>
+									<div class="adr_b" style="font-size:14px;">
+										<?php
+											if ($_POST['adresses'] == "1"){
+												$adresseObj = $utilisateurObj->getAdresse();
+												echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
+												echo $adresseObj->getNomRue()."<br/>";
+												if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
+													echo $adresseObj->getComplement()."<br/>";
+												}
+												echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
+												echo 'France';
+											} else {
+												echo $_POST['nom']." ".$_POST['prenom']."<br/>";
+												echo $_POST['adresse1']."<br/>";
+												if ($_POST['adresse2'] != ''){
+													echo $_POST['adresse2']."<br/>";
+												}
+												echo $_POST['code_postal']." ".$_POST['ville']."<br/>";
+												echo 'France';
+											}
+										?>
+									</div>
+								</div>
+								<br/>
+								<div id="div_continue" style="border:2px #000099 solid;">
+									Veuillez choisir un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
+									<?php
+										$_SESSION['last_command'] = $commande->getCommandeID();
+										include("e-transactions/selectcard.php");
+										displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
+									?>
+								</div>
+								<div class="separator10"></div>
 							</div>
 				<?php
 						} else {
@@ -325,8 +342,8 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 								<div class="separator10" style="height:20px"></div>
 								<input type="hidden" name="payment" value="true"/>
 								<center>
-									<input type="button" class="button" value="Retour" onClick="history.back();"/>
-									<input type="submit" class="button" value="Continuer" id="valid_button"/>
+									<input style="width:250px;" type="button" class="button" value="Retour - Annuler ma commande" onClick="document.location.href='viewalbum.php?al=<?php echo $albumStringID; ?>';"/>
+									<input style="width:250px;" type="submit" class="button" value="Continuer - Valider ma commande" id="valid_button"/>
 								</center>
 							</form>
 							<div class="separator10"></div>

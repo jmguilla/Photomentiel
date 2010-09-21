@@ -86,11 +86,11 @@ class Album {
 	 * @param unknown_type $d2
 	 * @param unknown_type $isPublique
 	 */
-	public static function smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL){
+	public static function smartRechercheAlbumEtImageStringIDEtPhotographeEtEvenement($search = NULL, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL, $n =NULL){
 		$dir_album_class_php = dirname(__FILE__);
 		include_once $dir_album_class_php . "/Image.class.php";
 		$daoAlbum = new AlbumDAO();
-		$tmp =  $daoAlbum->smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search, $d1, $d2, $isPublique, $etat);
+		$tmp =  $daoAlbum->smartRechercheAlbumEtStringIDEtPhotographeEtEvenement($search, $d1, $d2, $isPublique, $etat, $n);
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
@@ -225,6 +225,14 @@ class Album {
 	public static function validerListeAlbum($listeAlbum){
 		$dao = new AlbumDAO();
 		return $dao->validerListeAlbum($listeAlbum);
+	}
+	/**
+	 * Change l'état d'une liste d'album à 2 et sauve le changement en BD.
+	 * @param unknown_type $listeAlbum
+	 */
+	public static function activerListeAlbum($listeAlbum){
+		$dao = new AlbumDAO();
+		return $dao->activerListeAlbum($listeAlbum);
 	}
 
 	/*#########################################

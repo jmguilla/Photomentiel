@@ -10,7 +10,7 @@ class EvenementDAO extends DAO {
 	}
 
 	public function getEvenementDepuisID($id){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .	
@@ -34,7 +34,7 @@ class EvenementDAO extends DAO {
 				$words = array();
 			}
 		}
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .	
@@ -53,7 +53,7 @@ class EvenementDAO extends DAO {
 		return $this->extractArrayQuery($tmp, $this, "buildEvenementEtLieuxEtUtilisateurFromRow");
 	}
 
-	public function smartRechercheEvenementEtUtilisateur($search = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL){
+	public function smartRechercheEvenementEtUtilisateur($search = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL, $n = NULL){
 		if(str_word_count($search) > 1){
 			$words = explode(' ', $search);
 		}else{
@@ -63,7 +63,7 @@ class EvenementDAO extends DAO {
 				$words = array();
 			}
 		}
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
@@ -94,13 +94,17 @@ class EvenementDAO extends DAO {
 			$query .= " and e.date <= '" . 
 			mysql_real_escape_string($d2) . " 23:59:59' ";
 		}
-		$query .= " order by e.date asc";
+		$query .= " order by e.date asc ";
+		if(isset($n) && $n > 0){
+			$query .= " limit " .
+			mysql_real_escape_string($n);
+		}
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildEvenementEtLieuxEtUtilisateurFromRow");
 	}
 
 	public function getEvenements(){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .
@@ -113,7 +117,7 @@ class EvenementDAO extends DAO {
 	}
 
 	public function getNProchainsEvenements($n){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .	
@@ -160,7 +164,7 @@ class EvenementDAO extends DAO {
 	 * @param unknown_type $d2
 	 */
 	public function getNProchainsEvenementsEntreDates($n, $d1, $d2){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
@@ -198,7 +202,7 @@ class EvenementDAO extends DAO {
 	 * @param unknown_type $d
 	 */
 	public function getEvenementsADate($d){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .
@@ -218,7 +222,7 @@ class EvenementDAO extends DAO {
 	 * @param int $n
 	 */
 	public function getNDerniersEvenements($n){
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .	
@@ -238,10 +242,11 @@ class EvenementDAO extends DAO {
 	 * @param unknown_type $evt
 	 */
 	public function create($evt){
-		$query = "insert into Evenement ( mailing, description, id_region, id_departement, id_ville, web, type, date, id_utilisateur ) " .
+		$query = "insert into Evenement ( mailing, description, adresse, id_region, id_departement, id_ville, web, type, date, id_utilisateur ) " .
 		"values ('" . 
 		mysql_real_escape_string($evt->getMailing()) . "', '" .
-		mysql_real_escape_string($evt->getDescription()) . "', ";
+		mysql_real_escape_string($evt->getDescription()) . "', '" .
+		mysql_real_escape_string($evt->getAdresse()) . "', ";
 		$region = $evt->getRegion();
 		if(isset($region)){
 			$query = $query . mysql_real_escape_string($region->getID_Region()) . ", ";
@@ -283,7 +288,8 @@ class EvenementDAO extends DAO {
 	 */
 	public function save($evt){
 		$query = "update Evenement ";
-		$query .= "set description = '" . mysql_real_escape_string($evt->getDescription()) . "', ";
+		$query .= "set description = '" . mysql_real_escape_string($evt->getDescription()) . "', adresse = '" .
+		mysql_real_escape_string($evt->getAdresse()) . ", ";
 		$region = $evt->getRegion();
 		if(isset($region) && $region > 0){
 			$query .= "id_region = " . 
@@ -353,7 +359,9 @@ class EvenementDAO extends DAO {
 		$id_utilisateur = $row->offsetGet($prefix . "id_utilisateur");
 		$desc = $row->offsetGet($prefix . "description");
 		$mail = $row->offsetGet($prefix . "mailing");
+		$adresse = $row->offsetGet($prefix . "adresse");
 		$result = new Evenement();
+		$result->setAdresse($adresse);
 		$result->setMailing($mail);
 		$result->setEvenementID($id);
 		$result->setWeb($web);

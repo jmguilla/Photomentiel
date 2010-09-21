@@ -7,6 +7,7 @@ class Evenement {
 	private $type;
 	private $date;
 	private $description;
+	private $adresse = '';
 	private $region;
 	private $departement;
 	private $ville;
@@ -55,9 +56,9 @@ class Evenement {
 	 * @param int $id_region
 	 * @param string $type
 	 */
-	public static function smartRechercheEvenementEtUtilisateur($query = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL){
+	public static function smartRechercheEvenementEtUtilisateur($query = NULL, $d1 = NULL, $d2 = NULL, $id_region = NULL, $type = NULL, $n = NULL){
 		$dao = new EvenementDAO();
-		return $dao->smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $id_region, $type);
+		return $dao->smartRechercheEvenementEtUtilisateur($query, $d1, $d2, $id_region, $type, $n);
 	}
 	/**
 	 * Renvoie les n prochains evenements
@@ -252,6 +253,12 @@ class Evenement {
 	}
 	public function setWeb($w){
 		$this->web = $w;
+	}
+	public function getAdresse(){
+		return $this->adresse;
+	}
+	public function setAdresse($adresse){
+		$this->adresse = $adresse;
 	}
 }
 ?>

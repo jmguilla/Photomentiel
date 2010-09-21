@@ -37,6 +37,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 	}
 	//get album obj	
 	$albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
+	//check album owner
+	if ($albumObj->getID_Photographe() != $utilisateurObj->getPhotographeID()){
+		photomentiel_die(new PMError("Album inaproprié !","Cet album ne vous appartient pas, que faites vous là ?"), false);
+	}
+	//update mailing if needed
 	if(isset($_POST['mails']) && $_POST['mails'] != $albumObj->getMailing()){
 		$albumObj->setMailing($_POST['mails']);
 		$albumObj->save();
@@ -145,12 +150,9 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			if (!$updateMode && !$albumCreated){
 		?>
 		<form id="create_form" method="POST">
-		<table>
-			<tr>
-				<td colspan="3" height="30px;">
-					<u>Description de l'album :</u>
-				</td>
-			</tr>
+		<fieldset>
+			<legend> Description de l'album </legend>
+			<table>
 			<tr>
 				<td width="180px">
 					Intitulé (titre)* : 
@@ -161,7 +163,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td height="25px">
 					Album public ? : 
 				</td><td>
 					<input type="radio" id="public1" name="public" value="0" checked="true"/> Non (Album privé)
@@ -170,9 +172,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<div class="checkform" id="rpublic"></div>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" height="15px;"></td>
-			</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend> Evénement </legend>
+			<table>
 			<tr>
 				<td colspan="3" height="84px;">
 					<span class="note">Un événement peut être associé à cet album, le spécifier nous permet d'envoyer un E-mail
@@ -182,7 +186,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td width="180px">
 					Evénement associé : 
 				</td><td>
 					<input id="filter_date" class="textfield" value="jj/mm/aaaa" type="text" onKeyUp="if(this.value.length==2 || this.value.length==5){this.value+='/';}" onFocus="this.select()"/>
@@ -202,9 +206,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<div class="checkform" id="revent"></div>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" height="15px;"></td>
-			</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend> Formats & tarifs </legend>
+			<table>
 			<tr>
 				<td colspan="3" height="100px;">
 					<span class="note">Pour les formats, les prix indiqués sont donnés à titre indicatif et sont, selon nos statistiques, ceux qui offrent
@@ -215,7 +221,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td width="180px">
 					Formats & tarifs : <br/>
 					<span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span>
 				</td><td colspan="2">
@@ -238,9 +244,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					</table>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" height="15px;"></td>
-			</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend> Mailing liste </legend>
+			<table>
 			<tr>
 				<td colspan="3" height="66px;">
 					<span class="note">La zone suivante vous permet de créer une liste de mails, que vous pouvez remplir ou compléter plus tard.<br/>
@@ -249,7 +257,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td width="180px">
 					Liste de mails : <br/>
 					<span class="note2">Séparez les mails par des points-virgules '<b>;</b>'</span>
 				</td><td>
@@ -259,25 +267,35 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				</td>
 			</tr>
 		</table>
+	</fieldset>
 		<div class="separator10"></div>
-		<center><input type="button" class="button" value="Annuler" onClick="history.back();"/><input id="create_submit" type="button" class="button" value="Créer mon album" onClick="validForm();"/><center/>
+		<center><input type="button" class="button" value="Annuler" onClick="document.location.href='myaccount.php'"/><input id="create_submit" type="button" class="button" value="Créer mon album" onClick="validForm();"/><center/>
 		</form>
 		<?php
 			} else if ($updateMode){
 				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
 		?>
 		<form id="update_form" method="POST" action="?action=update&al=<?php echo $sid ?>">
-		<table>
+		<fieldset>
+			<legend> Description de l'album </legend>
+			<table>
 			<tr>
-				<td colspan="3" height="30px;">
-					<u>Description de l'album :</u>
-				</td>
-			</tr>
-			<tr>
-				<td width="180px">
+				<td width="180px;">
 					Intitulé : 
 				</td><td colspan="2">
 					<?php echo toNchar($albumObj->getNom(),180); ?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Code : 
+				</td><td colspan="2">
+					<font color="blue"><?php echo $sid; ?></font>
+					<?php
+						if ($albumObj->getEtat() <= 2) {
+							echo ' - <a id="card_pdf" href="cartes-de-visite-'.$sid.'.pdf">Télécharger vos cartes de visites</a>';
+						}
+					?>
 				</td>
 			</tr>
 			<tr>
@@ -314,38 +332,42 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					</table>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" height="15px;"></td>
-			</tr>
-			<tr>
-				<td>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend> Reversions </legend>
+			<table cellspacing="0px">
+			<tr style="background-color:lightgreen;">
+				<td width="182px;" height="22px">
 					Gain pour le mois : 
 				</td><td colspan="2">
-					<b><?php echo $albumObj->getBalance(); ?> &#8364;</b>
+					<b><?php echo $albumObj->getBalance(); ?> &#8364;&nbsp;</b>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td height="22px">
 					Gain total : 
 				</td><td colspan="2">
 					<?php echo $albumObj->getGainTotal(); ?> &#8364;
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" height="15px;"></td>
-			</tr>
+			</table>
+		</fieldset>
 			<?php
 				if ($continueUpdateState){
 			?>
+		<fieldset>
+			<legend> Gestion de votre mailing liste </legend>
+			<table>
 			<tr>
 				<td colspan="3" height="66px;">
 					<span class="note">La zone suivante vous permet de gérer votre liste de mails.<br/>
 					Photomentiel enverra un E-mail à toutes ces personnes dès que l'album sera prêt, ainsi qu'un rappel 2 semaines plus tard.</span><br/>
-					<u>Si vous avez de nouveaux mails, veuillez les insérer maintenant :</u>
+					<u>Si vous avez de nouveaux contacts, vous pouvez les insérer maintenant :</u>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td width="180px;">
 					Liste de mails : <br/>
 					<span class="note2">Séparez les mails par des points-virgules '<b>;</b>'</span>
 				</td><td>
@@ -354,21 +376,19 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<div class="checkform" id="rmails"></div>
 				</td>
 			</tr>
+			</table>
+		</fieldset>
 			<?php
 				}
-			?>
-		</table>
-			<?php
 				if ($continueUpdateState){
 			?>
 		<div class="separator10"></div>
-		<center><input type="button" class="button" value="Retour" onClick="history.back();"/><input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/><center/>
+		<center><input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/><input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/><center/>
 			<?php
 				}
 			?>
 		</form>
-		<div class="separator10"></div>
-		
+		<div class="separator10" style="height:20px;"></div>
 			<?php
 				if($albumObj->getEtat() == 0){
 					echo '<div id="catitle3">Votre album est <u>en attente de téléchargement</u> de photos :</div>';

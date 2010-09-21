@@ -22,7 +22,7 @@ if ($utilisateurObj && isset($_GET['cmd'])){
 		photomentiel_die(new PMError("Commande inapropriée","Cette commande ne vous appartient pas, que faites vous là ?"),false);
 	}
 } else {
-	photomentiel_die(new PMError("Commande non spécifiée","Aucun code commande n'a été spécifié ou vous n'êtes pas connecté, que faites vous là ?"),false);
+	photomentiel_die(new PMError("Utilisateur non connecté","Vous n'êtes pas connecté, pour accéder à votre commande, veuillez vous connecter en utilisant les champs ci-dessus."),false);
 }
 
 if ($utilisateurObj && $commandObj){
@@ -30,7 +30,7 @@ if ($utilisateurObj && $commandObj){
 	$lines = CommandePhoto::getCommandePhotosDepuisID_Commande($commandObj->getCommandeID());
 	foreach($lines as $line){
 		$cl = array('fileName'=>$line->getPhoto(),
-					'formatID'=>$line->getID_TypePapier(),
+					'formatID'=>$line->getID_TaillePapier(),
 					'quantity'=>$line->getNombre(),
 					'total'=>$line->getPrix());
 		array_push($commandLines,$cl);
@@ -96,26 +96,32 @@ if ($utilisateurObj && $commandObj){
 		<div id="make_cmd">
 			<div class="separator10"></div>
 			<div class="recap_info">
-				Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
-				<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.<br/><br/>
-				Vos photos vous <?php echo ($commandObj->getEtat() == 4)?'ont été':'seront'; ?> livrées à l'adresse suivante : <br/><br/>
-				<div class="adr_b" style="font-size:14px;">
-					<?php
-						$adresseObj = $commandObj->getAdresse();
-						echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
-						echo $adresseObj->getNomRue()."<br/>";
-						if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
-							echo $adresseObj->getComplement()."<br/>";
-						}
-						echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
-						echo 'France';
-					?>
+				<div id="b1">
+					Vous avez commandé <i><b><?php echo $nb_photos; ?> photo<?php echo $nb_photos==1?'':'s'; ?></i></b> pour un total de 
+					<i><b><?php echo sprintf('%.2f',$total); ?> &#8364;</i></b>.
+				</div>
+				<br/>
+				<div id="b1">
+					Vos photos vous <?php echo ($commandObj->getEtat() == 4)?'ont été':'seront'; ?> livrées à l'adresse suivante : <br/><br/>
+					<div class="adr_b" style="font-size:14px;">
+						<?php
+							$adresseObj = $commandObj->getAdresse();
+							echo $adresseObj->getNom()." ".$adresseObj->getPrenom()."<br/>";
+							echo $adresseObj->getNomRue()."<br/>";
+							if ($adresseObj->getComplement() != null && $adresseObj->getComplement() != ''){
+								echo $adresseObj->getComplement()."<br/>";
+							}
+							echo $adresseObj->getCodePostal()." ".$adresseObj->getVille()."<br/>";
+							echo 'France';
+						?>
+					</div>
 				</div>
 				<br/>
 				<?php
 					$etatc = $commandObj->getEtat();
 					if ($etatc == 0){
 						?>
+						<div id="b1" style="border:2px darkred solid;">
 							<span id="not_payed">Vous n'avez pas encore payé cette commande, vous pouvez :</span><br/><br/>
 							<ul>
 							<li>La payer en choisissant un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
@@ -127,13 +133,14 @@ if ($utilisateurObj && $commandObj){
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>
 							</ul>
+						</div>
 							<div class="separator10"></div>
 						<?php
 					} else {
 						?>
 							<div class="state_ok" id="cmd1">
 								<span class="state_title_ok">Votre paiement a été validé</span> 
-								<?php if($etatc == 1){echo '(La commande sera préparée sous peu)';} ?>
+								(<?php if($etatc == 1){echo 'La commande sera préparée sous peu - ';} ?><a href="facture-<?php echo $commandObj->getCommandeID(); ?>.pdf">Télécharger ma facture</a>)
 							</div>
 							<div class="<?php echo ($etatc >= 2)?'state_ok':'state'; ?>" id="cmd2">
 								<span class="<?php echo ($etatc >= 2)?'state_title_ok':'state_title'; ?>">Votre commande est en cours de préparation</span>

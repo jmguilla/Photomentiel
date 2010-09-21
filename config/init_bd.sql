@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Ven 17 Septembre 2010 à 00:24
+-- Généré le : Lun 20 Septembre 2010 à 21:28
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -106,7 +106,8 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (37, 'Tu', 'Fais', 'le', 'Fou', 'Les Arcs', '83460', 37),
 (38, 'guillal', 'mlqksjdf', 'mlkikic', 'mq', 'test', '06000', 38),
 (39, 'scheefer', 'Gérard', '67 Boulevard du val Claret', 'Bat 10', 'Antibes', '06600', 39),
-(40, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 40);
+(40, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 40),
+(41, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 41);
 
 -- --------------------------------------------------------
 
@@ -152,36 +153,39 @@ INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evene
 CREATE TABLE IF NOT EXISTS `Commande` (
   `commandeID` int(10) unsigned NOT NULL auto_increment,
   `date` datetime NOT NULL,
+  `datePaiement` datetime default NULL,
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   `id_album` int(10) unsigned default NULL,
   `etat` smallint(5) unsigned NOT NULL default '0',
+  `preparateur` varchar(20) NOT NULL default '',
   `fdp` float NOT NULL default '0',
   `numero` varchar(15) NOT NULL default '',
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- Contenu de la table `Commande`
 --
 
-INSERT INTO `Commande` (`commandeID`, `date`, `id_utilisateur`, `id_album`, `etat`, `fdp`, `numero`) VALUES
-(1, '2010-08-30 21:57:04', 8, NULL, 0, 0, '100830210000'),
-(2, '2010-09-06 16:57:45', 4, NULL, 1, 3.5, '100906160000'),
-(3, '2010-09-11 10:47:13', 7, NULL, 0, 0, '100911100000'),
-(4, '2010-09-11 14:39:21', 4, NULL, 1, 3.5, '100911140000'),
-(29, '2010-09-13 09:52:30', 8, NULL, 1, 0, '100913090000'),
-(30, '2010-09-14 08:09:38', 8, NULL, 1, 0, '100914080000'),
-(32, '2010-09-14 08:34:15', 4, NULL, 1, 0, '100914080002'),
-(33, '2010-09-14 08:35:15', 4, NULL, 1, 0, '100914080003'),
-(34, '2010-09-14 10:07:36', 4, NULL, 1, 0, '100914100000'),
-(35, '2010-09-14 11:14:20', 4, NULL, 0, 3.5, '100914110000'),
-(36, '2010-09-14 13:59:48', 4, NULL, 4, 3.5, '100914130000'),
-(37, '2010-09-14 16:09:02', 7, NULL, 1, 0, '100914160000'),
-(38, '2010-09-14 16:14:06', 7, NULL, 0, 3.5, '100914160001'),
-(39, '2010-09-15 23:16:52', 1, NULL, 1, 0, '100915230000'),
-(40, '2010-09-16 18:33:11', 4, NULL, 0, 3.5, '100916180000');
+INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, `id_album`, `etat`, `preparateur`, `fdp`, `numero`) VALUES
+(1, '2010-08-30 21:57:04', NULL, 8, NULL, 0, '', 0, '100830210000'),
+(2, '2010-09-06 16:57:45', NULL, 4, NULL, 2, 'jm@jm.jm', 3.5, '100906160000'),
+(3, '2010-09-11 10:47:13', NULL, 7, NULL, 0, '', 0, '100911100000'),
+(4, '2010-09-11 14:39:21', NULL, 4, NULL, 2, 'ag@ag.ag', 3.5, '100911140000'),
+(29, '2010-09-13 09:52:30', NULL, 8, NULL, 2, 'jl@jl.jl', 0, '100913090000'),
+(30, '2010-09-14 08:09:38', NULL, 8, NULL, 2, 'jm@jm.jm', 0, '100914080000'),
+(32, '2010-09-14 08:34:15', NULL, 4, NULL, 1, '', 0, '100914080002'),
+(33, '2010-09-14 08:35:15', NULL, 4, NULL, 2, 'ag@ag.ag', 0, '100914080003'),
+(34, '2010-09-14 10:07:36', NULL, 4, NULL, 1, '', 0, '100914100000'),
+(35, '2010-09-14 11:14:20', NULL, 4, NULL, 0, '', 3.5, '100914110000'),
+(36, '2010-09-14 13:59:48', NULL, 4, NULL, 4, '', 3.5, '100914130000'),
+(37, '2010-09-14 16:09:02', NULL, 7, NULL, 2, 'jm@jm.jm', 0, '100914160000'),
+(38, '2010-09-14 16:14:06', NULL, 7, NULL, 0, '', 3.5, '100914160001'),
+(39, '2010-09-15 23:16:52', NULL, 1, NULL, 2, 'jl@jl.jl', 0, '100915230000'),
+(40, '2010-09-16 18:33:11', NULL, 4, NULL, 0, '', 3.5, '100916180000'),
+(41, '2010-09-20 09:14:13', NULL, 4, NULL, 0, '', 3.5, '100920090000');
 
 -- --------------------------------------------------------
 
@@ -238,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `fk_commandePhoto_album` (`id_album`),
   KEY `id_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=183 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=186 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -307,7 +311,10 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (179, '20090913152209.JPG', 1, 39, 1, 2, 1, 1, 2.50),
 (180, '20090913152209.JPG', 1, 39, 1, 4, 1, 1, 6.00),
 (181, '00000000000000_0002.JPG', 2, 40, 1, 1, 1, 4, 8.00),
-(182, '00000000000000_0011.JPG', 2, 40, 1, 1, 1, 4, 8.00);
+(182, '00000000000000_0011.JPG', 2, 40, 1, 1, 1, 4, 8.00),
+(183, '00000000000000.JPG', 1, 41, 1, 1, 1, 4, 4.00),
+(184, '00000000000000.JPG', 1, 41, 1, 3, 1, 4, 12.00),
+(185, '00000000000000_0000.JPG', 1, 41, 1, 2, 1, 4, 8.00);
 
 -- --------------------------------------------------------
 
@@ -455,6 +462,7 @@ INSERT INTO `departement` (`id_departement`, `id_region`, `code`, `nom`) VALUES
 CREATE TABLE IF NOT EXISTS `Evenement` (
   `evenementID` int(10) unsigned NOT NULL auto_increment,
   `description` varchar(100) NOT NULL,
+  `adresse` varchar(150) NOT NULL default '',
   `id_region` int(11) default NULL,
   `id_departement` int(11) default NULL,
   `id_ville` int(11) default NULL,
@@ -474,14 +482,14 @@ CREATE TABLE IF NOT EXISTS `Evenement` (
 -- Contenu de la table `Evenement`
 --
 
-INSERT INTO `Evenement` (`evenementID`, `description`, `id_region`, `id_departement`, `id_ville`, `type`, `date`, `mailing`, `web`, `id_utilisateur`) VALUES
-(1, 'Un mariage presque parfait', 21, 6, 1906, 1, '2011-07-28 15:02:25', '', '', 1),
-(2, 'Une description un peu inutile', 21, 6, 1906, 2, '2010-08-28 15:02:25', '', '', 2),
-(3, 'Lancée de pizzas fraichement préparées', 21, 6, 1906, 0, '2010-09-28 15:02:25', '', '', 3),
-(4, 'Hockey : France vs Espagne', 21, 6, 1906, 2, '2010-09-28 15:20:25', '', '', 4),
-(5, 'Visite chez les hobbits', 21, 6, 1906, 0, '2010-09-28 15:45:25', '', '', 5),
-(6, 'Un autre mariage mais mieux réussi :)', 21, 6, 1906, 1, '2011-01-28 15:55:25', '', '', 1),
-(7, 'Et voilà le premier événement en ligne via la form !! wouhaiiii', 13, 38, 8095, 3, '2010-12-12 22:00:00', '', '', 8);
+INSERT INTO `Evenement` (`evenementID`, `description`, `adresse`, `id_region`, `id_departement`, `id_ville`, `type`, `date`, `mailing`, `web`, `id_utilisateur`) VALUES
+(1, 'Un mariage presque parfait', '', 21, 6, 1906, 1, '2011-07-28 15:02:25', '', '', 1),
+(2, 'Une description un peu inutile', '', 21, 6, 1906, 2, '2010-08-28 15:02:25', '', '', 2),
+(3, 'Lancée de pizzas fraichement préparées', '', 21, 6, 1906, 0, '2010-06-10 00:00:00', '', '', 3),
+(4, 'Hockey : France vs Espagne', '', 21, 6, 1906, 2, '2010-06-10 00:00:00', '', '', 4),
+(5, 'Visite chez les hobbits', '', 21, 6, 1906, 0, '2010-06-10 00:00:00', '', '', 5),
+(6, 'Un autre mariage mais mieux réussi :)', '', 21, 6, 1906, 1, '2011-01-28 15:55:25', '', '', 1),
+(7, 'Et voilà le premier événement en ligne via la form !! wouhaiiii', '', 13, 38, 8095, 3, '2010-12-12 22:00:00', '', '', 8);
 
 -- --------------------------------------------------------
 
@@ -665,17 +673,18 @@ CREATE TABLE IF NOT EXISTS `TaillePapier` (
   `dimensions` varchar(20) NOT NULL,
   `prixConseille` float NOT NULL default '10',
   PRIMARY KEY  (`taillePapierID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `TaillePapier`
 --
 
 INSERT INTO `TaillePapier` (`taillePapierID`, `description`, `dimensions`, `prixConseille`) VALUES
-(1, 'Petit', '10x15', 10),
-(2, 'Petit', '13x18', 10),
-(3, 'Petit', '15x21', 10),
-(4, 'Petit', '18x24', 10);
+(1, 'Standard', '10x15', 3),
+(2, 'Agrandissement', '13x17', 3.5),
+(3, 'Moyen', '15x21', 4),
+(4, 'Moyen Agrandissement', '18x24', 4.5),
+(5, 'Grand', '20x30', 6);
 
 -- --------------------------------------------------------
 
@@ -35300,7 +35309,7 @@ ALTER TABLE `AdresseCommande`
 -- Contraintes pour la table `Album`
 --
 ALTER TABLE `Album`
-  ADD CONSTRAINT `fk_album_evenement` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`),
+  ADD CONSTRAINT `fk_album_evenement` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_album_photographe` FOREIGN KEY (`id_photographe`) REFERENCES `Photographe` (`photographeID`);
 
 --

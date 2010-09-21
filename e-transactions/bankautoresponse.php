@@ -4,6 +4,7 @@
 	include_once($dir_bar_php."/../classes/modele/Commande.class.php");
 	include_once($dir_bar_php."/../classes/modele/CommandePhoto.class.php");
 	include_once($dir_bar_php."/../classes/modele/Album.class.php");
+	include_once($dir_bar_php."/../classes/modele/Photographe.class.php");
 	include($dir_bar_php."/buildresponse.php");
 
 	//put some logs
@@ -33,19 +34,15 @@
 			if ($commandObj->getEtat() == 0){
 				//give this command the next state : archive is done when state goes form 0 to 1
 				$commandObj->etatSuivant();
-				//TODO add x percent of this amout to this album
-				$lines = CommandePhoto::getCommandePhotosDepuisID_Commande($commandObj->getCommandeID());
-				if($lines){
-					$album = $lines[0]->getID_Album();
-					$album = Album::getAlbumDepuisID($album);
-					if ($album){//TODO fix percent with photograph's
-						$album->setBalance($album->getBalance()+toFloatAmount($amount*0.7));
-						$album->setGainTotal($album->getGainTotal()+toFloatAmount($amount*0.7));
-						$album->save();
-					}
+				//add x percent of this amout to this album
+				$album = $commandObj->getID_Album();
+				$album = Album::getAlbumDepuisID($album);
+				if ($album){//TODO améliorer ça dans la fonction updateAmounts ?
+					$percentApplied = Photographe::getPhotographeDepuisID($album->getID_Photographe())->getPourcentage();
+					$album->updateAmounts(toFloatAmount($amount)*$percentApplied/100);
 				}
 				//TODO send mail with facture
-				//ControleurUtils::sendFacture($commandObj);
+				ControleurUtils::sendFacture($commandObj);
 			}
 		}
 	}

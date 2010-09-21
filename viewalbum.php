@@ -58,6 +58,11 @@ $thumbsDir = THUMB_DIRECTORY;
 $picsDir = PICTURE_DIRECTORY;
 //get the corresponding album
 $albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
+//check if it is opened
+if ($albumObj->getEtat() != 2){
+	//TODO mieux que ça -> proposer de mettre son mail
+	photomentiel_die(new PMError("L'album n'est pas encore prêt !","Cet album n'est pas encore visualisable ou a été fermé."));
+}
 $_SESSION['photographID'] = $albumObj->getID_Photographe();
 //get the corresponding photographe
 $photographObj = Photographe::getPhotographeDepuisID($albumObj->getID_Photographe());
@@ -100,6 +105,24 @@ if (!is_numeric($page) || $page<1 || ($nb_photos_per_page*($page-1)>sizeof($pics
 	$page=1;
 }
 
+
+//if a backToAlbum command has been sent, just store the content in session
+if (isset($_POST["pictur_0"])){
+	//put pictures from POST in SESSION
+	$commandLines = array();
+	$i=0;
+	while (isset($_POST["pictur_$i"])){
+		$cl = array('fileName'=>$_POST["pictur_$i"],'formatID'=>$_POST["format_$i"],'quantity'=>$_POST["number_$i"]);
+		array_push($commandLines, $cl);
+		$i++;
+	}
+	//$commandLines contains every command lines as it is represented in the session
+	$_SESSION['COMMAND_LINES'] = $commandLines;
+} else {
+	unset($_SESSION['COMMAND_LINES']);
+}
+
+//and display
 include("head.php");
 ?>
 	<script language="javascript" src="js/jquery.autopager-1.0.0.js"></script>
@@ -124,7 +147,9 @@ include("head.php");
 			<div id="leftpanel_mid">
 				<div class="separator5"></div>
 				<div id="album_infos">
-					<span>Date :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
+					<span>Code :</span> <?php echo $albumStringID; ?>
+					<br/>
+					<span>Création :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
 					<br/>
 					<?php 
 					$adresseObj = $photographObj->getAdresse();
@@ -136,8 +161,14 @@ include("head.php");
 					<?php } ?>
 					<br/>
 					<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"> <?php echo $photographObj->getEmail(); ?></a>
-					<br/>
-					<span>Evènement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+					<?php
+						if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
+					?>
+						<br/>
+						<span>Evénement :</span> <a target="_blank" href="events.php?ev=<?php echo $albumObj->getID_Evenement(); ?>">détails...</a>
+					<?php
+						}
+					?>
 				</div>
 				<div class="separator10"></div>
 				<u>Formats disponibles et tarifs :</u>

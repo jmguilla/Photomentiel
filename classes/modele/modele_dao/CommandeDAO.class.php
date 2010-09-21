@@ -11,6 +11,44 @@ class CommandeDAO extends DAO{
 		parent::__construct($dsn);
 	}
 
+	public function setEnCoursDePreparation($id, $prep){
+		$query = "update Commande set etat = 2, preparateur = '" .
+		mysql_real_escape_string($prep) . "' where commandeID = " .
+		mysql_real_escape_string($id) . " and etat = 1";
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() == 1){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+
+	public function getCommandeEtPhotosDepuisEtat($etat){
+		$query = "select * from Commande as c left join CommandePhoto as cp on cp.id_commande = c.commandeID left join AdresseCommande as a on a.id_commande = c.commandeID where c.etat = " . 
+		mysql_real_escape_string($etat);
+		$tmp = $this->retrieve($query);
+		if($tmp->getNumRows() > 0) {
+			$result = array();
+			$currentCommande = NULL;
+			$daoCP = new CommandePhotoDAO();
+			foreach($tmp as $row){
+				$commande = $this->buildCommandeFromRow($row);
+				$photo = $daoCP->buildCommandePhotoFromRow($row);
+				if(!isset($currentCommande) || $currentCommande->getCommandeID() != $commande->getCommandeID()){
+					$currentCommande = $commande;
+					$result[] = $currentCommande;
+				}
+				$currentCommande->addCommandePhoto($photo);
+			}
+			return $result;
+		}else{
+			return false;
+		}
+	}
+
 	public function getCommandeDepuisID($id){
 		$query = "select * from Commande as c, AdresseCommande as a where a.id_commande = c.commandeID and commandeID = " . 
 		mysql_real_escape_string($id);
@@ -27,8 +65,11 @@ class CommandeDAO extends DAO{
 		include_once $dir_commandedao_class_php . "/../Album.class.php";
 		include_once $dir_commandedao_class_php . "/../Photographe.class.php";
 		$query = "update Commande set etat = " .
-		mysql_real_escape_string($commande->getEtat()) .
-		" where commandeID = " .
+		mysql_real_escape_string($commande->getEtat());
+		if($commande->getEtat() == 1){
+			$query .= ", datePaiement = now() ";
+		}
+		$query .= " where commandeID = " .
 		mysql_real_escape_string($commande->getCommandeID());
 		$this->startTransaction();
 		$tmp = $this->update($query);
@@ -259,20 +300,24 @@ class CommandeDAO extends DAO{
 		$adresse = $adao->buildAdresseCommandeFromRow($row);
 		$id = $row->offsetGet("commandeID");
 		$date = $row->offsetGet("date");
+		$dp = $row->offsetGet("datePaiement");
 		$idUtilisateur = $row->offsetGet("id_utilisateur");
 		$s = $row->offsetGet("etat");
 		$fdp = $row->offsetGet("fdp");
 		$numero = $row->offsetGet("numero");
 		$id_album = $row->offsetGet("id_album");
+		$prep = $row->offsetGet("preparateur");
 		$result = new Commande();
 		$result->setAdresse($adresse);
 		$result->setFDP($fdp);
 		$result->setCommandeID($id);
 		$result->setDate($date);
+		$result->setDatePaiement($dp);
 		$result->setNumero($numero);
 		$result->setID_Utilisateur($idUtilisateur);
 		$result->setEtat($s);
 		$result->setID_Album($id_album);
+		$result->setPreparateur($prep);
 		return $result;
 	}
 
