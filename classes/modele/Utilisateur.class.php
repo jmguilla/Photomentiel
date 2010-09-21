@@ -33,6 +33,14 @@ class Utilisateur {
 		return $result; 
 	}
 	/**
+	 * Renvoie la liste des utilisateur avec une entrée dans la table Activate
+	 * sous la forme d'une association $result[i]['Activate'] == $id; $result[i]['Utilisateur'] == $user
+	 */
+	public static function getNonActif(){
+		$dao = new UtilisateurDAO();
+		return $dao->getNonActif();
+	}
+	/**
 	 * controle que l'email ne soit pas déjà utilisé.
 	 * retourne false si l'email n'est pas valide ou qu'il est déjà utilisé
 	 * retourne true si l'email n'est pas déjà atribué.

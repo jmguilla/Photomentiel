@@ -13,6 +13,9 @@ Rendez-vous dans la section désirée:<br/>
 <form method="post" action="evenement.php">
 	<input type="submit" value="Gestion Evenements"/>
 </form>
+<form method="post" action="utilisateur.php">
+	<input type="submit" value="Gestion Utilisateurs"/>
+</form>
 </div>
 <?php 
 include $dir_administration_index_php . "/header.php";

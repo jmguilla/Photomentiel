@@ -22,6 +22,12 @@ class UtilisateurDAO extends DAO{
 		}
 	}
 
+	public function getNonActif(){
+		$query = "select * from Adresse as ad, Activate as a, Utilisateur as u left join Photographe as p on u.utilisateurID = p.id_utilisateur where a.id_utilisateur = u.utilisateurID and ad.id_utilisateur = u.utilisateurID";
+		$tmp = $this->retrieve($query);
+		return $this->extractArrayQuery($tmp, $this, "buildUtilisateurEtActivateIDFromRow");
+	}
+
 	public function create($utilisateur, $activateID){
 		$dir_utilisateurdao_class_php = dirname(__FILE__);
 		include_once $dir_utilisateurdao_class_php . "/AdresseDAO.class.php";
@@ -317,6 +323,17 @@ class UtilisateurDAO extends DAO{
 		$result->setEmail($email);
 		$result->setUtilisateurID($id);
 		$result->setAdresse($adresse);
+		return $result;
+	}
+
+	protected function buildActivateIDFromRow($row, $prefix = ''){
+		return $row->offsetGet($prefix . "activateID");
+	}
+
+	protected function buildUtilisateurEtActivateIDFromRow($row, $prefix = '', $pa = '', $pactivate = ''){
+		$result = array();
+		$result['Utilisateur'] = $this->buildUtilisateurFromRow($row, $prefix, $pa);
+		$result['ActivateID'] = $this->buildActivateIDFromRow($row, $pactivate);
 		return $result;
 	}
 
