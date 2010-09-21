@@ -23,7 +23,6 @@ switch($action){
 		for($i = 0; $i < 6; $i++){
 			$mdp = $mdp . $array[rand(0, (count($array) - 1))];
 		}
-		$user->setEmail($email);
 		$res = $user->saveMDPEtEnvoyerEmail($mdp);
 		if($res){//on envoie un email avec le nouveau mdp
 			$_SESSION['message'] .= "Mot de passe changé avec succès.<br/>";
