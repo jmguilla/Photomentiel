@@ -3,6 +3,27 @@ $dir_administration_controleur_commande_php = dirname(__FILE__);
 include_once $dir_administration_controleur_commande_php . "/../../classes/modele/Commande.class.php";
 
 switch($action){
+	case commande_expediee:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "ID commande introuvable, impossible de changer l'état.<br/>";
+			break;
+		}
+		$commande = Commande::getCommandeDepuisID($_POST['id']);
+		$_SESSION['message'] .= "commande: " . $commande->getCommandeID() . " - " . $commande->getEtat() . "<br/>";
+		if(!$commande){
+			$_SESSION['message'] .= "Aucune commande ne correspond à cet identifiant.<br/>";
+			break;
+		}
+		if($commande->getEtat() != 2){
+			$_SESSION['message'] .= "Impossible de changer l'état, état courant différent de 2.<br/>";
+			break;
+		}
+		if($commande->etatSuivant()){
+			$_SESSION['message'] .= "Etat changé avec succès.<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible de changer l'état.<br/>";
+		}
+	break;
 	case traiter_commande:
 		$id = $_POST['id'];
 		$result = Commande::setEnCoursDePreparation($id, $_SERVER['REMOTE_USER']);

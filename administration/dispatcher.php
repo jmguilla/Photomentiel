@@ -15,6 +15,7 @@ switch($action){
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_album.php";
 	break;
 	case traiter_commande:
+	case commande_expediee:
 	case down_xml:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_commande.php";
 	break;

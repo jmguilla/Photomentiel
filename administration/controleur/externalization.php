@@ -11,6 +11,7 @@ define("supprimer_evenement", "supprimer_evenement");
 //commande
 define("traiter_commande", "traiter_commande");
 define("down_xml", "download_commande_xml");
+define("commande_expediee", "commande_expediee");
 
 //utilisateur
 define("renvoyer_email_confirmation", "renvoyer_email_confirmation");

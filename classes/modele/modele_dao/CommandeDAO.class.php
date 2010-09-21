@@ -103,6 +103,9 @@ class CommandeDAO extends DAO{
 					$this->commit();
 					return true;
 				}
+			}else{
+				$this->commit();
+				return true;
 			}
 		}
 		$this->rollback();
