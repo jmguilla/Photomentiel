@@ -15,4 +15,5 @@ define("down_xml", "download_commande_xml");
 //utilisateur
 define("renvoyer_email_confirmation", "renvoyer_email_confirmation");
 define("activer_utilisateur", "activer_utilisateur");
+define("reinitialiser_mdp", "reinitialiser_mdp");
 ?>
