@@ -14,9 +14,9 @@ switch($action){
 			$_SESSION['message'] .= "Impossible d'envoyer un email pour activer l'utilisateur car aucun activate_id n'a été fourni...<br/>";
 			break;
 		}
-		$id = $_POST['id'];
+		$user = Utilisateur::getUtilisateurDepuisID($id);
 		$aid = $_POST['aid'];
-		if(ControleurUtils::sendValidationEmail(new Utilisateur($id), $aid)){
+		if(ControleurUtils::sendValidationEmail($user, $aid)){
 			$_SESSION['message'] .= "Email envoyé avec succès<br/>";
 		}else{
 			$_SESSION['message'] .= "Impossible d'envoyer un email à l'utilisateur<br/>";
