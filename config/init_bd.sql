@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Lun 20 Septembre 2010 à 21:28
+-- Généré le : Mar 21 Septembre 2010 à 21:22
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `Activate` (
 --
 
 INSERT INTO `Activate` (`activateID`, `id_utilisateur`) VALUES
+('3fe3c423d2d847d38589e9aae1d1dbd921', 21),
 ('f0aa6c9d8adef6cf19dddd71455ed0cc17', 17);
 
 -- --------------------------------------------------------
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`adresseID`),
   KEY `fk_adresse_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Contenu de la table `Adresse`
@@ -66,7 +67,9 @@ INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `vi
 (8, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 8),
 (14, 'Guillaume', 'jean-michel', '5 rue des Boers', '', 'Nice', '06100', 15),
 (15, 'ché', 'faire', '2222', '333333', 'Antibes', '06600', 16),
-(16, 'sdfsdhf ', 'sdfjs hd', 'dsjf hsdf', '', 'Antibes', '06600', 17);
+(16, 'sdfsdhf ', 'sdfjs hd', 'dsjf hsdf', '', 'Antibes', '06600', 17),
+(19, 'ché', 'faire', 'on s\\''en tape', 'je test pas ça', 'Antibes', '06600', 20),
+(20, 'ouaz', 'meher', '11 rue de la république', '', 'Les Arcs', '83460', 21);
 
 -- --------------------------------------------------------
 
@@ -140,9 +143,7 @@ INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evene
 (1, 'Rencontre OK', 1, 1, 3, 2, '', 48.65, 48.65, '', '2010-06-28 15:20:25'),
 (2, 'Tunning Jacky', 1, 1, 3, 2, '', 35.00, 35.00, '', '2010-08-01 12:46:42'),
 (3, 'Mariage Chris', 1, 2, 3, 2, '', 4.55, 4.55, '', '2010-08-01 12:53:00'),
-(4, 'Mariage bien réussi', 1, 3, 3, 2, '', 246.05, 246.05, '', '2010-08-01 12:55:17'),
-(11, 'fgdfg dfg dfg', 0, 9, 7, 0, '', 0.00, 0.00, '', '2010-09-14 14:51:07'),
-(12, 'jkbbjhbjhhkbhkb', 0, 1, 5, 1, '', 0.00, 0.00, '', '2010-09-15 23:38:01');
+(4, 'Mariage bien réussi', 1, 3, 3, 2, '', 246.05, 246.05, '', '2010-08-01 12:55:17');
 
 -- --------------------------------------------------------
 
@@ -590,10 +591,7 @@ INSERT INTO `PrixTaillePapierAlbum` (`prixTaillePapierAlbumID`, `prix`, `id_tail
 (13, 4.00, 1, 4),
 (14, 8.00, 2, 4),
 (15, 12.00, 3, 4),
-(16, 16.00, 4, 4),
-(23, 10.00, 1, 11),
-(24, 10.00, 2, 11),
-(25, 10.00, 1, 12);
+(16, 16.00, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -654,11 +652,9 @@ CREATE TABLE IF NOT EXISTS `StringID` (
 --
 
 INSERT INTO `StringID` (`stringID`, `homePhotographe`, `id_album`) VALUES
-('3x5uyoz0', '2010051201', 12),
 ('a2c5j7yt', '2010072801', 3),
 ('a5f8t1v5', '2010051201', 1),
 ('r5v7ttri', '2010051201', 2),
-('wgiib7s2', '2010091400', 11),
 ('x442y888', '2010072901', 4);
 
 -- --------------------------------------------------------
@@ -721,7 +717,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateInscription` datetime NOT NULL,
   PRIMARY KEY  (`utilisateurID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Contenu de la table `Utilisateur`
@@ -738,7 +734,9 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (8, 'jl@schee.fr', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-20 01:22:58'),
 (15, 'tchitchoubyne@msn.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-07 00:08:33'),
 (16, 'jl@jl.jl', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-14 14:35:23'),
-(17, 'sdsfd@sdfsd.sdf', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-16 15:52:01');
+(17, 'sdsfd@sdfsd.sdf', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-16 15:52:01'),
+(20, 'kcscheefer@netcourrier.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-21 15:37:46'),
+(21, 'jmichel.guillaume.list@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-21 21:20:48');
 
 -- --------------------------------------------------------
 

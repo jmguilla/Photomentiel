@@ -21,6 +21,10 @@ switch($action){
 	case supprimer_evenement:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_evenement.php";
 	break;
+	case renvoyer_email_confirmation:
+	case activer_utilisateur:
+		include_once $dir_administration_dispatcher_php . "/controleur/controleur_utilisateur.php";
+	break;
 	//pour empecher mauvais formattage
 	case 'dummy':
 	break;
