@@ -66,7 +66,6 @@ switch($action){
 			break;
 		}
 		$commande = Commande::getCommandeDepuisID($_POST['id']);
-		$_SESSION['message'] .= "commande: " . $commande->getCommandeID() . " - " . $commande->getEtat() . "<br/>";
 		if(!$commande){
 			$_SESSION['message'] .= "Aucune commande ne correspond à cet identifiant.<br/>";
 			break;
