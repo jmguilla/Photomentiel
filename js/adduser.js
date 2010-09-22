@@ -140,6 +140,18 @@ function checkRIB(){
 	}
 	return { "error" : errorRIB, "mess" : mess };
 }
+function checkCGU() {
+	var errorCGU = false;
+	var mess = '';
+	if (!$('#cgu').attr('checked')){
+		errorCGU = true;
+		mess = "\nVous devez accepter les conditions générales de ventes et d'utilisation";
+		$('#rcgu').css('background-image','url(design/misc/unchecked.gif)');
+	} else {
+		$('#rcgu').css('background-image','url(design/misc/checked.gif)');
+	}
+	return { "error" : errorCGU, "mess" : mess };
+}
 
 function checkForm () {
     var error = false;
@@ -176,6 +188,9 @@ function checkForm () {
 	    error = error || tmp.error;
 	    mess += tmp.mess;
 	}
+	tmp = checkCGU();
+	error = error || tmp.error;
+    mess += tmp.mess;
 	//result
     return { "error" : error, "mess" : mess };
 }
