@@ -39,4 +39,5 @@ if ($album->getID_Photographe() != $utilisateurObj->getPhotographeID()){
 }
 
 makeCard($sidObj->getStringID(), $album, $utilisateurObj);
+
 ?>

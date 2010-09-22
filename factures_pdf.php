@@ -17,14 +17,12 @@ include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/Utilisateur.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 
-
 if (!isset($_GET['cmd'])){
 	photomentiel_die(new PMError("Commande non spécifiée !","Aucune commande spécifiée !"));
 }
 if(!isset($_SESSION['userID'])){
 	photomentiel_die(new PMError("Aucun utilisateur connecté !","Cette page requiert la connexion d'un utilisateur !"));
 }
-
 
 $utilisateurObj = Utilisateur::getUtilisateurDepuisID($_SESSION['userID']);
 $command = Commande::getCommandeDepuisID($_GET['cmd']);
@@ -42,4 +40,5 @@ foreach($tmp as $tp){
 }
 
 makePDF($command, $utilisateurObj, $photoFormatsDim);
+
 ?>
