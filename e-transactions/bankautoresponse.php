@@ -5,10 +5,11 @@
 	include_once($dir_bar_php."/../classes/modele/CommandePhoto.class.php");
 	include_once($dir_bar_php."/../classes/modele/Album.class.php");
 	include_once($dir_bar_php."/../classes/modele/Photographe.class.php");
+	include_once($dir_bar_php."/../classes/controleur/ControleurUtils.class.php");
 	include($dir_bar_php."/buildresponse.php");
 
 	//put some logs
-	$log = fopen("logs/".date("Ymd").".log", 'a');
+	$log = fopen("logs/".date("Ym").".log", 'a');
 	fwrite($log, "--------------------------------------------------\n");
 	fwrite($log, "transmission_date = $transmission_date\n");
 	fwrite($log, "merchant_id = $merchant_id\n");
@@ -26,15 +27,12 @@
 	fwrite($log, "customer_id = $customer_id\n");
 	fwrite($log, "customer_ip_address = $customer_ip_address\n");
 	fclose($log);
-	
+
 	if ($CB_RETURN_EXIT_CODE == 0){
 		//$numCmd contient le numéro de la commande
 		if ($bank_response_code=='00' && $response_code=='00'){
 			$commandObj = Commande::getCommandeDepuisID($numCmd);
 			if ($commandObj->getEtat() == 0){
-				//TODO améliorer ça avec une requete qui save que le bon champ
-				$commandObj->setDatePaiement(date("Y-m-d H:i:s",time()));
-				$commandObj->save();
 				//give this command the next state : archive is done when state goes form 0 to 1
 				$commandObj->etatSuivant();
 				//add x percent of this amout to this album

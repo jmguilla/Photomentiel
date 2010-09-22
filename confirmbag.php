@@ -93,6 +93,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 		$commande = new Commande();
 		$commande->setAdresse($adress);
 		$commande->setID_Utilisateur($utilisateurObj->getUtilisateurID());
+		$commande->setID_Album($_SESSION['albumID']);
 		$total = 0;
 		for ($i=0;$i<sizeof($commandLines) && $total<SHIPPING_RATE_UNTIL;$i++){
 			$current = $commandLines[$i];
