@@ -105,3 +105,19 @@ function confirmAndGoNext(){
 	//send to php session
 	form.submit();
 }
+
+function removePic(picName){
+	//prepare form
+	var form = $('#form_removePic');
+	var tmp = "";
+	var j = 0;	
+	for (var i=0;i<picturesInBag.length;i++){
+		if (picturesInBag[i] != picName) {
+			tmp = tmp+picturesInBag[i]+"-";
+			j++;
+		}
+	}
+	tmp = tmp.substring(0,tmp.length-1);
+	form.append('<input type="hidden" name="pics" value="'+tmp+'"></input>');
+	form.submit();
+}

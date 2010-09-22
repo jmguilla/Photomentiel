@@ -154,9 +154,9 @@ include("header.php");
 					echo '<td class="'.$imp.'">'.(substr($formatStr,5)).'</td>';
 					//tot
 					$total_cmd += $sstot_tot;
-					$tot_text = ($sstot_tot > 0)?sprintf('%.2f',$sstot_tot):'<img src="design/misc/trash.png""></img><br/><font size="1">Non commandée</font>';
+					$tot_text = ($sstot_tot > 0)?sprintf('%.2f',$sstot_tot):'<img src="design/misc/trash.png"></img><br/><font size="1">Non commandée</font>';
 					$ref_tot = $ref.'tot';
-					echo '<td class="'.$imp.'"><span class="stot" id="'.$ref_tot.'">'.$tot_text.'</span></td></tr>';
+					echo '<td class="'.$imp.'"><span class="stot" id="'.$ref_tot.'">'.$tot_text.'</span></td></tr>'."\n";
 				}
 			?>
 				<tr id="total_"><td colspan="3" style="text-align:left;background-color:white;">
