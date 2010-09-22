@@ -2,7 +2,7 @@ function trim (myString) {
 	return myString.replace(/^\s+/g,'').replace(/\s+$/g,'')
 }
 //create mail regexp
-var re_mail = new RegExp('^.+@.+[.].+$');
+var re_mail = new RegExp('^[^@]+@[^.@]+[.].+$');
 //create data regexp
 var re_date = new RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}$');
 //check username//pwd is correct and connect if so

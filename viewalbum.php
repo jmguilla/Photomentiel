@@ -16,6 +16,7 @@ ini_set('url_rewriter.tags','');
 include_once("classes/PMError.class.php");
 include_once("classes/modele/StringID.class.php");
 include_once("classes/modele/Album.class.php");
+include_once("classes/modele/Utilisateur.class.php");
 include_once("classes/modele/Photographe.class.php");
 include_once("classes/modele/Adresse.class.php");
 include_once("classes/modele/TaillePapier.class.php");
@@ -36,7 +37,6 @@ if(isset($_GET[$get_var_picture])){
 } else {
 	$pictureSelected = false;
 }
-
 	
 if(isset($_GET[$get_var_page])){
 	$page=$_GET[$get_var_page];
@@ -59,12 +59,21 @@ $picsDir = PICTURE_DIRECTORY;
 //get the corresponding album
 $albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
 //check if it is opened
-if ($albumObj->getEtat() != 2){
-	//TODO mieux que ça -> proposer de mettre son mail
-	photomentiel_die(new PMError("L'album n'est pas encore prêt !","Cet album n'est pas encore visualisable ou a été fermé."));
+if ($albumObj->getEtat() == 4){
+	photomentiel_die(new PMError("L'album a été fermé !","Cet album a été fermé, il n'est plus disponible."));
 }
-$_SESSION['photographID'] = $albumObj->getID_Photographe();
+$displayMailing = ($albumObj->getEtat() != 2);
+//check if mail must be added
+$mailingAdded = 0;
+if (isset($_POST['mailing'])){
+	if ($albumObj->addMailAMailing($_POST['mailing'])){
+		$mailingAdded = 1;
+	} else {
+		$mailingAdded = 2;
+	}
+}
 //get the corresponding photographe
+$_SESSION['photographID'] = $albumObj->getID_Photographe();
 $photographObj = Photographe::getPhotographeDepuisID($albumObj->getID_Photographe());
 //get photo formats for this album
 $tmp = TaillePapier::getTaillePapiers();
@@ -84,21 +93,23 @@ if (!is_dir($picturesPath)){
 	photomentiel_die(new PMError("Album inexistant !","Le chemin vers cet album n'a pas été trouvé"));
 }
 //create pictures array or get it in session if exists
-if (!isSet($_SESSION['albumStringID']) || $_SESSION['albumStringID'] != $albumStringID){
-	$picsArray = array();
-	$scan = opendir($picturesPath.$thumbsDir);
-	while ($fileName = readdir($scan)) {
-	    if ($fileName != "." && $fileName != "..") {
-		array_push($picsArray,$fileName);
-	    }
+if (!$displayMailing) {
+	if (!isSet($_SESSION['albumStringID']) || $_SESSION['albumStringID'] != $albumStringID){
+		$picsArray = array();
+		$scan = opendir($picturesPath.$thumbsDir);
+		while ($fileName = readdir($scan)) {
+		    if ($fileName != "." && $fileName != "..") {
+			array_push($picsArray,$fileName);
+		    }
+		}
+		closedir($scan);
+		sort($picsArray);
+		$_SESSION['albumStringID'] = $albumStringID;
+		$_SESSION['picturesName'] = $picsArray;
+	} else {
+		//avoid loading several time the same list of pictures in the same session
+		$picsArray = $_SESSION['picturesName'];
 	}
-	closedir($scan);
-	sort($picsArray);
-	$_SESSION['albumStringID'] = $albumStringID;
-	$_SESSION['picturesName'] = $picsArray;
-} else {
-	//avoid loading several time the same list of pictures in the same session
-	$picsArray = $_SESSION['picturesName'];
 }
 
 if (!is_numeric($page) || $page<1 || ($nb_photos_per_page*($page-1)>sizeof($picsArray))){
@@ -122,23 +133,33 @@ if (isset($_POST["pictur_0"])){
 	unset($_SESSION['COMMAND_LINES']);
 }
 
+if (isset($_SESSION['userID']) && $displayMailing){
+	$utilisateurObj = Utilisateur::getUtilisateurDepuisID($_SESSION['userID']);
+}
+
 //and display
 include("head.php");
 ?>
-	<script language="javascript" src="js/jquery.autopager-1.0.0.js"></script>
-	<script language="javascript" src="js/thickbox.js"></script>
-	<script language="javascript">
-		$(function() {
-			$.autopager({
-				link: 'a[rel=next_page]',
-				content: '.album_content'
+	<?php
+		if (!$displayMailing){
+	?>
+		<script language="javascript" src="js/jquery.autopager-1.0.0.js"></script>
+		<script language="javascript" src="js/thickbox.js"></script>
+		<script language="javascript">
+			$(function() {
+				$.autopager({
+					link: 'a[rel=next_page]',
+					content: '.album_content'
+				});
+				initBasket();
 			});
-			initBasket();
-		});
-		thumbsFullDir = "<?php echo $picturesPath.$thumbsDir; ?>";
-		picsFullDir = "<?php echo $picturesPath.$picsDir; ?>";
-		albumCookieName = "ptmtl_<?php echo $albumStringID; ?>";
-	</script>
+			thumbsFullDir = "<?php echo $picturesPath.$thumbsDir; ?>";
+			picsFullDir = "<?php echo $picturesPath.$picsDir; ?>";
+			albumCookieName = "ptmtl_<?php echo $albumStringID; ?>";
+		</script>
+	<?php
+		}
+	?>
 	<div id="header_alb"><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><div id="header_alb_left"><span id="accueil">Accueil</span></div></a><div id="header_alb_right"></div></div>
 	<div id="leftpanel">
 			<div id="leftpanel_top">
@@ -190,7 +211,7 @@ include("head.php");
 			<div id="leftpanel_bot"></div>
 	</div>
 	<div id="album_top"></div>
-	<?php if (!$autopager){ ?>
+	<?php if (!$displayMailing && !$autopager){ ?>
 		<div id="hidden_links" style="visibility:hidden;">
 			<?php
 				//print link for thick box pictures links and count
@@ -201,7 +222,38 @@ include("head.php");
 				}
 			?>
 		</div>
-	<?php } ?>
+	<?php } 
+	
+	if ($displayMailing) {
+	?>
+	<div id="content_mailing">
+		<span>Cet album n'est pas encore disponible.</span><br/>
+		<?php
+			if ($mailingAdded == 0){
+		?>
+			<u>Pour être prévenu par mail dès sa publication, veuillez remplir le champ suivant et appuyer sur <i>Valider</i> :</u><br/>
+			<br/>
+			<form id="form_mailing" method="POST" onSubmit="return mailingCheckMail();">
+				Votre E-mail : <input name="mailing" id="mailing" type="text" class="texfield" <?php echo isset($utilisateurObj)?'value="'.$utilisateurObj->getEmail().'"':''; ?> ></input>
+				<input id="mailing_submit" type="submit" class="button" value="Valider"></input>
+			</form>
+		<?php
+			} else if ($mailingAdded == 1){
+		?>
+			Votre Email a été correctement ajouté, vous recevrez un mail dès la publication de cet album.
+		<?php
+			} else {
+		?>
+			Vous êtes déjà inscrit à la publication de cet évènement.
+		<?php
+			}
+		?>
+		<br/><br/>
+		<input type="button" class="button" value="Retourner à l'accueil" onClick="document.location.href='index.php';"/>
+	</div>
+	<?php
+	} else {
+	?>
 	<div class="album_content">
 		<?php
 		$picsFullDir = $picturesPath.$picsDir;
@@ -236,5 +288,8 @@ include("head.php");
  	<form id="form_viewbag" method="POST" action="viewbag.php">
  		<input id="form_input" type="hidden" name="pics"/>
  	</form>
+ 	<?php
+	}
+	?>
   </body>
 </html>

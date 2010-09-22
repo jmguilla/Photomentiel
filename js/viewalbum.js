@@ -77,3 +77,10 @@ function submitViewBag(){
 	document.getElementById("form_input").value=pics.substr(0,pics.length-1);
 	$("#form_viewbag").submit();
 }
+function mailingCheckMail(){
+	if (!re_mail.test($("#mailing").val())){
+		alert("Veuillez saisir une adresse Email valide.");
+		return false;
+	}
+	return true;
+}

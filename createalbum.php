@@ -261,7 +261,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					Liste de mails : <br/>
 					<span class="note2">Séparez les mails par des points-virgules '<b>;</b>'</span>
 				</td><td>
-					<textarea name="mails" cols="55" rows="6" id="mails" regexp="^([^@]+@[^.]+[.][^;]+)([;][^@]+@[^.]+[.][^;]+)*$"></textarea>
+					<textarea name="mails" cols="55" rows="6" id="mails" regexp="^([^@]+@[^.@]+[.][^@;]+)([;][^@]+@[^.@]+[.][^@;]+)*$"></textarea>
 				</td><td>
 					<div class="checkform" id="rmails"></div>
 				</td>
@@ -371,7 +371,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					Liste de mails : <br/>
 					<span class="note2">Séparez les mails par des points-virgules '<b>;</b>'</span>
 				</td><td>
-					<textarea name="mails" cols="55" rows="6" id="mails" regexp="^([^@]+@[^.]+[.][^;]+)([;][^@]+@[^.]+[.][^;]+)*$"><?php echo $albumObj->getMailing(); ?></textarea>
+					<textarea name="mails" cols="55" rows="6" id="mails" regexp="^([^@]+@[^.@]+[.][^@;]+)([;][^@]+@[^.@]+[.][^@;]+)*$"><?php echo $albumObj->getMailing(); ?></textarea>
 				</td><td>
 					<div class="checkform" id="rmails"></div>
 				</td>
