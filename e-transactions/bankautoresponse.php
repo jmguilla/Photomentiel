@@ -32,6 +32,9 @@
 		if ($bank_response_code=='00' && $response_code=='00'){
 			$commandObj = Commande::getCommandeDepuisID($numCmd);
 			if ($commandObj->getEtat() == 0){
+				//TODO améliorer ça avec une requete qui save que le bon champ
+				$commandObj->setDatePaiement(date("Y-m-d H:i:s",time()));
+				$commandObj->save();
 				//give this command the next state : archive is done when state goes form 0 to 1
 				$commandObj->etatSuivant();
 				//add x percent of this amout to this album

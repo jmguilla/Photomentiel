@@ -208,7 +208,7 @@ function makePDF($command, $user, $photosFormatDim, $dest=null){
 	$x = 15;$y+=5;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY(15,$y);
-	$PDF->Write(10, "Date de paiement : JJ/MM/AAAA HH:MM");
+	$PDF->Write(10, "Date de paiement : ".date("d/m/Y H:i",strtotime($command->getDatePaiement())));
 	//footer
 	$x = 78;$y = 266;
 	$PDF->SetFont('Times','',8);
