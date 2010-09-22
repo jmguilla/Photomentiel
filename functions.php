@@ -96,7 +96,7 @@ function makePDF($command, $user, $photosFormatDim, $dest=null){
 	$y+=5;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "Dispensé d’immatriculation au registre du commerce");
+	$PDF->Write(10, "Dispensé d'immatriculation au registre du commerce");
 	$y+=5;
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "et des sociétés (RCS) et au répertoire des métiers (RM)");
