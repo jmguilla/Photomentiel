@@ -11,6 +11,35 @@ class CommandeDAO extends DAO{
 		parent::__construct($dsn);
 	}
 
+	public function getCommandeEtPhotosDepuisID_Album($ida){
+		$query = "select * from Commande as c left join CommandePhoto as cp on c.commandeID = cp.id_commande left join AdresseCommande as a on a.id_commande = c.commandeID where cp.id_album = " .
+		mysql_real_escape_string($ida);
+		$result = $this->retrieve($query);
+		if($result->getNumRows() > 0) {
+			$tmp = array();
+			$daoCP = new CommandePhotoDAO();
+			$currentCommande = NULL;
+			foreach($result as $row){
+				$commande = $this->buildCommandeFromRow($row);
+				if($currentCommande == NULL || $currentCommande->getCommandeID() != $commande->getCommandeID()){
+					//on enregistre la commande precedente
+					if(isset($currentCommande)){//on est pas dans le premier run
+						$tmp[] = $currentCommande;
+					}
+					//on met a jour la commande
+					$currentCommande = $commande;
+				}
+				$photo = $daoCP->buildCommandePhotoFromRow($row);
+				$currentCommande->addCommandePhoto($photo);
+			}
+			//reste � enregistrer la derni�re commande
+			$tmp[] = $currentCommande;
+			return $tmp;
+		}else{
+			return false;
+		}
+	}
+
 	public function setEnCoursDePreparation($id, $prep){
 		$query = "update Commande set etat = 2, preparateur = '" .
 		mysql_real_escape_string($prep) . "' where commandeID = " .

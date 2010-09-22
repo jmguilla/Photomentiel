@@ -31,6 +31,13 @@ class Commande{
 		$dao = new CommandeDAO();
 		return $dao->setEnCoursDePreparation($id, $prep);
 	}
+	public static function getCommandeEtPhotosDepuisID_Album($ida){
+		if(!isset($ida)){
+			return false;
+		}
+		$dao = new CommandeDAO();
+		return $dao->getCommandeEtPhotosDepuisID_Album($ida);
+	}
 	/**
 	 * Renvoie la commande identifée par l'id passé en parametre
 	 * sans les photos associées
@@ -45,10 +52,16 @@ class Commande{
 	 * @param int $id
 	 */
 	public static function getCommandeDepuisID_Utilisateur($id){
+		if(!isset($id)){
+			return false;
+		}
 		$dao = new CommandeDAO();
 		return $dao->getCommandeDepuisID_Utilisateur($id);
 	}
 	public static function getCommandeEtPhotosDepuisEtat($etat){
+		if(!isset($etat)){
+			return false;
+		}
 		$dao = new CommandeDAO();
 		return $dao->getCommandeEtPhotosDepuisEtat($etat);
 	}
@@ -58,6 +71,9 @@ class Commande{
 	 * @param int $id
 	 */
 	public static function getCommandeEtPhotosDepuisID($id){
+		if(!isset($id)){
+			return false;
+		}
 		$dir_commande_class_php = dirname(__FILE__);
 		include_once $dir_commande_class_php . "/CommandePhoto.class.php";
 		$dao = new CommandeDAO();
@@ -69,6 +85,9 @@ class Commande{
 	 * @param int $id
 	 */
 	public static function getCommandesEtPhotosDepuisID_Utilisateur($id){
+		if(!isset($id)){
+			return false;
+		}
 		$dir_commande_class_php = dirname(__FILE__);
 		include_once $dir_commande_class_php . "/CommandePhoto.class.php";
 		$dao = new CommandeDAO();

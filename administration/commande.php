@@ -15,6 +15,32 @@ $_SESSION['message'] = '';
 	<input type="submit" value="retour accueil"/>
 </form>
 <h3>Commandes</h3>
+<span><h4>Commandes en attente de paiement:</h4>
+<?php
+$commandes = Commande::getCommandeEtPhotosDepuisEtat(0);
+if($commandes){
+	echo '	<table>';
+	foreach($commandes as $commande){
+		$prix = $commande->getFDP();
+		$commandesPhoto = $commande->getCommandesPhoto();
+		if(isset($commandesPhoto) && !empty($commandesPhoto)){
+			foreach($commandesPhoto as $commandePhoto){
+				$prix += $commandePhoto->getPrix();
+			}
+		}
+		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="detail_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="détail"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="supprimer_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="supprimer"/></form></td></tr>' . "\n";
+	}
+	echo '	</table>';
+?>
+<?php
+}else{
+?>
+Aucune!<br/>
+<?php
+}
+?>
+</span>
+<hr/>
 <span><h4>Commandes à traiter:</h4>
 <?php
 $commandes = Commande::getCommandeEtPhotosDepuisEtat(1);
@@ -28,7 +54,7 @@ if($commandes){
 				$prix += $commandePhoto->getPrix();
 			}
 		}
-		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="traiter_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="traiter"/></form></td></tr>' . "\n";
+		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="detail_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="détail"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="traiter_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="traiter"/></form></td></tr>' . "\n";
 	}
 	echo '	</table>';
 ?>
@@ -54,7 +80,7 @@ if($commandes){
 				$prix += $commandePhoto->getPrix();
 			}
 		}
-		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="commande_expediee"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="état = expédié"/></form></td></tr>' . "\n";
+		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="detail_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="détail"/></form></td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="commande_expediee"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="état = expédié"/></form></td></tr>' . "\n";
 	}
 	echo '	</table>';
 ?>
