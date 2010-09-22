@@ -14,7 +14,7 @@
 include("header.php");
 include_once("classes/modele/Album.class.php");
 include_once("classes/modele/Evenement.class.php");
-//TODO chercher toutes les valeurs d'enum et vérifier qu'elles sont bien utilisées au travers des tableaux
+
 ?>
 <script type="text/javascript" src="js/calendar.js"></script>
 <script type="text/javascript">

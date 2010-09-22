@@ -42,7 +42,7 @@
 					$percentApplied = Photographe::getPhotographeDepuisID($album->getID_Photographe())->getPourcentage();
 					$album->updateAmounts(toFloatAmount($amount)*$percentApplied/100);
 				}
-				//TODO send mail with facture
+				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
 			}
 		}

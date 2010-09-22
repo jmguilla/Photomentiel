@@ -68,7 +68,7 @@ if ($utilisateurObj && $commandObj){
 				$imp = ($i%2==0)?'pair':'impair';
 				echo '<tr>';
 				//ref
-				echo '<td class="'.$imp.'">'.substr($current['fileName'],0,sizeof($current['fileName'])-5).'</td>';
+				echo '<td class="'.$imp.'">'.removeExtension($current['fileName']).'</td>';
 				//format
 				echo '<td class="'.$imp.'">'.$photoFormatsDim[$current['formatID']].'</td>';
 				//quantity

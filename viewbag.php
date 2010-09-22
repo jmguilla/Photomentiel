@@ -129,7 +129,7 @@ include("header.php");
 				$total_cmd = 0;
 				for ($i=0;$i<sizeof($pictures);$i++){
 					$imp = ($i%2==0)?'pair':'impair';
-					$ref = substr($pictures[$i],0,sizeof($pictures[$i])-5);
+					$ref = removeExtension($pictures[$i]);
 					//ref + photo
 					echo '<tr><td class="'.$imp.'"><u>'.$ref.'</u></td>'.
 							 '<td class="'.$imp.'"><a class="thickbox" rel="bag_confirm" title="Agrandir" href="'.$picturesPath.$picsDir.$pictures[$i].'"><img src="'.$picturesPath.$thumbsDir.$pictures[$i].'"></a></td>';

@@ -135,7 +135,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 } else {
 	$cmdConfirmed = false;
 }
-//TODO search 'substr' and replace by removeExtension(...)
+
 ?>
 	<div id="full_content_top">
 		Confirmation de votre commande
