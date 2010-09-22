@@ -4,10 +4,57 @@ include_once $dir_administration_controleur_album_php . "/../../classes/modele/A
 
 switch($action){
 	case detail_album:
+		$dir_administration_controleur_album_php = dirname(__FILE__);
+		include_once $dir_administration_controleur_album_php . "/../../classes/modele/Commande.class.php";
+		include_once $dir_administration_controleur_album_php . "/../../classes/modele/CommandePhoto.class.php";
 		include $dir_administration_controleur_album_php . "/../header.php";
-		echo '<form action="dispatcher.php" method="post"><input type="hidden" name="action" value="montrer_album"/><input type="submit" value="retour liste album"/></form>' . "\n";
-		
-		echo '<form action="dispatcher.php" method="post"><input type="hidden" name="action" value="montrer_album"/><input type="submit" value="retour liste album"/></form>' . "\n";
+		if(!isset($_POST['id'])){
+			echo 'Aucun id_album fourni<br/>';
+		}else{
+			$ida = $_POST['id'];
+			echo '<form action="dispatcher.php" method="post"><input type="hidden" name="action" value="montrer_album"/><input type="submit" value="retour liste album"/></form>' . "\n";
+			$album = Album::getAlbumDepuisID($ida);
+			list($usec, $sec) = explode(" ", microtime());
+			echo 'Détails de l\'album <b>#' . $ida . "</b> - " . $album->getNom() . " - publié le <b>" . $album->getDate() . "</b><br/>\n";
+			echo 'Crée il y a <b>' . round((($sec - strtotime($album->getDate())) / (60 * 60 * 24)), 0) . ' jours</b>' . "<br/>\n";
+			$commandes = Commande::getCommandeEtPhotosDepuisID_Album($ida);
+			if($commandes){
+				echo '<br/>' . "\n" . '<h3>Commandes</h3><table>' . "\n";
+				$total = 0;
+				$totalDernierMois = 0;
+				$totalCommandesDernierMois = 0;
+				foreach($commandes as $commande){
+					$totalCommande = $commande->getFDP();
+					$photos = $commande->getCommandesPhoto();
+					if($photos){
+						foreach($photos as $photo){
+							$totalCommande += $photo->getPrix();
+						}
+					}
+					$total += $totalCommande;
+					$datePaiement = $commande->getDatePaiement();
+					switch($commande->getEtat()){
+						case 0: $bgcolor=' bgcolor="red"' ;break;
+						case 1: $bgcolor=' bgcolor="orange"' ;break;
+						case 2: $bgcolor=' bgcolor="yellow"' ;break;
+						case 3: $bgcolor=' bgcolor="blue"' ;break;
+						case 4: $bgcolor=' bgcolor="green"' ;break;
+					}
+					$jours =round((($sec - strtotime($commande->getDate())) / (60 * 60 * 24)), 0);
+					if($jours <= 30 && $commande->getEtat() >= 1){
+						$totalDernierMois += $totalCommande;
+						$totalCommandesDernierMois ++;
+					}
+					echo '<tr' . $bgcolor . '><td>#' . $commande->getCommandeID() . '</td><td> - ' . $COMMAND_STATES[$commande->getEtat()] . '</td><td> - passée il y a <b>' . $jours . ' jours</b></td><td> - ' . ((isset($datePaiement))?('payée le ' . $datePaiement):('')) . '</td><td> - pour ' . $totalCommande . '&#x20AC;</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td></tr>' . "\n";
+				}
+				echo '</table><br/>' . "\n";
+				echo 'Nombre de commandes passées: <b>' . count($commandes) . '</b> pour un total de <b>' . $total . '&#x20AC;</b><br/>' . "\n";
+				echo 'Dont <b>' . $totalCommandesDernierMois . ' commandes encaissées</b> au cours des 30 derniers jours pour un total de <b>' . $totalDernierMois . '&#x20AC;</b><br/>' . "\n";
+			}else{
+				echo 'Aucune commande passée pour cet album<br/>' . "\n";
+			}
+			echo '<form action="dispatcher.php" method="post"><input type="hidden" name="action" value="montrer_album"/><input type="submit" value="retour liste album"/></form>' . "\n";
+		}
 		include $dir_administration_controleur_album_php . "/../footer.php";
 	exit();
 	case montrer_album:
