@@ -16,13 +16,16 @@ include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
 include("header.php");
 
-if ($utilisateurObj && isset($_GET['cmd'])){
+if (!$utilisateurObj){
+	photomentiel_die(new PMError("Utilisateur non connecté","Vous n'êtes pas connecté, pour accéder à votre commande, veuillez vous connecter en utilisant les champs ci-dessus."),false);
+}
+if (isset($_GET['cmd'])){
 	$commandObj = Commande::getCommandeDepuisID($_GET['cmd']);
 	if ($commandObj->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
 		photomentiel_die(new PMError("Commande inapropriée","Cette commande ne vous appartient pas, que faites vous là ?"),false);
 	}
 } else {
-	photomentiel_die(new PMError("Utilisateur non connecté","Vous n'êtes pas connecté, pour accéder à votre commande, veuillez vous connecter en utilisant les champs ci-dessus."),false);
+	photomentiel_die(new PMError("Aucune commande spécifiée","Aucune commande n'a été spécifiée, que faites vous là ?"),false);
 }
 
 if ($utilisateurObj && $commandObj){

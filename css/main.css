@@ -228,3 +228,26 @@ div#full_content_bot {
 	width:980px;
 	height:11px;
 }
+
+div#error {
+	background-image:url(../design/misc/error.png);
+	background-repeat:no-repeat;
+	width:80%;
+	margin-left:10%;
+	border:1px white solid;
+}
+div#error div#title {
+	margin-top:40px;
+	font-size:26px;
+	font-weight:bold;
+	text-decoration:underline;
+	width:80%;
+	margin-left:19%;
+}
+div#error div#message {
+	margin-top:100px;
+	color:blue;
+	font-size:20px;
+	font-weight:bold;
+	text-align:left;
+}

@@ -48,7 +48,7 @@ $albumStringID = $_GET[$get_var_album];
 //get photographe home pictures dir
 $sidObj = StringID::getStringIDDepuisID($albumStringID);
 if (!$sidObj){
-	photomentiel_die(new PMError("Album inexistant !","L'album spécifié n'existe pas ou plus..."));
+	photomentiel_die(new PMError("Album inexistant !","L'album spécifié n'existe pas ou n'est plus disponible..."));
 }
 $_SESSION['albumID'] = $sidObj->getID_Album();
 $photographeHome = $sidObj->getHomePhotographe();

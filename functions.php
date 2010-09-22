@@ -70,11 +70,15 @@ function removeExtension($fileName){
 	return substr($fileName,0,sizeof($fileName)-5);
 }
 
+//TODO checker pq y'a pas de char special
+
 /*
  * Create pdf file from command, and user.
  * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
  */
 function makePDF($command, $user, $photosFormatDim, $dest=null){
+	//TODO ajouter adresse physique de la boite postale
+	//TODO ajouter numero SIREN du concerné
 	$adresse = $user->getAdresse();
 	$PDF = new phpToPDF();
 	$PDF->AddPage();

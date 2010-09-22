@@ -50,9 +50,21 @@ function photomentiel_die($pmError,$declareHeader = true){
 		<?php echo $pmError->getTitle(); ?>
 	</div>
 	<div id="full_content_mid">
-		<div class="separator10"></div>
-		<?php echo $pmError->getMessage(); ?>
-		<div class="separator10"></div>
+		<div class="separator10" style="height:80px;"></div>
+		<div id="error">
+			<div id="title">
+				<?php echo $pmError->getTitle(); ?>
+			</div>
+			<div id="message">
+				<?php echo $pmError->getMessage(); ?>
+			</div>
+		</div>
+		<div class="separator10" style="height:50px;"></div>
+		<center>
+			<input class="button" style="margin-right:25px;width:220px;" type="button" value="Revenir à la page précédente" onClick="history.back();" />
+			<input class="button" style="margin-left:25px;width:190px;" type="button" value="Revenir à l'accueil" onClick="document.location.href='index.php'" />
+		</center>
+		<div class="separator10" style="height:80px;"></div>
 	</div>
 	<div id="full_content_bot"></div>
 	<?php
