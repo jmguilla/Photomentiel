@@ -27,8 +27,8 @@ include_once("classes/modele/Evenement.class.php");
 	<div id="square_mid">
 		<div class="separator5"></div>
 		<div id="card">
-			<form id="card_form">
-				<input id="flash_border" class="card_code" type="text" maxlength="<?php echo STRINGID_LENGTH; ?>" onChange="$('#tl_error').hide();"/></input>
+			<form id="card_form" method="POST" action="viewalbum.php">
+				<input name="al" id="flash_border" class="card_code" type="text" maxlength="<?php echo STRINGID_LENGTH; ?>" onChange="$('#tl_error').hide();"/></input>
 				<input class="button" id="card_valider" type="submit" value="Valider" title="Accéder à l'album" onClick="return displayAlbum($('#flash_border').val());"></input>
 			</form>
 			<div id="tl_error">Cet album n'existe pas !</div>

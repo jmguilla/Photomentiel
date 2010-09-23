@@ -343,9 +343,12 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 								<div class="separator10" style="height:20px"></div>
 								<input type="hidden" name="payment" value="true"/>
 								<center>
-									<input style="width:250px;" type="button" class="button" value="Retour - Annuler ma commande" onClick="document.location.href='viewalbum.php?al=<?php echo $albumStringID; ?>';"/>
+									<input style="width:250px;" type="button" class="button" value="Retour - Annuler ma commande" onClick="$('#backToAlbum').submit();"/>
 									<input style="width:250px;" type="submit" class="button" value="Continuer - Valider ma commande" id="valid_button"/>
 								</center>
+							</form>
+							<form id="backToAlbum" method="POST" action="viewalbum.php">
+								<input type="hidden" name="al" value="<?php echo $albumStringID; ?>"></input>
 							</form>
 							<div class="separator10"></div>
 				<?php

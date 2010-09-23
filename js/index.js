@@ -59,7 +59,10 @@ function displayAlbum(albumId){
 		success:function(data){
 			$('#tl_error').hide();
 			if(data.value != false){
-				document.location.href='viewalbum.php?al='+albumId;
+				if (true/*public*/){
+					$('#card_form').attr('method','GET');
+				}
+				$('#card_form').submit();
 			} else {
 				$('#tl_error').html("Code album incorrect");
 				$('#tl_error').css('padding-top','10px');

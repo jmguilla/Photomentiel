@@ -180,7 +180,8 @@ include("header.php");
 	<form id="form_confirmbag" method="POST" action="confirmbag.php">
 		<!-- filled by js -->
 	</form>
-	<form id="form_backToAlbum" method="POST" action="viewalbum.php?al=<?php echo $albumStringID; ?>">
+	<form id="form_backToAlbum" method="POST" action="viewalbum.php">
+		<input type="hidden" name="al" value="<?php echo $albumStringID; ?>"></input>
 		<!-- filled by js -->
 	</form>
 	<div id="full_content_bot"></div>

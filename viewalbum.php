@@ -41,10 +41,10 @@ if(isset($_GET[$get_var_picture])){
 if(isset($_GET[$get_var_page])){
 	$page=$_GET[$get_var_page];
 }
-if (!isSet($_GET[$get_var_album]) || $_GET[$get_var_album] == ''){
-	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"));
+if ((!isSet($_GET[$get_var_album]) || $_GET[$get_var_album] == '') && (!isSet($_POST[$get_var_album]) || $_POST[$get_var_album] == '')){
+	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié."));
 }
-$albumStringID = $_GET[$get_var_album];
+$albumStringID = isSet($_GET[$get_var_album])?$_GET[$get_var_album]:$_POST[$get_var_album];
 //get photographe home pictures dir
 $sidObj = StringID::getStringIDDepuisID($albumStringID);
 if (!$sidObj){
