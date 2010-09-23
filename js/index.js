@@ -58,8 +58,8 @@ function displayAlbum(albumId){
 		dataType:"json",
 		success:function(data){
 			$('#tl_error').hide();
-			if(data.value != false){
-				if (true/*public*/){
+			if(data.value[0] != false){
+				if (data.value[1]){
 					$('#card_form').attr('method','GET');
 				}
 				$('#card_form').submit();
