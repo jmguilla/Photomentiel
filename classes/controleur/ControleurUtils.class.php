@@ -143,7 +143,7 @@ class ControleurUtils{
 		     	}
 		     	$content .= "                                Port : ".sprintf('%.2f',$commande->getFDP())." €\n";
 		     	$total += $commande->getFDP();
-		     	$content .= "                                Total: " . $total." €\n\n";
+		     	$content .= "                                Total: ".sprintf('%.2f',$total)." €\n\n";
 			$content .= "Vous pouvez suivre votre commande ou l'imprimer en vous connectant à votre espace personnel sur www.photomentiel.fr\n";
 			$content .= "Merci d'utiliser photomentiel.fr\n\n\n";
 			$content .= "Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n";
