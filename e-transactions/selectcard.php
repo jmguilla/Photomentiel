@@ -11,8 +11,8 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 
 	// Initialisation du chemin du fichier pathfile
 	//   ex :
-    //    -> Windows : $parm="$parm pathfile=c:\\repertoire\\pathfile";
-    //    -> Unix    : $parm="$parm pathfile=/home/repertoire/pathfile";
+        //    -> Windows : $parm="$parm pathfile=c:\\repertoire\\pathfile";
+        //    -> Unix    : $parm="$parm pathfile=/home/repertoire/pathfile";
 	$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
 
 	//		Si aucun transaction_id n'est affecté, request en génère

@@ -75,9 +75,9 @@ class ControleurUtils{
 	public static function sendValidationEmail($utilisateur, $activateID){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-	     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
-	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-	     	$headers .='Content-Transfer-Encoding: 8bit'; 
+		     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
+		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+		     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
 			"Photomentiel - Validez votre compte !",
 			"Bienvenue sur Photomentiel !\n\n".
@@ -95,16 +95,17 @@ class ControleurUtils{
 	public static function sendNouveauMDPEmail($utilisateur, $mdp){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-	     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
-	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-	     	$headers .='Content-Transfer-Encoding: 8bit'; 
+		     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
+		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+		     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
-			"Votre nouveau mot de passe Photomentiel",
-			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n\n" .
-			"Voici votre nouveau mot de passe: " . $mdp . "\n".
-			"associé à l'adresse email: " .$utilisateur->getEmail() . "\n\n".
-			"Vous avez la possibilité de changer ce mot de passe sur le site.\n".
-			"Merci d'utiliser photomentiel.fr",
+			"Photomentiel - Nouveau mot de passe",
+			"Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n\n".
+			"Pour votre compte dont l'Email est : ".$utilisateur->getEmail()."\n".
+			"Voici votre nouveau mot de passe : ".$mdp."\n\n".
+			"Nous vous recommandons de changer ce mot de passe dans la rubrique mon compte sur www.photomentiel.fr.\n\n".
+			"Merci d'utiliser photomentiel.fr\n\n\n".
+			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
 			$headers
 			);
 		}

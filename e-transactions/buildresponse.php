@@ -3,10 +3,10 @@
 	$message="message=$HTTP_POST_VARS[DATA]";
 	
 	// Initialisation du chemin du fichier pathfile
-    //   ex :
-    //    -> Windows : $pathfile="pathfile=c:\\repertoire\\pathfile";
-    //    -> Unix    : $pathfile="pathfile=/home/repertoire/pathfile";
-   $pathfile="pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
+        //   ex :
+        //    -> Windows : $pathfile="pathfile=c:\\repertoire\\pathfile";
+        //    -> Unix    : $pathfile="pathfile=/home/repertoire/pathfile";
+        $pathfile="pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
 
 	// Initialisation du chemin de l'executable response
 	// ex :
@@ -69,7 +69,7 @@
 	} else {
 		// OK, affichage des champs de la réponse
 		$CB_RETURN_EXIT_CODE = 0;
-		$numCmd = $caddie;
+		$idCmd = $caddie;
 	}
 	
 ?>

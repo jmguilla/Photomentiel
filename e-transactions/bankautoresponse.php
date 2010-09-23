@@ -31,7 +31,7 @@
 	if ($CB_RETURN_EXIT_CODE == 0){
 		//$numCmd contient le numéro de la commande
 		if ($bank_response_code=='00' && $response_code=='00'){
-			$commandObj = Commande::getCommandeDepuisID($numCmd);
+			$commandObj = Commande::getCommandeEtPhotosDepuisID($idCmd);
 			if ($commandObj->getEtat() == 0){
 				//give this command the next state : archive is done when state goes form 0 to 1
 				$commandObj->etatSuivant();
