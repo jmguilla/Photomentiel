@@ -47,7 +47,7 @@ function getEvents(){
 	if (tp!=0) {param.type=tp;}
 	$.ajax({
 		type:"POST",
-		url:"classes/dispatcher.php",
+		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
@@ -80,7 +80,7 @@ function addMailing(eventID){
 	}
 	$.ajax({
 		type:"GET",
-		url:"classes/dispatcher.php",
+		url:"/dispatcher.php",
 		data:"action=add_mail_to_evenement&email="+email+"&id="+eventID,
 		dataType:"json",
 		success:function(data){
@@ -128,7 +128,7 @@ $(document).ready(function() {
 	$("#fregion").change(function(){
 		$.ajax({
 			type: "GET",
-			url: "/classes/dispatcher.php",
+			url: "/dispatcher.php",
 			data:"action=list_departement_par_region&regionID=" + $("#fregion").val(),
 			dataType:"json",
 			success:function(data){
@@ -160,7 +160,7 @@ $(document).ready(function() {
 function changeVille(){
 	$.ajax({
 		type: "GET",
-		url: "/classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=list_ville_par_departement&departementID=" + $("#fdepartement").val(),
 		dataType:"json",
 		success:function(data){

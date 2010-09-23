@@ -50,7 +50,7 @@ function getAlbums(){
 	if (kw!='') {param.query=kw;}
 	$.ajax({
 		type:"POST",
-		url: "classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){

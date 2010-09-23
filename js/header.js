@@ -22,7 +22,7 @@ function checkUserOrConnect(scriptname){
 	}
 	$.ajax({
 		type: "POST",
-		url: "classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=logon&email=" + email + "&pwd=" + pwd,
 		dataType:"json",
 		success:function(data){
@@ -55,7 +55,7 @@ function checkEmail(){
 	}
 	$.ajax({
 		type: "GET",
-		url: "classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=lostpwd&email=" + email,
 		dataType:"json",
 		success:function(data){

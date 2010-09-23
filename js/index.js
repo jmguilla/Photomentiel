@@ -8,7 +8,7 @@ $(document).ready(function(){
 function changeAlbumsContent(){
 	$.ajax({
 		type: "GET",
-		url: "classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=get_random_image_thumb_path&n=1",
 		dataType:"json",
 		success:function(data){
@@ -53,7 +53,7 @@ function displayAlbum(albumId){
 	}
 	$.ajax({
 		type: "GET",
-		url: "classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=get_stringid&sid="+albumId,
 		dataType:"json",
 		success:function(data){
@@ -104,7 +104,7 @@ function getEvents(){
 	if (d2!=''){param+="&d2="+d2;}
 	$.ajax({
 		type:"GET",
-		url:"classes/dispatcher.php",
+		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
