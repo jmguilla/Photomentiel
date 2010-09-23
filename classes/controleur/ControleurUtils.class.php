@@ -2,6 +2,7 @@
 $dir_controleurutils_class_php = dirname(__FILE__);
 include_once $dir_controleurutils_class_php . "/../vue/JSONVue.class.php";
 include_once $dir_controleurutils_class_php . "/externalization.php";
+include_once $dir_controleurutils_class_php . "/../modele/TaillePapier.class.php";
 
 class ControleurUtils{
 	public static function serialize_object_json($obj, $result = true, $cause = NULL){
@@ -121,27 +122,33 @@ class ControleurUtils{
 			$commandePhotos = $commande->getCommandesPhoto();
 			if(!isset($commandePhotos) || !is_array($commandePhotos) || count($commandePhotos) == 0){
 				$commande = Commande::getCommandeEtPhotosDepuisID($commande->getCommandeID());
+				$commandePhotos = $commande->getCommandesPhoto();
 			}
 
 			//on calcul le montant
 			$total = 0;
-
 			//on envoie
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
 		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
 		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 		     	$headers .='Content-Transfer-Encoding: 8bit'; 
-		     	$content = "Récapitulatif de la commande " . $commande->getNumero() . "\n\n";
+		     	$content = "Vous venez d'effectuer une commande et nous vous en remercions.\n";
+			$content .= "Voici le récapitulatif de votre commande n°" . $commande->getNumero() . "\n\n";
+
+			$taillePapier = TaillePapier::getTaillePapiers();
 		     	foreach($commandePhotos as $commandePhoto){
 		     		$prix = $commandePhoto->getPrix();
 		     		$total += $prix;
-		     		$content .= "photo " . $commandePhoto->getPhoto() . " - " . TaillePapier::getTaillePapierDepuisID($commandePhoto->getID_TaillePapier())->getDimensions() . " - " . $prix . "\n";
+		     		$content .= substr($commandePhoto->getPhoto(),0,sizeof($commandePhoto->getPhoto())-5)." | ".$taillePapier[$commandePhoto->getID_TaillePapier()]->getDimensions()." | ".$commandePhoto->getNombre()." | ".$prix." €\n";
 		     	}
-		     	$content .= "                                Frais de port: " . $commande->getFDP() . "\n\n";
+		     	$content .= "                                Port : ".sprintf('%.2f',$commande->getFDP())." €\n";
 		     	$total += $commande->getFDP();
-		     	$content .= "                                Total: " . $total;
+		     	$content .= "                                Total: " . $total." €\n\n";
+			$content .= "Vous pouvez suivre votre commande ou l'imprimer en vous connectant à votre espace personnel sur www.photomentiel.fr\n";
+			$content .= "Merci d'utiliser photomentiel.fr\n\n\n";
+			$content .= "Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n";
 			return mail($utilisateur->getEmail(),
-			"Récapitulatif de la commande " . $commande->getNumero(),
+			"Photomentiel - Votre commande n°".$commande->getNumero(),
 			$content,
 			$headers
 			);
