@@ -38,9 +38,8 @@
 				//add x percent of this amout to this album
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
-				if ($album){//TODO améliorer ça dans la fonction updateAmounts ?
-					$percentApplied = Photographe::getPhotographeDepuisID($album->getID_Photographe())->getPourcentage();
-					$album->updateAmounts(toFloatAmount($amount)*$percentApplied/100);
+				if ($album){
+					$album->updateAmounts(toFloatAmount($amount));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);

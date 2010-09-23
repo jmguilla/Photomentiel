@@ -365,6 +365,11 @@ class Album {
 	 * Update balance et gaintotal avec le parametre et sauve en BD
 	 */
 	public function updateAmounts($amount){
+		$dir_album_class_php = dirname(__FILE__);
+		include_once $dir_album_class_php . "/Utilisateur.class.php";
+		include_once $dir_album_class_php . "/Photographe.class.php";
+		$percentApplied = Photographe::getPhotographeDepuisID($this->getID_Photographe())->getPourcentage();
+		$amount = $amount*$percentApplied/100;
 		$this->balance += $amount;
 		$this->gainTotal += $amount;
 		$dao = new AlbumDAO();
