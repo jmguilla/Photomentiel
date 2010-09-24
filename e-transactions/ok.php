@@ -12,7 +12,7 @@
 //$dir_okko_php = dirname(__FILE__);
 //include($dir_okko_php."/buildresponse.php");
 @session_start();
-$numCmd = $_SESSION['last_command'];
+$idCmd = $_SESSION['last_command'];
 unset($_SESSION['last_command']);
-header('Location:/viewcommand.php?cmd='.$numCmd);
+header('Location:/viewcommand.php?cmd='.$idCmd);
 ?>

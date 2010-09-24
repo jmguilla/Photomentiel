@@ -138,6 +138,8 @@ if (isset($_SESSION['userID']) && $displayMailing){
 }
 
 //and display
+$HEADER_TITLE = "Visualisation de l'album photo ".$albumStringID;
+$HEADER_DESCRIPTION = "Page de visualisation des albums et de selection des photos";
 include("head.php");
 ?>
 	<?php
