@@ -40,7 +40,7 @@ function checkMail(){
     		$("#remail").html('');
 			$.ajax({
 				type: "GET",
-				url: "/classes/dispatcher.php",
+				url: "/dispatcher.php",
 				data:"action=check_email&email=" + email,
 				dataType:"json",
 				async:false, 
