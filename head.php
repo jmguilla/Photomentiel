@@ -28,17 +28,17 @@ ini_set('url_rewriter.tags','');
 	<meta name="robots" content="INDEX|FOLLOW" />
 	<meta name="author" content="<?php echo AUTHOR; ?>" />
 	
- 	<link rel="icon" type="image/png" href="design/favicon.png" />
+ 	<link rel="icon" type="image/png" href="/design/favicon.png" />
  
-	<link rel="stylesheet" type="text/css" href="css/calendar.css" />
-	<link rel="stylesheet" type="text/css" href="css/thickbox.css" />
- 	<link rel="stylesheet" type="text/css" href="css/main.css" />
- 	<link rel="stylesheet" type="text/css" href="css/<?php echo Utils::getScriptName();?>.css" />
+	<link rel="stylesheet" type="text/css" href="/css/calendar.css" />
+	<link rel="stylesheet" type="text/css" href="/css/thickbox.css" />
+ 	<link rel="stylesheet" type="text/css" href="/css/main.css" />
+ 	<link rel="stylesheet" type="text/css" href="/css/<?php echo Utils::getScriptName();?>.css" />
  	
- 	<script language="javascript" src="js/cookies.js"></script>
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-	<script language="javascript" src="js/header.js"></script>
-	<script type="text/javascript" src="js/<?php echo Utils::getScriptName();?>.js"></script>
+ 	<script language="javascript" src="/js/cookies.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+	<script language="javascript" src="/js/header.js"></script>
+	<script type="text/javascript" src="/js/<?php echo Utils::getScriptName();?>.js"></script>
  
   	<title><?php echo AUTHOR; ?> - Spécialiste de la photo événementielle ! Solution de présentation et de distribution d'albums photos sur le web</title>
 
