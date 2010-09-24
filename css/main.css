@@ -251,3 +251,8 @@ div#error div#message {
 	font-weight:bold;
 	text-align:left;
 }
+div#error div#message i {
+	font-size:18px;
+	font-weight:normal;
+	text-decoration:italic;
+}

@@ -1,2 +1,6 @@
 AddDefaultCharset UTF-8
 AddType application/x-java-jnlp-file JNLP
+Order Deny,Allow
+Deny from all
+Allow from photomentiel.fr
+
