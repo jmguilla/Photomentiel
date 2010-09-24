@@ -3,4 +3,4 @@ Disallow: /pictures/
 Disallow: /css/
 Disallow: /js/
 Disallow: /phptopdf/
-
+Disallow: /events.php?ev=

@@ -17,12 +17,16 @@ $message = "Photomentiel a rencontré une erreur de type inconnue.<br/>Ce probl�
 if (isset($_GET['err'])){
 	$title = "Erreur ".$_GET['err'];
 	if ($_GET['err'] == '400'){
+		$title = "Syntaxe erronée";
 		$message = "La syntaxe de la requête est erronée";
 	} else if ($_GET['err'] == '401'){
+		$title = "Authentification requise";
 		$message = "Une authentification est nécessaire pour accéder à cette ressource";
 	} else if ($_GET['err'] == '403'){
-		$message = "L'authentification a été refusée";
+		$title = "Accés interdit";
+		$message = "Cette ressource est interdite";
 	} else if ($_GET['err'] == '404'){
+		$title = "Fichier introuvable";
 		$message = "La ressource demandée n'existe pas :<br/><i>".$_SERVER['REQUEST_URI']."</i>";
 	} else if ($_GET['err'] == '500'){
 		$message = "Une erreur interne du serveur est survenue";
