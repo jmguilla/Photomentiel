@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /pictures/
+Disallow: /css/
+Disallow: /js/
+Disallow: /phptopdf/
+

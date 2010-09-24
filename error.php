@@ -23,7 +23,7 @@ if (isset($_GET['err'])){
 	} else if ($_GET['err'] == '403'){
 		$message = "L'authentification a été refusée";
 	} else if ($_GET['err'] == '404'){
-		$message = "La ressource demandée n'existe pas";
+		$message = "La ressource demandée n'existe pas :<br/>".$_SERVER['REQUEST_URI'];
 	} else if ($_GET['err'] == '500'){
 		$message = "Une erreur interne du serveur est survenue";
 	} else {
