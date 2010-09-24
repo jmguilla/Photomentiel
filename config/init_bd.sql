@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Ven 24 Septembre 2010 à 00:26
+-- Généré le : Ven 24 Septembre 2010 à 22:57
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`adresseID`),
   KEY `fk_adresse_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Contenu de la table `Adresse`
@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
 
 INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `ville`, `codePostal`, `id_utilisateur`) VALUES
 (1, 'Scheefer', 'Jean-Luc', '160 Chemin des Combes', 'Les Bastides & Bermudes 3', 'Antibes', '06600', 1),
-(2, '', '', '63 Avenue Croisette', '1er étage', 'Le Cannet', '06110', 2),
-(3, '', '', '43 Avenue Franklyn Roosevelt', 'Les Jardins de Valauris, Batiment E, entrée C, 6ie', 'Le Cannet', '06110', 3),
+(2, 'nom anonyme', 'prenom anonyme', '63 Avenue Croisette', '1er étage', 'Le Cannet', '06110', 2),
+(3, 'nom anonyme', 'prenom anonyme', '43 Avenue Franklyn Roosevelt', 'Les Jardins de Valauris, Batiment E, entrée C, 6ie', 'Le Cannet', '06110', 3),
 (4, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 4),
-(5, '', '', '42 rue du Plop', '', 'Sophia Antipolis', '06560', 5),
+(5, 'nom anonyme', 'prenom anonyme', '42 rue du Plop', '', 'Sophia Antipolis', '06560', 5),
 (6, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 6),
 (7, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 7),
 (8, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 8),
@@ -70,7 +70,8 @@ INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `vi
 (16, 'sdfsdhf ', 'sdfjs hd', 'dsjf hsdf', '', 'Antibes', '06600', 17),
 (19, 'ché', 'faire', 'on s\\''en tape', 'je test pas ça', 'Antibes', '06600', 20),
 (20, 'ouaz', 'meher', '11 rue de la république', '', 'Les Arcs', '83460', 21),
-(21, 'thomas', 'lebrun', '4 Av Antoine Veran', 'Immeuble le cheverny', 'Nice', '06100', 22);
+(21, 'thomas', 'lebrun', '4 Av Antoine Veran', 'Immeuble le cheverny', 'Nice', '06100', 22),
+(22, 'Scheefer', 'Jean-Luc', 'bla', '', 'Saint-Dalmas-le-Selvage', '06660', 23);
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -118,7 +119,16 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (46, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 46),
 (47, 'Scheefer', 'Jean-Luc', 'test', '', 'Le Cannet', '06110', 47),
 (48, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 48),
-(49, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 49);
+(49, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 49),
+(50, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 50),
+(51, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 51),
+(52, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 52),
+(53, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 53),
+(54, 'y\\''en', 'à mare', 'de devoir', 'absolument fournir', 'ca avec chromes', '06300', 54),
+(55, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 55),
+(56, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 56),
+(57, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 57),
+(59, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 59);
 
 -- --------------------------------------------------------
 
@@ -148,10 +158,10 @@ CREATE TABLE IF NOT EXISTS `Album` (
 --
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 183.05, 183.05, '', '2010-06-28 15:20:25'),
-(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 35.00, 35.00, '', '2010-08-01 12:46:42'),
-(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 80.50, 80.50, '', '2010-08-01 12:53:00'),
-(4, 'Mariage bien réussi', 1, 3, 3, 2, '521000018', 346.85, 346.85, '', '2010-08-01 12:55:17');
+(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 226.10, 226.10, '', '2010-06-28 15:20:25'),
+(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 64.40, 64.40, '', '2010-08-01 12:46:42'),
+(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 118.65, 38.15, '', '2010-08-01 12:53:00'),
+(4, 'Mariage bien réussi', 1, 3, 3, 2, '521000018', 492.10, 492.10, '', '2010-08-01 12:55:17');
 
 -- --------------------------------------------------------
 
@@ -172,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
 -- Contenu de la table `Commande`
@@ -201,7 +211,16 @@ INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, 
 (46, '2010-09-23 13:55:39', '2010-09-23 13:55:56', 8, 3, 1, '', 0, '100923131'),
 (47, '2010-09-23 15:58:22', '2010-09-23 15:58:39', 8, 1, 1, '', 0, '100923150'),
 (48, '2010-09-23 19:33:51', '2010-09-23 19:34:25', 4, 3, 1, '', 3.5, '100923190'),
-(49, '2010-09-24 00:21:44', '2010-09-24 00:23:02', 4, 1, 1, '', 3.5, '100924000');
+(49, '2010-09-24 00:21:44', '2010-09-24 00:23:02', 4, 1, 1, '', 3.5, '100924000'),
+(50, '2010-09-24 12:05:50', '2010-09-24 12:07:08', 4, 2, 1, '', 0, '100924120'),
+(51, '2010-09-24 13:08:24', '2010-09-24 13:08:42', 4, 3, 1, '', 0, '100924130'),
+(52, '2010-09-24 13:14:50', '2010-09-24 13:15:04', 4, 4, 1, '', 0, '100924131'),
+(53, '2010-09-24 13:18:17', '2010-09-24 13:18:36', 4, 3, 1, '', 3.5, '100924132'),
+(54, '2010-09-24 13:18:39', '2010-09-24 13:18:56', 4, 4, 1, '', 0, '100924133'),
+(55, '2010-09-24 13:19:56', '2010-09-24 13:20:14', 4, 4, 1, '', 0, '100924134'),
+(56, '2010-09-24 13:28:16', '2010-09-24 13:28:34', 4, 1, 1, '', 3.5, '100924135'),
+(57, '2010-09-24 13:47:35', '2010-09-24 13:47:50', 4, 4, 1, '', 3.5, '100924136'),
+(59, '2010-09-24 22:03:33', '2010-09-24 22:03:48', 4, 1, 1, '', 0, '100924220');
 
 -- --------------------------------------------------------
 
@@ -217,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `CommandeArchive` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `prix` float(5,2) NOT NULL,
   PRIMARY KEY  (`commandeArchiveID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `CommandeArchive`
@@ -243,7 +262,16 @@ INSERT INTO `CommandeArchive` (`commandeArchiveID`, `date`, `id_utilisateur`, `n
 (17, '2010-09-23 13:55:39', 8, '100923131', 2, 84.00),
 (18, '2010-09-23 15:58:22', 8, '100923150', 1, 119.50),
 (19, '2010-09-23 19:33:51', 4, '100923190', 2, 24.50),
-(20, '2010-09-24 00:21:44', 4, '100924000', 1, 6.50);
+(20, '2010-09-24 00:21:44', 4, '100924000', 1, 6.50),
+(21, '2010-09-24 12:05:50', 4, '100924120', 1, 42.00),
+(22, '2010-09-24 13:08:24', 4, '100924130', 2, 45.00),
+(23, '2010-09-24 13:14:50', 4, '100924131', 3, 60.00),
+(24, '2010-09-24 13:18:17', 4, '100924132', 2, 9.50),
+(25, '2010-09-24 13:18:39', 4, '100924133', 3, 88.00),
+(26, '2010-09-24 13:19:56', 4, '100924134', 3, 44.00),
+(27, '2010-09-24 13:28:16', 4, '100924135', 1, 7.50),
+(28, '2010-09-24 13:47:35', 4, '100924136', 3, 15.50),
+(29, '2010-09-24 22:03:33', 4, '100924220', 1, 54.00);
 
 -- --------------------------------------------------------
 
@@ -267,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `fk_commandePhoto_album` (`id_album`),
   KEY `id_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=240 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=270 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -385,7 +413,36 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (236, '00000000000000_0024.JPG', 1, 48, 1, 3, 1, 3, 9.00),
 (237, '00000000000000_0026.JPG', 1, 48, 1, 3, 1, 3, 9.00),
 (238, '20090913152209.JPG', 1, 49, 1, 1, 1, 1, 1.50),
-(239, '20090913152543.JPG', 1, 49, 1, 1, 1, 1, 1.50);
+(239, '20090913152543.JPG', 1, 49, 1, 1, 1, 1, 1.50),
+(240, '20031102122210.JPG', 1, 50, 1, 3, 1, 2, 6.00),
+(241, '20031102122210.JPG', 2, 50, 1, 4, 1, 2, 16.00),
+(242, '20031102121839.JPG', 2, 50, 1, 3, 1, 2, 12.00),
+(243, '20031102120337.JPG', 2, 50, 1, 2, 1, 2, 8.00),
+(244, '00000000000000_0025.JPG', 1, 51, 1, 2, 1, 3, 6.00),
+(245, '00000000000000_0025.JPG', 1, 51, 1, 4, 1, 3, 12.00),
+(246, '00000000000000_0027.JPG', 1, 51, 1, 2, 1, 3, 6.00),
+(247, '00000000000000_0027.JPG', 1, 51, 1, 3, 1, 3, 9.00),
+(248, '00000000000000_0027.JPG', 1, 51, 1, 4, 1, 3, 12.00),
+(249, '00000000000000_0005.JPG', 1, 52, 1, 3, 1, 4, 12.00),
+(250, '00000000000000_0005.JPG', 3, 52, 1, 4, 1, 4, 48.00),
+(251, '00000000000000_0028.JPG', 1, 53, 1, 2, 1, 3, 6.00),
+(252, '00000000000000_0002.JPG', 2, 54, 1, 1, 1, 4, 8.00),
+(253, '00000000000000_0002.JPG', 1, 54, 1, 2, 1, 4, 8.00),
+(254, '00000000000000_0002.JPG', 1, 54, 1, 3, 1, 4, 12.00),
+(255, '00000000000000_0002.JPG', 1, 54, 1, 4, 1, 4, 16.00),
+(256, '00000000000000_0008.JPG', 2, 54, 1, 1, 1, 4, 8.00),
+(257, '00000000000000_0008.JPG', 1, 54, 1, 2, 1, 4, 8.00),
+(258, '00000000000000_0008.JPG', 1, 54, 1, 3, 1, 4, 12.00),
+(259, '00000000000000_0008.JPG', 1, 54, 1, 4, 1, 4, 16.00),
+(260, '00000000000000_0010.JPG', 1, 55, 1, 1, 1, 4, 4.00),
+(261, '00000000000000_0010.JPG', 2, 55, 1, 3, 1, 4, 24.00),
+(262, '00000000000000_0018.JPG', 1, 55, 1, 2, 1, 4, 8.00),
+(263, '00000000000000_0050.JPG', 2, 55, 1, 1, 1, 4, 8.00),
+(264, '20090913154718.JPG', 1, 56, 1, 3, 1, 1, 4.00),
+(265, '00000000000000_0069.JPG', 1, 57, 1, 3, 1, 4, 12.00),
+(267, '20090913153549.JPG', 3, 59, 1, 4, 1, 1, 18.00),
+(268, '20090913153520.JPG', 3, 59, 1, 4, 1, 1, 18.00),
+(269, '20090913153438.JPG', 3, 59, 1, 4, 1, 1, 18.00);
 
 -- --------------------------------------------------------
 
@@ -755,6 +812,23 @@ INSERT INTO `TaillePapier` (`taillePapierID`, `description`, `dimensions`, `prix
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `transactionID`
+--
+
+CREATE TABLE IF NOT EXISTS `transactionID` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `transactionID` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `transactionID`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `TypePapier`
 --
 
@@ -787,7 +861,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateInscription` datetime NOT NULL,
   PRIMARY KEY  (`utilisateurID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Contenu de la table `Utilisateur`
@@ -807,7 +881,8 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (17, 'sdsfd@sdfsd.sdf', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-16 15:52:01'),
 (20, 'kcscheefer@netcourrier.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-21 15:37:46'),
 (21, 'jmichel.guillaume.list@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 0, '2010-09-21 21:20:48'),
-(22, 't.lebrun06@gmail.com', 'ef6e65efc188e7dffd7335b646a85a21', 1, '2010-09-23 19:39:23');
+(22, 't.lebrun06@gmail.com', 'ef6e65efc188e7dffd7335b646a85a21', 1, '2010-09-23 19:39:23'),
+(23, 'jl@photomentiel.fr', 'ab4f63f9ac65152575886860dde480a1', 1, '2010-09-24 21:53:26');
 
 -- --------------------------------------------------------
 
@@ -35411,6 +35486,8 @@ ALTER TABLE `Evenement`
 -- Contraintes pour la table `EvenementEcouteur`
 --
 ALTER TABLE `EvenementEcouteur`
+  ADD CONSTRAINT `EvenementEcouteur_ibfk_2` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `EvenementEcouteur_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `Utilisateur` (`utilisateurID`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_evenementEcouteur_evenement` FOREIGN KEY (`id_evenement`) REFERENCES `Evenement` (`evenementID`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_evenementEcouteur_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `Utilisateur` (`utilisateurID`) ON DELETE CASCADE;
 
