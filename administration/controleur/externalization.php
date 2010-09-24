@@ -19,4 +19,5 @@ define("detail_commande", "detail_commande");
 define("renvoyer_email_confirmation", "renvoyer_email_confirmation");
 define("activer_utilisateur", "activer_utilisateur");
 define("reinitialiser_mdp", "reinitialiser_mdp");
+define("payer", "payer");
 ?>

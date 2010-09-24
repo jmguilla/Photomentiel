@@ -1,7 +1,7 @@
 <?php
 @session_start();
 $dir_dispatcher_php = dirname(__FILE__);
-include_once $dir_dispatcher_php . "/controleur/externalization.php";
+include_once $dir_dispatcher_php . "/classes/controleur/externalization.php";
 
 //TODO passer de GET a POST?
 try{
@@ -16,7 +16,7 @@ try{
 		case l_ville_dpt:
 		case g_ville_from_cp:
 		case g_ville_from_nom:
-			include_once("controleur/controleur_lieux.php");
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_lieux.php";
 		break;
 		case logon:
 		case c_usr:
@@ -28,7 +28,7 @@ try{
 		case s_email_contact:
 		case send_facture:
 		case s_email_photographe:
-			include_once $dir_dispatcher_php . "/controleur/controleur_utilisateurs.php";
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_utilisateurs.php";
 		break;
 		case g_evt_id:
 		case gnp_evt_entre_dates:
@@ -49,24 +49,24 @@ try{
 		case gnd_album_plus_entre_dates:
 		case a_m_evt:
 		case a_m_album:
-			include_once $dir_dispatcher_php . "/controleur/controleur_evenements.php";
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_evenements.php";
 		break;
 		case g_sid:
 		case g_sid_p_ida:
-			include_once $dir_dispatcher_php . "/controleur/controleur_stringid.php";
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_stringid.php";
 		break;
 		case gr_image_thumb_path:
-			include_once $dir_dispatcher_php . "/controleur/controleur_images.php";
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_images.php";
 		break;
 		case s_commande:
-			include_once $dir_dispatcher_php . "/controleur/controleur_commandes.php";
+			include_once $dir_dispatcher_php . "/classes/controleur/controleur_commandes.php";
 		break;
 		default:
 			throw new InvalidArgumentException("Action inconnue dans dispatcher: " . $action);
 		break;
 	}
 }catch(Exception $e){
-	include_once $dir_dispatcher_php . "/controleur/ControleurUtils.class.php";
+	include_once $dir_dispatcher_php . "/classes/controleur/ControleurUtils.class.php";
 	ControleurUtils::serialize_object_json(NULL, false, $e->getMessage());
 }
 ?>

@@ -17,6 +17,7 @@ switch($action){
 	case detail_commande:
 	case traiter_commande:
 	case commande_expediee:
+	case supprimer_commande:
 	case down_xml:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_commande.php";
 	break;
@@ -26,6 +27,7 @@ switch($action){
 	case renvoyer_email_confirmation:
 	case activer_utilisateur:
 	case reinitialiser_mdp:
+	case payer:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_utilisateur.php";
 	break;
 	//pour empecher mauvais formattage

@@ -90,19 +90,20 @@ switch($action){
 		}
 	break;
 	case down_xml:
+		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/StringID.class.php";
+		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/TaillePapier.class.php";
 		$id = $_POST['id'];
 		$commande = Commande::getCommandeEtPhotosDepuisID($id);
-		if(!$commande){
+		$sid = StringID::getStringIDDepuisID_Album($commande->getID_Album());
+		if(!$commande || !$sid){
 			echo "Aucune commande ne correspond à l'identifiant #" . $id;
 			exit();
 		}
-		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/StringID.class.php";
-		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/TaillePapier.class.php";
 		$taillesPapier = TaillePapier::getTaillePapiers();
 		$adresse = $commande->getAdresse();
 	    header("Content-Type: text/xml");
 		echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-		echo '<commande id="'.$commande->getCommandeID().'" numero="'.$commande->getNumero().'">'."\n";
+		echo '<commande id="'.$commande->getCommandeID().'" numero="'.$commande->getNumero().'" id_album="' . $sid->getID_Album() . '" homePhotographe="' . $sid->getHomePhotographe() . '" stringID="' . $sid->getStringID() . '">'."\n";
 		echo "	<adresse>\n";
 		echo "		<nom>" . $adresse->getNom() . "</nom>\n";
 		echo "		<prenom>" . $adresse->getPrenom() . "</prenom>\n";

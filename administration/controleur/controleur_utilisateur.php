@@ -2,9 +2,30 @@
 $dir_administration_controleur_utilisateur_php = dirname(__FILE__);
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Utilisateur.class.php";
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Photographe.class.php";
+include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Album.class.php";
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/controleur/ControleurUtils.class.php";
 
 switch($action){
+	case payer:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, annulation.<br/>";
+			break;
+		}
+		$photographe = Photographe::getPhotographeDepuisID($_POST['id']);
+		if(!$photographe){
+			$_SESSION['message'] .= "Aucun photographe ne correspond à cet id.<br/>";
+			break;
+		}
+		$albums = Album::getAlbumDepuisID_Photographe($photographe->getPhotographeID(), false);
+		foreach($albums as $album){
+			if($album->resetBalance()){
+				$_SESSION['message'] .= "Balance réinitialisée pour l'album #" . $album->getAlbumID() . ".<br/>";
+			}else{
+				$_SESSION['message'] .= "<font color=\"red\">Impossible de réinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
+			}
+		}
+		header('Location: photographe.php');
+		exit();
 	case reinitialiser_mdp:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Impossible de réinitialiser le mdp de l'utilisateur car aucun id_utilisateur n'a été fourni...<br/>";

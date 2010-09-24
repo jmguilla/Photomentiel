@@ -68,7 +68,7 @@ function checkMail(){
 function queryCPFromVille(ville){
 	$.ajax({
 		type: "GET",
-		url: "/classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=get_ville_from_nom&nom="+ville,
 		dataType:"json",
 		success:function(data){
@@ -82,7 +82,7 @@ function queryCPFromVille(ville){
 function queryVilleFromCP(cp){
 	$.ajax({
 		type: "GET",
-		url: "/classes/dispatcher.php",
+		url: "/dispatcher.php",
 		data:"action=get_ville_from_cp&cp="+cp,
 		dataType:"json",
 		success:function(data){
@@ -294,7 +294,7 @@ $(document).ready(function() {
 		if(!isValid.error) {
 			$.ajax({
 				type: "POST",
-				url: "/classes/dispatcher.php",
+				url: "/dispatcher.php",
 				data: createUserDataAction(),
 				dataType:"json",
 				success:function(data){
@@ -328,7 +328,7 @@ $(document).ready(function() {
 		if(!isValid.error) {
 			$.ajax({
 				type: "POST",
-				url: "/classes/dispatcher.php",
+				url: "/dispatcher.php",
 				data: updateUserDataAction(),
 				dataType:"json",
 				success:function(data){
