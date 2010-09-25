@@ -74,6 +74,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 			$albToCreate->setID_Evenement($_POST['event']);
 		}
 		$albToCreate->setIsPublique($_POST['public']);
+		if (isset($_POST['filigrane']) && $_POST['filigrane'] != ''){
+			$albToCreate->setFiligramme($_POST['filigrane']);
+		}
 		if(isset($_POST['mails'])){
 			$albToCreate->setMailing($_POST['mails']);
 		}
@@ -184,6 +187,22 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<div class="checkform" id="rpublic"></div>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="3" height="66px;">
+					<span class="note">Les photos exposées seront filigranées, indiquez ici si vous souhaitez choisir notre filigrane par défaut,<br/>
+					ou le filigrane de votre choix en entrant le texte désiré dans le champ suivant.</span><br/>
+					<u>Si vous souhaitez un filigrane personnalisé, veuillez renseigner le champ suivant, sinon laisser le vide :</u>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Filigrane personnalisé :
+				</td><td>
+					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20"/>
+				</td><td>
+					<div class="checkform" id="rfiligrane"></div>
+				</td>
+			</tr>
 			</table>
 		</fieldset>
 		<fieldset>
@@ -248,7 +267,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 									</td><td class="price">
 										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixConseille().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364; <span class="prix_conseille">( Prix conseillé : <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
 									</td><td>
-										<div class="checkform" style="width:230px;" id="r'.$paper->getTaillePapierID().'"></div>
+										<div class="checkform" style="width:300px;" id="r'.$paper->getTaillePapierID().'"></div>
 									</td>
 								</tr>';
 							}
