@@ -59,7 +59,7 @@ $picsDir = PICTURE_DIRECTORY;
 //get the corresponding album
 $albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
 //check if it is opened
-if ($albumObj->getEtat() == 4){
+if ($albumObj->getEtat() == 3){
 	photomentiel_die(new PMError("L'album a été fermé !","Cet album a été fermé, il n'est plus disponible."));
 }
 $displayMailing = ($albumObj->getEtat() != 2);

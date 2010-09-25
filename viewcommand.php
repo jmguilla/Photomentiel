@@ -15,6 +15,7 @@ include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
 include_once("classes/modele/TransactionID.class.php");
+include_once("classes/modele/Album.class.php");
 include("header.php");
 
 if (!$utilisateurObj){
@@ -137,7 +138,8 @@ if ($utilisateurObj && $commandObj){
 							<?php
 								$_SESSION['last_command'] = $commandObj->getCommandeID();
 								include("e-transactions/selectcard.php");
-								displayCards(null,toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
+								displayCards($albumObj->getModule(),toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 							?>
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>

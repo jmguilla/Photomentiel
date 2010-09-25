@@ -1,10 +1,18 @@
 <?php
 //File to be imported when selecting credit card
 function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albumID){
-	//TODO choose proper payment mode (jl jm a)
+	//TODO change SIREN value when available
+	$SIREN_A  = '000000000';
+	$SIREN_JM = '521000018';
+	if ($p_module == $SIREN_A){
+		//Arnaud
+		$parm="merchant_id=013044876511111";
+	} else {
+		//JM
+		$parm="merchant_id=013044876511111";
+	}
 	
 	//needed params
-	$parm="merchant_id=013044876511111";
 	$parm="$parm merchant_country=fr";
 	$parm="$parm amount=$p_amount";
 	$parm="$parm currency_code=978";
@@ -13,7 +21,13 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//   ex :
         //    -> Windows : $parm="$parm pathfile=c:\\repertoire\\pathfile";
         //    -> Unix    : $parm="$parm pathfile=/home/repertoire/pathfile";
-	$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
+    if ($p_module == '521000018'){
+		//JM
+		$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
+	} else {
+		//Arnaud
+		$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
+	}
 
 	//		Si aucun transaction_id n'est affecté, request en génère
 	//		un automatiquement à partir de heure/minutes/secondes
