@@ -4,3 +4,6 @@ Disallow: /css/
 Disallow: /js/
 Disallow: /phptopdf/
 Disallow: /events.php?ev=
+Disallow: /cgu.php
+Disallow: /mentions.php
+Disallow: /privacy
