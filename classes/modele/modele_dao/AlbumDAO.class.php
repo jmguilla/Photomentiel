@@ -530,6 +530,17 @@ class AlbumDAO extends DAO {
 				throw new CreateAlbumException("Impossible de retrouver l'identifiant du nouvel ablum");
 			}
 
+			global $MODULES;
+			$module = $MODULES[$lid%3];
+
+			$queryModule = "update Album set module = '" .
+			mysql_real_escape_string($module) . "' where albumID = " .
+			mysql_real_escape_string($lid);
+			$tmpModule = $this->update($queryModule);
+			if(!$tmpModule || $this->getAffectedRows() != 1){
+				$this->rollback();
+				throw new CreateAlbumException("Impossible d'affecter un module bancaire à l'album");
+			}
 
 			//creation des prixTaillePapierAlbum
 			$prixTaillePapiers = $album->internalGetPrixTaillePapier();
