@@ -145,20 +145,20 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 		<div class="path">
 			<a href="index.php">Accueil</a> &gt; 
 			Album &gt; 
-			Panier &gt; 
+			<?php
+				if ($cmdConfirmed){
+					echo 'Panier &gt; ';
+				} else {
+					echo '<a href="javascript:history.back();">Panier</a> &gt; ';
+				}
+			?>
 			Identification
 			<?php
 				 if ($utilisateurObj){
-			?>
-				 &gt; Livraison
-			<?php
+				 	echo ' &gt; Livraison';
 				 }
-			?>
-			<?php
 				 if ($cmdConfirmed){
-			?>
-				 &gt; Paiement
-			<?php
+				 	echo ' &gt; Paiement';
 				 }
 			?>
 		</div>
