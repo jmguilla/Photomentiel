@@ -5,6 +5,7 @@ include_once $dir_album_class_php . "/../Config.php";
 
 class Album {
 	private $albumID;
+	private $filigramme = 'www.photomentiel.fr';
 	private $isPublique;
 	private $nom;
 	private $id_photographe;
@@ -352,6 +353,14 @@ class Album {
 
 	public function setGainTotal($gt){
 		$this->gainTotal = $gt;
+	}
+
+	public function getFiligramme(){
+		return $this->filigramme;
+	}
+
+	public function setFiligramme($fili){
+		$this->filigramme = $fili;
 	}
 	/**
 	 * Remet la balance à 0 et sauve en BD
