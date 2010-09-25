@@ -21,6 +21,7 @@ include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/Adresse.class.php");
 include_once("classes/modele/AdresseCommande.class.php");
+include_once("classes/modele/TransactionID.class.php");
 
 if (!isSet($_SESSION['albumStringID'])){
 	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"));
@@ -251,7 +252,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 									<?php
 										$_SESSION['last_command'] = $commande->getCommandeID();
 										include("e-transactions/selectcard.php");
-										displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
+										displayCards(null,toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
 									?>
 								</div>
 								<div class="separator10"></div>

@@ -14,6 +14,7 @@ include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
+include_once("classes/modele/TransactionID.class.php");
 include("header.php");
 
 if (!$utilisateurObj){
@@ -21,7 +22,7 @@ if (!$utilisateurObj){
 }
 if (isset($_GET['cmd'])){
 	$commandObj = Commande::getCommandeDepuisID($_GET['cmd']);
-	if ($commandObj->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
+	if (!$commandObj || $commandObj->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
 		photomentiel_die(new PMError("Commande inapropriée","Cette commande ne vous appartient pas, que faites vous là ?"),false);
 	}
 } else {
@@ -131,7 +132,7 @@ if ($utilisateurObj && $commandObj){
 							<?php
 								$_SESSION['last_command'] = $commandObj->getCommandeID();
 								include("e-transactions/selectcard.php");
-								displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								displayCards(null,toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 							?>
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>

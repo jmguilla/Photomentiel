@@ -26,7 +26,7 @@ if(!isset($_SESSION['userID'])){
 
 $utilisateurObj = Utilisateur::getUtilisateurDepuisID($_SESSION['userID']);
 $command = Commande::getCommandeDepuisID($_GET['cmd']);
-if ($command->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
+if (!$command || $command->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
 	photomentiel_die(new PMError("Commande inapropriée !","Cette commande ne vous appartient pas, que faites vous là ?"));
 }
 

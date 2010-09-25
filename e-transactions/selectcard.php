@@ -19,7 +19,9 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//		un automatiquement à partir de heure/minutes/secondes
 	//		Référez vous au Guide du Programmeur pour
 	//		les réserves émises sur cette fonctionnalité
-	//$parm="$parm transaction_id=$p_transactionID";//TODO
+	if (isset($p_transactionID)){
+		$parm="$parm transaction_id=$p_transactionID";
+	}
 	$parm="$parm language=fr";
 	$parm="$parm payment_means=CB,2,VISA,2,MASTERCARD,2";
 	$parm="$parm header_flag=no";
