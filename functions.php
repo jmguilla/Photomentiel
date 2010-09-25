@@ -53,6 +53,18 @@ function getHashFromArray($kvArray){
 }
 
 /* 
+ * Return an hashcode of the given array
+ */
+function getRequestParamFromPost(){
+	$kvArray = $_GET;
+	$h = '';
+	foreach ($kvArray as $k => $v) {
+		$h = $h.$k."=".$v."&";
+	}
+	return $h;
+}
+
+/* 
  * Return an hashcode of the given command array (array of array)
  */
 function getHashFromCommand($cmdArray){
@@ -69,8 +81,6 @@ function getHashFromCommand($cmdArray){
 function removeExtension($fileName){
 	return substr($fileName,0,sizeof($fileName)-5);
 }
-
-//TODO checker pq y'a pas de char special
 
 /*
  * Create pdf file from command, and user.

@@ -22,7 +22,7 @@ include_once("classes/modele/Adresse.class.php");
 <div id="full_content_mid">
 	<div class="path">
 		<a href="index.php">Accueil</a> &gt; 
-		Albums
+		Albums publics
 	</div>
 	<div class="separator10"></div>
 	<div id="albums_content">
