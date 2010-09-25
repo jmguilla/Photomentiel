@@ -531,7 +531,7 @@ class AlbumDAO extends DAO {
 			}
 
 			global $MODULES;
-			$module = $MODULES[$lid%3];
+			$module = $MODULES[$lid%sizeof($MODULES)];
 
 			$queryModule = "update Album set module = '" .
 			mysql_real_escape_string($module) . "' where albumID = " .

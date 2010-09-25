@@ -191,7 +191,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td colspan="3" height="66px;">
 					<span class="note">Les photos exposées seront filigranées, indiquez ici si vous souhaitez choisir notre filigrane par défaut,<br/>
 					ou le filigrane de votre choix en entrant le texte désiré dans le champ suivant.</span><br/>
-					<u>Si vous souhaitez un filigrane personnalisé, veuillez renseigner le champ suivant, sinon laisser le vide :</u>
+					<u>Si vous souhaitez un filigrane personnalisé, veuillez renseigner le champ suivant, sinon laissez le vide :</u>
 				</td>
 			</tr>
 			<tr>

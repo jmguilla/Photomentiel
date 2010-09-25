@@ -76,7 +76,7 @@ class ControleurUtils{
 	public static function sendValidationEmail($utilisateur, $activateID){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-		     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
+		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
 		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 		     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
@@ -96,7 +96,7 @@ class ControleurUtils{
 	public static function sendNouveauMDPEmail($utilisateur, $mdp){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-		     	$headers .='Reply-To: contact@photomentiel.fr'."\n"; 
+		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
 		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 		     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
