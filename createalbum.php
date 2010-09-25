@@ -75,7 +75,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 		}
 		$albToCreate->setIsPublique($_POST['public']);
 		if (isset($_POST['filigrane']) && $_POST['filigrane'] != ''){
-			$albToCreate->setFiligramme($_POST['filigrane']);
+			$albToCreate->setFiligramme(preg_replace("[ ]","_",$_POST['filigrane']));
 		}
 		if(isset($_POST['mails'])){
 			$albToCreate->setMailing($_POST['mails']);
@@ -339,6 +339,13 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			</tr>
 			<tr>
 				<td>
+					Filigrane : 
+				</td><td colspan="2">
+					<i><?php echo $albumObj->getFiligramme(); ?></i>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					Evénement associé : 
 				</td><td colspan="2">
 					<?php 
@@ -369,7 +376,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		<fieldset>
 			<legend> Reversions </legend>
 			<table cellspacing="0px">
-			<tr style="background-color:lightgreen;">
+			<tr <?php echo ($albumObj->getEtat()<2)?'':'style="background-color:lightgreen;"'; ?>>
 				<td width="182px;" height="22px">
 					Gain pour le mois : 
 				</td><td colspan="2">
