@@ -20,6 +20,10 @@ include_once("classes/modele/Adresse.class.php");
 		Liste des albums publics
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Albums
+	</div>
 	<div class="separator10"></div>
 	<div id="albums_content">
 		<div id="search">

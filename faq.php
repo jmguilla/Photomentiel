@@ -15,6 +15,10 @@ include("header.php");
 		Foire aux questions
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Foire aux questions
+	</div>
 	<div class="separator10"></div>
 	<!-- content here -->
 </div>

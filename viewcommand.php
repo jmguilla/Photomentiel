@@ -54,6 +54,11 @@ if ($utilisateurObj && $commandObj){
 		Détails de votre commande n°<?php echo $commandObj->getNumero(); ?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		<a href="myaccount.php">Mon compte</a> &gt; 
+		Commande n°<?php echo $commandObj->getNumero(); ?>
+	</div>
 	<div id="pictures_content">
 		<div class="separator10"></div>
 		<div class="recap">Voici le récapitulatif de votre commande :</div>

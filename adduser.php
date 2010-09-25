@@ -40,6 +40,18 @@ if (isset($_GET["np"])){
 		<?php echo ($createMode||$accountCreated)?'Création':'Modification'; ?> de compte <?php if ($photographMode){echo 'Photographe';} ?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a>
+		<?php
+			if (!$typeSet){
+				echo ' &gt; Type de compte';
+			} else if(!$createMode) {
+				echo ' &gt; Modification de compte';
+			} else {
+				echo ' &gt; Nouveau compte';
+			}
+		?>
+	</div>
 	<div class="separator10"></div>
 	<?php
 		if ($accountCreated){

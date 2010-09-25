@@ -35,6 +35,10 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 		Gestion de mon compte
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Mon compte
+	</div>
 	<div class="separator10"></div>
 	<div id="content">
 		<?php

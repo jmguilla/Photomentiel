@@ -229,6 +229,13 @@ div#full_content_bot {
 	height:11px;
 }
 
+div.path {
+	text-align:left;
+	padding-top:2px;
+	margin-left:10px;
+	color:#0099FF;
+}
+
 div#error {
 	background-image:url(../design/misc/error.png);
 	background-repeat:no-repeat;

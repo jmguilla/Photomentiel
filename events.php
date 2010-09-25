@@ -22,7 +22,7 @@ include_once("classes/modele/Ville.class.php");
 include_once("classes/modele/EvenementEcouteur.class.php");
 include_once("classes/modele/StringID.class.php");
 include_once("classes/modele/Album.class.php");
-//TODO virer les évènements quand l'album relié est fermé
+
 $eventSelected = false;
 if (isset($_GET['ev'])) {
 	$eventSelected = $_GET['ev'];
@@ -99,6 +99,20 @@ if (isset($_POST['ftype'])){
 		?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a>
+		<?php
+			if ($addEvent){
+				echo ' &gt; <a href="events.php">Evénements</a>';
+				echo ' &gt; Nouvel événement';
+			} elseif ($eventSelected) {
+				echo ' &gt; <a href="events.php">Evénements</a>';
+				echo ' &gt; Evénement';
+			} else {
+				echo ' &gt; Evénements';
+			}
+		?>
+	</div>
 	<div class="separator10"></div>
 	<div id="events_content">
 		<div id="search">

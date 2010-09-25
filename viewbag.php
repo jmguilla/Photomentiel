@@ -70,6 +70,11 @@ include("header.php");
 		Détails de votre panier
 	</div>
 	<div id="full_content_mid">
+		<div class="path">
+			<a href="index.php">Accueil</a> &gt; 
+			<a href="javascript:goPrevious();">Album</a> &gt; 
+			Panier
+		</div>
 		<div class="separator10"></div>
 		<div id="bag_information">
 			<div class="separator5"></div>

@@ -142,6 +142,26 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 		Confirmation de votre commande
 	</div>
 	<div id="full_content_mid">
+		<div class="path">
+			<a href="index.php">Accueil</a> &gt; 
+			Album &gt; 
+			Panier &gt; 
+			Identification
+			<?php
+				 if ($utilisateurObj){
+			?>
+				 &gt; Livraison
+			<?php
+				 }
+			?>
+			<?php
+				 if ($cmdConfirmed){
+			?>
+				 &gt; Paiement
+			<?php
+				 }
+			?>
+		</div>
 		<div id="pictures_content">
 			<div class="separator10"></div>
 			<div class="recap">Voici le récapitulatif de votre commande :</div>

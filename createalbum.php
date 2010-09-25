@@ -127,6 +127,18 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		<a href="myaccount.php">Mon compte</a> &gt; 
+		<?php
+			if ($updateMode){
+				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
+				echo "Album <b>".$sid."</b>"; 
+			} else {
+				echo "Nouvel album"; 
+			}
+		?>
+	</div>
 	<div class="separator10"></div>
 	<div id="catitle">
 		<?php
@@ -273,7 +285,8 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		</form>
 		<?php
 			} else if ($updateMode){
-				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
+				//set at top
+				//$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
 		?>
 		<form id="update_form" method="POST" action="?action=update&al=<?php echo $sid ?>">
 		<fieldset>
