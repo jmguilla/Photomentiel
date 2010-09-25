@@ -328,17 +328,21 @@ if (isset($_GET["np"])){
 					</tr>
 				<?php
 					}
+					if ($createMode) {
 				?>
-				<tr>
-					<td colspan="3" height="15px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input id="cgu" name="cgu" type="checkbox"></input> J'ai lu et j'accepte les <a target="blank_" href="cgu.php">conditions générales de ventes et d'utilisations</a>
-					</td><td>
-						<div class="checkform" id="rcgu"></div>
-					</td>
-				</tr>
+					<tr>
+						<td colspan="3" height="15px;"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input id="cgu" name="cgu" type="checkbox"></input> J'ai lu et j'accepte les <a target="blank_" href="cgu.php">conditions générales de ventes et d'utilisations</a>
+						</td><td>
+							<div class="checkform" id="rcgu"></div>
+						</td>
+					</tr>
+				<?php
+					}
+				?>
 				<tr>
 					<td class="aster" colspan="3" height="44px;">
 						Les champs marqués d'une astérisque (*) doivent être obligatoirement renseignés
