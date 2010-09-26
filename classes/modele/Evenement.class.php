@@ -267,9 +267,6 @@ class Evenement {
 		$mailing = str_replace("\n", "", $mailing);
 		if(ModeleUtils::sendEvenementAlbumDisponible($this, $mailing)){
 			$this->setMailing('');
-			if($this->save()){
-				return true;
-			}
 		}
 		return false;
 	}

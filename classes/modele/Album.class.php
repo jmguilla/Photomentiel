@@ -415,9 +415,6 @@ class Album {
 		if($sid){
 			if(ModeleUtils::sendAlbumDisponible($this, $sid, $mailing)){
 				$this->setMailing('');
-				if($this->save()){
-					return true;
-				}
 			}
 		}
 		return false;
