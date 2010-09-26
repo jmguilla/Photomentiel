@@ -776,6 +776,7 @@ class AlbumDAO extends DAO {
 		$result->setMailing($mailing);
 		$result->setBalance($balance);
 		$result->setGainTotal($gt);
+		$result->setModule($mod);
 		return $result;
 	}
 	/**
