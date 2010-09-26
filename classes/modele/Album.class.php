@@ -404,5 +404,23 @@ class Album {
 	function internalGetPrixTaillePapier(){
 		return $this->prixTaillePapier;
 	}
+
+	public function envoyerMailing(){
+		$dir_album_class_php = dirname(__FILE__);
+		include_once $dir_album_class_php . "/ModeleUtils.class.php";
+		include_once $dir_album_class_php . "/StringID.class.php";
+		$mailing = $this->getMailing();
+		$mailing = str_replace("\n", "", $mailing);
+		$sid = StringID::getStringIDDepuisID_Album($this->albumID);
+		if($sid){
+			if(ModeleUtils::sendAlbumDisponible($this, $sid, $mailing)){
+				$this->setMailing('');
+				if($this->save()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
 ?>

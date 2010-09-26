@@ -17,7 +17,6 @@ class ModeleUtils{
 		return $fichier;
 	}
 
-
 	public static function Rib2Iban($codebanque,$codeguichet,$numerocompte,$cle){
 		$charConversion = array("A" => "10","B" => "11","C" => "12","D" => "13","E" => "14","F" => "15","G" => "16","H" => "17",
 		"I" => "18","J" => "19","K" => "20","L" => "21","M" => "22","N" => "23","O" => "24","P" => "25","Q" => "26",
@@ -25,13 +24,45 @@ class ModeleUtils{
 	 
 		$tmpiban = strtr($codebanque.$codeguichet.$numerocompte.$cle."FR00",$charConversion);
 	 
-		// Soustraction du modulo 97 de l'IBAN temporaire � 98
+		// Soustraction du modulo 97 de l'IBAN temporaire � 98
 		$cleiban = strval(98 - intval(bcmod($tmpiban,"97")));
 	 
 		if (strlen($cleiban) == 1)
 			$cleiban = "0".$cleiban;
 	 
 		return "FR".$cleiban.$codebanque.$codeguichet.$numerocompte.$cle;
+	}
+
+	public static function sendEvenementAlbumDisponible($evt, $mails){
+		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
+			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
+		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+		     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
+		     	$headers .='Bcc:' . $mails; 
+			return mail('',
+			"Photomentiel - Un nouvel album est disponible!",
+			"Un nouvel album vient d'être publié pour l'évènement " . $evt->getDescription() . "\n" .
+			"Allez vérifier sur www.photomentiel.fr !!" ,
+			$headers
+			);
+		}
+	}
+
+	public static function sendAlbumDisponible($album, $sid, $mails){
+		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
+			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
+	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+	     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
+	     	$headers .='Bcc:' . $mails;
+			return mail('',
+			"Photomentiel - Un nouvel album est disponible!",
+			"L'album intitulé '" . $album->getNom() . "' vient d'être mis en ligne!!\n" .
+			"Rendez-vous à l'adresse http://www.photomentiel.fr/album-" . $sid->getStringID() . ".php\n" ,
+			$headers
+			);
+		}
 	}
 }
 ?>

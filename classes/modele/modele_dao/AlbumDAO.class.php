@@ -52,12 +52,14 @@ class AlbumDAO extends DAO {
 			$this->startTransaction();
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
-				$this->commit();
-				return true;
-			}else{
-				$this->rollback();
-				return false;
+				//on envoie les mails...
+				if($this->listeAlbumValidee($listeAlbum)){
+					$this->commit();
+					return true;
+				}
 			}
+			$this->rollback();
+			return false;
 		}
 		return false;
 	}
@@ -462,8 +464,8 @@ class AlbumDAO extends DAO {
 		return $this->extractArrayQuery($tmp, $this, "buildAlbumAndStringIDFromRow");
 	}
 	/**
-	 * cree l'album pass� en parametre en BD et gere
-	 * en plus la cr�ation d'un stringID associ� et
+	 * cree l'album passé en parametre en BD et gere
+	 * en plus la création d'un stringID associ� et
 	 * celle du repertoire album.
 	 * si un probl�me survient, une erreur et jetee et
 	 * la creation est annulee
@@ -945,6 +947,22 @@ class AlbumDAO extends DAO {
 		}
 		reset($objects);
 		return rmdir($dir);
+	}
+
+	private function listeAlbumValidee($liste){
+		$dir_albumdao_class_php = dirname(__FILE__);
+		include_once $dir_albumdao_class_php . "/../../controleur/ControleurUtils.class.php";
+		include_once $dir_albumdao_class_php . "/../Evenement.class.php";
+		$error = false;
+		foreach($liste as $album){
+			$id_evt = $album->getID_Evenement();
+			if(isset($id_evt)){
+				$evt = Evenement::getEvenementDepuisID($id_evt);
+				$error |= !$evt->envoyerMailing();
+			}
+			$error |= !$album->envoyerMailing();
+		}
+		return $error;
 	}
 }
 

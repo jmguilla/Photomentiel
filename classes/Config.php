@@ -15,7 +15,7 @@ for ($i=0;$i<sizeof($prdPossibleRootDir);$i++) {
 $EVENTS_TYPES=array('Mariage','Evenement Sportif','Shooting Perso','Autre');
 $COMMAND_STATES=array('En attente','Payée','En cours de préparation','Expédiée','Terminée');
 $ALBUM_STATES=array('Créé','Prêt','Ouvert','Cloturé');
-$MODULES=array('521000018','000000000');
+$MODULES=array('521000018','521000019','521000020');
 
 define('DBTYPE', 'mysql');
 if($_SERVER['SERVER_ADDR'] == "213.186.33.16"){
