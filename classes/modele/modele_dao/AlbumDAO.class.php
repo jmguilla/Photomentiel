@@ -756,7 +756,7 @@ class AlbumDAO extends DAO {
 		}
 		$id = $row->offsetGet($prefix . "albumID");
 		$filigramme = $row->offsetGet($prefix . "filigramme");
-		$nom = $row->offsetGet($prefix . "nom");
+		$nom = htmlspecialchars($row->offsetGet($prefix . "nom"));
 		$idp = $row->offsetGet($prefix . "id_photographe");
 		$ide = $row->offsetGet($prefix . "id_evenement");
 		$date = $row->offsetGet($prefix . "date");
