@@ -42,7 +42,7 @@ class ModeleUtils{
 		     	$headers .='Bcc:' . $mails; 
 			return mail('',
 			"Photomentiel - Un nouvel album est disponible!",
-			"Un nouvel album vient d'être publié pour l'évènement " . $evt->getDescription() . "\n" .
+			"Un nouvel album vient d'être publié pour l'évènement '" . $evt->getDescription() . "'\n" .
 			"Allez vérifier sur www.photomentiel.fr !!" ,
 			$headers
 			);
