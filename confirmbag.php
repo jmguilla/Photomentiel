@@ -97,6 +97,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 		$total = 0;
 		for ($i=0;$i<sizeof($commandLines) && $total<SHIPPING_RATE_UNTIL;$i++){
 			$current = $commandLines[$i];
+			if ($current['quantity']<1){photomentiel_die(new PMError("Error","You damn cheat !?"),false);}
 			$total += $current['quantity']*$photoFormatsPrice[$current['formatID']];
 		}
 		if ($total < SHIPPING_RATE_UNTIL){
