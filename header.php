@@ -16,7 +16,7 @@ include_once("classes/modele/Utilisateur.class.php");
 include("userconnection.php");
 ?>
 <div id="header_surround"><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><div id="header"><span id="accueil">Accueil</span></div></a></div>
-<div class="separator5"></div>
+<div class="separator2"></div>
 <div id="menu_barre">
 	<div style="text-align:left;float:left;padding-left:10px;width:740px;">
 		<!--<div id="home"><a href="index.php" title="Retour accueil"><img src="design/misc/home.png"></img></a></div>-->
@@ -55,6 +55,6 @@ include("userconnection.php");
 		?>
 	</div>
 </div>
-<div class="separator10"></div>
+<div class="separator2"></div>
 <div id="body_content">
 
