@@ -15,6 +15,10 @@ include("header.php");
 		Mentions Légales
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Mentions légales
+	</div>
 	<div class="separator10"></div>
 	
 </div>

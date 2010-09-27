@@ -15,6 +15,10 @@ include("header.php");
 		Conditions Générales d'Utilisation
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Conditions Générales de Ventes et d'Utilisations
+	</div>
 	<div class="separator10"></div>
 	
 </div>

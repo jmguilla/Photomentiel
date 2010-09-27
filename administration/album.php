@@ -34,7 +34,7 @@ if($assocs){
 		$album = $assoc["Album"];
 		$stringid = $assoc['StringID'];
 		$photographe = $assoc['Photographe'];
-		echo "\t\t" . '<tr><td><input type="checkbox" name="albumID' . $album->getAlbumID() . '" value="albumID' . $album->getAlbumID() . '"/></td><td><a href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
+		echo "\t\t" . '<tr><td><input type="checkbox" name="albumID' . $album->getAlbumID() . '" value="albumID' . $album->getAlbumID() . '"/></td><td><a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
 		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td></tr>' . "\n";
 	}
 ?>

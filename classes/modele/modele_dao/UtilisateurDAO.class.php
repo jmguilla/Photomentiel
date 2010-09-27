@@ -122,7 +122,6 @@ class UtilisateurDAO extends DAO{
 			$this->rollback();
 			return false;
 		}
-		return $utilisateur;
 	}
 	/**
 	 * Met a jour le mdp en BD. L'utilisateur est identifie grace a son email.

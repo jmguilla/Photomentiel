@@ -52,12 +52,14 @@ class AlbumDAO extends DAO {
 			$this->startTransaction();
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
-				$this->commit();
-				return true;
-			}else{
-				$this->rollback();
-				return false;
+				//on envoie les mails...
+				if($this->listeAlbumValidee($listeAlbum)){
+					$this->commit();
+					return true;
+				}
 			}
+			$this->rollback();
+			return false;
 		}
 		return false;
 	}
@@ -97,7 +99,7 @@ class AlbumDAO extends DAO {
 	 * @param int $n
 	 */
 	public function getNDerniersAlbumsEtImageEtStringIDEtPhotographeEtEvenementEntreDates($n = 1, $d1 = NULL, $d2 = NULL, $isPublique = true, $etat = NULL){
-		$query = "select a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+		$query = "select a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
@@ -183,7 +185,7 @@ class AlbumDAO extends DAO {
 			}
 		}
 		//table album
-		$query = "select a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+		$query = "select a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
@@ -261,7 +263,7 @@ class AlbumDAO extends DAO {
 	 */
 	public function getAlbumEtStringIDEtPhotographeEtEvenementDepuisID_Evenement($id, $isPublique = false, $etat = NULL){
 		//table album
-				$query = "select a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+				$query = "select a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
@@ -335,7 +337,7 @@ class AlbumDAO extends DAO {
 			}
 		}
 		//table album
-				$query = "select a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+				$query = "select a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
@@ -462,8 +464,8 @@ class AlbumDAO extends DAO {
 		return $this->extractArrayQuery($tmp, $this, "buildAlbumAndStringIDFromRow");
 	}
 	/**
-	 * cree l'album pass� en parametre en BD et gere
-	 * en plus la cr�ation d'un stringID associ� et
+	 * cree l'album passé en parametre en BD et gere
+	 * en plus la création d'un stringID associ� et
 	 * celle du repertoire album.
 	 * si un probl�me survient, une erreur et jetee et
 	 * la creation est annulee
@@ -483,10 +485,12 @@ class AlbumDAO extends DAO {
 		$balance = $album->getBalance();
 		$mailing = $album->getMailing();
 		$gt = $album->getGainTotal();
+		$filigramme = $album->getFiligramme();
 		//creation album
 		try{
 			$this->startTransaction();
-			$query = "insert into Album(mailing, balance, gainTotal, nom, id_photographe, id_evenement, isPublique, date, etat, module) values ('" . 
+			$query = "insert into Album(filigramme, mailing, balance, gainTotal, nom, id_photographe, id_evenement, isPublique, date, etat, module) values ('" . 
+			mysql_real_escape_string($filigramme) . "', '" .
 			mysql_real_escape_string($mailing) . "', " .
 			mysql_real_escape_string($balance) . ", " .
 			mysql_real_escape_string($gt) . ", '" . 
@@ -528,6 +532,17 @@ class AlbumDAO extends DAO {
 				throw new CreateAlbumException("Impossible de retrouver l'identifiant du nouvel ablum");
 			}
 
+			global $MODULES;
+			$module = $MODULES[$lid%sizeof($MODULES)];
+
+			$queryModule = "update Album set module = '" .
+			mysql_real_escape_string($module) . "' where albumID = " .
+			mysql_real_escape_string($lid);
+			$tmpModule = $this->update($queryModule);
+			if(!$tmpModule || $this->getAffectedRows() != 1){
+				$this->rollback();
+				throw new CreateAlbumException("Impossible d'affecter un module bancaire à l'album");
+			}
 
 			//creation des prixTaillePapierAlbum
 			$prixTaillePapiers = $album->internalGetPrixTaillePapier();
@@ -600,7 +615,8 @@ class AlbumDAO extends DAO {
 		mysql_real_escape_string($album->getModule()) ."', balance = " .
 		mysql_real_escape_string($album->getBalance()) . ", mailing = '" .
 		mysql_real_escape_string($album->getMailing()) . "', gainTotal = ".
-		mysql_real_escape_string($album->getGainTotal()) . ", ";
+		mysql_real_escape_string($album->getGainTotal()) . ", filigramme = '".
+		mysql_real_escape_string($album->getFiligramme()) . "', ";
 		if($album->isPublique()){
 			$query .= "isPublique = true ";
 		}else{
@@ -739,6 +755,7 @@ class AlbumDAO extends DAO {
 			$prefix = '';
 		}
 		$id = $row->offsetGet($prefix . "albumID");
+		$filigramme = $row->offsetGet($prefix . "filigramme");
 		$nom = $row->offsetGet($prefix . "nom");
 		$idp = $row->offsetGet($prefix . "id_photographe");
 		$ide = $row->offsetGet($prefix . "id_evenement");
@@ -750,6 +767,7 @@ class AlbumDAO extends DAO {
 		$gt = $row->offsetGet($prefix . "gainTotal");
 		$mailing = $row->offsetGet($prefix . "mailing");
 		$result = new Album();
+		$result->setFiligramme($filigramme);
 		$result->setAlbumID($id);
 		$result->setNom($nom);
 		$result->setID_Photographe($idp);
@@ -760,6 +778,7 @@ class AlbumDAO extends DAO {
 		$result->setMailing($mailing);
 		$result->setBalance($balance);
 		$result->setGainTotal($gt);
+		$result->setModule($mod);
 		return $result;
 	}
 	/**
@@ -928,6 +947,22 @@ class AlbumDAO extends DAO {
 		}
 		reset($objects);
 		return rmdir($dir);
+	}
+
+	private function listeAlbumValidee($liste){
+		$dir_albumdao_class_php = dirname(__FILE__);
+		include_once $dir_albumdao_class_php . "/../../controleur/ControleurUtils.class.php";
+		include_once $dir_albumdao_class_php . "/../Evenement.class.php";
+		$error = false;
+		foreach($liste as $album){
+			$id_evt = $album->getID_Evenement();
+			if(isset($id_evt)){
+				$evt = Evenement::getEvenementDepuisID($id_evt);
+				$error |= !$evt->envoyerMailing();
+			}
+			$error |= !$album->envoyerMailing();
+		}
+		return $error;
 	}
 }
 

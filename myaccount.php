@@ -35,6 +35,10 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 		Gestion de mon compte
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Mon compte
+	</div>
 	<div class="separator10"></div>
 	<div id="content">
 		<?php
@@ -66,15 +70,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 			<div id="left">
 				<?php
 					if($photographMode) {
-					//TODO afficher fin de quota au lieu du bouton si quota épuisé.
 				?>
 				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
 				<center><hr id="separator"/><center>
-				<!--<div id="quotas">
-					si pas de SIREN<br/>
-					quota utilisé : 123/500 &#8364;<br/>
-					Albums restants : 2<br/>ou<br/>quota épuisé et plus de bouton
-				</div>-->
 				<?php
 					}
 				?>
@@ -114,7 +112,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 					</div>
 				</div>
 				<div class="content_box">
-					<div class="title">Mes commandes en cours :</div>
+					<div class="title">Mes commandes :</div>
 					<div class="content_flow">
 						<?php
 							/***************************** USER COMMANDS  ******************************/

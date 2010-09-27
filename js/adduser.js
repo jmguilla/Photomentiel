@@ -188,9 +188,11 @@ function checkForm () {
 	    error = error || tmp.error;
 	    mess += tmp.mess;
 	}
-	tmp = checkCGU();
-	error = error || tmp.error;
-    mess += tmp.mess;
+	if(createMode){
+		tmp = checkCGU();
+		error = error || tmp.error;
+	    mess += tmp.mess;
+	}
 	//result
     return { "error" : error, "mess" : mess };
 }

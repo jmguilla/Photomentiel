@@ -1,5 +1,5 @@
 <?php
-include_once "../modele/Config.php";
+include_once "../Config.php";
 include_once "../modele/modele_dao/daophp5/DAO.class.php";
 
 class TestDAO extends DAO{

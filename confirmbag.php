@@ -21,6 +21,8 @@ include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/Adresse.class.php");
 include_once("classes/modele/AdresseCommande.class.php");
+include_once("classes/modele/TransactionID.class.php");
+include_once("classes/modele/StringID.class.php");
 
 if (!isSet($_SESSION['albumStringID'])){
 	photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"));
@@ -142,6 +144,26 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 		Confirmation de votre commande
 	</div>
 	<div id="full_content_mid">
+		<div class="path">
+			<a href="index.php">Accueil</a> &gt; 
+			Album &gt; 
+			<?php
+				if ($cmdConfirmed){
+					echo 'Panier &gt; ';
+				} else {
+					echo '<a href="javascript:history.back();">Panier</a> &gt; ';
+				}
+			?>
+			Identification
+			<?php
+				 if ($utilisateurObj){
+				 	echo ' &gt; Livraison';
+				 }
+				 if ($cmdConfirmed){
+				 	echo ' &gt; Paiement';
+				 }
+			?>
+		</div>
 		<div id="pictures_content">
 			<div class="separator10"></div>
 			<div class="recap">Voici le récapitulatif de votre commande :</div>
@@ -252,7 +274,8 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 									<?php
 										$_SESSION['last_command'] = $commande->getCommandeID();
 										include("e-transactions/selectcard.php");
-										displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
+										$albumObj = Album::getAlbumDepuisID(StringID::getStringIDDepuisID($albumStringID)->getID_Album());
+										displayCards($albumObj->getModule(),toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
 									?>
 								</div>
 								<div class="separator10"></div>

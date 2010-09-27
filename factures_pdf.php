@@ -16,6 +16,7 @@ include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/Utilisateur.class.php");
 include_once("classes/modele/TaillePapier.class.php");
+include_once("classes/modele/Album.class.php");
 
 if (!isset($_GET['cmd'])){
 	photomentiel_die(new PMError("Commande non spécifiée !","Aucune commande spécifiée !"));
@@ -26,7 +27,7 @@ if(!isset($_SESSION['userID'])){
 
 $utilisateurObj = Utilisateur::getUtilisateurDepuisID($_SESSION['userID']);
 $command = Commande::getCommandeDepuisID($_GET['cmd']);
-if ($command->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
+if (!$command || $command->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
 	photomentiel_die(new PMError("Commande inapropriée !","Cette commande ne vous appartient pas, que faites vous là ?"));
 }
 
@@ -39,6 +40,8 @@ foreach($tmp as $tp){
 	$photoFormatsDim[$tp->getTaillePapierID()] = $tp->getDimensions();
 }
 
-makePDF($command, $utilisateurObj, $photoFormatsDim);
+$albumObj = Album::getAlbumDepuisID($command->getID_Album());
+
+makePDF($command, $utilisateurObj, $photoFormatsDim, $albumObj->getModule());
 
 ?>
