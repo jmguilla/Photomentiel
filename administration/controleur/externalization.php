@@ -4,6 +4,8 @@ define("valider_album", "valider_album");
 define("activer_album", "activer_album");
 define("montrer_album", "montrer_album");
 define("detail_album", "detail_album");
+define("cloturer_album", "cloturer_album");
+define("supprimer_album", "supprimer_album");
 
 //evenement
 define("supprimer_evenement", "supprimer_evenement");

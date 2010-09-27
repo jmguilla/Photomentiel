@@ -3,6 +3,30 @@ $dir_administration_controleur_album_php = dirname(__FILE__);
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Album.class.php";
 
 switch($action){
+	case supprimer_album:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, impossible de supprimer l'album<br/>";
+			break;
+		}
+		$album = Album::getAlbumDepuisID($_POST['id']);
+		if($album->delete()){
+			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " supprimé avec success<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible de supprimer l'album #" . $album->getAlbumID() . "<br/>";
+		}
+	break;
+	case cloturer_album:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, impossible de cloturer l'album<br/>";
+			break;
+		}
+		$album = Album::getAlbumDepuisID($_POST['id']);
+		if($album->cloturer()){
+			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " cloturé avec success<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible de cloturer l'album #" . $album->getAlbumID() . "<br/>";
+		}
+	break;
 	case detail_album:
 		$dir_administration_controleur_album_php = dirname(__FILE__);
 		include_once $dir_administration_controleur_album_php . "/../../classes/modele/Commande.class.php";
@@ -68,7 +92,7 @@ switch($action){
 				$album = $assoc['Album'];
 				$photo = $assoc['Photographe'];
 				$stringid = $assoc['StringID'];
-				echo '<tr><td>#' . $album->getAlbumID() . ' - </td><td> <a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a> </td><td>' . $photo->getAdresse()->getPrenom() . " - " . $photo->getAdresse()->getNom() . ' </td><td> ' . $album->getGainTotal() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="detail_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" value="détails"/></form></td></tr>' . "\n";
+				echo '<tr><td>#' . $album->getAlbumID() . ' - </td><td> <a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a> </td><td>' . $photo->getAdresse()->getPrenom() . " - " . $photo->getAdresse()->getNom() . ' </td><td> ' . $album->getGainTotal() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="detail_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" value="détails"/></form></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="cloturer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Vous êtes sur le point de cloturer un album.\nContinuer?\');"  value="cloturer"/></form></td></tr>' . "\n";
 			}
 			echo "</table>";
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";

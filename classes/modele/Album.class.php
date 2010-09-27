@@ -32,6 +32,7 @@ class Album {
 		}
 		$this->module = $module;
 	}
+
 	/**
 	 * Renvoie les n derniers albums
 	 * si n n'est pas fournies, renvoies tous les derniers albums
@@ -311,6 +312,11 @@ class Album {
 
 	public function getModule(){
 		return $this->module;
+	}
+
+	public function cloturer(){
+		$dao = new AlbumDAO();
+		return $dao->cloturer($this);
 	}
 
 	public function setModule($mod){
