@@ -73,14 +73,14 @@ class AdresseCommandeDAO extends DAO{
 	 * @param unknown_type $row
 	 */
 	public function buildAdresseCommandeFromRow($row){
-		$id = htmlspecialchars($row->offsetGet("adresseCommandeID"));
+		$id = $row->offsetGet("adresseCommandeID");
 		$nom = htmlspecialchars($row->offsetGet("nom"));
 		$prenom = htmlspecialchars($row->offsetGet("prenom"));
 		$nomRue = htmlspecialchars($row->offsetGet("nomRue"));
 		$cmp = htmlspecialchars($row->offsetGet("complement"));
 		$ville = htmlspecialchars($row->offsetGet("ville"));
 		$cp = htmlspecialchars($row->offsetGet("codePostal"));
-		$idu = htmlspecialchars($row->offsetGet("id_commande"));
+		$idu = $row->offsetGet("id_commande");
 		$result = new AdresseCommande();
 		$result->setAdresseCommandeID($id);
 		$result->setNom($nom);

@@ -203,13 +203,13 @@ class UtilisateurDAO extends DAO{
 		include_once $dir_utilisateurdao_class_php . "/../Adresse.class.php";
 		$adao = new AdresseDAO();
 		$adresse = $adao->buildAdresseFromRow($row, $pa);
-		$id = htmlspecialchars($row->offsetGet($prefix . "utilisateurID"));
+		$id = $row->offsetGet($prefix . "utilisateurID");
 		$email = htmlspecialchars($row->offsetGet($prefix . "email"));
 		$dateInscription = htmlspecialchars($row->offsetGet($prefix . "dateInscription"));
 		$mdp = htmlspecialchars($row->offsetGet($prefix . "mdp"));
 		$actif = htmlspecialchars($row->offsetGet($prefix . "actif"));
 		//est-ce un photographe?
-		$pid = htmlspecialchars($row->offsetGet($prefix . "photographeID"));
+		$pid = $row->offsetGet($prefix . "photographeID");
 		$result = NULL;
 		if(isset($pid)){
 			$dirname = dirname(__FILE__);
@@ -226,7 +226,7 @@ class UtilisateurDAO extends DAO{
 			$rib_k = htmlspecialchars($row->offsetGet($prefix . "rib_k"));
 			$bic = htmlspecialchars($row->offsetGet($prefix . "bic"));
 			$iban = htmlspecialchars($row->offsetGet($prefix . "iban"));
-			$pourcentage = htmlspecialchars($row->offsetGet($prefix . "pourcentage"));
+			$pourcentage = $row->offsetGet($prefix . "pourcentage");
 			$result->setHome($home);
 			$result->setPhotographeID($pid);
 			$result->setNomEntreprise($ne);

@@ -103,33 +103,37 @@ switch($action){
 		exit();
 	break;
 	case valider_album:
-		$albums = Album::getNDerniersAlbums(0, false, 1);
-		$listeAlbum = array();
-		foreach($albums as $album){
-			if(isset($_POST['albumID' . $album->getAlbumID()])){
-				$listeAlbum[] = $album;
-			}
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, validation impossible<br/>";
+			return ;
 		}
-		$result = Album::validerListeAlbum($listeAlbum);
+		$album = Album::getAlbumDepuisID($_POST['id']);
+		if(!$album){
+			$_SESSION['message'] .= "Aucun album ne correspond à l'id " . $_POST['id'] . "<br/>";
+			return ;
+		}
+		$result = Album::validerListeAlbum(array($album));
 		if($result){
-			$_SESSION['message'] .= "Liste d'album validée<br/>";
+			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " validé avec succés<br/>";
 		}else{
-			$_SESSION['message'] .= "Un problème est survenue pendant la validation de la liste d'album<br/>";
+			$_SESSION['message'] .= "Un problème est survenue pendant la validation de l'album #" . $album->getAlbumID() . "<br/>";
 		}
 	break;
 	case activer_album:
-		$albums = Album::getNDerniersAlbums(0, false, 3);
-		$listeAlbum = array();
-		foreach($albums as $album){
-			if(isset($_POST['albumID' . $album->getAlbumID()])){
-				$listeAlbum[] = $album;
-			}
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, validation impossible<br/>";
+			return ;
 		}
-		$result = Album::activerListeAlbum($listeAlbum);
+		$album = Album::getAlbumDepuisID($_POST['id']);
+		if(!$album){
+			$_SESSION['message'] .= "Aucun album ne correspond à l'id " . $_POST['id'] . "<br/>";
+			return ;
+		}
+		$result = Album::activerListeAlbum(array($album));
 		if($result){
-			$_SESSION['message'] .= "Liste d'album activée<br/>";
+			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " activée<br/>";
 		}else{
-			$_SESSION['message'] .= "Un problème est survenue pendant l'activation de la liste d'album<br/>";
+			$_SESSION['message'] .= "Un problème est survenue pendant l'activation de la l'album #" . $album->getAlbumID() . "<br/>";
 		}
 	break;
 	default:
