@@ -348,18 +348,15 @@ class EvenementDAO extends DAO {
 	 * Notez que les lieux ne sont pas setté dans cette methode.
 	 * @param unknown_type $row
 	 */
-	public function buildEvenementFromRow($row, $prefix = NULL){
-		if(!isset($prefix)){
-			$prefix = '';
-		}
-		$id = $row->offsetGet($prefix . "evenementID");
-		$web = $row->offsetGet($prefix . "web");
-		$type = $row->offsetGet($prefix . "type");
-		$date = $row->offsetGet($prefix . "date");
-		$id_utilisateur = $row->offsetGet($prefix . "id_utilisateur");
-		$desc = $row->offsetGet($prefix . "description");
-		$mail = $row->offsetGet($prefix . "mailing");
-		$adresse = $row->offsetGet($prefix . "adresse");
+	public function buildEvenementFromRow($row, $prefix = ''){
+		$id = htmlspecialchars($row->offsetGet($prefix . "evenementID"));
+		$web = htmlspecialchars($row->offsetGet($prefix . "web"));
+		$type = htmlspecialchars($row->offsetGet($prefix . "type"));
+		$date = htmlspecialchars($row->offsetGet($prefix . "date"));
+		$id_utilisateur = htmlspecialchars($row->offsetGet($prefix . "id_utilisateur"));
+		$desc = htmlspecialchars($row->offsetGet($prefix . "description"));
+		$mail = htmlspecialchars($row->offsetGet($prefix . "mailing"));
+		$adresse = htmlspecialchars($row->offsetGet($prefix . "adresse"));
 		$result = new Evenement();
 		$result->setAdresse($adresse);
 		$result->setMailing($mail);

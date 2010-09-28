@@ -197,109 +197,36 @@ class UtilisateurDAO extends DAO{
 	 * @param ligne resultat mysql $row
 	 * @param string $prefix
 	 */
-	public function buildUtilisateurFromRow($row, $prefix = NULL, $pa = NULL){
-		$setPre = isset($prefix);
+	public function buildUtilisateurFromRow($row, $prefix = '', $pa = ''){
 		$dir_utilisateurdao_class_php = dirname(__FILE__);
 		include_once $dir_utilisateurdao_class_php . "/AdresseDAO.class.php";
 		include_once $dir_utilisateurdao_class_php . "/../Adresse.class.php";
 		$adao = new AdresseDAO();
 		$adresse = $adao->buildAdresseFromRow($row, $pa);
-		if($setPre){
-			$id = $row->offsetGet($prefix . "utilisateurID");
-		}else{
-			$id = $row->offsetGet("utilisateurID");
-		}
-		if($setPre){
-			$email = $row->offsetGet($prefix . "email");
-		}else{
-			$email = $row->offsetGet("email");
-		}
-		if($setPre){
-			$dateInscription = $row->offsetGet($prefix . "dateInscription");
-		}else{
-			$dateInscription = $row->offsetGet("dateInscription");
-		}
-		if($setPre){
-			$mdp = $row->offsetGet($prefix . "mdp");
-		}else{
-			$mdp = $row->offsetGet("mdp");
-		}
-		if($setPre){
-			$actif = $row->offsetGet($prefix . "actif");
-		}else{
-			$actif = $row->offsetGet("actif");
-		}
+		$id = htmlspecialchars($row->offsetGet($prefix . "utilisateurID"));
+		$email = htmlspecialchars($row->offsetGet($prefix . "email"));
+		$dateInscription = htmlspecialchars($row->offsetGet($prefix . "dateInscription"));
+		$mdp = htmlspecialchars($row->offsetGet($prefix . "mdp"));
+		$actif = htmlspecialchars($row->offsetGet($prefix . "actif"));
 		//est-ce un photographe?
-		if($setPre){
-			$pid = $row->offsetGet($prefix . "photographeID");
-		}else{
-			$pid = $row->offsetGet("photographeID");
-		}
+		$pid = htmlspecialchars($row->offsetGet($prefix . "photographeID"));
 		$result = NULL;
 		if(isset($pid)){
 			$dirname = dirname(__FILE__);
 			include_once $dirname . "/../Photographe.class.php";
 			$result = new Photographe();
-			if($setPre){
-				$siren = $row->offsetGet($prefix . "siren");
-			}else{
-				$siren = $row->offsetGet("siren");
-			}
-			if($setPre){
-				$sw = $row->offsetGet($prefix . "siteWeb");
-			}else{
-				$sw = $row->offsetGet("siteWeb");
-			}
-			if($setPre){
-				$tel = $row->offsetGet($prefix . "telephone");
-			}else{
-				$tel = $row->offsetGet("telephone");
-			}
-			if($setPre){
-				$ne = $row->offsetGet($prefix . "nomEntreprise");
-			}else{
-				$ne = $row->offsetGet("nomEntreprise");
-			}
-			if($setPre){
-				$home = $row->offsetGet($prefix . "home");
-			}else{
-				$home = $row->offsetGet("home");
-			}
-			if($setPre){
-				$rib_b = $row->offsetGet($prefix . "rib_b");
-			}else{
-				$rib_b = $row->offsetGet("rib_b");
-			}
-			if($setPre){
-				$rib_g = $row->offsetGet($prefix . "rib_g");
-			}else{
-				$rib_g = $row->offsetGet("rib_g");
-			}
-			if($setPre){
-				$rib_c = $row->offsetGet($prefix . "rib_c");
-			}else{
-				$rib_c = $row->offsetGet("rib_c");
-			}
-			if($setPre){
-				$rib_k = $row->offsetGet($prefix . "rib_k");
-			}else{
-				$rib_k = $row->offsetGet("rib_k");
-			}
-			if($setPre){
-				$bic = $row->offsetGet($prefix . "bic");
-			}else{
-				$bic = $row->offsetGet("bic");
-			}
-			if($setPre){
-				$iban = $row->offsetGet($prefix . "iban");
-			}else{
-				$iban = $row->offsetGet("iban");
-			}
-			if($setPre){
-				$pourcentage = $row->offsetGet($prefix . "pourcentage");
-			}else{
-				$pourcentage = $row->offsetGet("pourcentage");
-			}
+			$siren = htmlspecialchars($row->offsetGet($prefix . "siren"));
+			$sw = htmlspecialchars($row->offsetGet($prefix . "siteWeb"));
+			$tel = htmlspecialchars($row->offsetGet($prefix . "telephone"));
+			$ne = htmlspecialchars($row->offsetGet($prefix . "nomEntreprise"));
+			$home = htmlspecialchars($row->offsetGet($prefix . "home"));
+			$rib_b = htmlspecialchars($row->offsetGet($prefix . "rib_b"));
+			$rib_g = htmlspecialchars($row->offsetGet($prefix . "rib_g"));
+			$rib_c = htmlspecialchars($row->offsetGet($prefix . "rib_c"));
+			$rib_k = htmlspecialchars($row->offsetGet($prefix . "rib_k"));
+			$bic = htmlspecialchars($row->offsetGet($prefix . "bic"));
+			$iban = htmlspecialchars($row->offsetGet($prefix . "iban"));
+			$pourcentage = htmlspecialchars($row->offsetGet($prefix . "pourcentage"));
 			$result->setHome($home);
 			$result->setPhotographeID($pid);
 			$result->setNomEntreprise($ne);
