@@ -44,7 +44,7 @@ class Album {
 	}
 	/**
 	 * Retourne un tableau d'associations avec pour chaque entrées:
-	 * $result[$i]["Album"], $result[$i]["StringID"], $result[$i]["Thumb"], $result[$i]["Photographe"] et $result[$i]["Evenement"] 
+	 * $result[$i]["Album"], $result[$i]["StringID"], $result[$i]["Thumb"], $result[$i]["Photographe"] et $result[$i]["Evenement"]
 	 * @param unknown_type $query
 	 * @param unknown_type $isPublique
 	 */
@@ -82,7 +82,7 @@ class Album {
 	}
 	/**
 	 * Retourne un tableau d'associations avec pour chaque entrées:
-	 * $result[$i]["Album"], $result[$i]["StringID"], $result[$i]["Thumb"], $result[$i]["Photographe"] et $result[$i]["Evenement"] 
+	 * $result[$i]["Album"], $result[$i]["StringID"], $result[$i]["Thumb"], $result[$i]["Photographe"] et $result[$i]["Evenement"]
 	 * @param unknown_type $query
 	 * @param unknown_type $d1
 	 * @param unknown_type $d2
@@ -346,7 +346,7 @@ class Album {
 		}
 		if(!isset($this->mailing) || $this->mailing == ''){
 			$this->mailing = $m;
-		}else{			
+		}else{
 			$this->mailing .= ";" . $m;
 		}
 		$dao = new AlbumDAO();
@@ -420,7 +420,7 @@ class Album {
 		$sid = StringID::getStringIDDepuisID_Album($this->albumID);
 		if($sid){
 			if(ModeleUtils::sendAlbumDisponible($this, $sid, $mailing)){
-				$this->setMailing('');
+				return true;
 			}
 		}
 		return false;

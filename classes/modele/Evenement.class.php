@@ -263,10 +263,25 @@ class Evenement {
 	public function envoyerMailing(){
 		$dir_evenement_class_php = dirname(__FILE__);
 		include_once $dir_evenement_class_php . "/ModeleUtils.class.php";
+		include_once $dir_evenement_class_php . "/EvenementEcouteur.class.php";
+		include_once $dir_evenement_class_php . "/Utilisateur.class.php";
 		$mailing = $this->getMailing();
 		$mailing = str_replace("\n", "", $mailing);
 		if(ModeleUtils::sendEvenementAlbumDisponible($this, $mailing)){
-			$this->setMailing('');
+			$ees = EvenementEcouteur::getEvenementEcouteurDepuisID_Evenement($this->getEvenementID());
+			$mailing = '';
+			$count = count($ees);
+			if($ees && $count > 0){
+				foreach($ees as $ee){
+					$count--;
+					$mailing .= Utilisateur::getUtilisateurDepuisID($ee->getID_Utilisateur())->getEmail();
+					if($count > 0){
+						$mailing .= ";";
+					}
+				}
+				return ModeleUtils::sendEvenementAlbumDisponible($this, $mailing);
+			}
+			return true;
 		}
 		return false;
 	}
