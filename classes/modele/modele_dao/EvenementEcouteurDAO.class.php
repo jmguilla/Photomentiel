@@ -9,6 +9,31 @@ class EvenementEcouteurDAO extends DAO{
 		parent::__construct($dsn);
 	}
 
+	/**
+	 * Supprime la liste complète des evenementEcouteur passée en parametre.
+	 * pas de gestion de la transaction ( pas de commit )
+	 * @param $list
+	 */
+	public function deleteList($list){
+		if(count($list) > 0){
+			$num = count($list);
+			$query = "delete from EvenementEcouteur where ";
+			foreach($list as $ee){
+				$num--;
+				$query .= " id_evenement = " .
+				mysql_real_escape_string($ee->getID_Evenement());
+				if($num > 0){
+					$query .= " or ";
+				}
+			}
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() == count($list)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function create($ee){
 		$query = "insert into EvenementEcouteur (id_evenement, id_utilisateur) values (".
 		mysql_real_escape_string($ee->getID_Evenement()) . ", " .
@@ -47,6 +72,16 @@ class EvenementEcouteurDAO extends DAO{
 		mysql_real_escape_string($ee->getID_Utilisateur());
 		$tmp = $this->retrieve($query);
 		return $this->extractObjectQuery($tmp,$this, "buildEvenementEcouteurFromRow");
+	}
+	/**
+	 * Renvoie le tableau d'evenementEcouteur avec l'id_evenement donné
+	 * @param int $id_evt
+	 */
+	public function getEvenementEcouteurDepuisID_Evenement($id_evt){
+		$query = "select * from EvenementEcouteur where id_evenement = " .
+		mysql_real_escape_string($id_evt);
+		$tmp = $this->retrieve($query);
+		return $this->extractArrayQuery($tmp,$this, "buildEvenementEcouteurFromRow");
 	}
 	/**
 	 * Renvoie un tableau contenant la totalite des evenement

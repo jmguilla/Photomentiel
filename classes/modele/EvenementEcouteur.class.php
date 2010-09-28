@@ -13,6 +13,29 @@ class EvenementEcouteur {
 	}
 
 	/**
+	 * Retourne un table d'evenement ecouteur avec l'id_evt passé en param
+	 * @param unknown_type $id_evt
+	 */
+	public static function getEvenementEcouteurDepuisID_Evenement($id_evt){
+		if(!isset($id_evt)){
+			return false;
+		}
+		$dao = new EvenementEcouteurDAO();
+		return $dao->getEvenementEcouteurDepuisID_Evenement($id_evt);
+	}
+	/**
+	 * Supprime la liste d'ee passée en param. pas de commit...
+	 * @param unknown_type $list
+	 */
+	public static function deleteList($list){
+		if(!isset($list) || count($list) == 0){
+			return false;
+		}
+		$dao = new EvenementEcouteurDAO();
+		return $dao->deleteList($list);
+	}
+
+	/**
 	 * Retourne un tableau d'evenements à venir auquel s'est enregistré
 	 * l'utilisateur passe en parametre
 	 * @param Utilisateur $user
