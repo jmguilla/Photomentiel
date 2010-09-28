@@ -30,3 +30,6 @@ div#content_sent {
 	line-height:30px;
 }
 
+input#captcha {
+	width:50px;
+}

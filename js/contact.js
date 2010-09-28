@@ -12,6 +12,10 @@ $(document).ready(function() {
 			alert("Votre message semble un peu court.");
 			return false;
 		}
+		if ($('#captcha').val().length < 5){
+			alert("Veuillez saisir les 5 caractères de vérification.");
+			return false;
+		}
 		return true;
 	});
 	$('#content').keyup(function(){
