@@ -517,16 +517,20 @@ if(typeof thickox == 'undefined') {
 		
 		$.browser.valid = 	!$.browser.msie || 
 							/MSIE 7\.0/i.test(window.navigator.userAgent) || 
-							/MSIE 8\.0/i.test(window.navigator.userAgent) || 
-							/MSIE 9\.0/i.test(window.navigator.userAgent);
+							/MSIE 8\.0/i.test(window.navigator.userAgent);
 	
-		if($.browser.valid) { //do nothing for ie < 8
+		if($.browser.valid) { //do nothing for ie < 7
 			var borderTop = parseInt($TB_window.css('border-top-width'), 10);
 			var borderBottom = parseInt($TB_window.css('border-bottom-width'), 10);
 			var height = TB_HEIGHT+borderTop+borderBottom;
 		
 			$TB_window.css({
 				marginTop : '-'+parseInt((height/2), 10)+'px'
+			});
+		} else if(/MSIE 9\.0/i.test(window.navigator.userAgent)){//special for IE 9
+			$TB_window.css({
+				marginTop : '-'+parseInt(TB_HEIGHT/2, 10)+'px',
+				marginLeft : '-'+parseInt(TB_WIDTH/2, 10)+'px'
 			});
 		}
 	}

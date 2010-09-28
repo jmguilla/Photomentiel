@@ -6,4 +6,4 @@ Disallow: /phptopdf/
 Disallow: /events.php?ev=
 Disallow: /cgu.php
 Disallow: /mentions.php
-Disallow: /privacy
+Disallow: /privacy.php
