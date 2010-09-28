@@ -33,9 +33,9 @@ class TypePapierDAO extends DAO{
 	 * Helpers
 	 ###################################*/
 	public function buildTypePapierFromRow($row){
-		$tp = htmlspecialchars($row->offsetGet("typePapierID"));
-		$desc = htmlspecialchars($row->offsetGet("description"));
-		$prix = htmlspecialchars($row->offsetGet("prix"));
+		$tp = $row->offsetGet("typePapierID");
+		$desc = $row->offsetGet("description");
+		$prix = $row->offsetGet("prix");
 		$result = new TypePapier();
 		$result->setTypePapierID($tp);
 		$result->setDescription($desc);

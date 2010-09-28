@@ -349,11 +349,11 @@ class EvenementDAO extends DAO {
 	 * @param unknown_type $row
 	 */
 	public function buildEvenementFromRow($row, $prefix = ''){
-		$id = htmlspecialchars($row->offsetGet($prefix . "evenementID"));
+		$id = $row->offsetGet($prefix . "evenementID");
 		$web = htmlspecialchars($row->offsetGet($prefix . "web"));
-		$type = htmlspecialchars($row->offsetGet($prefix . "type"));
+		$type = $row->offsetGet($prefix . "type");
 		$date = htmlspecialchars($row->offsetGet($prefix . "date"));
-		$id_utilisateur = htmlspecialchars($row->offsetGet($prefix . "id_utilisateur"));
+		$id_utilisateur = $row->offsetGet($prefix . "id_utilisateur");
 		$desc = htmlspecialchars($row->offsetGet($prefix . "description"));
 		$mail = htmlspecialchars($row->offsetGet($prefix . "mailing"));
 		$adresse = htmlspecialchars($row->offsetGet($prefix . "adresse"));

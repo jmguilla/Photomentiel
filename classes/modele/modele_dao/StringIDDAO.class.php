@@ -68,9 +68,9 @@ class StringIDDAO extends DAO{
 	 * Helpers
 	 #####################################*/
 	public function buildStringIDFromRow($row, $prefix = ''){
-		$id = htmlspecialchars($row->offsetGet($prefix . "stringID"));
-		$homeP = htmlspecialchars($row->offsetGet($prefix . "homePhotographe"));
-		$idA = htmlspecialchars($row->offsetGet($prefix . "id_album"));
+		$id = $row->offsetGet($prefix . "stringID");
+		$homeP = $row->offsetGet($prefix . "homePhotographe");
+		$idA = $row->offsetGet($prefix . "id_album");
 		$result = new StringID();
 		$result->setStringID($id);
 		$result->setHomePhotographe($homeP);

@@ -33,7 +33,7 @@ class CouleurDAO extends DAO{
 	 * Helpers
 	 #####################################*/
 	public function buildCouleurFromRow($row){
-		$tp = htmlspecialchars($row->offsetGet("couleurID"));
+		$tp = $row->offsetGet("couleurID");
 		$desc = htmlspecialchars($row->offsetGet("description"));
 		return new Couleur($tp, $desc);
 	}

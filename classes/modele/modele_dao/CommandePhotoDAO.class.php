@@ -70,15 +70,15 @@ class CommandePhotoDAO extends DAO{
 	 * Helpers
 	 ###################################*/
 	public function buildCommandePhotoFromRow($row){
-		$id = htmlspecialchars($row->offsetGet("commandePhotoID"));
+		$id = $row->offsetGet("commandePhotoID");
 		$photo = htmlspecialchars($row->offsetGet("photo"));
 		$nb = htmlspecialchars($row->offsetGet("nombre"));
-		$id_taille = htmlspecialchars($row->offsetGet("id_taillePapier"));
-		$id_type = htmlspecialchars($row->offsetGet("id_typePapier"));
-		$id_couleur = htmlspecialchars($row->offsetGet("id_couleur"));
-		$id_album = htmlspecialchars($row->offsetGet("id_album"));
-		$id_commande = htmlspecialchars($row->offsetGet("id_commande"));
-		$prix = htmlspecialchars($row->offsetGet("prix"));
+		$id_taille = $row->offsetGet("id_taillePapier");
+		$id_type = $row->offsetGet("id_typePapier");
+		$id_couleur = $row->offsetGet("id_couleur");
+		$id_album = $row->offsetGet("id_album");
+		$id_commande = $row->offsetGet("id_commande");
+		$prix = $row->offsetGet("prix");
 		$result = new CommandePhoto();
 		$result->setID_Commande($id_commande);
 		$result->setID_Album($id_album);
