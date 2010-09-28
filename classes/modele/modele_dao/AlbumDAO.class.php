@@ -59,7 +59,7 @@ class AlbumDAO extends DAO {
 			$current = 0;
 			foreach($listeAlbum as $album){
 				$current++;
-				$query .= "albumID = " . mysql_real_escape_string($album->getAlbumID());
+				$query .= " albumID = " . mysql_real_escape_string($album->getAlbumID());
 				if($current < $length){
 					$query .= " or ";
 				}
@@ -67,7 +67,7 @@ class AlbumDAO extends DAO {
 			$query .= " )";
 			$this->startTransaction();
 			$tmp = $this->update($query);
-			if($tmp && $this->getAffectedRows() >= 0){
+			if($tmp && $this->getAffectedRows() == count($listeAlbum)){
 				//on envoie les mails...
 				if($this->listeAlbumValidee($listeAlbum)){
 					$this->commit();
@@ -966,16 +966,16 @@ class AlbumDAO extends DAO {
 		$dir_albumdao_class_php = dirname(__FILE__);
 		include_once $dir_albumdao_class_php . "/../../controleur/ControleurUtils.class.php";
 		include_once $dir_albumdao_class_php . "/../Evenement.class.php";
-		$error = false;
+		$result = true;
 		foreach($liste as $album){
 			$id_evt = $album->getID_Evenement();
 			if(isset($id_evt)){
 				$evt = Evenement::getEvenementDepuisID($id_evt);
-				$error |= !$evt->envoyerMailing();
+				$result &= $evt->envoyerMailing();
 			}
-			$error |= !$album->envoyerMailing();
+			$result &= $album->envoyerMailing();
 		}
-		return $error;
+		return $result;
 	}
 }
 

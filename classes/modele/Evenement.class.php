@@ -269,9 +269,9 @@ class Evenement {
 		$mailing = str_replace("\n", "", $mailing);
 		if(ModeleUtils::sendEvenementAlbumDisponible($this, $mailing)){
 			$ees = EvenementEcouteur::getEvenementEcouteurDepuisID_Evenement($this->getEvenementID());
-			$mailing = '';
 			$count = count($ees);
 			if($ees && $count > 0){
+				$mailing = '';
 				foreach($ees as $ee){
 					$count--;
 					$mailing .= Utilisateur::getUtilisateurDepuisID($ee->getID_Utilisateur())->getEmail();
