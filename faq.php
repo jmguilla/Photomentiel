@@ -20,7 +20,7 @@ include("header.php");
 		Foire aux questions
 	</div>
 	<div class="separator10"></div>
-	<!-- content here -->
+	
 </div>
 <div id="full_content_bot"></div>
 <?php
