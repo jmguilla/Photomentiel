@@ -4,7 +4,7 @@ $dir_administration_album_php = dirname(__FILE__);
 include_once $dir_administration_album_php . "/../classes/modele/Album.class.php";
 include_once $dir_administration_album_php . "/../classes/modele/Evenement.class.php";
 include_once $dir_administration_album_php . "/../classes/modele/Utilisateur.class.php";
-include $dir_administration_album_php . "/header_album.php";
+include $dir_administration_album_php . "/header.php";
 
 if(isset($_SESSION['message'])){
 	echo $_SESSION['message'];
@@ -27,21 +27,17 @@ Albums ouverts:<br/>
 $assocs = Album::getNDerniersAlbumsEtImageEtStringIDEtPhotographeEtEvenementEntreDates(0,NULL,NULL, false, 1);
 if($assocs){
 ?>
-<form action="dispatcher.php" method="POST" onsubmit="return OnSubmitValidationForm();">
-	<table>
+<table>
 <?php
 	foreach($assocs as $assoc){
 		$album = $assoc["Album"];
 		$stringid = $assoc['StringID'];
 		$photographe = $assoc['Photographe'];
-		echo "\t\t" . '<tr><td><input type="checkbox" name="albumID' . $album->getAlbumID() . '" value="albumID' . $album->getAlbumID() . '"/></td><td><a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
-		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="document.pressed=this.name" name="supprimer_album" value="supprimer"/></td></tr>' . "\n";
+		echo "\t\t" . '<tr><td><a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
+		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="valider_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return validate(\"Confirmer validation album.\");" name="valider_album"  value="valider"/></form></td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\"Confirmer suppression album.\");" name="supprimer_album"  value="supprimer"/></form></td></tr>' . "\n";
 	}
 ?>
-	</table>
-	<input type="hidden" id="actionValidation" name="action" value=""/>
-	<input type="submit"  onclick="document.pressed=this.name" name="valider_album" value="valider"/>
-</form>
+</table>
 <?php
 }else{
 ?>
@@ -56,21 +52,17 @@ Aucun!<br/>
 $assocs = Album::getNDerniersAlbumsEtImageEtStringIDEtPhotographeEtEvenementEntreDates(0,NULL,NULL, false, 3);
 if($assocs){
 ?>
-<form action="dispatcher.php" method="POST" onsubmit="return OnSubmitActivationForm();">
-	<table>
+<table>
 <?php
 	foreach($assocs as $assoc){
 		$album = $assoc["Album"];
 		$stringid = $assoc['StringID'];
 		$photographe = $assoc['Photographe'];
-		echo "\t\t" . '<tr><td><input type="checkbox" name="albumID' . $album->getAlbumID() . '" value="albumID' . $album->getAlbumID() . '"/></td><td><a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
-		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="document.pressed=this.name" name="supprimer_album"  value="supprimer"/></td></tr>' . "\n";
+		echo "\t\t" . '<tr><td><a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
+		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="activer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return validate(\"Confirmer réactivation album.\");" name="activer_album"  value="réactiver"/></form></td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\"Confirmer activation album.\");" name="supprimer_album"  value="supprimer"/></form></td></tr>' . "\n";
 	}
 ?>
-	</table>
-	<input type="hidden" id="actionActivation" name="action" value=""/>
-	<input type="submit" onclick="document.pressed=this.name" name="activer_album" value="activer"/>
-</form>
+</table>
 <?php
 }else{
 ?>
