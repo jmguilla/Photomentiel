@@ -15,6 +15,10 @@ include("header.php");
 		Vous êtes photographe !
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Vous êtes photographe !
+	</div>
 	<div class="separator10"></div>
 	<!-- content here -->
 </div>

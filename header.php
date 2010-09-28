@@ -16,14 +16,14 @@ include_once("classes/modele/Utilisateur.class.php");
 include("userconnection.php");
 ?>
 <div id="header_surround"><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><div id="header"><span id="accueil">Accueil</span></div></a></div>
-<div class="separator5"></div>
+<div class="separator2"></div>
 <div id="menu_barre">
 	<div style="text-align:left;float:left;padding-left:10px;width:740px;">
 		<!--<div id="home"><a href="index.php" title="Retour accueil"><img src="design/misc/home.png"></img></a></div>-->
 		<?php
 			if (!$utilisateurObj){
 		?>
-				<form id="form_connect" method="POST" action="?">
+				<form id="form_connect" method="POST" action="?<?php echo getRequestParamFromPost(); ?>">
 					E-mail : <input name="user_email" id="user_email" class="email" type="text" title="Entrez votre adresse E-mail"/>
 					Mot de passe : <input name="user_pwd" id="user_pwd" class="password" style="width:100px;" type="password" title="Entrez votre mot de passe"/>
 					<input class="button" id="valider" type="submit" value="Go" title="Me connecter" onClick="return checkUserOrConnect('<?php echo Utils::getScriptName();?>');"/>
@@ -55,6 +55,6 @@ include("userconnection.php");
 		?>
 	</div>
 </div>
-<div class="separator10"></div>
+<div class="separator2"></div>
 <div id="body_content">
 

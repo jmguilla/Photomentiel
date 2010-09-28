@@ -260,5 +260,15 @@ class Evenement {
 	public function setAdresse($adresse){
 		$this->adresse = $adresse;
 	}
+	public function envoyerMailing(){
+		$dir_evenement_class_php = dirname(__FILE__);
+		include_once $dir_evenement_class_php . "/ModeleUtils.class.php";
+		$mailing = $this->getMailing();
+		$mailing = str_replace("\n", "", $mailing);
+		if(ModeleUtils::sendEvenementAlbumDisponible($this, $mailing)){
+			$this->setMailing('');
+		}
+		return false;
+	}
 }
 ?>

@@ -74,6 +74,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 			$albToCreate->setID_Evenement($_POST['event']);
 		}
 		$albToCreate->setIsPublique($_POST['public']);
+		if (isset($_POST['filigrane']) && $_POST['filigrane'] != ''){
+			$albToCreate->setFiligramme(preg_replace("[ ]","_",$_POST['filigrane']));
+		}
 		if(isset($_POST['mails'])){
 			$albToCreate->setMailing($_POST['mails']);
 		}
@@ -127,6 +130,18 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		<a href="myaccount.php">Mon compte</a> &gt; 
+		<?php
+			if ($updateMode){
+				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
+				echo "Album <b>".$sid."</b>"; 
+			} else {
+				echo "Nouvel album"; 
+			}
+		?>
+	</div>
 	<div class="separator10"></div>
 	<div id="catitle">
 		<?php
@@ -170,6 +185,22 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<input type="radio" id="public2" name="public" value="1"/> Oui (Album public)
 				</td><td>
 					<div class="checkform" id="rpublic"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" height="66px;">
+					<span class="note">Les photos exposées seront filigranées, indiquez ici si vous souhaitez choisir notre filigrane par défaut,<br/>
+					ou le filigrane de votre choix en entrant le texte désiré dans le champ suivant.</span><br/>
+					<u>Si vous souhaitez un filigrane personnalisé, veuillez renseigner le champ suivant, sinon laissez le vide :</u>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Filigrane personnalisé :
+				</td><td>
+					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20"/>
+				</td><td>
+					<div class="checkform" id="rfiligrane"></div>
 				</td>
 			</tr>
 			</table>
@@ -236,7 +267,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 									</td><td class="price">
 										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixConseille().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364; <span class="prix_conseille">( Prix conseillé : <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
 									</td><td>
-										<div class="checkform" style="width:230px;" id="r'.$paper->getTaillePapierID().'"></div>
+										<div class="checkform" style="width:300px;" id="r'.$paper->getTaillePapierID().'"></div>
 									</td>
 								</tr>';
 							}
@@ -273,7 +304,8 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		</form>
 		<?php
 			} else if ($updateMode){
-				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
+				//set at top
+				//$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
 		?>
 		<form id="update_form" method="POST" action="?action=update&al=<?php echo $sid ?>">
 		<fieldset>
@@ -303,6 +335,13 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					Album public : 
 				</td><td colspan="2">
 					<?php echo $albumObj->isPublique()?"Oui":"Non"; ?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Filigrane : 
+				</td><td colspan="2">
+					<i><?php echo $albumObj->getFiligramme(); ?></i>
 				</td>
 			</tr>
 			<tr>
@@ -337,7 +376,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		<fieldset>
 			<legend> Reversions </legend>
 			<table cellspacing="0px">
-			<tr style="background-color:lightgreen;">
+			<tr <?php echo ($albumObj->getEtat()<2)?'':'style="background-color:lightgreen;"'; ?>>
 				<td width="182px;" height="22px">
 					Gain pour le mois : 
 				</td><td colspan="2">

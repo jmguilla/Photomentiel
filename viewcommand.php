@@ -14,6 +14,8 @@ include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
+include_once("classes/modele/TransactionID.class.php");
+include_once("classes/modele/Album.class.php");
 include("header.php");
 
 if (!$utilisateurObj){
@@ -21,7 +23,7 @@ if (!$utilisateurObj){
 }
 if (isset($_GET['cmd'])){
 	$commandObj = Commande::getCommandeDepuisID($_GET['cmd']);
-	if ($commandObj->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
+	if (!$commandObj || $commandObj->getID_Utilisateur() != $utilisateurObj->getUtilisateurID()){
 		photomentiel_die(new PMError("Commande inapropriée","Cette commande ne vous appartient pas, que faites vous là ?"),false);
 	}
 } else {
@@ -53,6 +55,11 @@ if ($utilisateurObj && $commandObj){
 		Détails de votre commande n°<?php echo $commandObj->getNumero(); ?>
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		<a href="myaccount.php">Mon compte</a> &gt; 
+		Commande n°<?php echo $commandObj->getNumero(); ?>
+	</div>
 	<div id="pictures_content">
 		<div class="separator10"></div>
 		<div class="recap">Voici le récapitulatif de votre commande :</div>
@@ -131,7 +138,8 @@ if ($utilisateurObj && $commandObj){
 							<?php
 								$_SESSION['last_command'] = $commandObj->getCommandeID();
 								include("e-transactions/selectcard.php");
-								displayCards(null,toBankAmount($total),null,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
+								displayCards($albumObj->getModule(),toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 							?>
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>

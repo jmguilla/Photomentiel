@@ -23,7 +23,6 @@ ini_set('url_rewriter.tags','');
  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="Content-Language" content="fr">
 	<meta http-equiv="keywords" name="keywords" content="présentation photos événement événementiel photographe visualiser acheter distribuer albums partager impression tirages papier" />
-	<meta http-equiv="description" name="description" content="Photomentiel, Spécialiste de la photo événementielle ! Solution de présentation et de distribution d'albums photos sur le web" />
 	<meta http-equiv="robots" name="Robots" content="all">	
 	<meta name="robots" content="INDEX|FOLLOW" />
 	<meta name="author" content="<?php echo AUTHOR; ?>" />
@@ -39,8 +38,19 @@ ini_set('url_rewriter.tags','');
 	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
 	<script language="javascript" src="/js/header.js"></script>
 	<script type="text/javascript" src="/js/<?php echo Utils::getScriptName();?>.js"></script>
- 
-  	<title><?php echo AUTHOR; ?> - Spécialiste de la photo événementielle ! Solution de présentation et de distribution d'albums photos sur le web</title>
+
+	<?php
+		if (isset($HEADER_TITLE)){
+			echo '<title>'.AUTHOR.' - '.$HEADER_TITLE.'</title>';
+		} else {
+			echo '<title>'.AUTHOR.' - Spécialiste de la photo événementielle ! Solution de présentation et de distribution d\'albums photos sur le web</title>';
+		}
+		if (isset($HEADER_DESCRIPTION)){
+			echo '<meta http-equiv="description" name="description" content="'.$HEADER_DESCRIPTION.'" />';
+		} else {
+			echo '<meta http-equiv="description" name="description" content="Spécialiste de la photo événementielle ! Solution de présentation et de distribution d\'albums photos sur le web" />';
+		}
+	?>
 
  </head>
  <body>

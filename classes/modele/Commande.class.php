@@ -44,6 +44,9 @@ class Commande{
 	 * @param int $id
 	 */
 	public static function getCommandeDepuisID($id){
+		if(!isset($id) || $id == ''){
+			return false;
+		}
 		$dao = new CommandeDAO();
 		return $dao->getCommandeDepuisID($id);
 	}

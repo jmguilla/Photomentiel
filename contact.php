@@ -38,6 +38,10 @@ if ($utilisateurObj && isset($_POST['content'])){
 		Contact
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Contact
+	</div>
 	<div class="separator10" style="height:20px"></div>
 	<div id="form_content">
 		<?php

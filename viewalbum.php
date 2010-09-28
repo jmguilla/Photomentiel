@@ -59,7 +59,7 @@ $picsDir = PICTURE_DIRECTORY;
 //get the corresponding album
 $albumObj = Album::getAlbumDepuisID($sidObj->getID_Album());
 //check if it is opened
-if ($albumObj->getEtat() == 4){
+if ($albumObj->getEtat() == 3){
 	photomentiel_die(new PMError("L'album a été fermé !","Cet album a été fermé, il n'est plus disponible."));
 }
 $displayMailing = ($albumObj->getEtat() != 2);
@@ -138,6 +138,8 @@ if (isset($_SESSION['userID']) && $displayMailing){
 }
 
 //and display
+$HEADER_TITLE = "Visualisation de l'album photo ".$albumStringID;
+$HEADER_DESCRIPTION = "Page de visualisation des albums et de selection des photos";
 include("head.php");
 ?>
 	<?php

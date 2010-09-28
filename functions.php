@@ -53,6 +53,18 @@ function getHashFromArray($kvArray){
 }
 
 /* 
+ * Return an hashcode of the given array
+ */
+function getRequestParamFromPost(){
+	$kvArray = $_GET;
+	$h = '';
+	foreach ($kvArray as $k => $v) {
+		$h = $h.$k."=".$v."&";
+	}
+	return $h;
+}
+
+/* 
  * Return an hashcode of the given command array (array of array)
  */
 function getHashFromCommand($cmdArray){
@@ -70,15 +82,12 @@ function removeExtension($fileName){
 	return substr($fileName,0,sizeof($fileName)-5);
 }
 
-//TODO checker pq y'a pas de char special
-
 /*
  * Create pdf file from command, and user.
  * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
  */
-function makePDF($command, $user, $photosFormatDim, $dest=null){
+function makePDF($command, $user, $photosFormatDim, $siren ,$dest=null){
 	//TODO ajouter adresse physique de la boite postale
-	//TODO ajouter numero SIREN du concerné
 	$adresse = $user->getAdresse();
 	$PDF = new phpToPDF();
 	$PDF->AddPage();
@@ -92,7 +101,7 @@ function makePDF($command, $user, $photosFormatDim, $dest=null){
 	$PDF->Write(10, "contact@photomentiel.fr");
 	$y+=5;
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "SIREN No 123456789");
+	$PDF->Write(10, "SIREN No ".$siren);
 	$y+=5;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);

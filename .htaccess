@@ -1,6 +1,7 @@
 SetEnv PHP_VER 5
 SetEnv REGISTER_GLOBALS 0
 AddDefaultCharset UTF-8
+SetEnv MAGIC_QUOTES 0
 
 ErrorDocument 400 /err400.htm
 ErrorDocument 401 /err401.htm
@@ -13,3 +14,16 @@ RewriteRule ^facture-([0-9]+)\.pdf$ /factures_pdf.php?cmd=$1 [L]
 RewriteRule ^cartes-de-visite-([A-Za-z0-9]+)\.pdf$ /card_pdf.php?al=$1 [L]
 RewriteRule ^active-([A-Za-z0-9]+)$ /validaccount.php?uid=$1 [L]
 RewriteRule ^err([0-9]+)\.htm$ /error.php?err=$1 [L]
+RewriteRule ^album-([A-Za-z0-9]+)\.php$ /viewalbum.php?al=$1 [L]
+
+RewriteRule ^css/$ /error.php?err=403 [L]
+RewriteRule ^js/$ /error.php?err=403 [L]
+RewriteRule ^e-transactions/$ /error.php?err=403 [L]
+RewriteRule ^design/$ /error.php?err=403 [L]
+RewriteRule ^design/backgrounds/$ /error.php?err=403 [L]
+RewriteRule ^design/buttons/$ /error.php?err=403 [L]
+RewriteRule ^design/misc/$ /error.php?err=403 [L]
+RewriteRule ^phptopdf/$ /error.php?err=403 [L]
+RewriteRule ^pictures/$ /error.php?err=403 [L]
+RewriteRule ^pictures/[0-9]+/$ /error.php?err=403 [L]
+RewriteRule ^pictures/[0-9]+/[A-Za-z0-9]+/$ /error.php?err=403 [L]

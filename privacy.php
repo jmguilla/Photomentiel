@@ -15,6 +15,10 @@ include("header.php");
 	Vie privée et retrait de photos
 </div>
 <div id="full_content_mid">
+	<div class="path">
+		<a href="index.php">Accueil</a> &gt; 
+		Vie privée
+	</div>
 	<div class="separator10"></div>
 	<!-- content here -->
 </div>

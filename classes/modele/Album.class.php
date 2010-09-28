@@ -5,6 +5,7 @@ include_once $dir_album_class_php . "/../Config.php";
 
 class Album {
 	private $albumID;
+	private $filigramme = 'www.photomentiel.fr';
 	private $isPublique;
 	private $nom;
 	private $id_photographe;
@@ -31,6 +32,7 @@ class Album {
 		}
 		$this->module = $module;
 	}
+
 	/**
 	 * Renvoie les n derniers albums
 	 * si n n'est pas fournies, renvoies tous les derniers albums
@@ -312,6 +314,11 @@ class Album {
 		return $this->module;
 	}
 
+	public function cloturer(){
+		$dao = new AlbumDAO();
+		return $dao->cloturer($this);
+	}
+
 	public function setModule($mod){
 		$this->module = $mod;
 	}
@@ -352,6 +359,14 @@ class Album {
 
 	public function setGainTotal($gt){
 		$this->gainTotal = $gt;
+	}
+
+	public function getFiligramme(){
+		return $this->filigramme;
+	}
+
+	public function setFiligramme($fili){
+		$this->filigramme = $fili;
 	}
 	/**
 	 * Remet la balance à 0 et sauve en BD
@@ -394,6 +409,21 @@ class Album {
 	 */
 	function internalGetPrixTaillePapier(){
 		return $this->prixTaillePapier;
+	}
+
+	public function envoyerMailing(){
+		$dir_album_class_php = dirname(__FILE__);
+		include_once $dir_album_class_php . "/ModeleUtils.class.php";
+		include_once $dir_album_class_php . "/StringID.class.php";
+		$mailing = $this->getMailing();
+		$mailing = str_replace("\n", "", $mailing);
+		$sid = StringID::getStringIDDepuisID_Album($this->albumID);
+		if($sid){
+			if(ModeleUtils::sendAlbumDisponible($this, $sid, $mailing)){
+				$this->setMailing('');
+			}
+		}
+		return false;
 	}
 }
 ?>
