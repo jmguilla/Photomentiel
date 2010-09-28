@@ -766,22 +766,19 @@ class AlbumDAO extends DAO {
 	 * Helpers
 	 ###################################################*/
 
-	public function buildAlbumFromRow($row, $prefix = NULL){
-		if(!isset($prefix)){
-			$prefix = '';
-		}
-		$id = $row->offsetGet($prefix . "albumID");
-		$filigramme = $row->offsetGet($prefix . "filigramme");
-		$nom = $row->offsetGet($prefix . "nom");
-		$idp = $row->offsetGet($prefix . "id_photographe");
-		$ide = $row->offsetGet($prefix . "id_evenement");
-		$date = $row->offsetGet($prefix . "date");
-		$isp = $row->offsetGet($prefix . "isPublique");
-		$etat = $row->offsetGet($prefix . "etat");
-		$mod = $row->offsetGet($prefix . "module");
-		$balance = $row->offsetGet($prefix . "balance");
-		$gt = $row->offsetGet($prefix . "gainTotal");
-		$mailing = $row->offsetGet($prefix . "mailing");
+	public function buildAlbumFromRow($row, $prefix = ''){
+		$id = htmlspecialchars($row->offsetGet($prefix . "albumID"));
+		$filigramme = htmlspecialchars($row->offsetGet($prefix . "filigramme"));
+		$nom = htmlspecialchars($row->offsetGet($prefix . "nom"));
+		$idp = htmlspecialchars($row->offsetGet($prefix . "id_photographe"));
+		$ide = htmlspecialchars($row->offsetGet($prefix . "id_evenement"));
+		$date = htmlspecialchars($row->offsetGet($prefix . "date"));
+		$isp = htmlspecialchars($row->offsetGet($prefix . "isPublique"));
+		$etat = htmlspecialchars($row->offsetGet($prefix . "etat"));
+		$mod = htmlspecialchars($row->offsetGet($prefix . "module"));
+		$balance = htmlspecialchars($row->offsetGet($prefix . "balance"));
+		$gt = htmlspecialchars($row->offsetGet($prefix . "gainTotal"));
+		$mailing = htmlspecialchars($row->offsetGet($prefix . "mailing"));
 		$result = new Album();
 		$result->setFiligramme($filigramme);
 		$result->setAlbumID($id);

@@ -71,18 +71,15 @@ class AdresseDAO extends DAO{
 	 * requete mysql
 	 * @param unknown_type $row
 	 */
-	public function buildAdresseFromRow($row, $prefix = NULL){
-		if(!isset($prefix)){
-			$prefix = '';
-		}
-		$id = $row->offsetGet($prefix . "adresseID");
-		$nom = $row->offsetGet($prefix . "nom");
-		$prenom = $row->offsetGet($prefix . "prenom");
-		$nomRue = $row->offsetGet($prefix . "nomRue");
-		$cmp = $row->offsetGet($prefix . "complement");
-		$ville = $row->offsetGet($prefix . "ville");
-		$cp = $row->offsetGet($prefix . "codePostal");
-		$idu = $row->offsetGet($prefix . "id_utilisateur");
+	public function buildAdresseFromRow($row, $prefix = ''){
+		$id = htmlspecialchars($row->offsetGet($prefix . "adresseID"));
+		$nom = htmlspecialchars($row->offsetGet($prefix . "nom"));
+		$prenom = htmlspecialchars($row->offsetGet($prefix . "prenom"));
+		$nomRue = htmlspecialchars($row->offsetGet($prefix . "nomRue"));
+		$cmp = htmlspecialchars($row->offsetGet($prefix . "complement"));
+		$ville = htmlspecialchars($row->offsetGet($prefix . "ville"));
+		$cp = htmlspecialchars($row->offsetGet($prefix . "codePostal"));
+		$idu = htmlspecialchars($row->offsetGet($prefix . "id_utilisateur"));
 		$result = new Adresse();
 		$result->setAdresseID($id);
 		$result->setNom($nom);

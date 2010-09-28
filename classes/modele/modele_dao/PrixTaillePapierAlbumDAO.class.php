@@ -78,10 +78,10 @@ class PrixTaillePapierAlbumDAO extends DAO{
 	 * Helpers
 	 ###########################*/
 	public function buildPrixTaillePapierAlbumFromRow($row){
-		$id = $row->offsetGet("prixTaillePapierAlbumID");
-		$idp = $row->offsetGet("id_taillePapier");
-		$ida = $row->offsetGet("id_album");
-		$prix = $row->offsetGet("prix");
+		$id = htmlspecialchars($row->offsetGet("prixTaillePapierAlbumID"));
+		$idp = htmlspecialchars($row->offsetGet("id_taillePapier"));
+		$ida = htmlspecialchars($row->offsetGet("id_album"));
+		$prix = htmlspecialchars($row->offsetGet("prix"));
 		$result = new PrixTaillePapierAlbum();
 		$result->setPrixTaillePapierAlbumID($id);
 		$result->setID_TaillePapier($idp);

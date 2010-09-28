@@ -21,7 +21,7 @@ class TypePapierDAO extends DAO{
 		$this->extractObjectQuery($tmp, $this, "buildTypePapierFromRow");
 	}
 	/**
-	 * Renvoie la totalit� des type papier enregistr� en BD
+	 * Renvoie la totalité des type papier enregistré en BD
 	 */
 	public function getTypePapiers(){
 		$query = "select * from TypePapier";
@@ -33,9 +33,9 @@ class TypePapierDAO extends DAO{
 	 * Helpers
 	 ###################################*/
 	public function buildTypePapierFromRow($row){
-		$tp = $row->offsetGet("typePapierID");
-		$desc = $row->offsetGet("description");
-		$prix = $row->offsetGet("prix");
+		$tp = htmlspecialchars($row->offsetGet("typePapierID"));
+		$desc = htmlspecialchars($row->offsetGet("description"));
+		$prix = htmlspecialchars($row->offsetGet("prix"));
 		$result = new TypePapier();
 		$result->setTypePapierID($tp);
 		$result->setDescription($desc);
