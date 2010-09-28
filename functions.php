@@ -251,7 +251,7 @@ function makeCard($stringID, $album, $photographe, $dest=null){
 	$x = 25;$y += 4;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "Vous pouvez imprimer et découper ces cartes sur du papier cartonné afin de les distribuer lors de votre évènement.");
+	$PDF->Write(10, "Vous pouvez imprimer et découper ces cartes sur du papier cartonné afin de les distribuer lors de votre événement.");
 	//cards
 	$x = 20;$y += 15;
 	for ($i=0;$i<5;$i++){
