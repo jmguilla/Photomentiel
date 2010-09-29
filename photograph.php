@@ -88,9 +88,11 @@ $PERCENT = 23;
 			<span class="start"></span>Pour cela plusieurs solutions, tout d'abord, vous ne souhaitez pas vous déplacer et l'ensemble des données que vous souhaitez transmettre ne dépasse pas <?php echo $TAILLE_MAX; ?> Go, alors vous pouvez transmettre vos photos directement au travers d'internet, les explications sur le transfert des photos vous seront communiquées à la création d'un album.<br/>
 			<span class="start"></span>Si le temps de transfert est un problème, vous pouvez aussi nous transmettre vos photographies sur n'importe quel support numérique (cartes mémoire, CD-ROM, DVD-ROM, clé usb) par les services postaux à l'adresse :
 			<div class="photograph_adress">
-			Photomentiel<br/>
-			pouet pouet CEDEX 3<br/>
-			Sophia Antipolis
+			<?php
+				echo ADRESSE1.'<br/>';
+				echo ADRESSE2.'<br/>';
+				echo ADRESSE3;
+			?>
 			</div>
 			Ou bien tout simplement en nous contactant pour nous remettre les photos en main propre !
 			<br/>

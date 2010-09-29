@@ -172,7 +172,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 				<td width="180px">
 					Intitulé (titre)* : 
 				</td><td>
-					<input name="title" class="textfield" type="text" id="title" required="required"/>
+					<input name="title" class="textfield" type="text" id="title" required="required" maxlength="40"/>
 				</td><td>
 					<div class="checkform" id="rtitle"></div>
 				</td>
@@ -430,7 +430,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 		<div class="separator10" style="height:20px;"></div>
 			<?php
 				if($albumObj->getEtat() == 0){
-					echo '<div id="catitle3">Votre album est <u>en attente de téléchargement</u> de photos :</div>';
+					echo '<div id="catitle3">Votre album est <u>en attente de téléchargement</u> de photos : (voir les instructions ci-dessous)</div>';
 				} else if($albumObj->getEtat() == 1){
 					echo '<div id="catitle3">Votre album est <u>en attente de validation</u> par Photomentiel.<br/>Cette action sera effectuée dans les plus brefs délais...</div>';
 					echo '<div class="separator10" style="height:50px;"></div>';
@@ -444,15 +444,36 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 
 				if($albumObj->getEtat() == 0){
 		?>
-					là on explique comment télécharger des photos et il faut un bouton pour valider la fin du téléchargement.(checkbox + bouton)<br/>
-					Vous avez terminé de télécharger vos photos pour cet album ? Veuillez cocher la case ci-dessous et valider.<br/>
-					Attention, une fois validée, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails jusqu'à la validation de votre album par nos équipes.
+					<div id="dl">
+						Il existe plusieurs moyens de nous faire parvenir vos photos :
+						<ol>
+							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : 111.222.333.444 avec vos identifiants Photomentiel.</li>
+							<li>Utiliser <i>notre</i> client FTP (Java doit être installé sur votre ordinateur)</li>
+							<li>
+								Par voie postale, en nous envoyant vos photos sur n'importe quel support (clé USB, carte mémoire, CD, DVD, etc.) à l'adresse suivante :
+								<div class="photograph_adress">
+								<?php
+									echo ADRESSE1.'<br/>';
+									echo ADRESSE2.'<br/>';
+									echo ADRESSE3;
+								?>
+								</div>
+							</li>
+							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région</li>
+						</ol>
+						<br/>
+						Si <span class="h">vous avez terminé de télécharger vos photos pour cet album</span>, veuillez cocher la case ci-dessous et valider.<br/>
+						<span class="note">Attention, une fois validée, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails à contacter jusqu'à la validation de votre album par nos équipes.<br/>
+						Cette étape n'est pas nécessaire lorsque vous nous faites parvenir vos photos comme décrit dans les points 3 et 4.</span>
+					</div>
 					<div class="separator10"></div>
-					<form method="POST" action="?action=update&al=<?php echo $sid; ?>" onSubmit="return changeAlbumState();">
-						<input type="checkbox" name="cb_gonext" id="cb_gonext"/> J'ai terminé de télécharger mes photos
-						<input type="submit" class="button" name="b_gonext" id="b_gonext" value="valider"/>
-					</form>
-					<div class="separator10" style="height:50px;"></div>
+					<div id="enddl">
+						<form method="POST" action="?action=update&al=<?php echo $sid; ?>" onSubmit="return changeAlbumState();">
+							<input type="checkbox" name="cb_gonext" id="cb_gonext"/> J'ai terminé de télécharger mes photos
+							<input type="submit" class="button" name="b_gonext" id="b_gonext" value="valider"/>
+						</form>
+					</div>
+					<div class="separator10"></div>
 		<?php		
 				}
 			}

@@ -105,3 +105,34 @@ a#card_pdf:hover {
 	color:green;
 }
 
+div#dl {
+	text-align:left;
+	padding:5px;
+	font-size:14px;
+}
+div#dl ol li {
+	margin-left:30px;
+	margin-top:8px;
+}
+div#dl span.h {
+	color:blue;
+	font-weight:bold;
+}
+div.photograph_adress {
+	text-align:left;
+	font-size:14px;
+	line-height:18px;
+	margin-left:20px;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding:5px;
+	padding-left:15px;
+	border:1px grey solid;
+	width:170px;
+}
+div#enddl {
+	border:1px #5555FF solid;
+	width:80%;
+	padding:10px;
+	background-color: #E5F2FF;
+}
