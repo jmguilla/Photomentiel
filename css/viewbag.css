@@ -81,7 +81,18 @@ div.faq_f {
 }
 input.faq_q {
 	width:25px;
+	margin-top:2px;
 	text-align:center;
+	color:black;
+}
+input.faq_q:hover {
+	color:black;
+}
+div#explainpm {
+	width:99%;
+	border:1px blue solid;
+	padding:4px;
+	background-color:#DDDDFF;
 }
 div.faq_f {
 	clear:both;

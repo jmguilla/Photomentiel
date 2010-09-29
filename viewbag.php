@@ -122,6 +122,8 @@ include("header.php");
 		</div>
 		<div class="separator10"></div>
 		<div id="pictures_content">
+			<div id="explainpm">Cliquez sur les boutons <b>+</b> et <b>-</b> pour retirer ou ajouter des photos.</div>
+			<div class="separator2"></div>
 			<table cellspacing="0px">
 				<tr id="title">
 					<th>Référence</th>
@@ -144,7 +146,7 @@ include("header.php");
 						$text_value = isset($quantities[$pictures[$i].$id])?'value="'.$quantities[$pictures[$i].$id].'"':'';
 						$f = $photoFormatsDim[$id];
 						$ref_nb = $ref.$f.'nb';
-						$formatStr .= '<br/><div class="faq_f">'.$f.'</div><a class="a_minus" title="Retirer 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\',-'.$p.');"></a><input type="text" class="faq_q" id="'.$ref_nb.'" picture="'.$pictures[$i].'" format="'.$f.'" formatId="'.$id.'" '.$text_value.' readonly="true"></div><a class="a_plus" title="Ajouter 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\','.$p.');"></a>';
+						$formatStr .= '<br/><div class="faq_f">'.$f.'</div><a class="a_minus" title="Retirer 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\',-'.$p.');"></a><input type="text" class="faq_q" id="'.$ref_nb.'" picture="'.$pictures[$i].'" format="'.$f.'" formatId="'.$id.'" '.$text_value.' disabled="true"></div><a class="a_plus" title="Ajouter 1" href="javascript:" onClick="changePrice(\''.$ref.'\',\''.$f.'\','.$p.');"></a>';
 					}
 					echo '<td class="'.$imp.'" width="180px">'.(substr($formatStr,5)).'</td>';
 					//ss tot
