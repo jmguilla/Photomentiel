@@ -122,7 +122,7 @@ include("header.php");
 		</div>
 		<div class="separator10"></div>
 		<div id="pictures_content">
-			<div id="explainpm">Cliquez sur les boutons <b>+</b> et <b>-</b> pour retirer ou ajouter des photos.</div>
+			<div id="explainpm">Cliquer sur les boutons <img src="/design/buttons/minus_img.png"></img> et <img src="/design/buttons/plus_img.png"></img> pour retirer ou ajouter des photos.</div>
 			<div class="separator2"></div>
 			<table cellspacing="0px">
 				<tr id="title">
