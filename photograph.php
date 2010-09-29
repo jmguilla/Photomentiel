@@ -53,7 +53,7 @@ $PERCENT = 23;
 		</div>
 		<div class="question"><a name="4"></a>Vous parlez de stockage sécurisé, c'est à dire ?</div>
 		<div class="answer">
-			<span class="start"></span>Étant informaticien de formation, nous sommes à même de mettre en place l'ensemble des solutions de vérification, redondance, sauvegardes, etc ... pour assurer la conservation de vos données. L'ensemble de nos disques durs sont monitorés en temps réel et lorsque des symptômes de pannes se font ressentir, ils sont immédiatement remplacé.<br/>
+			<span class="start"></span>Étant informaticien de formation, nous sommes à même de mettre en place l'ensemble des solutions de vérification, redondance, sauvegardes, etc ... pour assurer la conservation de vos données. L'ensemble de nos disques durs sont monitorés en temps réel et lorsque des symptômes de pannes se font ressentir, ils sont immédiatement remplacés.<br/>
 			Si une panne devait survenir ? Aucun problème, chaque parcelle de donnée est répliquée sur plusieurs disques durs, ce qui nous permet, à chaud sans interruption de service, de remplacer le disque dur défectueux, sans aucune pertes de donnée. Et si cela ne vous rassure toujours pas, sachez que nous effectuons quotidiennement une copie de sauvegarde de l'ensemble des données, cette copie est ensuite entreposée dans un endroit distant du système de stockage principal et ne disposant pas d'accés internet. Nous sommes donc capable de faire face à tous type de pannes.
 		</div>
 		<div class="question"><a name="5"></a>Moi je privilégie la qualité, je ne veux pas me retrouver au milieu de photographes débutants logés à la même enseigne.</div>
@@ -75,13 +75,13 @@ $PERCENT = 23;
 		</div>
 		<div class="question"><a name="8"></a>Bon d'accord tout ceci semble tentant, mais qui vais-je photographier ?</div>
 		<div class="answer">
-			<span class="start"></span>Nous ciblons principalement l'évènementiel, les sorties des associations, les réunions de comités d'entreprises, tous ces évènements qui sont riches en souvenir mais qui ne sont que rarement couvert par des photographes professionnels. Si vous n'avez pas le temps de parcourir les offices du tourismes, les calendriers d'associations des mairies, etc ... et bien ce n'est pas un problème, nous l'avons fait pour vous ! Rendez vous dans la rubrique <a href="events.php">événements</a> et faites votre choix ! Vous n'aurez plus qu'à contacter un responsable d'événement pour proposer vos services.<br/>
+			<span class="start"></span>Nous ciblons principalement l'évènementiel, les sorties des associations, les réunions de comités d'entreprises, tous ces évènements qui sont riches en souvenir mais qui ne sont que rarement couvertes par des photographes professionnels. Si vous n'avez pas le temps de parcourir les offices du tourismes, les calendriers d'associations des mairies, etc ... et bien ce n'est pas un problème, nous l'avons fait pour vous ! Rendez vous dans la rubrique <a href="events.php">événements</a> et faites votre choix ! Vous n'aurez plus qu'à contacter un responsable d'événement pour proposer vos services.<br/>
 			<b>Notre but est de vous permettre de vous concentrer sur votre passion : la photo.</b>
 		</div>
 		<div class="question"><a name="9"></a>Oui d'accord je suis emballé, je signe où ?</div>
 		<div class="answer">
 			<span class="start"></span>Et bien tout d'abord la loi française sur le travail ne nous permet pas de rémunérer un particulier, si vous êtes un professionnel que faites vous encore là ? La rubrique <a href="adduser.php?type=ph">inscription</a> du site vous attend !<br/>
-			<span class="start"></span>Si vous êtes photographe amateur avec un réel talent, le statut d'auto-entrepreneur semble être la solution idéale, vous pouvez vous inscrire directement <a target="_blank" href="https://www.cfe.urssaf.fr/autoentrepreneur/CFE_Bienvenue">par internet en moins de 20 minutes</a> et vous recevrez votre numéro SIRET par la poste sous 15 jours. En terme de charges sociales vous ne serez imposé que sur vos bénéfices à hauteur de <?php echo $PERCENT; ?>%, n'hésitez pas à nous contacter pour de plus ample renseignements, nous pourrons vous conseiller au mieux. 
+			<span class="start"></span>Si vous êtes photographe amateur avec un réel talent, le statut d'auto-entrepreneur semble être la solution idéale, vous pouvez vous inscrire directement <a target="_blank" href="https://www.cfe.urssaf.fr/autoentrepreneur/CFE_Bienvenue">par internet en moins de 20 minutes</a> et vous recevrez votre numéro SIRET par la poste sous 15 jours. En terme de charges sociales vous ne serez imposé que sur vos bénéfices à hauteur de <?php echo $PERCENT; ?>%, n'hésitez pas à nous contacter pour de plus amples renseignements, nous pourrons vous conseiller au mieux. 
 		</div>
 		<div class="question"><a name="10"></a>Mais au fait, comment puis-je vous transmettre mes photos ?</div>
 		<div class="answer">
