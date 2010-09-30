@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Jeu 30 Septembre 2010 à 09:21
+-- Généré le : Jeu 30 Septembre 2010 à 09:25
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -141,7 +141,7 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 
 CREATE TABLE IF NOT EXISTS `Album` (
   `albumID` int(10) unsigned NOT NULL auto_increment,
-  `nom` varchar(50) NOT NULL default '',
+  `nom` varchar(40) NOT NULL default '',
   `isPublique` tinyint(1) NOT NULL,
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `id_evenement` int(10) unsigned default NULL,
