@@ -7,6 +7,7 @@ class TaillePapier{
 	private $description;
 	private $dimensions;
 	private $prixConseille = -1;
+	private $prixFournisseur = 0;
 
 	public function __construct($tp = -1, $desc = NULL, $dim = NULL){
 		$this->taillePapierID = $tp;
@@ -71,6 +72,14 @@ class TaillePapier{
 
 	public function setPrixConseille($p){
 		$this->prixConseille = $p;
+	}
+
+	public function getPrixFournisseur(){
+		return $this->prixFournisseur;
+	}
+
+	public function setPrixFournisseur($p){
+		$this->prixFournisseur = $p;
 	}
 }
 ?>
