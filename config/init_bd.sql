@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Jeu 30 Septembre 2010 à 19:59
+-- Généré le : Jeu 30 Septembre 2010 à 21:31
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -134,7 +134,10 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (62, 'calles', 'michele', '6 rue du murier', '', 'Les Arcs', '83460', 62),
 (63, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 63),
 (64, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 64),
-(65, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 65);
+(65, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 65),
+(66, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 66),
+(67, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 67),
+(68, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 68);
 
 -- --------------------------------------------------------
 
@@ -165,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `Album` (
 --
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 226.18, 0.05, '', '2010-06-28 15:20:25'),
+(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 263.14, 18.44, '', '2010-06-28 15:20:25'),
 (2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
 (3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 'www.photomentiel.fr', 198.89, 0.00, '', '2010-08-01 12:53:00'),
 (4, 'Mariage bien réussi', 1, 3, 3, 2, '521000018', 'www.photomentiel.fr', 492.10, 0.00, '', '2010-08-01 12:55:17'),
@@ -193,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
 
 --
 -- Contenu de la table `Commande`
@@ -236,7 +239,10 @@ INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, 
 (62, '2010-09-26 18:57:01', '2010-09-26 18:57:39', 26, 3, 1, '', 3.5, '100926180'),
 (63, '2010-09-30 19:43:06', '2010-09-30 19:43:26', 4, 3, 1, '', 0, '100930190'),
 (64, '2010-09-30 19:49:25', '2010-09-30 19:49:39', 4, 1, 1, '', 3.5, '100930191'),
-(65, '2010-09-30 19:52:29', '2010-09-30 19:52:40', 4, 1, 1, '', 3.5, '100930192');
+(65, '2010-09-30 19:52:29', '2010-09-30 19:52:40', 4, 1, 1, '', 3.5, '100930192'),
+(66, '2010-09-30 20:02:00', '2010-09-30 20:02:13', 4, 1, 1, '', 3.5, '100930200'),
+(67, '2010-09-30 20:06:46', '2010-09-30 20:07:24', 4, 1, 1, '', 3.5, '100930201'),
+(68, '2010-09-30 21:20:52', '2010-09-30 21:21:08', 4, 1, 1, '', 3.5, '100930210');
 
 -- --------------------------------------------------------
 
@@ -252,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `CommandeArchive` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `prix` float(5,2) NOT NULL,
   PRIMARY KEY  (`commandeArchiveID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
 -- Contenu de la table `CommandeArchive`
@@ -292,7 +298,10 @@ INSERT INTO `CommandeArchive` (`commandeArchiveID`, `date`, `id_utilisateur`, `n
 (31, '2010-09-26 18:57:01', 26, '100926180', 2, 18.50),
 (32, '2010-09-30 19:43:06', 4, '100930190', 2, 57.00),
 (33, '2010-09-30 19:49:25', 4, '100930191', 1, 23.00),
-(34, '2010-09-30 19:52:29', 4, '100930192', 1, 12.50);
+(34, '2010-09-30 19:52:29', 4, '100930192', 1, 12.50),
+(35, '2010-09-30 20:02:00', 4, '100930200', 1, 12.50),
+(36, '2010-09-30 20:06:46', 4, '100930201', 1, 24.00),
+(37, '2010-09-30 21:20:52', 4, '100930210', 1, 24.00);
 
 -- --------------------------------------------------------
 
@@ -316,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `id_commande` (`id_commande`),
   KEY `fk_commandePhoto_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=311 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=329 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -485,7 +494,25 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (307, '20090913153438.JPG', 1, 64, 1, 3, 1, 1, 4.00),
 (308, '20090913152543.JPG', 1, 65, 1, 1, 1, 1, 1.50),
 (309, '20090913153425.JPG', 1, 65, 1, 1, 1, 1, 1.50),
-(310, '20090913153425.JPG', 1, 65, 1, 4, 1, 1, 6.00);
+(310, '20090913153425.JPG', 1, 65, 1, 4, 1, 1, 6.00),
+(311, '20090913154223.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(312, '20090913154718.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(313, '20090913160453.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(314, '20090913162634.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(315, '20090913153810.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(316, '20090913153814.JPG', 1, 66, 1, 1, 1, 1, 1.50),
+(317, '20090913154223.JPG', 1, 67, 1, 1, 1, 1, 1.50),
+(318, '20090913154718.JPG', 1, 67, 1, 1, 1, 1, 1.50),
+(319, '20090913160453.JPG', 1, 67, 1, 1, 1, 1, 1.50),
+(320, '20090913162634.JPG', 1, 67, 1, 3, 1, 1, 4.00),
+(321, '20090913153810.JPG', 1, 67, 1, 4, 1, 1, 6.00),
+(322, '20090913153814.JPG', 1, 67, 1, 4, 1, 1, 6.00),
+(323, '20090913154223.JPG', 1, 68, 1, 1, 1, 1, 1.50),
+(324, '20090913154718.JPG', 1, 68, 1, 1, 1, 1, 1.50),
+(325, '20090913160453.JPG', 1, 68, 1, 1, 1, 1, 1.50),
+(326, '20090913162634.JPG', 1, 68, 1, 3, 1, 1, 4.00),
+(327, '20090913153810.JPG', 1, 68, 1, 4, 1, 1, 6.00),
+(328, '20090913153814.JPG', 1, 68, 1, 4, 1, 1, 6.00);
 
 -- --------------------------------------------------------
 
@@ -889,7 +916,7 @@ CREATE TABLE IF NOT EXISTS `transactionID` (
 --
 
 INSERT INTO `transactionID` (`id`, `transactionID`) VALUES
-(1, 4);
+(1, 7);
 
 -- --------------------------------------------------------
 

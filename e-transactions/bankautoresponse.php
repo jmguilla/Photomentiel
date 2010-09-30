@@ -39,16 +39,17 @@
 				$prixTaillePhotos = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandObj->getID_Album());
 				$tailles = TaillePapier::getTaillePapiers();
 				foreach($lignes as $ligne){
-					$coutReel += $ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur();
+					$taille = $tailles[$ligne->getID_TaillePapier()];
+					$coutReel += $ligne->getNombre() * $taille->getPrixFournisseur();
 				}
+				fwrite($log, "real_cost = $coutReel\n");
 				//give this command the next state : archive is done when state goes from 0 to 1
 				$commandObj->etatSuivant();
 				//add x percent of this amout to this album
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
 				if ($album){
-					fwrite($log, "real_cost = $coutReel\n");
-					$album->updateAmounts(toFloatAmount($amount - $coutReel));
+					$album->updateAmounts(toFloatAmount($amount - ($coutReel * 100)));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
