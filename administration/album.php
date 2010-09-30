@@ -17,13 +17,13 @@ $_SESSION['message'] = '';
 </form>
 <h3>Albums</h3>
 Albums créés:<br/>
-<form target="blank" method="post" action="dispatcher.php">
+<form target="_blank" method="post" action="dispatcher.php">
 	<input type="hidden" name="action" value="montrer_album_cree"/>
 	<input type="submit" value="montrer"/>
 </form>
 <hr/>
 Albums ouverts:<br/>
-<form target="blank" method="post" action="dispatcher.php">
+<form target="_blank" method="post" action="dispatcher.php">
 	<input type="hidden" name="action" value="montrer_album"/>
 	<input type="submit" value="montrer"/>
 </form>
