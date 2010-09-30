@@ -9,7 +9,6 @@
  * Since : 1.0.0
  *
  */
-
 include("phptopdf/phpToPDF.php");
 
 /* 
@@ -86,7 +85,7 @@ function removeExtension($fileName){
  * Create pdf file from command, and user.
  * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
  */
-function makePDF($command, $user, $photosFormatDim, $siren ,$dest=null){
+function makePDF($command, $user, $photosFormatDim, $siren, $dest=null){
 	$adresse = $user->getAdresse();
 	$PDF = new phpToPDF();
 	$PDF->AddPage();
@@ -166,7 +165,7 @@ function makePDF($command, $user, $photosFormatDim, $siren ,$dest=null){
 	// Contenu du header du tableau.
 	$contenuHeader = array(
 		80, 34, 34, 34,
-		"Référence", "Format", "Quantité", "Total",
+		"Référence", "Format", "Quantité", "Total (Euro ttc)",
 	);
 	// Définition des propriétés du reste du contenu du tableau.
 	$proprieteContenu = array(
@@ -194,7 +193,7 @@ function makePDF($command, $user, $photosFormatDim, $siren ,$dest=null){
 		$tabContent[$index++] = removeExtension($line->getPhoto());
 		$tabContent[$index++] = $photosFormatDim[$line->getID_TaillePapier()];
 		$tabContent[$index++] = $line->getNombre();
-		$tabContent[$index++] = sprintf('%.2f',$line->getPrix())." €";
+		$tabContent[$index++] = sprintf('%.2f',$line->getPrix());
 		$tot += $line->getPrix();
 	}
 	//display tab
@@ -202,21 +201,21 @@ function makePDF($command, $user, $photosFormatDim, $siren ,$dest=null){
 	$PDF->SetXY($x,$y);
 	$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $tabContent);
 	//FDP
-	$x = 137;$y+=sizeof($lines)*6+7;
+	$x = 130;$y+=sizeof($lines)*6+7;
 	$PDF->SetFont('Times','',11);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "Frais de port : ");
 	$PDF->SetFont('Times','',11);
-	$PDF->SetXY($x+26,$y+2);
-	$PDF->Cell(34,6,$command->getFDP()==0?"Offert!":sprintf('%.2f',$command->getFDP())." €",1,1,'C');
+	$PDF->SetXY($x+33,$y+2);
+	$PDF->Cell(34,6,$command->getFDP()==0?"Offert!":sprintf('%.2f',$command->getFDP()),1,1,'C');
 	//Total
 	$y+=7;
 	$PDF->SetFont('Times','',12);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "Total : ");
+	$PDF->Write(10, "Total (Euro ttc) : ");
 	$PDF->SetFont('Times','B',12);
-	$PDF->SetXY($x+26,$y+2);
-	$PDF->Cell(34,6,sprintf('%.2f',$command->getFDP()+$tot)." €",1,1,'C');
+	$PDF->SetXY($x+33,$y+2);
+	$PDF->Cell(34,6,sprintf('%.2f',$command->getFDP()+$tot),1,1,'C');
 	//mention
 	$PDF->SetFont('Times','',8);
 	$y += 6;
