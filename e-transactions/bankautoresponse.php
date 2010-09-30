@@ -3,6 +3,8 @@
 	include_once($dir_bar_php."/../functions.php");
 	include_once($dir_bar_php."/../classes/modele/Commande.class.php");
 	include_once($dir_bar_php."/../classes/modele/CommandePhoto.class.php");
+	include_once($dir_bar_php."/../classes/modele/PrixTaillePapierAlbum.class.php");
+	include_once($dir_bar_php."/../classes/modele/TaillePapier.class.php");
 	include_once($dir_bar_php."/../classes/modele/Album.class.php");
 	include_once($dir_bar_php."/../classes/modele/Photographe.class.php");
 	include_once($dir_bar_php."/../classes/controleur/ControleurUtils.class.php");
@@ -31,15 +33,22 @@
 	if ($CB_RETURN_EXIT_CODE == 0){
 		//$idCmd contient l'ID de la commande
 		if ($bank_response_code=='00' && $response_code=='00'){
-			$commandObj = Commande::getCommandeDepuisID($idCmd);
+			$commandObj = Commande::getCommandeEtPhotosDepuisID($idCmd);
 			if ($commandObj->getEtat() == 0){
+				$lignes = $commandObj->getCommandesPhoto();
+				$total = $commandObj->getFDP();
+				$prixTaillePhotos = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandObj->getID_Album());
+				$tailles = TaillePapier::getTaillePapiers();
+				foreach($lignes as $ligne){
+					$total = $ligne->getPrix() - ($ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur());
+				}
 				//give this command the next state : archive is done when state goes from 0 to 1
 				$commandObj->etatSuivant();
 				//add x percent of this amout to this album
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
 				if ($album){
-					$album->updateAmounts(toFloatAmount($amount));
+					$album->updateAmounts(toFloatAmount($total));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);

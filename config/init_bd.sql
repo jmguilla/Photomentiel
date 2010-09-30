@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Jeu 30 Septembre 2010 à 09:25
+-- Généré le : Jeu 30 Septembre 2010 à 18:59
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -680,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `telephone` varchar(20) NOT NULL default '',
   `siteWeb` varchar(50) NOT NULL default '',
   `home` varchar(100) NOT NULL default '',
-  `pourcentage` tinyint(3) unsigned NOT NULL default '70',
+  `pourcentage` tinyint(3) unsigned NOT NULL default '77',
   `rib_b` varchar(10) NOT NULL default '',
   `rib_g` varchar(10) NOT NULL default '',
   `rib_c` varchar(20) NOT NULL default '',
@@ -697,13 +697,13 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
 --
 
 INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
-(1, 'ET tu s''auras pas n''a', '521000018', '+33620375962', 'www.site2.com', '2010051201', 70, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 4),
-(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 70, '', '', '', '', '', '', 5),
-(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', 70, '', '', '', '', '', '', 6),
-(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 70, '19106', '00021', '43511041644', '60', '', '', 7),
-(8, '', '521000018', '', '', '2010090700', 70, '19106', '00021', '43511041644', '60', '', '', 15),
-(9, '', '521000018', '', '', '2010091400', 70, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 16),
-(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 70, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24);
+(1, 'ET tu s''auras pas n''a', '521000018', '+33620375962', 'www.site2.com', '2010051201', 77, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 4),
+(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 77, '', '', '', '', '', '', 5),
+(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', 77, '', '', '', '', '', '', 6),
+(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 77, '19106', '00021', '43511041644', '60', '', '', 7),
+(8, '', '521000018', '', '', '2010090700', 77, '19106', '00021', '43511041644', '60', '', '', 15),
+(9, '', '521000018', '', '', '2010091400', 77, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 16),
+(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 77, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24);
 
 -- --------------------------------------------------------
 
