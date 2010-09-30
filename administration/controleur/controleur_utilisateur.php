@@ -6,6 +6,30 @@ include_once $dir_administration_controleur_utilisateur_php . "/../../classes/mo
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/controleur/ControleurUtils.class.php";
 
 switch($action){
+	case modifier_photographe:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id fourni, annulation.<br/>";
+			break;
+		}
+		if(!isset($_POST['pourcentage'])){
+			$_SESSION['message'] .= "Aucun pourcentage fourni, annulation.<br/>";
+			break;
+		}
+		$id = $_POST['id'];
+		$pourcentage = $_POST['pourcentage'];
+		$photographe = Photographe::getPhotographeDepuisID($id);
+		if(!$photographe){
+			$_SESSION['message'] .= "Aucun photographe ne correspond à cette id, annulation.<br/>";
+			break;
+		}
+		$photographe->setPourcentage($pourcentage);
+		if($photographe->save()){
+			$_SESSION['message'] .= "Changement de pourcentage effectué avec succès<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible de sauver le changement.<br/>";
+		}
+		header('Location: photographe.php');
+		exit();
 	case payer:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id fourni, annulation.<br/>";

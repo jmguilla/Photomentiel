@@ -32,6 +32,7 @@ switch($action){
 	case activer_utilisateur:
 	case reinitialiser_mdp:
 	case payer:
+	case modifier_photographe:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_utilisateur.php";
 	break;
 	//pour empecher mauvais formattage

@@ -1,4 +1,4 @@
-<?php
+c<?php
 //album
 define("valider_album", "valider_album");
 define("activer_album", "activer_album");
@@ -24,4 +24,5 @@ define("renvoyer_email_confirmation", "renvoyer_email_confirmation");
 define("activer_utilisateur", "activer_utilisateur");
 define("reinitialiser_mdp", "reinitialiser_mdp");
 define("payer", "payer");
+define("modifier_photographe", "modifier_photographe");
 ?>
