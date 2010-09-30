@@ -84,3 +84,12 @@ function mailingCheckMail(){
 	}
 	return true;
 }
+function showPhotographeDetails(){
+	$('#photograph_details').css('visibility','visible');
+	//$('#photograph_details').fadeIn("slow");
+}
+function exitPhotographeDetails(){
+	//$('#photograph_details').fadeOut("fast");
+	$('#photograph_details').css('visibility','hidden');
+}
+

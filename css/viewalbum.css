@@ -180,3 +180,25 @@ div.basket_content {
 div.basket_content img {
 	height:45px;
 }
+div.photograph_details {
+	visibility:hidden;
+	position:absolute;
+	top:90px;
+	left:20px;
+	width:500px;
+	height:250px;
+	border:2px black solid;
+	z-index:100px;
+	background-color:#DDDDFF;
+}
+div#photograph_details_content {
+	margin:5px;
+	text-align:left;
+}a.pd_exit {
+	display:block;
+	float:right;
+	height:16px;
+	width:16px;
+}
+a.pd_exit:link, a.pd_exit:visited {background:url(../design/buttons/exit.png) 0 0px no-repeat;}
+a.pd_exit:hover, a.pd_exit:active {background:url(../design/buttons/exit.png) 0 -16px no-repeat;}

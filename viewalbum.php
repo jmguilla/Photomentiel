@@ -169,21 +169,47 @@ include("head.php");
 			</div>
 			<div id="leftpanel_mid">
 				<div class="separator5"></div>
+
+				<?php 
+					$adresseObj = $photographObj->getAdresse();
+				?>
+				<div id="photograph_details" class="photograph_details">
+					<div style="width:100%;"><a href="javascript:exitPhotographeDetails();" class="pd_exit" title="Fermer"></a></div>
+					<div class="separator2"></div>
+					<div id="photograph_details_content">
+						<table>
+							<tr>
+								<td width="120px">
+									Photographe :
+								</td>
+								<td>
+									<?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Téléphone :
+								</td>
+								<td>
+									0123456789
+								</td>
+							</tr>
+						</table>
+						Votre E-mail : <input id="email" type="textfield" class="textfield" name="email" <?php echo ($utilisateurObj)?'value="'.$utilisateurObj->getEmail().'"':''; ?>/>
+						<div class="separator5"></div>
+						Votre message :
+						<div class="separator2"></div>
+						<textarea id="content" class="textfield" cols="65" rows="4" name="content"></textarea>
+					</div>
+					<a href="javascript:exitPhotographeDetails();" title="Fermer">Fermer</a>
+				</div>
+
 				<div id="album_infos">
 					<span>Code :</span> <?php echo $albumStringID; ?>
 					<br/>
 					<span>Création :</span> <?php echo date("d/m/Y",strtotime($albumObj->getDate())); ?>
 					<br/>
-					<?php 
-					$adresseObj = $photographObj->getAdresse();
-					if($adresseObj){
-					?>
-					<span>Photographe :</span> <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?>
-					<?php }else{ ?>
-					<span>Photographe :</span> <?php echo $photographObj->getEmail(); ?>	
-					<?php } ?>
-					<br/>
-					<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"> <?php echo $photographObj->getEmail(); ?></a>
+					<span>Photographe :</span> <a title="Afficher les détails" href="javascript:showPhotographeDetails();"><?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?></a>
 					<?php
 						if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
 					?>

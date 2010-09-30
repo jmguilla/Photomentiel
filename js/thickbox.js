@@ -191,7 +191,7 @@ if(typeof thickox == 'undefined') {
 					TB_HEIGHT = imageHeight + 60;
 		
 					var content = '';
-					content += '<div style="width:100%;"><a href="#" class="tb_exit" id="TB_closeWindowButton" title="Fermer"/></div>';
+					content += '<div style="width:100%;"><a href="#" class="tb_exit" id="TB_closeWindowButton" title="Fermer"></a></div>';
 					content += '<div style="height:5px;"></div>';
 					content += '<div id="TB_ImageFull" style="position:relative;overflow:hidden;">';
 					
