@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Mar 28 Septembre 2010 à 20:47
+-- Généré le : Jeu 30 Septembre 2010 à 09:25
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -141,7 +141,7 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 
 CREATE TABLE IF NOT EXISTS `Album` (
   `albumID` int(10) unsigned NOT NULL auto_increment,
-  `nom` varchar(50) NOT NULL default '',
+  `nom` varchar(40) NOT NULL default '',
   `isPublique` tinyint(1) NOT NULL,
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `id_evenement` int(10) unsigned default NULL,
@@ -637,7 +637,7 @@ INSERT INTO `Evenement` (`evenementID`, `description`, `adresse`, `id_region`, `
 (4, 'Hockey : France vs Espagne', '', 21, 6, 1906, 2, '2010-06-10 00:00:00', '', '', 4),
 (5, 'Visite chez les hobbits', '', 21, 6, 1906, 0, '2010-06-10 00:00:00', '', '', 5),
 (6, 'Un autre mariage mais mieux réussi :)', '', 21, 6, 1906, 1, '2011-01-28 15:55:25', '', '', 1),
-(7, 'Et voilà le premier événement en ligne via la form !! wouhaiiii', '', 13, 38, 8095, 3, '2010-12-12 22:00:00', 'jmichel.guillaume@gmail.com;tchitchoubyne@msn.com', '', 8);
+(7, 'Et voilà le premier événement en ligne via la form !! wouhaiiii', '', 13, 38, 8095, 3, '2010-12-12 22:00:00', 'jmichel.guillaume@gmail.com;tchitchoubyne@msn.com;toto@toto.toto;tot@toto.toto', '', 8);
 
 -- --------------------------------------------------------
 
@@ -834,6 +834,7 @@ CREATE TABLE IF NOT EXISTS `TaillePapier` (
   `description` varchar(20) default NULL,
   `dimensions` varchar(20) NOT NULL,
   `prixConseille` float NOT NULL default '10',
+  `prixFourniseur` float(6,2) NOT NULL default '0.00',
   PRIMARY KEY  (`taillePapierID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
@@ -841,12 +842,12 @@ CREATE TABLE IF NOT EXISTS `TaillePapier` (
 -- Contenu de la table `TaillePapier`
 --
 
-INSERT INTO `TaillePapier` (`taillePapierID`, `description`, `dimensions`, `prixConseille`) VALUES
-(1, 'Standard', '10x15', 3),
-(2, 'Agrandissement', '13x17', 3.5),
-(3, 'Moyen', '15x21', 4),
-(4, 'Moyen Agrandissement', '18x24', 4.5),
-(5, 'Grand', '20x30', 6);
+INSERT INTO `TaillePapier` (`taillePapierID`, `description`, `dimensions`, `prixConseille`, `prixFourniseur`) VALUES
+(1, 'Standard', '10x15', 3, 0.00),
+(2, 'Agrandissement', '13x17', 3.5, 0.00),
+(3, 'Moyen', '15x21', 4, 0.00),
+(4, 'Moyen Agrandissement', '18x24', 4.5, 0.00),
+(5, 'Grand', '20x30', 6, 0.00);
 
 -- --------------------------------------------------------
 

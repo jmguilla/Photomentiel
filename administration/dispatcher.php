@@ -14,6 +14,8 @@ switch($action){
 	case detail_album:
 	case cloturer_album:
 	case supprimer_album:
+	case montrer_album_cree:
+	case valider_upload:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_album.php";
 	break;
 	case detail_commande:

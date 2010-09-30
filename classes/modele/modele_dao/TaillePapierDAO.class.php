@@ -36,11 +36,13 @@ class TaillePapierDAO extends DAO{
 		$desc = $row->offsetGet("description");
 		$dimensions = $row->offsetGet("dimensions");
 		$prix = $row->offsetGet("prixConseille");
+		$pf = $row->offsetGet("prixFournisseur");
 		$result = new TaillePapier();
 		$result->setTaillePapierID($tp);
 		$result->setDimensions($dimensions);
 		$result->setDescription($desc);
 		$result->setPrixConseille($prix);
+		$result->setPrixFournisseur($pf);
 		return $result;
 	}
 }
