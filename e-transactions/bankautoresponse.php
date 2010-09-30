@@ -28,7 +28,6 @@
 	fwrite($log, "command_id = $caddie\n");
 	fwrite($log, "customer_id = $customer_id\n");
 	fwrite($log, "customer_ip_address = $customer_ip_address\n");
-	fclose($log);
 
 	if ($CB_RETURN_EXIT_CODE == 0){
 		//$idCmd contient l'ID de la commande
@@ -48,6 +47,7 @@
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
 				if ($album){
+					fwrite($log, "real_cost = $coutReel\n");
 					$album->updateAmounts(toFloatAmount($amount - $coutReel));
 				}
 				//send mail with facture
@@ -56,4 +56,5 @@
 		}
 	}
 
+	fclose($log);
 ?>
