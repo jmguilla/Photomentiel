@@ -40,7 +40,7 @@
 				$prixTaillePhotos = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandObj->getID_Album());
 				$tailles = TaillePapier::getTaillePapiers();
 				foreach($lignes as $ligne){
-					$total = $ligne->getPrix() - ($ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur());
+					$total += $ligne->getPrix() - ($ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur());
 				}
 				//give this command the next state : archive is done when state goes from 0 to 1
 				$commandObj->etatSuivant();
