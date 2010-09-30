@@ -323,6 +323,11 @@ class Album {
 		return $dao->cloturer($this);
 	}
 
+	public function validerUpload(){
+		$dao = new AlbumDAO();
+		return $dao->validerUpload($this);
+	}
+
 	public function setModule($mod){
 		$this->module = $mod;
 	}

@@ -92,7 +92,7 @@ class EvenementEcouteurDAO extends DAO{
 		$dir_evenementecouteurdao_class_php = dirname(__FILE__);
 		include_once $dir_evenementecouteurdao_class_php . "/EvenementDAO.class.php";
 		include_once $dir_evenementecouteurdao_class_php . "/../Evenement.class.php";
-		$query = "select e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
+		$query = "select e.adresse, e.mailing, e.evenementID, e.description, e.web, e.type, e.date, e.id_utilisateur, " . 
 		"r.id_region as rid_region, r.nom as rnom, " . //relatifs a region
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon " .	
