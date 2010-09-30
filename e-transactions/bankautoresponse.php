@@ -36,11 +36,11 @@
 			$commandObj = Commande::getCommandeEtPhotosDepuisID($idCmd);
 			if ($commandObj->getEtat() == 0){
 				$lignes = $commandObj->getCommandesPhoto();
-				$total = $commandObj->getFDP();
+				$coutReel = $commandObj->getFDP();
 				$prixTaillePhotos = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandObj->getID_Album());
 				$tailles = TaillePapier::getTaillePapiers();
 				foreach($lignes as $ligne){
-					$total += $ligne->getPrix() - ($ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur());
+					$coutReel += $ligne->getNombre() * $tailles[$ligne->getID_TaillePapier()]->getPrixFournisseur();
 				}
 				//give this command the next state : archive is done when state goes from 0 to 1
 				$commandObj->etatSuivant();
@@ -48,7 +48,7 @@
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
 				if ($album){
-					$album->updateAmounts(toFloatAmount($total));
+					$album->updateAmounts(toFloatAmount($amount - $coutReel));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
