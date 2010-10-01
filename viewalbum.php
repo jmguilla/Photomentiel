@@ -194,7 +194,7 @@ include("head.php");
 						Veuillez recopier ces caractères en respectant les majuscules et les minuscules : 
 						<img align="top" src="captcha.php" title="Recopiez le code"/> 
 						<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:60px;"></input><br>
-						<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $photographObj->getPhotographeID(); ?>');"/></center>
+						<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $photographObj->getUtilisateurID(); ?>');"/></center>
 					</div>
 					<div class="separator5"></div>
 					<center><span id="p_error"></span><span id="p_success"></span></center>

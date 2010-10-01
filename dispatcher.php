@@ -27,7 +27,7 @@ try{
 		case lost_pwd:
 		case s_email_contact:
 		case send_facture:
-		case s_email_photographe:
+		case s_email_user:
 			include_once $dir_dispatcher_php . "/classes/controleur/controleur_utilisateurs.php";
 		break;
 		case g_evt_id:

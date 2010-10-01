@@ -8,12 +8,12 @@ include_once $dirname . "/../vue/JSONVue.class.php";
 include_once $dirname . "/externalization.php";
 
 switch($action){
-	case s_email_photographe:
-		if(!isset($_POST['idphotographe']) || !isset($_POST['msg']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
+	case s_email_user:
+		if(!isset($_POST['iduser']) || !isset($_POST['msg']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
 			ControleurUtils::serialize_object_json(false, true, "Le service est momentanément indisponible. Désolé.");
 			return;
 		}
-		$idp = $_POST['idphotographe'];
+		$id = $_POST['iduser'];
 		$message = $_POST['msg'];
 		$captcha = $_POST['captcha'];
 		$email = $_POST['email'];
@@ -21,12 +21,12 @@ switch($action){
 			ControleurUtils::serialize_object_json(false, true, "Captcha non valide.");
 			return;
 		}
-		$photographe = Photographe::getPhotographeDepuisID($idp);
-		if(!$photographe){
+		$user = Utilisateur::getUtilisateurDepuisID($id);
+		if(!$user){
 			ControleurUtils::serialize_object_json(false, true, "Le service est momentanément indisponible. Désolé.");
 			return;
 		}
-		ControleurUtils::serialize_object_json(ControleurUtils::sendPhotographemail($email, $message, $photographe), true, "Le service est momentanément indisponible. Désolé.");
+		ControleurUtils::serialize_object_json(ControleurUtils::sendPhotographemail($email, $message, $user), true, "Le service est momentanément indisponible. Désolé.");
 	break;
 	case send_facture:
 		$dirname = dirname(__FILE__);

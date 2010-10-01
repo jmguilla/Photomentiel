@@ -36,7 +36,7 @@ define("u_photographe", "update_photographe");
 define("check_email", "check_email");
 define("lost_pwd", "lostpwd");
 define("s_email_contact", "send_email_contact");
-define("s_email_photographe", "send_email_photographe");
+define("s_email_user", "send_email_user");
 define("send_facture", "send_facture");
 
 //en relation avec les stringID

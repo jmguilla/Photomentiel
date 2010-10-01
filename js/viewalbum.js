@@ -111,11 +111,11 @@ function sendEmailToPhotograph(idPhotographe){
 		return false;
 	}
 	var dataToSend = new Object();
-	dataToSend.idphotographe=idPhotographe;
+	dataToSend.iduser=idPhotographe;
 	dataToSend.email=$('#p_email').val();
 	dataToSend.captcha=$('#p_captcha').val();
 	dataToSend.msg=$('#p_content').val();
-	dataToSend.action='send_email_photographe';
+	dataToSend.action='send_email_user';
 	$('#p_send').attr('disabled', 'true');
 	$('#p_error').html("");
 	$('#p_success').html("");
