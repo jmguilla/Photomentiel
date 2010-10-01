@@ -178,7 +178,7 @@ include("head.php");
 					<div id="photograph_details_content">
 						<div style="text-align:left;font-size:14px;">
 						<span>Photographe :</span>  <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?><br/>
-						<span>Téléphone :</span> 0123456789<br/>
+						<span>Téléphone :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?><br/>
 						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?>
 						</div>
 						<div class="separator10"></div>
@@ -191,9 +191,9 @@ include("head.php");
 						<div class="separator2"></div>
 						<textarea id="p_content" class="textfield" cols="79" rows="4" name="content"></textarea>
 						<div class="separator5"></div>
-						Veuillez recopier ces caractères en respectant les majuscules et les minuscules : 
+						<span style="font-size:11px;">Veuillez recopier ces caractères en respectant les majuscules et les minuscules : </span>
 						<img align="top" src="captcha.php" title="Recopiez le code"/> 
-						<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:60px;"></input><br>
+						<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:40px;"></input><br>
 						<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $photographObj->getPhotographeID(); ?>');"/></center>
 					</div>
 					<div class="separator5"></div>

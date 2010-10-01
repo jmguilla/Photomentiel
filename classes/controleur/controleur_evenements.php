@@ -67,7 +67,7 @@ switch($action){
 								"StringID" =>true
 								),
 						"Photographe" => array(
-								"Email" => true,
+								"Telephone" => true,
 								"Adresse"  => true
 								),
 						"Adresse" => array(

@@ -87,14 +87,10 @@ include("header.php");
 				<br/>
 				<?php 
 				$adresseObj = $photographObj->getAdresse();
-				if($adresseObj){
 				?>
 				<span>Photographe :</span> <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?>
-				<?php }else{ ?>
-				<span>Photographe :</span> <?php echo $photographObj->getEmail(); ?>	
-				<?php } ?>
 				<br/>
-				<span>Contact :</span> <a href="mailto:<?php echo $photographObj->getEmail(); ?>"><?php echo $photographObj->getEmail(); ?></a>
+				<span>Contact :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?>
 				<?php
 					if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
 				?>
