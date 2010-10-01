@@ -10,7 +10,7 @@ include_once $dirname . "/externalization.php";
 switch($action){
 	case s_email_photographe:
 		if(!isset($_POST['idphotographe']) || !isset($_POST['msg']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
-			ControleurUtils::serialize_object_json(false, true, "Informations manquantes, impossible d'envoyer email au photographe.");
+			ControleurUtils::serialize_object_json(false, true, "Le service est momentanément indisponible. Désolé.");
 			return;
 		}
 		$idp = $_POST['idphotographe'];
@@ -18,15 +18,15 @@ switch($action){
 		$captcha = $_POST['captcha'];
 		$email = $_POST['email'];
 		if($captcha != $_SESSION['Captcha']){
-			ControleurUtils::serialize_object_json(false, true, "Captcha non valide." . $captcha . " - " . $_SESSION['Captcha']);
+			ControleurUtils::serialize_object_json(false, true, "Captcha non valide.");
 			return;
 		}
 		$photographe = Photographe::getPhotographeDepuisID($idp);
 		if(!$photographe){
-			ControleurUtils::serialize_object_json(false, true, "Aucun photographe avec l'id #" . $idp);
+			ControleurUtils::serialize_object_json(false, true, "Le service est momentanément indisponible. Désolé.");
 			return;
 		}
-		ControleurUtils::serialize_object_json(ControleurUtils::sendPhotographemail($email, $message, $photographe), true, "Impossible d'envoyer l'email au photographe #" . $idp);
+		ControleurUtils::serialize_object_json(ControleurUtils::sendPhotographemail($email, $message, $photographe), true, "Le service est momentanément indisponible. Désolé.");
 	break;
 	case send_facture:
 		$dirname = dirname(__FILE__);

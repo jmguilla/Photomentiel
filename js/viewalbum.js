@@ -128,7 +128,7 @@ function sendEmailToPhotograph(idPhotographe){
 			if(data.result == true && data.value == true){
 				$('#p_success').html("Votre message a bien été envoyé. Merci.");
 			} else {
-				$('#p_error').html("Une erreur est survenue, vérifier le captcha et recommencer.");
+				$('#p_error').html(data.cause);
 				$('#p_send').removeAttr('disabled');
 			}
 		},
