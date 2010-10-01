@@ -1,4 +1,4 @@
-c<?php
+<?php
 //album
 define("valider_album", "valider_album");
 define("activer_album", "activer_album");
