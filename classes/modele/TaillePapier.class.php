@@ -7,6 +7,7 @@ class TaillePapier{
 	private $description;
 	private $dimensions;
 	private $prixConseille = -1;
+	private $prixMinimum = 1;
 	private $prixFournisseur = 0;
 
 	public function __construct($tp = -1, $desc = NULL, $dim = NULL){
@@ -80,6 +81,14 @@ class TaillePapier{
 
 	public function setPrixFournisseur($p){
 		$this->prixFournisseur = $p;
+	}
+
+	public function getPrixMinimum(){
+		return $this->prixMinimum;
+	}
+
+	public function setPrixMinimum($pm){
+		$this->prixMinimum = $pm;
 	}
 }
 ?>

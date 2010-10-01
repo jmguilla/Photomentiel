@@ -11,7 +11,7 @@ class Photographe extends Utilisateur{
 	protected $siteweb;
 	protected $nomEntreprise;
 	protected $home;
-	protected $pourcentage = 77;
+	protected $pourcentage = PHOTOGRAPH_INITIAL_PERCENT;
 	protected $rib_b;
 	protected $rib_g;
 	protected $rib_c;
