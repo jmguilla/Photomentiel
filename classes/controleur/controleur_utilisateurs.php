@@ -14,7 +14,7 @@ switch($action){
 			return;
 		}
 		$idp = $_POST['idphotographe'];
-		$message = $POST['msg'];
+		$message = $_POST['msg'];
 		$captcha = $_POST['captcha'];
 		$email = $_POST['email'];
 		if($captcha != $_SESSION['Captcha']){
