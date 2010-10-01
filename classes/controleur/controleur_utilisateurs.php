@@ -9,7 +9,7 @@ include_once $dirname . "/externalization.php";
 
 switch($action){
 	case s_email_photographe:
-		if(!isset($_POST['idphotographe']) || !isset($POST['msg']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
+		if(!isset($_POST['idphotographe']) || !isset($_POST['msg']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
 			ControleurUtils::serialize_object_json(false, true, "Informations manquantes, impossible d'envoyer email au photographe.");
 			return;
 		}

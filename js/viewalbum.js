@@ -113,7 +113,7 @@ function sendEmailToPhotograph(idPhotographe){
 	var dataToSend = new Object();
 	dataToSend.idphotographe=idPhotographe;
 	dataToSend.email=$('#p_email').val();
-	dataToSend.captcha=$('#p_captcha').val()
+	dataToSend.captcha=$('#p_captcha').val();
 	dataToSend.msg=$('#p_content').val();
 	dataToSend.action='send_email_photographe';
 	$('#p_send').attr('disabled', 'true');
