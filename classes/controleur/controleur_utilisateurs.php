@@ -8,12 +8,32 @@ include_once $dirname . "/../vue/JSONVue.class.php";
 include_once $dirname . "/externalization.php";
 
 switch($action){
+	case s_email_photographe:
+		if(!isset($_POST['idphotographe']) || !isset($POST['message']) || !isset($_POST['captcha']) || !isset($_POST['email'])){
+			ControleurUtils::serialize_object_json(false, true, "Informations manquantes, impossible d'envoyer email au photographe.");
+			return;
+		}
+		$idp = $_POST['idphotographe'];
+		$message = $POST['message'];
+		$captcha = $_POST['captcha'];
+		$email = $_POST['email'];
+		if($captcha != $SESSION['Captcha']){
+			ControleurUtils::serialize_object_json(false, true, "Captcha non valide.");
+			return;
+		}
+		$photographe = Photographe::getPhotographeDepuisID($idp);
+		if(!$photographe){
+			ControleurUtils::serialize_object_json(false, true, "Aucun photographe avec l'id #" . $idp);
+			return;
+		}
+		ControleurUtils::serialize_object_json(ControleurUtils::sendPhotographemail($email, $message, $photographe), true, "Impossible d'envoyer l'email au photographe #" . $idp);
+	break;
 	case send_facture:
 		$dirname = dirname(__FILE__);
 		include_once $dirname . "/../modele/Commande.class.php";
 		include_once $dirname . "/../modele/TaillePapier.class.php";
 		if(isset($_POST['id'])){
-				$id = $_POST['id'];
+			$id = $_POST['id'];
 		}else{
 			$id = $_GET['id'];
 		}
