@@ -17,7 +17,7 @@ switch($action){
 		$message = $POST['msg'];
 		$captcha = $_POST['captcha'];
 		$email = $_POST['email'];
-		if($captcha != $SESSION['Captcha']){
+		if($captcha != $_SESSION['Captcha']){
 			ControleurUtils::serialize_object_json(false, true, "Captcha non valide.");
 			return;
 		}
