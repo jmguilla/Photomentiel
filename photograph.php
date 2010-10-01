@@ -12,7 +12,7 @@
 include("header.php");
 
 $TAILLE_MAX = 2;//Go
-$PERCENT = 23;
+$PERCENT = 27;
 ?>
 <div id="full_content_top">
 		Vous êtes photographe, Bienvenue parmi nous !

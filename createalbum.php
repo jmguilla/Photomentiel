@@ -325,7 +325,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<font color="blue"><?php echo $sid; ?></font>
 					<?php
 						if ($albumObj->getEtat() <= 2) {
-							echo ' - <a id="card_pdf" href="cartes-de-visite-'.$sid.'.pdf">Télécharger vos cartes de visites</a>';
+							echo ' - <a id="card_pdf" target="_blank" href="cartes-de-visite-'.$sid.'.pdf">Télécharger vos cartes de visites</a>';
 						}
 					?>
 				</td>
