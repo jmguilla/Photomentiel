@@ -1,6 +1,7 @@
 <?php
 	$dir_bar_php = dirname(__FILE__);
 	include_once($dir_bar_php."/../functions.php");
+	include_once($dir_bar_php."/../classes/Config.php");
 	include_once($dir_bar_php."/../classes/modele/Commande.class.php");
 	include_once($dir_bar_php."/../classes/modele/CommandePhoto.class.php");
 	include_once($dir_bar_php."/../classes/modele/PrixTaillePapierAlbum.class.php");
@@ -35,7 +36,7 @@
 			$commandObj = Commande::getCommandeEtPhotosDepuisID($idCmd);
 			if ($commandObj->getEtat() == 0){
 				$lignes = $commandObj->getCommandesPhoto();
-				$coutReel = $commandObj->getFDP();
+				$coutReel = SHIPPING_RATE;
 				$prixTaillePhotos = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($commandObj->getID_Album());
 				$tailles = TaillePapier::getTaillePapiers();
 				foreach($lignes as $ligne){
@@ -49,7 +50,7 @@
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
 				if ($album){
-					$album->updateAmounts(toFloatAmount($amount - ($coutReel * 100)));
+					$album->updateAmounts(toFloatAmount($amount - toBankAmount($coutReel)));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
