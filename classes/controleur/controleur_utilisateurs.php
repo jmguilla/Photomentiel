@@ -18,7 +18,7 @@ switch($action){
 		$captcha = $_POST['captcha'];
 		$email = $_POST['email'];
 		if($captcha != $_SESSION['Captcha']){
-			ControleurUtils::serialize_object_json(false, true, "Captcha non valide.");
+			ControleurUtils::serialize_object_json(false, true, "Captcha non valide." . $captcha . " - " . $_SESSION['Captcha']);
 			return;
 		}
 		$photographe = Photographe::getPhotographeDepuisID($idp);
