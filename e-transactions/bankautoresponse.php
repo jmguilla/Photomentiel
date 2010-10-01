@@ -11,7 +11,7 @@
 	include($dir_bar_php."/buildresponse.php");
 
 	//put some logs
-	$log = fopen("logs/".date("Ym").".log", 'a');
+	$log = fopen("/homez.368/photomen/cgi-bin/logs/".date("Ym").".log", 'a');
 	fwrite($log, "--------------------------------------------------\n");
 	fwrite($log, "transmission_date = $transmission_date\n");
 	fwrite($log, "merchant_id = $merchant_id\n");
