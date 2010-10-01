@@ -244,9 +244,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			<table>
 			<tr>
 				<td colspan="3" height="100px;">
-					<span class="note">Pour les formats, les prix indiqués sont donnés à titre indicatif et sont, selon nos statistiques, ceux qui offrent
-					les meilleurs rendements. Ils sont aussi les prix minimum que nous acceptons. Certains peuvent vous paraître bas, mais n'oubliez pas que vos clients préférent
-					acheter 5 photos à 6&#8364; plutôt qu'une à 20&#8364;. (les prix ne seront pas modifiables par la suite)</span><br/>
+					<span class="note">Pour les formats, les prix conseillés indiqués sont donnés à titre indicatif et sont, selon nos statistiques, ceux qui offrent
+					les meilleurs rendements. Vous y trouverez aussi les prix minimum que nous acceptons. N'oubliez pas que vos clients préférent
+					acheter 5 photos à 6&#8364; plutôt qu'une seule à 20&#8364;.<br/>(les prix ne seront pas modifiables par la suite)<br/>
+					Veuillez aussi prendre soin de choisir les formats en respectant vos ratios de résolution. (Par exemple, gardez le format 10x15 si vos photos sont larges, 
+					10x13 pour des photos en 4/3). En règle générale, vous ne devez pas avoir à choisir 2 formats dont le premier nombre est équivalent (ex. 10x13 et 10x15).</span><br/>
 					<u>Sélectionnez les formats de photos qui seront disponibles pour cet album, ainsi que les prix<br/>
 					que vous souhaitez leur attribuer :</u><br/>
 				</td>
@@ -265,7 +267,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 									<td>
 										'.$paper->getDimensions().' :&nbsp;
 									</td><td class="price">
-										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixConseille().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364; <span class="prix_conseille">( Prix conseillé : <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
+										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixMinimum().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364; <span class="prix_conseille">( Prix min: <b>'.$paper->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
 									</td><td>
 										<div class="checkform" style="width:300px;" id="r'.$paper->getTaillePapierID().'"></div>
 									</td>
@@ -447,7 +449,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					<div id="dl">
 						Il existe plusieurs moyens de nous faire parvenir vos photos :
 						<ol>
-							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : 111.222.333.444 avec vos identifiants Photomentiel.</li>
+							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : <?php echo FTP_TRANSFER_IP; ?> avec vos identifiants Photomentiel.</li>
 							<li>Utiliser <i>notre</i> client FTP (Java doit être installé sur votre ordinateur)</li>
 							<li>
 								Par voie postale, en nous envoyant vos photos sur n'importe quel support (clé USB, carte mémoire, CD, DVD, etc.) à l'adresse suivante :
@@ -459,7 +461,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 								?>
 								</div>
 							</li>
-							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région</li>
+							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Allez à la page contact pour prendre un rendez vous</a></li>
 						</ol>
 						<br/>
 						Si <span class="h">vous avez terminé de télécharger vos photos pour cet album</span>, veuillez cocher la case ci-dessous et valider.<br/>

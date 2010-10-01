@@ -40,11 +40,13 @@ define('STRINGID_LENGTH', 8);
 define('AUTHOR','Photomentiel');
 define('DOMAIN_NAME','photomentiel');
 define('DOMAIN_EXT','fr');
-define('SHIPPING_RATE',3.50);
+define('SHIPPING_RATE',3.49);
 define('SHIPPING_RATE_UNTIL',30);
 define('PHOTOGRAPH_INITIAL_PERCENT', 73);
 
 define('ADRESSE1','Photomentiel');
 define('ADRESSE2','Pouet Pouet CEDEX 3');
 define('ADRESSE3','Sophia Antipolis');
+
+define('FTP_TRANSFER_IP','11.22.33.44');
 ?>
