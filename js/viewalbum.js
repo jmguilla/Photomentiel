@@ -93,3 +93,48 @@ function exitPhotographeDetails(){
 	$('#photograph_details').css('visibility','hidden');
 }
 
+function sendEmailToPhotograph(idPhotographe){
+	if ($('#p_email').val() == ''){
+		alert("Veuillez saisir une adresse E-mail.");
+		return false;
+	}
+	if (!re_mail.test($('#p_email').val())){
+		alert("Veuillez saisir une adresse E-mail valide.");
+		return false;
+	}
+	if ($('#p_content').val().length < 20){
+		alert("Votre message semble un peu court.");
+		return false;
+	}
+	if ($('#p_captcha').val().length < 5){
+		alert("Veuillez saisir les 5 caractères de vérification.");
+		return false;
+	}
+	var dataToSend = new Object();
+	dataToSend.idphotographe=idPhotographe;
+	dataToSend.email=$('#p_email').val();
+	dataToSend.captcha=$('#p_captcha').val()
+	dataToSend.msg=$('#p_content').val();
+	$('#p_send').attr('disabled', 'true');
+	$('#p_error').html("");
+	$('#p_success').html("");
+	$.ajax({
+		type: "POST",
+		url: "/dispatcher.php",
+		data:dataToSend,
+		dataType:"json",
+		success:function(data){
+			if(data.result == true && data.value == true){
+				$('#p_success').html("Votre message a bien été envoyé. Merci.");
+			} else {
+				$('#p_error').html("Une erreur est survenue, vérifier le captcha et recommencer.");
+				$('#p_send').removeAttr('disabled');
+			}
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			alert('Error with code 18');
+		}
+	});
+	return false;
+}
+

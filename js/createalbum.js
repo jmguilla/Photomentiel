@@ -33,6 +33,20 @@ function checkMinPrice(){
 	}
     	return { "error" : errorMin, "mess" : mess };
 }
+/* check that their is no consecutive values set for pictures formats */
+function checkNotCompliant(){
+	previous = false;
+	current = false;
+	result = false;
+	$('input[min]').each(function() {
+		previous = current;
+		current = ($('#'+ this.id).val() != '');
+		if (previous && current){
+			result = true;
+		}
+    	});
+	return result;
+}
 
 function filterEvent(){
 	var d = $('#filter_date').val();
@@ -101,6 +115,10 @@ function validForm(update){
     	tmp = checkRegexp('mails');
     	error = error || tmp.error;
     	mess += tmp.mess;
+	//check format fields
+	if (checkNotCompliant() && !confirm("Vous avez sélectionné des formats dont les ratios ne sont pas compatibles.\nCeci peut avoir des répercussions négatives sur l'impression des photos de vos clients.\nContinuer quand même ?")) {
+		return;
+	}
 	//result
     	if (error){
     		alert(mess);

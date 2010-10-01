@@ -248,7 +248,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 					les meilleurs rendements. Vous y trouverez aussi les prix minimum que nous acceptons. N'oubliez pas que vos clients préférent
 					acheter 5 photos à 6&#8364; plutôt qu'une seule à 20&#8364;.<br/>(les prix ne seront pas modifiables par la suite)<br/>
 					Veuillez aussi prendre soin de choisir les formats en respectant vos ratios de résolution. (Par exemple, gardez le format 10x15 si vos photos sont larges, 
-					10x13 pour des photos en 4/3). En règle générale, vous ne devez pas avoir à choisir 2 formats dont le premier nombre est équivalent (ex. 10x13 et 10x15).</span><br/>
+					10x13 pour des photos en 4/3). En règle générale, vous ne devez pas avoir à choisir 2 formats dont le premier nombre est équivalent (ex. <b>10</b>x13 et <b>10</b>x15).</span><br/>
 					<u>Sélectionnez les formats de photos qui seront disponibles pour cet album, ainsi que les prix<br/>
 					que vous souhaitez leur attribuer :</u><br/>
 				</td>

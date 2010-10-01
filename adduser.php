@@ -279,7 +279,7 @@ if (isset($_GET["np"])){
 						<td>
 							Site Web : 
 						</td><td>
-							<input name="site_web" class="textfield" type="text" id="site_web" <?php echo $createMode?'':'value="'.$utilisateurObj->getSiteWeb().'"'; ?>/>
+							<input name="site_web" class="textfield" type="text" id="site_web" value="<?php echo $createMode?'http://':$utilisateurObj->getSiteWeb(); ?>"/>
 						</td><td>
 							<div  class="checkform" id="rsite_web"></div>
 						</td>

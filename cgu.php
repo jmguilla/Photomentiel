@@ -49,7 +49,7 @@ include("header.php");
 		<br/>
 		<h1>Introduction :</h1>
 		<span class="start"></span>Le service proposé par l'intermédiaire du site </span><span class="photomentiel">www.photomentiel.fr</span> est un service mis à votre disposition
-		par trois associés dont les immatriculations au registre des entreprises sont les suivantes : 000000000, 000000000, 000000000.<br/>
+		par deux associés dont les immatriculations au registre des entreprises sont les suivantes : 0521000018, 523919066.<br/>
 		Ce service s'adresse principalement aux photographes et aux visiteurs qui ont été photographiés et leurs permet de :<br/>
 		<ul>
 			<li>Mettre en ligne des photographies sous forme de fichiers numériques et les proposer à la vente.</li>
@@ -113,7 +113,14 @@ include("header.php");
 			plus considéré comme "viable" est exclusivement établi par nos services au travers de nos statistiques.<br/>
 			<span class="start"></span>Le prix des tirages/impressions sur différents supports est fixé par le photographe propriétaire de l'album et est en vigueur à partir
 			du moment où il figure sur la page de présentation de l'album. Ce prix est exprimé en Euros toutes taxes comprises et tenant compte de la TVA applicable au jour de la commande.
-			Il ne pourra plus être modifié une fois l'album créé. Les moyens de paiement acceptés sont les Cartes Bancaires : nationale, visa, mastercard
+			Il ne pourra plus être modifié une fois l'album créé. Les moyens de paiement acceptés sont les Cartes Bancaires : nationale, visa, mastercard.
+			<br/>
+			<span class="start"></span>Le photographe s'engage à respecter et être responsable des formats qu'il autorise pour l'impression des photos.
+			Il est important qu'il choisisse des formats papiers dont le ratio se rapproche le plus possible du ratio de la résolution des formats numériques.<br/>
+			Si <i>l</i> et <i>h</i> représentent respectivement les largeur et hauteur de la photo numérique, 
+			<i>L</i> et <i>H</i> les largeur et hauteur de la photo imprimée (ex. 10x13,10x15), alors <i>(l/h-L/H)</i> doit être le plus proche possible de 0 pour une taille donnée.<br/>
+			Example : la résolution numérique est 1200*1600. 1200/1600-10/13=-0.019 et 1200/1600-10/15=0.08, -0.019 est plus proche de 0 que 0.08, donc
+			le photographe devra choisir le format 10x13 et non 10x15.
 			<br/>
 			<span class="start"></span>La prise en charge de la commande sera effective dès la confirmation de son paiement. S'il s'avère que le paiement
 			est refusé par notre organisme bancaire ou qu'un problème survient lors du traitement de la commande, l'utilisateur en sera averti par email.<br/>

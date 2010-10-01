@@ -175,33 +175,29 @@ include("head.php");
 				?>
 				<div id="photograph_details" class="photograph_details">
 					<div style="width:100%;"><a href="javascript:exitPhotographeDetails();" class="pd_exit" title="Fermer"></a></div>
-					<div class="separator2"></div>
 					<div id="photograph_details_content">
-						<table>
-							<tr>
-								<td width="120px">
-									Photographe :
-								</td>
-								<td>
-									<?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Téléphone :
-								</td>
-								<td>
-									0123456789
-								</td>
-							</tr>
-						</table>
-						Votre E-mail : <input id="email" type="textfield" class="textfield" name="email" <?php echo ($utilisateurObj)?'value="'.$utilisateurObj->getEmail().'"':''; ?>/>
+						<div style="text-align:left;font-size:14px;">
+						<span>Photographe :</span>  <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?><br/>
+						<span>Téléphone :</span> 0123456789<br/>
+						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?>
+						</div>
+						<div class="separator10"></div>
+						<b>Pour contacter ce photographe par E-mail, veuillez remplir les champs suivants :</b><br/>
+						Votre E-mail : 
+						<div class="separator2"></div>
+						<input id="p_email" type="textfield" class="textfield" name="email" style="width:200px;"/>
 						<div class="separator5"></div>
 						Votre message :
 						<div class="separator2"></div>
-						<textarea id="content" class="textfield" cols="65" rows="4" name="content"></textarea>
+						<textarea id="p_content" class="textfield" cols="79" rows="4" name="content"></textarea>
+						<div class="separator5"></div>
+						Veuillez recopier ces caractères en respectant les majuscules et les minuscules : 
+						<img align="top" src="captcha.php" title="Recopiez le code"/> 
+						<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:60px;"></input><br>
+						<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $photographObj->getPhotographeID(); ?>');"/></center>
 					</div>
-					<a href="javascript:exitPhotographeDetails();" title="Fermer">Fermer</a>
+					<div class="separator5"></div>
+					<center><span id="p_error"></span><span id="p_success"></span></center>
 				</div>
 
 				<div id="album_infos">
