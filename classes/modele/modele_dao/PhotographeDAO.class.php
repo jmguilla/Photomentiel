@@ -125,6 +125,28 @@ class PhotographeDAO extends UtilisateurDAO{
 			return false;
 		}
 	}
+
+	public function voter($photographe, $note){
+		$currentNote = $photographe->getNote();
+		$nombreVotant = $photographe->getNombreVotant();
+		$newNombreVotant = $nombreVotant + 1;
+		$newNote = ($currentNote * $nombreVotant + $note) / $newNombreVotant;
+		$query = "update Photographe set nombreVotant = " .
+		mysql_real_escape_string($newNombreVotant) . ", note = " .
+		mysql_real_escape_string($newNote) . " where photographeID = " .
+		mysql_real_escape_string($photographe->getPhotographeID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp){
+			$photographe->setNombreVotant($newNombreVotant);
+			$photographe->setNote($newNote);
+			$this->commit();
+			return $photographe;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
 	/**###########################################
 	 * Helpers
 	 ############################################*/

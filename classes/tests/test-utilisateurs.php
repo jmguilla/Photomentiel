@@ -2,13 +2,10 @@
 $dir_test_utilisateurs_php = dirname(__FILE__);
 include_once $dir_test_utilisateurs_php . "/../modele/Utilisateur.class.php";
 include_once $dir_test_utilisateurs_php . "/../modele/Adresse.class.php";
-$photographe = Utilisateur::getUtilisateurDepuisID(1);
-$adresse = new Adresse();
-$adresse->setCodePostal("83460");
-$adresse->setNomRue("6 rue du murier");
-$adresse->setComplement("");
-$adresse->setVille("Les Arcs");
-$adresse = $adresse->create();
-$photographe->setID_Adresse($adresse->getAdresseID());
-$photographe->save();
+$photographe = Utilisateur::getUtilisateurDepuisID(7);
+$note = rand(0, 10);
+echo "nouvelle note: " . $note . "<br/>";
+echo "note courrant: " .$photographe->getNote() . " - pour " . $photographe->getNombreVotant() . " votants<br/>";
+$photographe->voter($note);
+echo "note après vote: " . $photographe->getNote() . " - pour " . $photographe->getNombreVotant() . " votants<br/>";
 ?>

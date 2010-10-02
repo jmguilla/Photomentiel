@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Ven 01 Octobre 2010 à 11:00
+-- Généré le : Sam 02 Octobre 2010 à 12:20
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -171,14 +171,14 @@ CREATE TABLE IF NOT EXISTS `Album` (
 --
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 311.03, 10.01, '', '2010-06-28 15:20:25'),
-(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
-(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00'),
-(4, 'Mariage bien réussi', 1, 3, 3, 2, '521000018', 'www.photomentiel.fr', 492.10, 0.00, '', '2010-08-01 12:55:17'),
-(5, 'Anniversaire Christian', 0, 10, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39'),
-(7, 'l''album', 0, 1, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20'),
-(8, 'l''album l''retour', 0, 1, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23'),
-(9, 'l''album l''retour l''retour', 0, 1, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02');
+(1, 'Rencontre OK', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 311.03, 10.01, '', '2010-06-28 15:20:25'),
+(2, 'Tunning Jacky', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
+(3, 'Mariage Chris', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00'),
+(4, 'Mariage bien réussi', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 492.10, 0.00, '', '2010-08-01 12:55:17'),
+(5, 'Anniversaire Christian', 0, 4, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39'),
+(7, 'l''album', 0, 4, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20'),
+(8, 'l''album l''retour', 0, 4, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23'),
+(9, 'l''album l''retour l''retour', 0, 4, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02');
 
 -- --------------------------------------------------------
 
@@ -754,6 +754,8 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `siteWeb` varchar(50) NOT NULL default '',
   `home` varchar(100) NOT NULL default '',
   `pourcentage` tinyint(3) unsigned NOT NULL default '73',
+  `note` float(4,2) unsigned NOT NULL default '6.00',
+  `nombreVotant` int(10) unsigned NOT NULL default '1',
   `rib_b` varchar(10) NOT NULL default '',
   `rib_g` varchar(10) NOT NULL default '',
   `rib_c` varchar(20) NOT NULL default '',
@@ -769,14 +771,14 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
 -- Contenu de la table `Photographe`
 --
 
-INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
-(1, 'ET tu s''auras pas n''a', '521000018', '+33620375962', 'www.site2.com', '2010051201', 73, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 4),
-(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 73, '', '', '', '', '', '', 5),
-(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', 73, '', '', '', '', '', '', 6),
-(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 73, '19106', '00021', '43511041644', '60', '', '', 7),
-(8, '', '521000018', '', '', '2010090700', 73, '19106', '00021', '43511041644', '60', '', '', 15),
-(9, '', '521000018', '', '', '2010091400', 73, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 16),
-(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 73, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24);
+INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `note`, `nombreVotant`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
+(1, 'ET tu s''auras pas n''a', '521000018', '+33620375962', 'www.site2.com', '2010051201', 73, 6.00, 1, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 4),
+(2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 73, 6.00, 1, '', '', '', '', '', '', 5),
+(3, 'nom entreprise 3', '15sq7d-f25seurt23427sq', '+336204899875', 'www.site3.com', '2010072901', 73, 6.00, 1, '', '', '', '', '', '', 6),
+(4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 73, 6.00, 1, '19106', '00021', '43511041644', '60', '', '', 7),
+(8, '', '521000018', '', '', '2010090700', 73, 6.00, 1, '19106', '00021', '43511041644', '60', '', '', 15),
+(9, '', '521000018', '', '', '2010091400', 73, 6.00, 1, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 16),
+(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 73, 6.00, 1, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24);
 
 -- --------------------------------------------------------
 
@@ -910,18 +912,21 @@ CREATE TABLE IF NOT EXISTS `TaillePapier` (
   `prixConseille` float(6,2) NOT NULL default '10.00',
   `prixFournisseur` float(6,2) NOT NULL default '0.00',
   PRIMARY KEY  (`taillePapierID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `TaillePapier`
 --
 
 INSERT INTO `TaillePapier` (`taillePapierID`, `description`, `dimensions`, `prixMinimum`, `prixConseille`, `prixFournisseur`) VALUES
-(1, 'Standard', '10x15', 1.00, 3.00, 0.20),
-(2, 'Agrandissement', '13x17', 1.00, 3.50, 0.30),
-(3, 'Moyen', '15x21', 1.00, 4.00, 0.40),
-(4, 'Moyen Agrandissement', '18x24', 1.00, 4.50, 0.50),
-(5, 'Grand', '20x30', 1.00, 6.00, 1.00);
+(1, 'Standard', '10x13', 2.00, 2.50, 0.08),
+(2, 'Standard', '10x15', 2.00, 2.50, 0.06),
+(3, 'Moyen', '13x17', 2.50, 3.20, 0.20),
+(4, 'Moyen', '13x19', 2.50, 3.20, 0.20),
+(5, 'Grand', '15x20', 3.40, 4.30, 0.30),
+(6, 'Grand', '15x21', 3.40, 4.30, 0.30),
+(7, 'Agrandissement', '20x27', 4.00, 5.20, 0.50),
+(8, 'Agrandissement', '20x30', 4.00, 5.20, 0.50);
 
 -- --------------------------------------------------------
 

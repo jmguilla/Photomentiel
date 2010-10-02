@@ -12,6 +12,8 @@ class Photographe extends Utilisateur{
 	protected $nomEntreprise;
 	protected $home;
 	protected $pourcentage = PHOTOGRAPH_INITIAL_PERCENT;
+	protected $note = 6;
+	protected $nombreVotant = 1;
 	protected $rib_b;
 	protected $rib_g;
 	protected $rib_c;
@@ -177,6 +179,30 @@ class Photographe extends Utilisateur{
 
 	public function setPourcentage($p){
 		$this->pourcentage = $p;
+	}
+
+	public function getNote(){
+		return $this->note;
+	}
+
+	public function setNote($note){
+		$this->note = $note;
+	}
+
+	public function getNombreVotant(){
+		return $this->nombreVotant;
+	}
+
+	public function setNombreVotant($nv){
+		$this->nombreVotant = $nv;
+	}
+
+	public function voter($note){
+		if($note < 0 || $note > 10){
+			return false;
+		}
+		$dao = new PhotographeDAO();
+		return $dao->voter($this, $note);
 	}
 }
 ?>

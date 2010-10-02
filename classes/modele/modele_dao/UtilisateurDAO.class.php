@@ -227,6 +227,10 @@ class UtilisateurDAO extends DAO{
 			$bic = htmlspecialchars($row->offsetGet($prefix . "bic"));
 			$iban = htmlspecialchars($row->offsetGet($prefix . "iban"));
 			$pourcentage = $row->offsetGet($prefix . "pourcentage");
+			$note = $row->offsetGet($prefix . "note");
+			$nv = $row->offsetGet($prefix . "nombreVotant");
+			$result->setNombreVotant($nv);
+			$result->setNote($note);
 			$result->setHome($home);
 			$result->setPhotographeID($pid);
 			$result->setNomEntreprise($ne);
