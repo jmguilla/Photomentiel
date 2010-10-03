@@ -11,7 +11,7 @@
  */
 ?>
 	</div>
-  	<div class="separator2"></div>
+  	<div class="separator5"></div>
   	<div id="footer">
   		&#169; 2009 <?php echo AUTHOR; ?> - Tous droits réservés - Vie privée et Internet
   	</div>

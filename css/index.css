@@ -15,12 +15,14 @@ div#square_top, div#divsquare_top {
 }
 div#square_top {
 	text-align:left;
-	background-image:url(../design/backgrounds/square_top.png);
+	background-color:#3377DD;
+	border:1px blue solid;
+	//background-image:url(../design/backgrounds/square_top.png);
 	background-repeat:no-repeat;
-	width:484px;
-	height:29px;
-	padding-top:6px;
-	padding-left:5px;
+	width:475px;
+	height:25px;
+	padding-top:3px;
+	padding-left:4px;
 }
 div#square_top a {
 	font-size:12px;
@@ -31,9 +33,11 @@ div#square_top a {
 	letter-spacing: 0;
 }
 div#square_mid {
-	background-image:url(../design/backgrounds/square_middle.png);
+	//background-image:url(../design/backgrounds/square_middle.png);
 	background-repeat:repeat-y;
-	width:484px;
+	width:479px;
+	border-left:1px blue solid;
+	border-right:1px blue solid;
 }
 div#card, div#albums, div#events, div#know_more {
 	height:215px;
@@ -71,10 +75,13 @@ div#card a:hover {
 	color: #007700;
 }
 div#square_bot {
-	background-image:url(../design/backgrounds/square_bottom.png);
+	//background-image:url(../design/backgrounds/square_bottom.png);
 	background-repeat:no-repeat;
-	width:484px;
-	height:11px;
+	width:479px;
+	height:5px;
+	border-bottom:1px blue solid;
+	border-right:1px blue solid;
+	border-left:1px blue solid;
 }
 
 div#tl_error {

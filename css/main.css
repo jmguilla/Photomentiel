@@ -93,15 +93,15 @@ textarea:hover, textarea:focus {
 
 div#header_surround{
 	margin-top:2px;
-	margin-left:auto; 
+	margin-left:auto;
 	margin-right:auto;
-	width:980px;
-	height:110px;
+	width:975px;
+	height:103px;
 }
 div#header {
 	background-image:url(../design/backgrounds/banniere.png);
 	background-repeat:no-repeat;
-	width:980px;
+	width:975px;
 	height:25px;
 	padding-top:85px;
 	text-align:left;
@@ -116,11 +116,13 @@ span#accueil {
 div#menu_barre {
 	margin-left:auto; 
 	margin-right:auto;
-	background-image:url(../design/backgrounds/buttons_barre.png);
+	//background-image:url(../design/backgrounds/buttons_barre.png);
 	background-repeat:no-repeat;
-	width:980px;
+	background-color:#1A1A1A;
+	border:1px blue solid;
+	width:970px;
 	padding-top:1px;
-	height:32px;
+	height:26px;
 	text-align:right;
 	color:#0099FF;
 	font-size:11px;
@@ -176,23 +178,24 @@ a#lost_pwd, a#deconnexion {
 div#body_content {
 	margin-left:auto;
 	margin-right:auto;
-	width:980px;
+	width:975px;
 }
 div#footer {
 	margin-left:auto;
 	margin-right:auto;
-	padding-top:4px;
-	background-image:url(../design/backgrounds/bottom.png);
+	padding-top:2px;
+	//background-image:url(../design/backgrounds/bottom.png);
 	background-repeat:no-repeat;
-	width:980px;
-	height:22px;
+	height:18px;
 	color:#0099FF;
-	
+	background-color:#1A1A1A;
+	border:1px blue solid;
+	width:970px;
 }
 div#end {
 	margin-left:auto;
 	margin-right:auto;
-	width:980px;
+	width:970px;
 }
 div#end a {
 	font-size:10px;
@@ -207,7 +210,7 @@ div#end a:hover {
 div#full_content_top {
 	background-image:url(../design/backgrounds/full_content_top.png);
 	background-repeat:no-repeat;
-	width:980px;
+	width:970px;
 	height:30px;
 	text-align:left;
 	font-size:17px;
@@ -220,12 +223,12 @@ div#full_content_top {
 div#full_content_mid {
 	background-image:url(../design/backgrounds/full_content_mid.png);
 	background-repeat:repeat-y;
-	width:980px;
+	width:970px;
 }
 div#full_content_bot {
 	background-image:url(../design/backgrounds/full_content_bot.png);
 	background-repeat:no-repeat;
-	width:980px;
+	width:970px;
 	height:11px;
 }
 
