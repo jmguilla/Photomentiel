@@ -186,7 +186,7 @@ div.photograph_details {
 	top:90px;
 	left:20px;
 	width:590px;
-	height:290px;
+	height:310px;
 	border:2px black solid;
 	z-index:100px;
 	background-color:white;
@@ -194,6 +194,9 @@ div.photograph_details {
 div#photograph_details_content {
 	margin:5px;
 	text-align:left;
+}
+img.star {
+	margin-right:2px;
 }
 span#p_error {
 	color:red;
