@@ -210,7 +210,7 @@ div#end a:hover {
 div#full_content_top {
 	background-image:url(../design/backgrounds/full_content_top.png);
 	background-repeat:no-repeat;
-	width:970px;
+	width:980px;
 	height:30px;
 	text-align:left;
 	font-size:17px;
@@ -223,12 +223,12 @@ div#full_content_top {
 div#full_content_mid {
 	background-image:url(../design/backgrounds/full_content_mid.png);
 	background-repeat:repeat-y;
-	width:970px;
+	width:980px;
 }
 div#full_content_bot {
 	background-image:url(../design/backgrounds/full_content_bot.png);
 	background-repeat:no-repeat;
-	width:970px;
+	width:980px;
 	height:11px;
 }
 
