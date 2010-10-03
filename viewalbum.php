@@ -179,13 +179,29 @@ include("head.php");
 						<div style="text-align:left;font-size:14px;">
 						<span>Photographe :</span>  <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?><br/>
 						<span>Téléphone :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?><br/>
-						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?>
+						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?><br/>
+						<span>Evaluation :</span> 
+						<?php
+							$note = round($photographObj->getNote()*6/10);
+							for ($i=0;$i<$note;$i++){
+								echo '<img class="star" src="/design/misc/star1.png"></img>';
+							}
+							for ($i=$note;$i<6;$i++){
+								echo '<img class="star" src="/design/misc/star0.png"></img>';
+							}
+						?>
 						</div>
 						<div class="separator10"></div>
 						<b>Pour contacter ce photographe par E-mail, veuillez remplir les champs suivants :</b><br/>
 						Votre E-mail : 
 						<div class="separator2"></div>
-						<input id="p_email" type="textfield" class="textfield" name="email" style="width:200px;"/>
+						<?php
+							$utilisateurObj = false;
+							if (isset($_SESSION['userID'])){
+								$utilisateurObj = Utilisateur::getUtilisateurDepuisID($_SESSION['userID']);
+							}
+						?>
+						<input id="p_email" type="textfield" class="textfield" name="email" style="width:200px;" value="<?php echo ($utilisateurObj)?$utilisateurObj->getEmail():''; ?>"/>
 						<div class="separator5"></div>
 						Votre message :
 						<div class="separator2"></div>
@@ -196,7 +212,7 @@ include("head.php");
 						<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:40px;"></input><br>
 						<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $photographObj->getUtilisateurID(); ?>');"/></center>
 					</div>
-					<div class="separator5"></div>
+					<div class="separator2" style="height:3px;"></div>
 					<center><span id="p_error"></span><span id="p_success"></span></center>
 				</div>
 
