@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Sam 02 Octobre 2010 à 12:20
+-- Généré le : Dim 03 Octobre 2010 à 12:43
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -171,14 +171,14 @@ CREATE TABLE IF NOT EXISTS `Album` (
 --
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 311.03, 10.01, '', '2010-06-28 15:20:25'),
-(2, 'Tunning Jacky', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
-(3, 'Mariage Chris', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00'),
+(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 311.03, 10.01, '', '2010-06-28 15:20:25'),
+(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
+(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00'),
 (4, 'Mariage bien réussi', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 492.10, 0.00, '', '2010-08-01 12:55:17'),
-(5, 'Anniversaire Christian', 0, 4, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39'),
-(7, 'l''album', 0, 4, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20'),
-(8, 'l''album l''retour', 0, 4, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23'),
-(9, 'l''album l''retour l''retour', 0, 4, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02');
+(5, 'Anniversaire Christian', 0, 10, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39'),
+(7, 'l''album', 0, 1, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20'),
+(8, 'l''album l''retour', 0, 1, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23'),
+(9, 'l''album l''retour l''retour', 0, 1, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02');
 
 -- --------------------------------------------------------
 
@@ -248,7 +248,7 @@ INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, 
 (68, '2010-09-30 21:20:52', '2010-09-30 21:21:08', 4, 1, 1, '', 3.5, '100930210'),
 (69, '2010-10-01 09:28:28', '2010-10-01 09:28:46', 1, 3, 1, '', 0, '101001090'),
 (70, '2010-10-01 09:38:10', '2010-10-01 09:41:50', 1, 1, 1, '', 0, '101001091'),
-(71, '2010-10-01 10:46:35', '2010-10-01 10:46:48', 1, 1, 1, '', 3.5, '101001100');
+(71, '2010-10-01 10:46:35', '2010-10-01 10:46:48', 1, 1, 2, 'jm@jm.jm', 3.5, '101001100');
 
 -- --------------------------------------------------------
 
