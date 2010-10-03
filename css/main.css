@@ -208,28 +208,35 @@ div#end a:hover {
 
 /** other content **/
 div#full_content_top {
-	background-image:url(../design/backgrounds/full_content_top.png);
-	background-repeat:no-repeat;
-	width:980px;
-	height:30px;
+	//background-image:url(../design/backgrounds/full_content_top.png);
+	//background-repeat:no-repeat;
+	background-color:#3377DD;
+	border:1px blue solid;
+	width:965px;
+	height:25px;
 	text-align:left;
 	font-size:17px;
 	font-weight:bold;
 	color:black;
 	letter-spacing:2px;
-	padding-top:6px;
+	padding-top:3px;
 	padding-left:5px;
 }
 div#full_content_mid {
-	background-image:url(../design/backgrounds/full_content_mid.png);
-	background-repeat:repeat-y;
-	width:980px;
+	//background-image:url(../design/backgrounds/full_content_mid.png);
+	//background-repeat:repeat-y;
+	width:970px;
+	border-left:1px blue solid;
+	border-right:1px blue solid;
 }
 div#full_content_bot {
-	background-image:url(../design/backgrounds/full_content_bot.png);
-	background-repeat:no-repeat;
-	width:980px;
-	height:11px;
+	//background-image:url(../design/backgrounds/full_content_bot.png);
+	//background-repeat:no-repeat;
+	width:970px;
+	height:5px;
+	border-left:1px blue solid;
+	border-right:1px blue solid;
+	border-bottom:1px blue solid;
 }
 
 div.path {
