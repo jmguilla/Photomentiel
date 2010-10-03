@@ -136,7 +136,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.note as ut_note, p.nombreVotant as ut_nombreVotant, p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -222,7 +222,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.note as ut_note, p.nombreVotant as ut_nombreVotant, p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -300,7 +300,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.note as ut_note, p.nombreVotant as ut_nombreVotant, p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
@@ -374,7 +374,7 @@ class AlbumDAO extends DAO {
 		//table utilisateur
 		"u.utilisateurID as ut_utilisateurID, u.email as ut_email, u.mdp as ut_mdp, u.actif as ut_actif, u.dateInscription as ut_dateInscription, " .
 		//table photographe
-		"p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
+		"p.note as ut_note, p.nombreVotant as ut_nombreVotant, p.pourcentage as ut_pourcentage, p.photographeID as ut_photographeID, p.nomEntreprise as ut_nomEntreprise, p.siren as ut_siren, p.telephone as ut_telephone, p.siteWeb as ut_siteWeb, p.home as ut_home, p.rib_b as ut_rib_b, p.rib_g as ut_rib_g, p.rib_c as ut_rib_c, p.rib_k as ut_rib_k, p.bic as ut_bic, p.iban as ut_iban, p.id_utilisateur as ut_id_utilisateur, " .
 		//talbe adresse
 		"ad.adresseID as ut_adresseID, ad.nom as ut_nom, ad.prenom as ut_prenom, ad.nomRue as ut_nomRue, ad.complement as ut_complement, ad.ville as ut_ville, ad.codePostal as ut_codePostal, ad.id_utilisateur as ut_id_utilisateur, " .
 		//table evenement
