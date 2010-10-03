@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <object class="com.jformdesigner.model.FormModel"> 
+  <void property="contentType"> 
+   <string>form/swing</string> 
+  </void> 
+  <void property="root"> 
+   <object class="com.jformdesigner.model.FormRoot"> 
+    <void method="add"> 
+     <object class="com.jformdesigner.model.FormWindow"> 
+      <string>javax.swing.JFrame</string> 
+      <object class="com.jformdesigner.model.FormLayoutManager"> 
+       <class>org.jdesktop.layout.GroupLayout</class> 
+       <void method="setProperty"> 
+        <string>$horizontalGroup</string> 
+        <string>par l {seq {space :::p, par l {comp sepFichier::l::422:x, comp spConsole::l::422:x, comp sepConnexion::l::422:x, seq {par l:::p {seq {comp labelLogin:::p::p, space :p:34:p, comp tfLogin:::p:157:p:1}, seq l:::1 {comp labelPwd:::p::p, space u:::p, comp jpPwd:::::x}}, space :p:33:p, par l {seq t {comp labelConnexion:::p::p, space ::22:x, comp labelEtatConnexion:::p:74:p}, comp buttonConnexion::l::172:x}}, comp sepConsole::l::422:x, seq l {comp buttonFichier:::p::p, space u:::p, comp labelUpEnCours:::p::p, space u:::p, comp labelPourcentage::::68:x}, seq t {comp labelAvancement:::p::p, space ::17:x, comp progressBar1:::p:341:p}}, space :::p}}</string> 
+       </void> 
+       <void method="setProperty"> 
+        <string>$verticalGroup</string> 
+        <string>par l {seq l {space :::p, comp sepConnexion:::p::p, space :::p, par b {comp labelLogin::b:p::p, comp tfLogin::b:p::p, comp buttonConnexion::b:p::p}, space :::p, par b {comp labelPwd::b:p::p, comp jpPwd::b:p::p, comp labelEtatConnexion::b:p::p, comp labelConnexion::b:p::p}, space u:::p, comp sepFichier:::p::p, space :::p, par b {comp buttonFichier::b:p:36:p, comp labelUpEnCours::b:p::p, comp labelPourcentage::b:p::p}, space ::13:x, par l {comp progressBar1:::p::p, comp labelAvancement:::p::p}, space :::p, comp sepConsole:::p::p, space :::p, comp spConsole:::p:103:p, space :::p}}</string> 
+       </void> 
+      </object> 
+      <void method="setProperty"> 
+       <string>title</string> 
+       <string>Photomentiel - Photo Uploader</string> 
+      </void> 
+      <void method="setProperty"> 
+       <string>defaultCloseOperation</string> 
+       <int>3</int> 
+      </void> 
+      <void method="setProperty"> 
+       <string>resizable</string> 
+       <boolean>false</boolean> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>login:</string> 
+        </void> 
+        <void property="name"> 
+         <string>labelLogin</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>password:</string> 
+        </void> 
+        <void property="name"> 
+         <string>labelPwd</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JTextField</string> 
+        <void property="name"> 
+         <string>tfLogin</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JButton</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>se connecter</string> 
+        </void> 
+        <void property="name"> 
+         <string>buttonConnexion</string> 
+        </void> 
+        <void method="addEvent"> 
+         <object class="com.jformdesigner.model.FormEvent"> 
+          <string>java.awt.event.ActionListener</string> 
+          <string>actionPerformed</string> 
+          <string>buttonConnexionActionPerformed</string> 
+          <boolean>true</boolean> 
+         </object> 
+        </void> 
+        <void method="addEvent"> 
+         <object class="com.jformdesigner.model.FormEvent"> 
+          <string>java.awt.event.ActionListener</string> 
+          <string>actionPerformed</string> 
+          <string>buttonConnexionActionPerformed</string> 
+          <boolean>true</boolean> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Etat connexion:</string> 
+        </void> 
+        <void property="name"> 
+         <string>labelConnexion</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>déconnecté</string> 
+        </void> 
+        <void property="name"> 
+         <string>labelEtatConnexion</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormContainer"> 
+        <string>javax.swing.JScrollPane</string> 
+        <object class="com.jformdesigner.model.FormLayoutManager"> 
+         <class>javax.swing.JScrollPane</class> 
+        </object> 
+        <void property="name"> 
+         <string>spConsole</string> 
+        </void> 
+        <void method="add"> 
+         <object class="com.jformdesigner.model.FormComponent"> 
+          <string>javax.swing.JTextArea</string> 
+          <void method="setProperty"> 
+           <string>editable</string> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="name"> 
+           <string>taConsole</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>connexion</string> 
+        </void> 
+        <void property="name"> 
+         <string>sepConnexion</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JPasswordField</string> 
+        <void property="name"> 
+         <string>jpPwd</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Fichiers</string> 
+        </void> 
+        <void property="name"> 
+         <string>sepFichier</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>com.jformdesigner.designer.wrapper.JGoodiesFormsSeparator</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Console</string> 
+        </void> 
+        <void property="name"> 
+         <string>sepConsole</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JButton</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Choisir répertoire/fichiers</string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>font</string> 
+         <object class="java.awt.Font"> 
+          <string>Tahoma</string> 
+          <int>0</int> 
+          <int>16</int> 
+         </object> 
+        </void> 
+        <void property="name"> 
+         <string>buttonFichier</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Upload en cours:</string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>font</string> 
+         <object class="java.awt.Font"> 
+          <string>Tahoma</string> 
+          <int>0</int> 
+          <int>16</int> 
+         </object> 
+        </void> 
+        <void property="name"> 
+         <string>labelUpEnCours</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>0/0</string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>font</string> 
+         <object class="java.awt.Font"> 
+          <string>Tahoma</string> 
+          <int>0</int> 
+          <int>16</int> 
+         </object> 
+        </void> 
+        <void property="name"> 
+         <string>labelPourcentage</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JProgressBar</string> 
+        <void property="name"> 
+         <string>progressBar1</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>Avancement:</string> 
+        </void> 
+        <void property="name"> 
+         <string>labelAvancement</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void property="name"> 
+       <string>photomentielFrame</string> 
+      </void> 
+     </object> 
+     <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+      <null/> 
+      <void method="setProperty"> 
+       <string>location</string> 
+       <object class="java.awt.Point"> 
+        <int>45</int> 
+        <int>0</int> 
+       </object> 
+      </void> 
+      <void method="setProperty"> 
+       <string>size</string> 
+       <object class="java.awt.Dimension"> 
+        <int>450</int> 
+        <int>350</int> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 
