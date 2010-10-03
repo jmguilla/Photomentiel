@@ -10,9 +10,10 @@ function eventString(eventObj, index) {
 	var tmp = '<div '+idi+' class="event">';
 	tmp += '<span class="date"><b>Date</b> : '+convertUSDate(event.Date)+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '+event.Type+'</span><br/><span class="content">';
 	tmp += '<span class="intitule"><a class="intitule" href="events.php?ev='+event.EvenementID+'"><b>Intitulé</b> : '+toNchar(event.Description,84)+'</a></span><br/>';
-	tmp += '<b>Posté par</b> : <a href="mailto:'+user.Email+'">'+user.Email+'</a><br/>';
 	if (event.Web != ''){
 		tmp += '<a target="_blank" href="'+event.Web+'">Plus de détails sur le lien officiel...</a><br/>';
+	} else {
+		tmp += 'Site web non communiqué<br/>';
 	}
 	tmp += '</span></div>';
 	return tmp;

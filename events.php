@@ -192,9 +192,10 @@ if (isset($_POST['ftype'])){
 								echo '<div '.$idi.' class="event">';
 								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$tmp->getType()].'</span><br/><span class="content">';
 								echo '<span class="intitule"><a class="intitule" href="events.php?ev='.$tmp->getEvenementID().'"><b>Intitulé</b> : '.toNchar($tmp->getDescription(),84).'</a></span><br/>';
-								echo '<b>Posté par</b> : <a href="mailto:'.$utilisateur->getEmail().'">'.$utilisateur->getEmail().'</a><br/>';
 								if ($tmp->getWeb() != ''){
 									echo '<a target="_blank" href="'.$tmp->getWeb().'">Plus de détails sur le lien officiel...</a><br/>';
+								} else {
+									echo 'Site web non communiqué<br/>';
 								}
 								echo '</span></div>';
 								if ($i == $nb_evt) {break;}
@@ -215,17 +216,21 @@ if (isset($_POST['ftype'])){
 						if ($evt){
 							echo '<div class="event_desc">
 								<div class="mailing"><b>Date : </b>'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$evt->getType()].'<br/>
-								<span class="desc"><b>Description : </b>'.$evt->getDescription().'</span></div><br/><br/>
-								<table CELLSPACING="4px;"><tr><td><b>Posté par : </b></td><td><a href="mailto:'.$utilisateur->getEmail().'">'.$utilisateur->getEmail().'</a></td></tr>
+								<span class="desc"><b>Description : </b>'.$evt->getDescription().'</span></div><br/>
+								<table CELLSPACING="4px;">
 								<tr><td><b>Région : </b></td><td>'.$evt->getRegion()->getNom().'</td></tr>
 								<tr><td><b>Département : &nbsp;&nbsp;</b></td><td>'.$evt->getDepartement()->getNom().'</td></tr>
 								<tr><td><b>Ville : </b></td><td><span class="highlight">'.$evt->getVille()->getNom().'</span></td></tr>
 								<tr><td><b>Date & heure : </b></td><td><span class="highlight">'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'</span></td></tr>
-								<tr><td><b>Adresse : </b></td><td><span class="highlight">'.$evt->getAdresse().'</span></td></tr></table><br/>';
+								<tr><td><b>Adresse : </b></td><td><span class="highlight">'.$evt->getAdresse().'</span></td></tr>';
 								if ($evt->getWeb() != ''){
-							echo   '<b>Lien vers l\'événement officiel : </b></td><td><a target="_blank" href="'.$evt->getWeb().'">'.toNchar($evt->getWeb(),60).'</a><br/>';
+									echo '<tr><td colspan="2"><b>Lien vers l\'événement officiel : </b><a target="_blank" href="'.$evt->getWeb().'">'.toNchar($evt->getWeb(),60).'</a></td></tr>';
+								} else {
+									echo '<tr><td colspan="2">Site internet non communiqué</td>';
 								}
-							echo   '<div class="mailing">';
+								echo '</table><br/>';
+								//this event is interesting you
+								echo   '<div class="mailing">';
 								if ($alb){
 									echo '<b>Accéder aux albums disponibles pour cet événement :</b>';
 									for ($s=0;$s<sizeof($alb);$s++){
@@ -233,7 +238,7 @@ if (isset($_POST['ftype'])){
 										echo   '<br/>&nbsp;&nbsp;&nbsp;<b><a href="viewalbum.php?al='.$strID->getStringID().'">'.toNChar($alb[$s]['Album']->getNom(),80).'</a></b>';
 									}
 								} else {
-							echo   '<br/><br/>Vous souhaitez être prévenu dès qu\'un album est disponible sur cet événement ?<br><span id="span_mailing">';
+									echo   'Vous souhaitez être prévenu dès qu\'un album est disponible sur cet événement ?<br><span id="span_mailing">';
 									if (!$utilisateurObj){
 										echo 'Veuillez nous préciser votre E-mail ici : <input id="mailing" type="textfield" class="textfield"/> puis <a href="javascript:addMailing(\''.$evt->getEvenementID().'\');">cliquer ici...</a>';
 									} else if($utilisateurObj){
@@ -246,9 +251,26 @@ if (isset($_POST['ftype'])){
 											echo 'Veuillez <a href="events.php?ev='.$evt->getEvenementID().'&action=mailing">cliquer ici...</a>';
 										}
 									}
-							echo   '</span>';
+									echo   '</span>';
 								}
-							echo   '</div></div>';
+								//contact host via mail
+								?>
+								<div class="separator2"></div>
+								<br/><b>Pour contacter le responsable par E-mail, veuillez remplir les champs suivants :</b><br/>
+								Votre E-mail : 
+								<div class="separator2"></div>
+								<input id="p_email" type="textfield" class="textfield" name="email" style="width:200px;" value="<?php echo $utilisateurObj?$utilisateurObj->getEmail():''; ?>"/>
+								<div class="separator5"></div>
+								Votre message :
+								<div class="separator2"></div>
+								<textarea id="p_content" class="textfield" cols="79" rows="4" name="content"></textarea>
+								<div class="separator5"></div>
+								<span style="font-size:11px;">Veuillez recopier ces caractères en respectant les majuscules et les minuscules : </span>
+								<img align="top" src="captcha.php" title="Recopiez le code"/> 
+								<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:40px;"></input><br>
+								<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $utilisateur->getUtilisateurID(); ?>');"/></center>
+								<?php
+								echo   '</div></div>';
 						} else {
 							echo "<br/>Cet événement n'existe pas !";
 						}
