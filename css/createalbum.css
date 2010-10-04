@@ -79,24 +79,6 @@ input#b_gonext{
 	margin-left:15px;
 }
 
-fieldset legend {
-	font-weight:bold;
-	color: #5555FF;
-	background-color: #E5F2FF;
-	border:2px solid #5555FF;
-	margin-left:10px;
-	margin-right:10px;
-	padding:2px;
-	padding-left:10px;
-	padding-right:10px;
-}
-fieldset {
-	padding:10px;
-	background-color: #E5F2FF;
-	border: 2px solid #5555FF;
-	display: block;
-	margin-top:15px;
-}
 a#card_pdf {
 	font-size:15px;
 	color:darkgreen;

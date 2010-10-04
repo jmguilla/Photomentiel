@@ -1,0 +1,30 @@
+div#privacy_title {
+	margin-left:20px;
+	margin-right:20px;
+	text-align:left;
+	font-weight:bold;
+	font-size:14px;
+}
+div.privacy_body {
+	margin-left:20px;
+	margin-right:20px;
+	text-align:left;
+	font-size:14px;
+}
+span.note {
+	font-size:13px;
+	color:#000044;
+}
+input#send_button {
+	margin-left:150px;
+}
+input#nom, input#prenom, input#email {
+	width:180px;
+}
+input#album{
+	width:74px;
+}
+input#ref{
+	width:200px;
+}
+
