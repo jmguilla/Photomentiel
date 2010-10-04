@@ -41,7 +41,7 @@ include_once("classes/modele/Evenement.class.php");
 		<div id="divsquare_top" style="float:left;">
 			Albums publics
 		</div>
-		<div style="float:right;padding-right:16px;">
+		<div style="float:right;padding-right:10px;">
 			<a class="on_blue" href="albums.php">Rechercher un album...</a>
 		</div>
 	</div>
@@ -106,7 +106,7 @@ include_once("classes/modele/Evenement.class.php");
 		<div id="divsquare_top" style="float:left;">
 			Evénements
 		</div>
-		<div style="float:right;padding-right:16px;">
+		<div style="float:right;padding-right:10px;">
 			<a class="on_blue" href="events.php?action=add">Ajouter un événement...</a>
 		</div>
 	</div>

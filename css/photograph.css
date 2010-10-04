@@ -31,7 +31,7 @@ div.question:hover {
 }
 
 div.answer {
-	text-align:left;
+	text-align:justify;
 	margin-left:0px;
 	font-size:13px;
 	color:#303030;

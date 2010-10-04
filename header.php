@@ -19,7 +19,6 @@ include("userconnection.php");
 <div class="separator5"></div>
 <div id="menu_barre">
 	<div style="text-align:left;float:left;padding-left:10px;width:740px;">
-		<!--<div id="home"><a href="index.php" title="Retour accueil"><img src="design/misc/home.png"></img></a></div>-->
 		<?php
 			if (!$utilisateurObj){
 		?>

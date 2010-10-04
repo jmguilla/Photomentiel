@@ -1,41 +1,37 @@
 div#choices_2 {
-	width:740px;
+	width:850px;
 	margin-left:auto;
 	margin-right:auto;
 	font-size:14px;
 }
-div#choices_buttons_content {
-	width:700px;
-	margin-left:auto;
-	margin-right:auto;
-}
 div#left_button, div#right_button {
 	border:2px #0099FF solid;
-	width:250px;
+	border-bottom:1px #0099FF solid;
+	width:368px;
 	font-size:16px;
 	font-weight:bold;
-	padding-top:15px;
-	height:56px;
+	padding-top:8px;
+	height:28px;
 	color:#0099FF;
 	background-color:#222222;
 }
 div#left_button:hover, div#right_button:hover {
 	border:2px #222222 solid;
+	border-bottom:1px #222222 solid;
 	color:#222222;
 	background-color:#0099FF;
 }
-div#left_button {
-	float:left;
-}
-div#right_button {
-	float:right;
-}
 div.description {
 	text-align:left;
-	border:1px blue solid;
-	background-color:#EEEEEE;
+	border:1px #0099FF solid;
+	background-color:#EEEEFF;
 	font-size:13px;
 	padding:5px;
+	width:360px;
+	height:140px;
+}
+div.description table {
+	height:100%;
 }
 
 input.textfield {

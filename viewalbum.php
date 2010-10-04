@@ -180,7 +180,7 @@ include("head.php");
 						<span>Photographe :</span>  <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?><br/>
 						<span>Téléphone :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?><br/>
 						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?><br/>
-						<span>Evaluation :</span> 
+						<span style="line-height:22px;">Evaluation :</span> 
 						<?php
 							$note = round($photographObj->getNote()*6/10);
 							for ($i=0;$i<$note;$i++){

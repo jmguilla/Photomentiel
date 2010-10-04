@@ -256,13 +256,13 @@ include("header.php");
 			
 			<span class="level2"><li>Droit de rétractation.</li></span>
 			<span class="start"></span>En accord avec l'article L 121-20 du Code de la Consommation, l'utilisateur dispose de 7 jours francs pour retourner un produit, à ses frais, qui ne le satisfait pas.
-			Ce produit doit être en parfait état de marche et ne doit avoir subit aucun dégat ou modification.
-			<br/>
+			Ce produit doit être en parfait état et ne doit avoir subit aucun dégat ou modification.
+			<!--<br/>
 			
 			<span class="level2"><li>Droit de rétractation d'achat d'objet personnalisé.</li></span>
 			<span class="start"></span>En accord avec l'article L.121-20-2 3 du Code de la Consommation l'utilisateur ne bénéficie pas d'un droit de rétractation pour la commande de fourniture de biens
 			confectionnés selon ses spécifications ou nettement personnalisés ou qui, du fait de leur nature, ne peuvent être réexpédiés ou sont susceptibles de se détériorer
-			ou de se périmer rapidement.
+			ou de se périmer rapidement.-->
 		</ol>
 			<br/><br/>	</div>
 	<div class="separator10"></div>

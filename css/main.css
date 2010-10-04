@@ -103,6 +103,7 @@ div#header {
 	background-repeat:no-repeat;
 	width:975px;
 	height:25px;
+	margin-left:1px;
 	padding-top:85px;
 	text-align:left;
 	font-size:11px;
@@ -176,7 +177,7 @@ a#lost_pwd, a#deconnexion {
 div#body_content {
 	margin-left:auto;
 	margin-right:auto;
-	width:975px;
+	width:972px;
 }
 div#footer {
 	margin-left:auto;

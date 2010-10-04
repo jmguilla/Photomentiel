@@ -11,7 +11,7 @@
  */
 include("header.php");
 
-$TAILLE_MAX = 2;//Go
+$TAILLE_MAX = 4;//Go
 $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 ?>
 <div id="full_content_top">
@@ -85,8 +85,9 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 		</div>
 		<div class="question"><a name="10"></a>Mais au fait, comment puis-je vous transmettre mes photos ?</div>
 		<div class="answer">
-			<span class="start"></span>Pour cela plusieurs solutions, tout d'abord, vous ne souhaitez pas vous déplacer et l'ensemble des données que vous souhaitez transmettre ne dépasse pas <?php echo $TAILLE_MAX; ?> Go, alors vous pouvez transmettre vos photos directement au travers d'internet, les explications sur le transfert des photos vous seront communiquées à la création d'un album.<br/>
-			<span class="start"></span>Si le temps de transfert est un problème, vous pouvez aussi nous transmettre vos photographies sur n'importe quel support numérique (cartes mémoire, CD-ROM, DVD-ROM, clé usb) par les services postaux à l'adresse :
+			<span class="start"></span>Pour cela plusieurs solutions, tout d'abord, vous ne souhaitez pas vous déplacer et l'ensemble des données que vous souhaitez transmettre ne dépasse pas <?php echo $TAILLE_MAX; ?> Go, alors vous pouvez transmettre vos photos directement au travers d'internet, les explications sur le transfert des photos vous seront communiquées à la création d'un album. Le temps de transfert dépendra de votre connexion internet.<br/>
+			<span class="start"></span>Si le temps de transfert est un problème, nous avons mis en place d'autres solutions.<br/>
+			Vous pouvez aussi nous transmettre vos photographies sur n'importe quel support numérique (carte mémoire, CD-ROM, DVD-ROM, clé usb, etc.) par les services postaux à l'adresse :
 			<div class="photograph_adress">
 			<?php
 				echo ADRESSE1.'<br/>';
@@ -94,7 +95,7 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 				echo ADRESSE3;
 			?>
 			</div>
-			Ou bien tout simplement en nous contactant pour nous remettre les photos en main propre !
+			Ou bien tout simplement en nous contactant pour nous remettre les photos en main propre si vous êtes en région PACA !
 			<br/>
 			<br/>
 			<a href="adduser.php?type=ph">Allez, je vais m'inscrire !</a>
