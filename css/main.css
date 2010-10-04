@@ -135,7 +135,8 @@ span#accueil {
 div#menu_barre {
 	margin-left:auto; 
 	margin-right:auto;
-	background-color:#1A1A1A;
+	background-image:url(../design/backgrounds/menu_bg.png);
+	background-repeat:repeat-x;
 	border:1px blue solid;
 	width:970px;
 	padding-top:1px;
@@ -203,7 +204,8 @@ div#footer {
 	padding-top:3px;
 	height:18px;
 	color:#0099FF;
-	background-color:#1A1A1A;
+	background-image:url(../design/backgrounds/footer_bg.png);
+	background-repeat:repeat-x;
 	border:1px blue solid;
 	width:970px;
 }
