@@ -46,16 +46,16 @@ div#leftpanel_top {
 	display:table-cell;
 	height:36px;
 	width:250px;
-	background-image:url(../design/backgrounds/menu_left_top.png);
-	background-repeat:no-repeat;
+	background-color:#4488E6;
+	border:1px blue solid;
 	vertical-align:middle;
 	text-align:left;
 	padding-left:3px;
 }
 div#leftpanel_mid {
-	width:244px;
-	background-image:url(../design/backgrounds/menu_left_mid.png);
-	background-repeat:repeat-y;
+	width:242px;
+	border-right:1px blue solid;
+	border-left:1px blue solid;
 	color:black;
 	text-align:left;
 	padding-left:6px;
@@ -86,9 +86,10 @@ div#album_infos span, div#photograph_details_content span {
 }
 div#leftpanel_bot {
 	height:10px;
-	width:250px;
-	background-image:url(../design/backgrounds/menu_left_bot.png);
-	background-repeat:no-repeat;
+	width:248px;
+	border-right:1px blue solid;
+	border-left:1px blue solid;
+	border-bottom:1px blue solid;
 }
 
 input#mailing {

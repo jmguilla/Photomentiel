@@ -172,7 +172,7 @@ if (isset($_POST['ftype'])){
 				}
 			?>
 			</div>
-			<div id="rcontent">
+			<div id="rcontent" style="height:525px;">
 			<?php
 				if (!$addEvent) {
 					/***************************** VIEWING MODE  ******************************/
@@ -228,9 +228,9 @@ if (isset($_POST['ftype'])){
 								} else {
 									echo '<tr><td colspan="2">Site internet non communiqué</td>';
 								}
-								echo '</table><br/>';
+								echo '</table></div>';
 								//this event is interesting you
-								echo   '<div class="mailing">';
+								echo '<div class="event_desc">';
 								if ($alb){
 									echo '<b>Accéder aux albums disponibles pour cet événement :</b>';
 									for ($s=0;$s<sizeof($alb);$s++){
@@ -253,10 +253,11 @@ if (isset($_POST['ftype'])){
 									}
 									echo   '</span>';
 								}
+								echo '</div><div class="event_desc" style="height:235px;">';
 								//contact host via mail
 								?>
 								<div class="separator2"></div>
-								<br/><b>Pour contacter le responsable par E-mail, veuillez remplir les champs suivants :</b><br/>
+								<b>Pour contacter le responsable par E-mail, veuillez remplir les champs suivants :</b><br/>
 								Votre E-mail : 
 								<div class="separator2"></div>
 								<input id="p_email" type="textfield" class="textfield" name="email" style="width:200px;" value="<?php echo $utilisateurObj?$utilisateurObj->getEmail():''; ?>"/>
@@ -268,9 +269,12 @@ if (isset($_POST['ftype'])){
 								<span style="font-size:11px;">Veuillez recopier ces caractères en respectant les majuscules et les minuscules : </span>
 								<img align="top" src="captcha.php" title="Recopiez le code"/> 
 								<input id="p_captcha" type="text" class="textfield" maxlength="5" style="width:40px;"></input><br>
-								<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToPhotograph('<?php echo $utilisateur->getUtilisateurID(); ?>');"/></center>
+								<div class="separator2" style="height:3px;"></div>
+								<center><input id="p_send" type="button" class="button" value="Envoyer" onClick="sendEmailToUser('<?php echo $utilisateur->getUtilisateurID(); ?>');"/></center>
+								<div class="separator2" style="height:3px;"></div>
+								<center><span id="p_error"></span><span id="p_success"></span></center>
 								<?php
-								echo   '</div></div>';
+								echo   '</div>';
 						} else {
 							echo "<br/>Cet événement n'existe pas !";
 						}

@@ -102,12 +102,14 @@ function getEvents(){
 	var param = "action=get_n_premiers_evenements_entre_dates&n=3";
 	if (d1!=''){param+="&d1="+d1;}
 	if (d2!=''){param+="&d2="+d2;}
+	$('#search_event').attr('disabled', 'true');
 	$.ajax({
 		type:"GET",
 		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
+			$('#search_event').removeAttr('disabled');
 			if (data.result == false){
 				alert('Impossible de récupérer des événements !');
 				return;

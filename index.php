@@ -38,7 +38,12 @@ include_once("classes/modele/Evenement.class.php");
 </div>
 <div id="square_right">
 	<div id="square_top">
-		Albums publics
+		<div id="divsquare_top" style="float:left;">
+			Albums publics
+		</div>
+		<div style="float:right;padding-right:16px;">
+			<a class="on_blue" href="albums.php">Rechercher un album...</a>
+		</div>
 	</div>
 	<div id="square_mid">
 		<div class="separator2"></div>

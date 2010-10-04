@@ -46,12 +46,14 @@ function getEvents(){
 	if (kw!='') {param.query=kw;}
 	if (rg!=0) {param.idr=rg;}
 	if (tp!=0) {param.type=tp;}
+	$('#search').attr('disabled', 'true');
 	$.ajax({
 		type:"POST",
 		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
+			$('#search').removeAttr('disabled');
 			if (data.result == false){
 				alert('Impossible de récupérer des évenements !');
 				return;
@@ -172,4 +174,50 @@ function changeVille(){
 			$("#fville").html(tmp);
 		}
 	});
+}
+
+function sendEmailToUser(idUser){
+	if ($('#p_email').val() == ''){
+		alert("Veuillez saisir une adresse E-mail.");
+		return false;
+	}
+	if (!re_mail.test($('#p_email').val())){
+		alert("Veuillez saisir une adresse E-mail valide.");
+		return false;
+	}
+	if ($('#p_content').val().length < 20){
+		alert("Votre message semble un peu court.");
+		return false;
+	}
+	if ($('#p_captcha').val().length < 5){
+		alert("Veuillez saisir les 5 caractères de vérification.");
+		return false;
+	}
+	var dataToSend = new Object();
+	dataToSend.iduser=idUser;
+	dataToSend.email=$('#p_email').val();
+	dataToSend.captcha=$('#p_captcha').val();
+	dataToSend.msg=$('#p_content').val();
+	dataToSend.action='send_email_user';
+	$('#p_send').attr('disabled', 'true');
+	$('#p_error').html("");
+	$('#p_success').html("");
+	$.ajax({
+		type: "POST",
+		url: "/dispatcher.php",
+		data:dataToSend,
+		dataType:"json",
+		success:function(data){
+			if(data.result == true && data.value == true){
+				$('#p_success').html("Votre message a bien été envoyé. Merci.");
+			} else {
+				$('#p_error').html(data.cause);
+				$('#p_send').removeAttr('disabled');
+			}
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			alert('Error with code 18');
+		}
+	});
+	return false;
 }

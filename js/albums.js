@@ -48,12 +48,14 @@ function getAlbums(){
 	if (d1!='') {param.d1=d1;}
 	if (d2!='') {param.d2=d2;}
 	if (kw!='') {param.query=kw;}
+	$('#search').attr('disabled', 'true');
 	$.ajax({
 		type:"POST",
 		url: "/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
+			$('#search').removeAttr('disabled');
 			if (data.result == false){
 				alert('Impossible de récupérer des albums !');
 				return;
