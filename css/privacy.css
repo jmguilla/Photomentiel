@@ -28,3 +28,34 @@ input#ref{
 	width:200px;
 }
 
+input#id_file {
+  	background-color:white;
+	font-size:14px;
+  	color:blue; 
+  	border:1px blue solid; 
+}
+input#id_file:hover {
+  	color:aqua; 
+  	border:1px aqua solid; 
+}
+div.checkform {
+	text-align:left;
+	color:red;
+	background-repeat:no-repeat;
+	height:18px;
+	padding-left:18px;
+	margin-left:5px;
+	width:188px;
+}
+
+input#goback, input#gohome {
+	margin-left:50px;
+	margin-right:50px;
+}
+div#content_sent {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	line-height:30px;
+}
+

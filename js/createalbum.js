@@ -95,15 +95,15 @@ function validForm(update){
 	});
 	$('#rmails').css('background-image','url(null)');
 	var error = false;
-    	var mess = '';
-    	//pour tous les champs requis
-    	var tmp = checkRequired();
-    	error = error || tmp.error;
-    	mess += tmp.mess;
-    	//pour les champs avec une regexp
-    	tmp = checkRegexp();
-    	error = error || tmp.error;
-    	mess += tmp.mess;
+	var mess = '';
+	//pour tous les champs requis
+	var tmp = checkRequired();
+	error = error || tmp.error;
+	mess += tmp.mess;
+	//pour les champs avec une regexp
+	tmp = checkRegexp();
+	error = error || tmp.error;
+	mess += tmp.mess;
 	//pour les champs avec un minimum et au moins 1 set
 	if (!tmp.error){
 		tmp = checkMinPrice();
@@ -120,19 +120,19 @@ function validForm(update){
 		return;
 	}
 	//result
-    	if (error){
-    		alert(mess);
-    		return;
-    	} else {
+	if (error){
+		alert(mess);
+		return;
+	} else {
 		if (update){
-    			$('#update_form').submit();
+				$('#update_form').submit();
 		} else {
 			$('input[min]').each(function() {
 				$('#'+ this.id).val($('#'+ this.id).val().replace(",","."));
 		    	});
 			$('#create_form').submit();
 		}
-    	}
+	}
 }
 
 function changeAlbumState(){

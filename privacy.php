@@ -10,6 +10,63 @@
  *
  */
 include("header.php");
+
+$msgSent=false;
+if (isset($_POST['Captcha'])){
+	$msgSent=true;
+	$errorCaptcha = $_SESSION['Captcha'] != $_POST['Captcha'];
+	if (!$errorCaptcha){
+		//Manage duplication (F5, history back, etc.)
+		$sendMail = false;
+		$postHash = getHashFromArray($_POST);
+		if (isset($_SESSION['privacyPostHash'])){
+			if ($_SESSION['privacyPostHash'] != $postHash){
+				$_SESSION['privacyPostHash'] = $postHash;
+				$sendMail = true;
+			}
+		} else {
+			$_SESSION['contactPostHash'] = $postHash;
+			$sendMail = true;
+		}
+		if ($sendMail){
+			//move uploaded object
+			$target_path = "administration/retraits/";
+			if (($_FILES["id_file"]["type"] == 'application/pdf' || 
+				$_FILES["id_file"]["type"] == 'image/jpeg') && 
+				$_FILES["id_file"]["size"] <= 512000){
+				$newFileName = date("YmdHis").".";
+				if ($_FILES["id_file"]["type"] == 'application/pdf'){
+					$newFileName .= "pdf";
+				} else {
+					$newFileName .= "jpg";
+				}
+				if(move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
+			    	$uploadSuccess = true;
+				} else{
+				    $uploadSuccess = false;
+				}
+			} else {
+				$uploadSuccess = false;
+			}
+			if ($uploadSuccess){
+				//TODO
+				//create object and save it
+				/*$retrait = new Retrait();
+				$retrait->setNom($_POST['nom']);
+				$retrait->setPrenom($_POST['prenom']);
+				$retrait->setEmail($_POST['email']);
+				$retrait->setCode($_POST['album']);
+				$retrait->setRef($_POST['ref']);
+				$retrait->setID($newFileName);
+				$retrait->setRaison($_POST['raison']);
+				$retrait->save();*/
+				//send email notification
+				/*ControleurUtils::sendRetraitMail($_POST['email'],$_POST['raison']);*/
+			}
+		}
+	}
+}
+
 ?>
 <div id="full_content_top">
 	Vie privée et retrait de photos
@@ -20,11 +77,44 @@ include("header.php");
 		Vie privée
 	</div>
 	<div class="separator10"></div>
+	<?php
+		if ($msgSent) {
+	?>
+		<div id="content_sent">
+			<div class="separator10" style="height:140px;"></div>
+			<?php
+				if ($errorCaptcha){
+			?>
+				Erreur, le code de vérification n'est pas le bon.<br/>
+				Veuillez réessayer.<br/>
+				<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>
+			<?php
+				} else {
+					if ($uploadSuccess) {
+			?>
+						Votre demande a bien été envoyée.<br/>
+						Nous nous efforcerons de la satisfaire dans les plus brefs délais.<br/>
+			<?php
+					} else {
+			?>
+						Erreur, le fichier n'est pas valide ou est trop volumineux.<br/>
+						Veuillez réessayer.<br/>
+						<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>
+			<?php
+					}
+				}
+			?>
+			<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input><?php if ($errorCaptcha){echo "</form>";} ?>
+			<div class="separator10" style="height:150px;"></div>
+		</div>
+	<?php
+		} else {
+	?>
 	<div id="privacy_title">
 		Si vous souhaitez faire retirer une photo, merci de bien vouloir remplir le formulaire ci-dessous :
 	</div>
 	<div class="privacy_body">
-		<form id="privacy" method="POST" action="adduser.php">
+		<form id="privacy_form" method="POST" action="privacy.php" enctype="multipart/form-data">
 			<fieldset>
 				<legend> Coordonnées personnelles </legend>
 				<table>
@@ -43,7 +133,7 @@ include("header.php");
 					</td><td>
 						<input name="prenom" class="textfield" type="text" id="prenom" required="required"/>
 					</td><td>
-						<div class="checkform" id="rnom"></div>
+						<div class="checkform" id="rprenom"></div>
 					</td>
 				</tr>
 				<tr>
@@ -107,9 +197,10 @@ include("header.php");
 				</tr>
 				<tr>
 					<td width="180px">
-						Pièce d'identité :
+						Pièce d'identité :<br/><span class="note">(inf. à 500Ko)</span>
 					</td><td>
-						<input name="id_file" class="button" type="file" id="id_file" maxlength="20"/>
+						<input type="hidden" name="MAX_FILE_SIZE" value="500000" />
+						<input name="id_file" type="file" id="id_file" maxlength="20" required="required"/>
 					</td><td>
 						<div class="checkform" id="rid_file"></div>
 					</td>
@@ -146,6 +237,9 @@ include("header.php");
 			<div class="separator10"></div>
 		</form>
 	</div>
+	<?php
+		}
+	?>
 </div>
 <div id="full_content_bot"></div>
 <?php
