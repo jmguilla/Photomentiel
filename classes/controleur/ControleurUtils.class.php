@@ -76,9 +76,9 @@ class ControleurUtils{
 	public static function sendValidationEmail($utilisateur, $activateID){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
-		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-		     	$headers .='Content-Transfer-Encoding: 8bit'; 
+	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+	     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
 			"Photomentiel - Validez votre compte !",
 			"Bienvenue sur Photomentiel !\n\n".
@@ -96,9 +96,9 @@ class ControleurUtils{
 	public static function sendNouveauMDPEmail($utilisateur, $mdp){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
-		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-		     	$headers .='Content-Transfer-Encoding: 8bit'; 
+	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+	     	$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
 			"Photomentiel - Nouveau mot de passe",
 			"Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n\n".
@@ -129,10 +129,10 @@ class ControleurUtils{
 			$total = 0;
 			//on envoie
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-		     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
-		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-		     	$headers .='Content-Transfer-Encoding: 8bit'; 
-		     	$content = "Vous venez d'effectuer une commande et nous vous en remercions.\n";
+	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+	     	$headers .='Content-Transfer-Encoding: 8bit'; 
+	     	$content = "Vous venez d'effectuer une commande et nous vous en remercions.\n";
 			$content .= "Voici le récapitulatif de votre commande n°" . $commande->getNumero() . "\n\n";
 
 			$taillePapier = TaillePapier::getTaillePapiers();
@@ -158,12 +158,26 @@ class ControleurUtils{
 	public static function sendContactmail($userID, $email, $content){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-	     		$headers .='Reply-To: ' . $email ."\n"; 
-	     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-	     		$headers .='Content-Transfer-Encoding: 8bit'; 
+     		$headers .='Reply-To: ' . $email ."\n"; 
+     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+     		$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
 			"Contact Photomentiel [".$userID."]",
 			$content,
+			$headers
+			);
+		}
+	}
+	
+	public static function sendRetraitMail($email, $raison){
+		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
+			$headers ='From: "Photomentiel"<retrait@photomentiel.fr>'."\n";
+     		$headers .='Reply-To: ' . $email ."\n";
+     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n";
+     		$headers .='Content-Transfer-Encoding: 8bit';
+			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
+			"Nouveau retrait demandé",
+			$raison,
 			$headers
 			);
 		}
@@ -172,9 +186,9 @@ class ControleurUtils{
 	public static function sendPhotographemail($email, $content, $photographe){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
-	     		$headers .='Reply-To: ' . $email ."\n"; 
-	     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-	     		$headers .='Content-Transfer-Encoding: 8bit'; 
+     		$headers .='Reply-To: ' . $email ."\n"; 
+     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+     		$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($photographe->getEmail(),
 			"Contact Photomentiel",
 			$content,

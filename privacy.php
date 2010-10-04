@@ -10,6 +10,8 @@
  *
  */
 include("header.php");
+include_once("classes/modele/RetraitPhoto.class.php");
+include_once("classes/controleur/ControleurUtils.class.php");
 
 $msgSent=false;
 if (isset($_POST['Captcha'])){
@@ -49,19 +51,18 @@ if (isset($_POST['Captcha'])){
 				$uploadSuccess = false;
 			}
 			if ($uploadSuccess){
-				//TODO
 				//create object and save it
-				/*$retrait = new Retrait();
+				$retrait = new RetraitPhoto();
 				$retrait->setNom($_POST['nom']);
 				$retrait->setPrenom($_POST['prenom']);
-				$retrait->setEmail($_POST['email']);
-				$retrait->setCode($_POST['album']);
+				$retrait->setMail($_POST['email']);
+				$retrait->setStringID($_POST['album']);
 				$retrait->setRef($_POST['ref']);
-				$retrait->setID($newFileName);
+				$retrait->setJustificatif($newFileName);
 				$retrait->setRaison($_POST['raison']);
-				$retrait->save();*/
+				$retrait->create();
 				//send email notification
-				/*ControleurUtils::sendRetraitMail($_POST['email'],$_POST['raison']);*/
+				ControleurUtils::sendRetraitMail($_POST['email'],$_POST['raison']);
 			}
 		}
 	}
