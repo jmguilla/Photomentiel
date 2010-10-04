@@ -25,4 +25,7 @@ define("activer_utilisateur", "activer_utilisateur");
 define("reinitialiser_mdp", "reinitialiser_mdp");
 define("payer", "payer");
 define("modifier_photographe", "modifier_photographe");
+
+//retraits
+define("detail_retrait", "detail_retrait");
 ?>
