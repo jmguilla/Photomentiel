@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Dim 03 Octobre 2010 à 12:43
+-- Généré le : Lun 04 Octobre 2010 à 21:49
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -869,6 +869,30 @@ INSERT INTO `region` (`id_region`, `nom`) VALUES
 (22, 'Rhône Alpes'),
 (23, 'Alsace'),
 (24, 'Basse-Normandie');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `RetraitPhoto`
+--
+
+CREATE TABLE IF NOT EXISTS `RetraitPhoto` (
+  `retraitPhotoID` mediumint(8) unsigned NOT NULL auto_increment,
+  `nom` varchar(20) character set utf8 NOT NULL default '',
+  `prenom` varchar(20) character set utf8 NOT NULL default '',
+  `mail` varchar(50) character set utf8 NOT NULL default '',
+  `stringID` varchar(8) character set utf8 NOT NULL,
+  `ref` varchar(100) character set utf8 NOT NULL default '',
+  `justificatif` varchar(100) character set utf8 NOT NULL,
+  `raison` varchar(200) character set utf8 NOT NULL,
+  PRIMARY KEY  (`retraitPhotoID`),
+  KEY `fk_retraitPhoto_stringID` (`stringID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `RetraitPhoto`
+--
+
 
 -- --------------------------------------------------------
 
@@ -35625,6 +35649,12 @@ ALTER TABLE `Photographe`
 ALTER TABLE `PrixTaillePapierAlbum`
   ADD CONSTRAINT `fk_prixtaillepapieralbum_album` FOREIGN KEY (`id_album`) REFERENCES `Album` (`albumID`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_prixtaillepapieralbum_taillepapier` FOREIGN KEY (`id_taillePapier`) REFERENCES `TaillePapier` (`taillePapierID`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `RetraitPhoto`
+--
+ALTER TABLE `RetraitPhoto`
+  ADD CONSTRAINT `RetraitPhoto_ibfk_1` FOREIGN KEY (`stringID`) REFERENCES `StringID` (`stringID`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `StringID`
