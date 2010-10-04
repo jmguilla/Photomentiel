@@ -24,6 +24,7 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 	</div>
 	<div class="separator10"></div>
 	<div id="photographc">
+		<center><h2>Vous êtes photographe ? Ces questions peuvent vous interesser !</h2></center><br/>
 		 
 		<a href="#1"><div class="question">Je suis photographe, si je passe par votre service, qu'est ce que cela va me coûter ?</div></a>
 		<a href="#2"><div class="question">Ok, je ne peux rien perdre, mais je pourrais gagner plus ?</div></a>

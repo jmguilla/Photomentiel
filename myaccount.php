@@ -83,9 +83,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 				<input id="view_events" type="button" class="button" value="Voir les évènements" onClick="document.location.href='events.php';"/><br>
 			</div>
 			<div id="right">
-				<div class="content_box">
+				<div class="content_box" <?php if(!$photographMode) { ?>style="height:230px"<?php } ?>>
 					<div class="title">Les événements qui m'intéressent :</div>
-					<div class="content_flow">
+					<div class="content_flow" <?php if(!$photographMode) { ?>style="height:205px"<?php } ?>>
 						<?php
 							/***************************** USER EVENTS  ******************************/
 							$events = EvenementEcouteur::getEvenementsAVenirDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
@@ -111,9 +111,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 						?>
 					</div>
 				</div>
-				<div class="content_box">
+				<div class="content_box" <?php if(!$photographMode) { ?>style="height:230px"<?php } ?>>
 					<div class="title">Mes commandes :</div>
-					<div class="content_flow">
+					<div class="content_flow" <?php if(!$photographMode) { ?>style="height:205px"<?php } ?>>
 						<?php
 							/***************************** USER COMMANDS  ******************************/
 							$commandes = Commande::getCommandesEtPhotosDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
@@ -153,11 +153,11 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 						?>
 					</div>
 				</div>
-				<div class="content_box" <?php echo ($photographMode)?'':'style="border:0px"'; ?>>
 				<?php
 					if($photographMode) {
 						/***************************** PHOTOGRAPH ALBUMS  ******************************/
 				?>
+				<div class="content_box">
 					<div class="title">Mes albums :</div>
 					<div class="content_flow">
 						<?php
@@ -189,10 +189,10 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 							}
 						?>
 					</div>
+				</div>
 				<?php
 					}
 				?>
-				</div>
 			</div>
 			<div class="separator2"></div>
 		<?php
