@@ -252,10 +252,10 @@ function makeCard($stringID, $album, $photographe, $dest=null){
 	$PDF->SetFont('Times','B',9);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "www.photomentiel.fr");
-	$x = 25;$y += 4;
+	$x = 30;$y += 4;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "Vous pouvez imprimer et découper ces cartes sur du papier cartonné afin de les distribuer lors de votre événement.");
+	$PDF->Write(10, "Vous pouvez imprimer et découper ces cartes sur papier afin de les distribuer lors de votre événement.");
 	//cards
 	$x = 20;$y += 15;
 	for ($i=0;$i<5;$i++){
