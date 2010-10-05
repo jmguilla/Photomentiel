@@ -19,6 +19,11 @@ class RetraitPhoto{
 		return $dao->getRetraitsPhoto();
 	}
 
+	public static function getRetraitPhoto($id){
+		$dao = new RetraitPhotoDAO();
+		return $dao->getRetraitPhoto($id);
+	}
+
 	public function create(){
 		$dao = new RetraitPhotoDAO();
 		return $dao->create($this);
@@ -27,6 +32,11 @@ class RetraitPhoto{
 	public function delete(){
 		$dao = new RetraitPhotoDAO();
 		return $dao->delete($this);
+	}
+
+	public function saveRef(){
+		$dao = new RetraitPhotoDAO();
+		return $dao->saveRef($this);
 	}
 	/**
 	 * Getters and setters

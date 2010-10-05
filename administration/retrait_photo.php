@@ -19,7 +19,7 @@ $_SESSION['message'] = '';
 <?php 
 $retraits = RetraitPhoto::getRetraitsPhoto();
 foreach($retraits as $retrait){
-	echo '<tr><td>#' . $retrait->getRetraitPhotoID() . '</td><td> - ' . $retrait->getStringID() . '</td><td><form action="dispatcher.php" target="_blank"><input type="hidden" name="action" value="detail_retrait"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="submit" name="detail" value="detail"/></form></td></tr>';
+	echo '<tr><td>#' . $retrait->getRetraitPhotoID() . '</td><td> - ' . $retrait->getStringID() . '</td><td><form method="post" action="dispatcher.php" target="_blank"><input type="hidden" name="action" value="detail_retrait"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="submit" name="detail" value="detail"/></form></td></tr>';
 }
 ?>
 </table>

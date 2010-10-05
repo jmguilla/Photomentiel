@@ -13,6 +13,12 @@ class RetraitPhotoDAO extends DAO{
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildRetraitPhotoFromRow");
 	}
+	public function getRetraitPhoto($id){
+		$query = "select * from RetraitPhoto where retraitPhotoID = " .
+		mysql_real_escape_string($id);
+		$tmp = $this->retrieve($query);
+		return $this->extractObjectQuery($tmp, $this, "buildRetraitPhotoFromRow");
+	}
 	public function create($rp){
 		$query = "insert into RetraitPhoto( nom, prenom, mail, stringID, ref, justificatif, raison) values ('" .
 		mysql_real_escape_string($rp->getNom()) . "', '" .
@@ -35,6 +41,19 @@ class RetraitPhotoDAO extends DAO{
 	}
 	public function delete($rp){
 		$query = "delete from RetraitPhoto where retraitPhotoID = " .
+		mysql_real_escape_string($rp->getRetraitPhotoID());
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() == 1){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	public function saveRef($rp){
+		$query = "update RetraitPhoto set ref = '" .
+		mysql_real_escape_string($rp->getRef()) . "' where retraitPhotoID = " .
 		mysql_real_escape_string($rp->getRetraitPhotoID());
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() == 1){

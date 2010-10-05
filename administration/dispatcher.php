@@ -9,6 +9,7 @@ if(isset($_POST['action'])){
 }
 switch($action){
 	case detail_retrait:
+	case supprimer_retrait:
 		include $dir_administration_dispatcher_php . "/controleur/controleur_retrait.php";
 	break;
 	case valider_album:
