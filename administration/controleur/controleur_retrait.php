@@ -38,7 +38,7 @@ switch($action){
 		$album = Album::getAlbumDepuisID($sid->getID_Album());
 		include $dir_administration_controleur_retrait_php . "/../header.php";
 		echo '<h3>Détail du retrait #'. $retrait->getRetraitPhotoID() . ' appartenant à l\'album #'. $album->getAlbumID() . '</h3>';
-		echo '<a target="_blank" href="retrait/' . $retrait->getJustificatif() . '">justificatif</a><br/>';
+		echo '<a target="_blank" href="retraits/' . $retrait->getJustificatif() . '">justificatif</a><br/>';
 		$raison = $retrait->getRaison();
 		if(!isset($raison) || $raison == ''){
 			echo '<table border="1px"><tr><td>pas de raison donnée</td></tr></table>';
