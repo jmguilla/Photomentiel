@@ -307,11 +307,13 @@ include("head.php");
 					<div class="td_in">
 						<a title="Agrandir" href="'.$picsFullDir.$picsArray[$addi].'" onClick="$(\'#hl_'.$addi.'\').displayHidden();return false;"><img src="'.$thumbsFullDir.$picsArray[$addi].'"/></a>
 					</div>
-					<table width="100%"><tr><td align="center">
-						<a class="a_basket" title="ajouter au panier" href="javascript:addToBasket(\''.$picsArray[$addi].'\');"/>
-						</td><td>
+					<table width="100%"><tr><td>
 						<a class="a_zoom" title="Agrandir" href="'.$picsFullDir.$picsArray[$addi].'" onClick="$(\'#hl_'.$addi.'\').displayHidden();return false;"/>
-						</td></tr></table>
+					</td><td>
+						<a class="a_basket" title="ajouter au panier" href="javascript:addToBasket(\''.$picsArray[$addi].'\');"/>
+					</td><td>
+						<span class="ref">'.removeExtension($picsArray[$addi]).'</span>
+					</td></tr></table>
 				</div>';
 		}
 		?>

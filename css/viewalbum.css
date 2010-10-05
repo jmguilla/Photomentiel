@@ -111,6 +111,11 @@ div#content_mailing span {
 	font-size:18px;
 }
 
+span.ref {
+	color:#AAAAAA;
+	font-size:11px;
+}
+
 div.td {
 	float:left;
 	width:136px;

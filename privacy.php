@@ -62,7 +62,13 @@ if (isset($_POST['Captcha'])){
 				$retrait->setRaison($_POST['raison']);
 				$retrait->create();
 				//send email notification
-				ControleurUtils::sendRetraitMail($_POST['email'],$_POST['raison']);
+				$msg = "Nom:".$_POST['nom']." - Prenom:".$_POST['prenom']."\n";
+				$msg .= "Email :".$_POST['email']."\n";
+				$msg .= "Album :".$_POST['album']."\n";
+				$msg .= "Ref(s):".$_POST['ref']."\n";
+				$msg .= "just. :".$newFileName."\n";
+				$msg .= "Raison:\n";
+				ControleurUtils::sendRetraitMail($_POST['email'],$msg.$_POST['raison']);
 			}
 		}
 	}

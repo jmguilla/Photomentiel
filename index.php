@@ -19,6 +19,7 @@ include_once("classes/modele/Evenement.class.php");
 <script type="text/javascript" src="js/calendar.js"></script>
 <script type="text/javascript">
 	stringIdLength = "<?php echo STRINGID_LENGTH; ?>";
+	$("#ie6_nojs").css('visibility','hidden');
 </script>
 <div id="square_left">
 	<div id="square_top">
@@ -166,9 +167,37 @@ include_once("classes/modele/Evenement.class.php");
 			<a title="<?php echo isset($_SESSION['userID'])?'Modifier mon compte':'Créer un compte'; ?>" class="know_more_item" id="create_account" href="adduser.php"><img height="45px" width="45px" align="middle" src="design/misc/<?php echo isset($_SESSION['userID'])?'update_account.png':'create_account.png'; ?>"/><?php echo $account_text; ?></a>
 			<a title="Les réponses à toutes vos questions" class="know_more_item" href="faq.php"><img height="45px" width="45px" align="middle" src="design/misc/help.png"/>Foire aux questions</a>
 			<a title="Cliquez si vous désirez retirer une photo" class="know_more_item" href="privacy.php"><img height="45px" width="45px" align="middle" src="design/misc/key.png"/>Vie privée et retrait de photos</a>
-			<!--<a title="Accéder au forum" class="know_more_item" href="forum.php"><img height="45px" width="45px" align="middle" src="design/misc/chat.png"/>Forum (en construction)</a>-->
 		</div>
 	</div>
+	<!-- IE6 and NO JS WARNING -->
+	<div id="ie6_nojs_bg"></div>
+	<div id="ie6_nojs">
+		<table width="100%" height="100%"><tr><td valign="middle" align="center">
+		<div id="ie6_nojsc">
+			<center><span class="title1"><u>ATTENTION</u></span></center><br/>
+			<span class="title2">Ce site ne fonctionnera pas avec votre configuration ou votre navigateur actuel.</span><br/><br/>
+			<span class="desc">Voici les raisons possibles et les solutions que nous pouvons vous proposer :</span>
+			<ul>
+				<li>
+					Vous utilisez <span class="b">Internet Explorer</span> dans une version <span class="b">trop ancienne</span>.<br/>
+					Nous vous suggérons alors de mettre votre navigateur à jour pour <span class="s">une version supérieur ou égale à 7</span>.
+				</li>
+				<li>
+					Votre moteur <span class="b">JavaScript</span> est peut être <span class="b">désactivé.</span><br/>
+					Ce site nécessite JavaScript pour fonctionner. Il est peut être juste nécessaire de <span class="s">l'activer</span>.<br/>
+					Pour ce faire, nous vous recommendons de <span class="s">suivre les instructions</span> disponibles à <a target="_blank" href="https://www.google.com/adsense/support/bin/answer.py?hl=fr&answer=12654">cette adresse</a>, puis de rafraîchir votre navigateur (<i>en appuyant sur F5</i>)
+				</li>
+			</ul>
+		</div>
+	</td></tr></table>
+	</div>
+	<script type="text/javascript">
+		if (!(/MSIE 6\.0/i.test(window.navigator.userAgent) || /MSIE 5\.0/i.test(window.navigator.userAgent))){
+			$("#ie6_nojs_bg").css('visibility','hidden');
+			$("#ie6_nojs").css('visibility','hidden');
+		}
+	</script>
+	<!-- IE6 and NO JS WARNING -->
 	<div id="square_bot"></div>
 </div>
 <?php

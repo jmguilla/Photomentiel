@@ -200,3 +200,60 @@ a#photographe {
 	font-weight:bold;
 	color:#FF0080;
 }
+div#ie6_nojs_bg {
+	position:absolute;
+	z-index:113;
+	background-color:black;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+	opacity:0.5;
+        -moz-opacity:0.5; /* FF */
+        -ms-filter:"alpha(opacity=50)"; /* IE >= 8 */
+        filter:alpha(opacity=50); /* IE < 8 */ 
+}
+div#ie6_nojs {
+	position:absolute;
+	z-index:114;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+}
+div#ie6_nojs div#ie6_nojsc {
+	background-color:white;
+	border:2px blue solid;
+	height:300px;
+	width:570px;
+	padding:6px;
+	text-align:left;
+	font-size:14px;
+}
+div#ie6_nojs li {
+	margin-left:25px;
+	margin-top:8px;
+}
+div#ie6_nojs span.title1, div#ie6_nojs span.title2 {
+	color:darkred;
+	font-size:16px;
+	font-weight:bold;
+	line-height:24px;
+}
+div#ie6_nojs span.title1 {
+	font-size:18px;
+}
+div#ie6_nojs span.desc {
+	font-size:14px;
+	font-weight:bold;
+	line-height:20px;
+}
+div#ie6_nojs span.b {
+	color:darkred;
+	font-weight:bold;
+}
+div#ie6_nojs span.s {
+	color:darkgreen;
+	font-weight:bold;
+}
+

@@ -210,10 +210,10 @@ if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['tit
 			<table>
 			<tr>
 				<td colspan="3" height="84px;">
-					<span class="note">Un événement peut être associé à cet album, le spécifier nous permet d'envoyer un E-mail
+					<span class="note">Un événement <u>peut être</u> associé à cet album, le spécifier nous permet d'envoyer un E-mail
 					à toutes les personnes qui se sont inscrites à cet événement pour les prévenir de sa disponibilité.<br/>
 					Ceci permet d'augmenter le nombre de visites sur cet album.<br/></span>
-					<u>S'il existe un événement associé, merci de le sélectionner :</u>
+					<u>Si vous souhaitez associer un événement, merci de le sélectionner :</u>
 				</td>
 			</tr>
 			<tr>

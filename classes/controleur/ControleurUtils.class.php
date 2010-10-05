@@ -169,7 +169,7 @@ class ControleurUtils{
 		}
 	}
 	
-	public static function sendRetraitMail($email, $raison){
+	public static function sendRetraitMail($email, $content){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<retrait@photomentiel.fr>'."\n";
      		$headers .='Reply-To: ' . $email ."\n";
@@ -177,7 +177,7 @@ class ControleurUtils{
      		$headers .='Content-Transfer-Encoding: 8bit';
 			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
 			"Nouveau retrait demandé",
-			$raison,
+			$content,
 			$headers
 			);
 		}
