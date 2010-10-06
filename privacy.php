@@ -39,6 +39,7 @@ if (isset($_POST['Captcha'])){
 			$sendMail = true;
 		}
 		//check file type
+		echo $_FILES["id_file"]["type"];
 		if (!($_FILES["id_file"]["type"] == 'application/pdf' || $_FILES["id_file"]["type"] == 'image/jpeg')){
 			$error_code = 2;
 		}
@@ -47,7 +48,7 @@ if (isset($_POST['Captcha'])){
 			$error_code = 3;
 		}
 		//check StringID
-		if(!(StringID::getStringIDDepuisID($_POST['album']))){
+		if($error_code == 0 && !(StringID::getStringIDDepuisID($_POST['album']))){
 			$error_code = 4;
 		}
 		if ($sendMail){
