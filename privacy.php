@@ -14,6 +14,7 @@ $HEADER_DESCRIPTION = "Si vous souhaitez faire retirer une photo, c'est ici que 
 include("header.php");
 include_once("classes/modele/RetraitPhoto.class.php");
 include_once("classes/controleur/ControleurUtils.class.php");
+include_once("classes/modele/StringID.class.php");
 
 $target_path = "administration/retraits/";
 $msgSent=false;
