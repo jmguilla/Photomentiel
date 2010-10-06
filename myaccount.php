@@ -20,11 +20,11 @@ include_once ("classes/modele/EvenementEcouteur.class.php");
 include_once ("classes/modele/Commande.class.php");
 
 if ($utilisateurObj){
-	$photographMode = $_SESSION['userClass'] == 'Photographe';
+	$photographMode = $_SESSION['userClass'] === 'Photographe';
 }
 
 $accountRemoved = false;
-if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
+if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 	//T O D O remove account
 	/*unset($_SESSION['userID']);
 	unset($_SESSION['userClass']);

@@ -17,7 +17,7 @@ include_once("classes/modele/Evenement.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
 
-if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] == 'Photographe')){
+if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] === 'Photographe')){
 	photomentiel_die(new PMError("Accés interdit !","Cet accés est strictement réservé à nos photographes, que faites vous là ?"));
 }
 
@@ -28,7 +28,7 @@ include("header.php");
 $updateMode = false;
 $albumCreated = false;
 $albumSaved = false;
-if (isset($_GET['action']) && $_GET['action'] == 'update'){
+if (isset($_GET['action']) && $_GET['action'] === 'update'){
 	if (!isSet($_GET['al']) || $_GET['al'] == ''){
 		photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"), false);
 	}
@@ -106,7 +106,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'update'){
 		$albumObj = Album::getAlbumDepuisID($_SESSION['lastCreatedAlbum']);
 	}
 }
-if ((isset($_GET['action']) && $_GET['action'] == 'update') || isset($_POST['title'])){
+if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['title'])){
 	//prepare photo formats and price
 	$tmp = TaillePapier::getTaillePapiers();
 	$photoFormatsDim = array();

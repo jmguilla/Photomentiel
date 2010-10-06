@@ -30,11 +30,11 @@ if (isset($_GET['ev'])) {
 
 $addEvent = false;
 if (isset($_GET['action']) && $utilisateurObj){
-	$addEvent = $_GET['action'] == 'add';
+	$addEvent = $_GET['action'] === 'add';
 }
 
 $evtectMatches = false;
-if ($eventSelected && isset($_GET['action']) && $_GET['action'] == 'mailing' && $utilisateurObj){
+if ($eventSelected && isset($_GET['action']) && $_GET['action'] === 'mailing' && $utilisateurObj){
 	if (!EvenementEcouteur::exists($_GET['ev'],$utilisateurObj->getUtilisateurID())){
 		$evtEc = new EvenementEcouteur($utilisateurObj->getUtilisateurID(),$_GET['ev']);
 		$evtEc->create();

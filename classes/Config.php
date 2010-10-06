@@ -40,7 +40,7 @@ define('STRINGID_LENGTH', 8);
 define('AUTHOR','Photomentiel');
 define('DOMAIN_NAME','photomentiel');
 define('DOMAIN_EXT','fr');
-define('SHIPPING_RATE',3.30);
+define('SHIPPING_RATE',2.90);
 define('SHIPPING_RATE_UNTIL',30);
 define('PHOTOGRAPH_INITIAL_PERCENT', 73);
 
