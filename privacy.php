@@ -39,8 +39,9 @@ if (isset($_POST['Captcha'])){
 			$sendMail = true;
 		}
 		//check file type
-		echo $_FILES["id_file"]["type"];
-		if (!($_FILES["id_file"]["type"] == 'application/pdf' || $_FILES["id_file"]["type"] == 'image/jpeg')){
+		$ext = strtoupper(substr($_FILES["id_file"]["name"],-3,3));
+		echo $ext;
+		if (!($ext == "PDF" || $ext == "JPG")){
 			$error_code = 2;
 		}
 		//check file size
@@ -54,11 +55,7 @@ if (isset($_POST['Captcha'])){
 		if ($sendMail){
 			//try upload
 			if ($error_code == 0) {
-				if ($_FILES["id_file"]["type"] == 'application/pdf'){
-					$newFileName .= "pdf";
-				} else {
-					$newFileName .= "jpg";
-				}
+				$newFileName = date("YmdHis").".$ext";
 				if(!move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
 				   	$error_code = 5;
 				}

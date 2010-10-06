@@ -12,7 +12,7 @@
 @session_start();
 header("Content-type: image/png");
 $nbcar = 5;
-$chaine = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz023456789';
+$chaine = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
 srand((double)microtime()*1000000);
 $variable='';
 for($i=0; $i<$nbcar; $i++) {
