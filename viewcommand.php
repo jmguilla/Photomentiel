@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Visualisation de votre commande";
+$HEADER_DESCRIPTION = "Visualisation et gestion de votre commande";
 include_once("classes/PMError.class.php");
 include_once("classes/modele/Commande.class.php");
 include_once("classes/modele/CommandePhoto.class.php");

@@ -9,8 +9,8 @@
  * Since : 1.0.0
  *
  */
-?>
-<?php
+$HEADER_TITLE = "Recherche et visualisation des événements";
+$HEADER_DESCRIPTION = "Page de recherche, visualisation et gestion des événements";
 include("header.php");
 include_once("classes/PMError.class.php");
 include_once("classes/modele/Evenement.class.php");

@@ -52,6 +52,8 @@ if (isset($_POST["pictur_0"])){
 $photoFormatsDim = $_SESSION['photoFormatsDim'];
 $photoFormatsPrice = $_SESSION['photoFormatsPrice'];
 
+$HEADER_TITLE = "Confirmation de votre panier";
+$HEADER_DESCRIPTION = "Page de confirmation de votre panier";
 include("header.php");
 
 if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){

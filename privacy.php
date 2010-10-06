@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Vie privée et retrait de photos";
+$HEADER_DESCRIPTION = "Si vous souhaitez faire retirer une photo, c'est ici que ça se passe";
 include("header.php");
 include_once("classes/modele/RetraitPhoto.class.php");
 include_once("classes/controleur/ControleurUtils.class.php");

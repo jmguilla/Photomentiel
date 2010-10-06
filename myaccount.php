@@ -10,6 +10,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Votre compte";
+$HEADER_DESCRIPTION = "Page de gestion de votre compte";
 include("header.php");
 include_once("classes/modele/Album.class.php");
 include_once("classes/modele/Photographe.class.php");

@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Question/réponses aux photographes";
+$HEADER_DESCRIPTION = "Photographe ? vous trouverez ici les réponses aux questions que vous pouvez vous poser";
 include("header.php");
 
 $TAILLE_MAX = 4;//Go

@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Visualisation des albums photos";
+$HEADER_DESCRIPTION = "Page de recherche et visualisation des albums";
 include("header.php");
 include_once("classes/modele/Album.class.php");
 include_once("classes/modele/Evenement.class.php");

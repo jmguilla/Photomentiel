@@ -21,6 +21,8 @@ if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] == 'Photographe'))
 	photomentiel_die(new PMError("Accés interdit !","Cet accés est strictement réservé à nos photographes, que faites vous là ?"));
 }
 
+$HEADER_TITLE = "Création et gestion d'album";
+$HEADER_DESCRIPTION = "Créer et gérer vos albums sur cette page";
 include("header.php");
 
 $updateMode = false;

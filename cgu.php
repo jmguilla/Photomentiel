@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Conditions Générales de Vente et d'Utilisation";
+$HEADER_DESCRIPTION = "Conditions Générales de Vente et d'Utilisation";
 include("header.php");
 ?>
 <div id="full_content_top">

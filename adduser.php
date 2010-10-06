@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Ajout/modification d'un utilisateur ".$albumStringID;
+$HEADER_DESCRIPTION = "Ajoute ou modifie un utlisateur";
 
 include("header.php");
 include_once("classes/modele/Adresse.class.php");
