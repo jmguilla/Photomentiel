@@ -2,4 +2,4 @@ SetEnv PHP_VER 5
 AuthName "Espace administrateur"
 AuthType Basic
 AuthUserFile /homez.368/photomen/.htpasswd
-#Require valid-user
+Require valid-user
