@@ -40,7 +40,6 @@ if (isset($_POST['Captcha'])){
 		}
 		//check file type
 		$ext = strtoupper(substr($_FILES["id_file"]["name"],-3,3));
-		echo $ext;
 		if (!($ext == "PDF" || $ext == "JPG")){
 			$error_code = 2;
 		}
@@ -56,6 +55,7 @@ if (isset($_POST['Captcha'])){
 			//try upload
 			if ($error_code == 0) {
 				$newFileName = date("YmdHis").".$ext";
+				echo $newFileName;
 				if(!move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
 				   	$error_code = 5;
 				}
