@@ -9,7 +9,7 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 		$parm="merchant_id=013044876511111";
 	} else {
 		//JM
-		$parm="merchant_id=013044876511111";
+		$parm="merchant_id=052100001800015";
 	}
 	
 	//needed params
