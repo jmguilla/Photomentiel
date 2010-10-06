@@ -47,7 +47,7 @@ if (isset($_POST['Captcha'])){
 			$error_code = 3;
 		}
 		//check StringID
-		if(!(StringID::getStringIDDepuisID($sidstring))){
+		if(!(StringID::getStringIDDepuisID($_POST['album']))){
 			$error_code = 4;
 		}
 		if ($sendMail){
