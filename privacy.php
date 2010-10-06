@@ -55,8 +55,7 @@ if (isset($_POST['Captcha'])){
 			//try upload
 			if ($error_code == 0) {
 				$newFileName = date("YmdHis").".$ext";
-				echo $newFileName;
-				if(!move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
+				if(move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
 				   	$error_code = 5;
 				}
 			}
