@@ -177,7 +177,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']=='remove'){
 									} else if($alb["Album"]->getEtat() == 1){
 										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> (en attente de validation par Photomentiel)';
 									} else {
-										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain total : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
+										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
 									}
 									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img height="38px" src="'.$alb["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
 									$i++;
