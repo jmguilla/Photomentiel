@@ -14,7 +14,7 @@
  *
  */
 if (isset($_GET['action'])){
-	if ($_GET['action']=='disc'){
+	if ($_GET['action']==='disc'){
 		unset($_SESSION['userID']);
 		unset($_SESSION['userClass']);
 	}

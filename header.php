@@ -15,7 +15,7 @@ include_once("classes/modele/Utilisateur.class.php");
 
 include("userconnection.php");
 ?>
-<div id="header_surround"><?php if (Utils::getScriptName() != 'index') { ?><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><?php } ?><div id="header"><span id="accueil" <?php if (Utils::getScriptName() == 'index') { ?>style="color:#0099FF;"<?php } ?>>Accueil</span></div><?php if (Utils::getScriptName() != 'index') { ?></a><?php } ?></div>
+<div id="header_surround"><?php if (Utils::getScriptName() != 'index') { ?><a href="index.php" title="<?php echo Utils::getFullDomainName(); ?> - Retour accueil"><?php } ?><div id="header"><span id="accueil" <?php if (Utils::getScriptName() === 'index') { ?>style="color:#0099FF;"<?php } ?>>Accueil</span></div><?php if (Utils::getScriptName() != 'index') { ?></a><?php } ?></div>
 <div class="separator5"></div>
 <div id="menu_barre">
 	<div style="text-align:left;float:left;padding-left:10px;width:740px;">
@@ -32,7 +32,7 @@ include("userconnection.php");
 			} else {
 				echo '<div id="user_connected">';
 				echo 'Connecté sous <b>'.$utilisateurObj->getEmail().'</b>';
-				if (get_class($utilisateurObj) == "Photographe"){
+				if (get_class($utilisateurObj) === "Photographe"){
 					echo " - (Photographe)";
 				}
 				echo '</div>';

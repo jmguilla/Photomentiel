@@ -30,7 +30,7 @@ if ($utilisateurObj && isset($_POST['content'])){
 		$sendMail = true;
 	}
 	if ($sendMail){
-		$errorCaptcha = $_SESSION['Captcha'] != $_POST['Captcha'];
+		$errorCaptcha = (strcmp($_SESSION['Captcha'],$_POST['Captcha']) != 0);
 		if (!$errorCaptcha){
 			ControleurUtils::sendContactmail($utilisateurObj->getUtilisateurID(),$_POST['email'],$_POST['content']);
 		}

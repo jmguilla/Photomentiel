@@ -22,7 +22,7 @@ if (isset($_POST['Captcha'])){
 	$msgSent=true;
 	$error_code = 0;
 	//test captcha
-	if ($_SESSION['Captcha'] != $_POST['Captcha']) {
+	if (strcmp($_SESSION['Captcha'],$_POST['Captcha']) != 0) {
 		$error_code = 1;
 	} else {
 		//continue
@@ -30,17 +30,17 @@ if (isset($_POST['Captcha'])){
 		$sendMail = false;
 		$postHash = getHashFromArray($_POST);
 		if (isset($_SESSION['privacyPostHash'])){
-			if ($_SESSION['privacyPostHash'] != $postHash){
+			if ($_SESSION['privacyPostHash'] !== $postHash){
 				$_SESSION['privacyPostHash'] = $postHash;
 				$sendMail = true;
 			}
 		} else {
-			$_SESSION['contactPostHash'] = $postHash;
+			$_SESSION['privacyPostHash'] = $postHash;
 			$sendMail = true;
 		}
 		//check file type
 		$ext = strtoupper(substr($_FILES["id_file"]["name"],-3,3));
-		if (!($ext == "PDF" || $ext == "JPG")){
+		if (!($ext === "PDF" || $ext === "JPG")){
 			$error_code = 2;
 		}
 		//check file size
@@ -55,7 +55,7 @@ if (isset($_POST['Captcha'])){
 			//try upload
 			if ($error_code == 0) {
 				$newFileName = date("YmdHis").".$ext";
-				if(move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
+				if(!move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
 				   	$error_code = 5;
 				}
 			}
@@ -100,38 +100,30 @@ if (isset($_POST['Captcha'])){
 		<div id="content_sent">
 			<div class="separator10" style="height:140px;"></div>
 			<?php
-				if ($errorCaptcha){
-			?>
-				Erreur, le code de vérification n'est pas le bon.<br/>
-				Veuillez réessayer.<br/>
-				<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>
-			<?php
-				} else {
-					switch ($error_code) {
-						case 0:
-							echo 'Votre demande a bien été envoyée.<br/>';
-							echo 'Nous nous efforcerons de la satisfaire dans les plus brefs délais.<br/>';
-							break;
-						case 1:
-							echo 'Erreur, le code de vérification n\'est pas le bon.<br/>';
-							break;
-						case 2:
-							echo 'Erreur, le fichier n\'a pas le type requis.<br/>';
-							break;
-						case 3:
-							echo 'Erreur, le fichier est trop volumineux.<br/>';
-							break;
-						case 4:
-							echo 'L\'album spécifié n\'existe pas ou plus.<br/>';
-							break;
-						case 5:
-							echo 'Il y\'a eu un problème durant le transfert de votre pièce d\'identité.<br/>';
-							break;
-					}
-					if ($error_code > 0){
-						echo 'Veuillez réessayer.<br/>';
-						echo '<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>';
-					}
+				switch ($error_code) {
+					case 0:
+						echo 'Votre demande a bien été envoyée.<br/>';
+						echo 'Nous nous efforcerons de la satisfaire dans les plus brefs délais.<br/>';
+						break;
+					case 1:
+						echo 'Erreur, le code de vérification n\'est pas le bon.<br/>';
+						break;
+					case 2:
+						echo 'Erreur, le fichier n\'a pas le type requis.<br/>';
+						break;
+					case 3:
+						echo 'Erreur, le fichier est trop volumineux.<br/>';
+						break;
+					case 4:
+						echo 'L\'album spécifié n\'existe pas ou plus.<br/>';
+						break;
+					case 5:
+						echo 'Il y\'a eu un problème durant le transfert de votre pièce d\'identité.<br/>';
+						break;
+				}
+				if ($error_code > 0){
+					echo 'Veuillez réessayer.<br/>';
+					echo '<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>';
 				}
 			?>
 			<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
