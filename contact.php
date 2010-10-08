@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Contact";
+$HEADER_DESCRIPTION = "Contactez nous";
 include("header.php");
 include_once("classes/modele/Utilisateur.class.php");
 include_once("classes/controleur/ControleurUtils.class.php");
@@ -28,7 +30,7 @@ if ($utilisateurObj && isset($_POST['content'])){
 		$sendMail = true;
 	}
 	if ($sendMail){
-		$errorCaptcha = $_SESSION['Captcha'] != $_POST['Captcha'];
+		$errorCaptcha = (strcmp($_SESSION['Captcha'],$_POST['Captcha']) != 0);
 		if (!$errorCaptcha){
 			ControleurUtils::sendContactmail($utilisateurObj->getUtilisateurID(),$_POST['email'],$_POST['content']);
 		}
@@ -79,6 +81,10 @@ if ($utilisateurObj && isset($_POST['content'])){
 		?>
 			<div id="form_title">
 				Pour toutes demandes ou suggestions, veuillez <?php echo $utilisateurObj?'':'<u>vous connecter</u> et '; ?> utiliser le formulaire ci-dessous :
+			</div>
+			<div id="form_info">
+				(Avant de remplir ce formulaire, veuillez vous assurez que vous n'avez pas trouvé la réponse à votre demande dans les pages 
+				<a href="faq.php">utilisateurs</a> ou <a href="photograph.php">photographes</a>)
 			</div>
 			<div class="separator10" style="height:20px"></div>
 			<form id="form_contact" method="POST" action="contact.php">

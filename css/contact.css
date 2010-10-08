@@ -1,8 +1,12 @@
-div#form_title {
+div#form_title,div#form_info {
 	width:100%;
 	text-align:left;
 	font-size:13px;
 	font-weight:bold;
+}
+div#form_info {
+	font-size:12px;
+	font-weight:normal;
 }
 div#form_content {
 	text-align:left;

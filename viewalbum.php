@@ -179,7 +179,7 @@ include("head.php");
 						<div style="text-align:left;font-size:14px;">
 						<span>Photographe :</span>  <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?><br/>
 						<span>Téléphone :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?><br/>
-						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()=='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?><br/>
+						<span>Site internet :</span> <?php echo ($photographObj->getSiteWeb()==='http://')?'Non communiqué':'<a target="_blank" href="'.$photographObj->getSiteWeb().'">'.$photographObj->getSiteWeb().'</a>'; ?><br/>
 						<span style="line-height:22px;">Evaluation :</span> 
 						<?php
 							$note = round($photographObj->getNote()*6/10);

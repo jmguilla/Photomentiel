@@ -9,6 +9,8 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Foire aux questions";
+$HEADER_DESCRIPTION = "Vous trouverez ici toutes les questions que vous pouvez vous poser et les réponses que nous vous fournissons";
 include("header.php");
 ?>
 <div id="full_content_top">

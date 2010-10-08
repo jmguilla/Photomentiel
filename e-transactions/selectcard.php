@@ -1,15 +1,14 @@
 <?php
 //File to be imported when selecting credit card
 function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albumID){
-	//TODO change SIREN value when available
-	$SIREN_A  = '000000000';
+	$SIREN_A  = '523919066';
 	$SIREN_JM = '521000018';
 	if ($p_module == $SIREN_A){
 		//Arnaud
 		$parm="merchant_id=013044876511111";
 	} else {
 		//JM
-		$parm="merchant_id=013044876511111";
+		$parm="merchant_id=052100001800015";
 	}
 	
 	//needed params

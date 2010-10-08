@@ -57,6 +57,8 @@ if (isset($_SESSION['COMMAND_LINES'])){
 	}
 }
 
+$HEADER_TITLE = "Visualisation de votre panier";
+$HEADER_DESCRIPTION = "Visualisation et gestion de votre panier";
 include("header.php");
 ?>
 	<script language="javascript" src="js/thickbox.js"></script>

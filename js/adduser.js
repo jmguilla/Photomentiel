@@ -294,6 +294,7 @@ $(document).ready(function() {
 	$('#createUser').submit(function() {
 		var isValid = checkForm();
 		if(!isValid.error) {
+			$('#userSubmit').attr("disabled","true");
 			$.ajax({
 				type: "POST",
 				url: "/dispatcher.php",
@@ -315,6 +316,7 @@ $(document).ready(function() {
 					}else{
 						alert(data.cause);
 					}
+					$('#userSubmit').removeAttr("disabled");
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
 					alert('Error with code 3');
@@ -328,6 +330,7 @@ $(document).ready(function() {
 	$('#updateUser').submit(function() {
 		var isValid = checkForm();
 		if(!isValid.error) {
+			$('#userSubmit').attr("disabled","true");
 			$.ajax({
 				type: "POST",
 				url: "/dispatcher.php",
@@ -349,6 +352,7 @@ $(document).ready(function() {
 					}else{
 						alert(data.cause);
 					}
+					$('#userSubmit').removeAttr("disabled");
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
 					alert('Error with code 8');

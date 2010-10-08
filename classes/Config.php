@@ -15,7 +15,7 @@ for ($i=0;$i<sizeof($prdPossibleRootDir);$i++) {
 $EVENTS_TYPES=array('Mariage','Evenement Sportif','Shooting Perso','Autre');
 $COMMAND_STATES=array('En attente','Payée','En cours de préparation','Expédiée','Terminée');
 $ALBUM_STATES=array('Créé','Prêt','Ouvert','Cloturé');
-$MODULES=array('521000018','523919066');
+$MODULES=array('521000018');
 
 define('DBTYPE', 'mysql');
 if($_SERVER['SERVER_ADDR'] == "213.186.33.16"){
@@ -40,7 +40,7 @@ define('STRINGID_LENGTH', 8);
 define('AUTHOR','Photomentiel');
 define('DOMAIN_NAME','photomentiel');
 define('DOMAIN_EXT','fr');
-define('SHIPPING_RATE',3.30);
+define('SHIPPING_RATE',2.90);
 define('SHIPPING_RATE_UNTIL',30);
 define('PHOTOGRAPH_INITIAL_PERCENT', 73);
 

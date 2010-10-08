@@ -9,48 +9,58 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Vie privée et retrait de photos";
+$HEADER_DESCRIPTION = "Si vous souhaitez faire retirer une photo, c'est ici que ça se passe";
 include("header.php");
 include_once("classes/modele/RetraitPhoto.class.php");
 include_once("classes/controleur/ControleurUtils.class.php");
+include_once("classes/modele/StringID.class.php");
 
+$target_path = "administration/retraits/";
 $msgSent=false;
 if (isset($_POST['Captcha'])){
 	$msgSent=true;
-	$errorCaptcha = $_SESSION['Captcha'] != $_POST['Captcha'];
-	if (!$errorCaptcha){
+	$error_code = 0;
+	//test captcha
+	if (strcmp($_SESSION['Captcha'],$_POST['Captcha']) != 0) {
+		$error_code = 1;
+	} else {
+		//continue
 		//Manage duplication (F5, history back, etc.)
 		$sendMail = false;
 		$postHash = getHashFromArray($_POST);
 		if (isset($_SESSION['privacyPostHash'])){
-			if ($_SESSION['privacyPostHash'] != $postHash){
+			if ($_SESSION['privacyPostHash'] !== $postHash){
 				$_SESSION['privacyPostHash'] = $postHash;
 				$sendMail = true;
 			}
 		} else {
-			$_SESSION['contactPostHash'] = $postHash;
+			$_SESSION['privacyPostHash'] = $postHash;
 			$sendMail = true;
 		}
+		//check file type
+		$ext = strtoupper(substr($_FILES["id_file"]["name"],-3,3));
+		if (!($ext === "PDF" || $ext === "JPG")){
+			$error_code = 2;
+		}
+		//check file size
+		if ($error_code == 0 && $_FILES["id_file"]["size"] > 512000){
+			$error_code = 3;
+		}
+		//check StringID
+		if($error_code == 0 && !(StringID::getStringIDDepuisID($_POST['album']))){
+			$error_code = 4;
+		}
 		if ($sendMail){
-			//move uploaded object
-			$target_path = "administration/retraits/";
-			if (($_FILES["id_file"]["type"] == 'application/pdf' || 
-				$_FILES["id_file"]["type"] == 'image/jpeg') && 
-				$_FILES["id_file"]["size"] <= 512000){
-				$newFileName = date("YmdHis").".";
-				if ($_FILES["id_file"]["type"] == 'application/pdf'){
-					$newFileName .= "pdf";
-				} else {
-					$newFileName .= "jpg";
+			//try upload
+			if ($error_code == 0) {
+				$newFileName = date("YmdHis").".$ext";
+				if(!move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
+				   	$error_code = 5;
 				}
-				if(move_uploaded_file($_FILES['id_file']['tmp_name'], $target_path.$newFileName)) {
-			    	$uploadSuccess = true;
-				} else{
-				    $uploadSuccess = false;
-				}
-			} else {
-				$uploadSuccess = false;
 			}
-			if ($uploadSuccess){
+			//create DB line and send mail
+			if ($error_code == 0) {
 				//create object and save it
 				$retrait = new RetraitPhoto();
 				$retrait->setNom($_POST['nom']);
@@ -90,28 +100,33 @@ if (isset($_POST['Captcha'])){
 		<div id="content_sent">
 			<div class="separator10" style="height:140px;"></div>
 			<?php
-				if ($errorCaptcha){
-			?>
-				Erreur, le code de vérification n'est pas le bon.<br/>
-				Veuillez réessayer.<br/>
-				<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>
-			<?php
-				} else {
-					if ($uploadSuccess) {
-			?>
-						Votre demande a bien été envoyée.<br/>
-						Nous nous efforcerons de la satisfaire dans les plus brefs délais.<br/>
-			<?php
-					} else {
-			?>
-						Erreur, le fichier n'est pas valide ou est trop volumineux.<br/>
-						Veuillez réessayer.<br/>
-						<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>
-			<?php
-					}
+				switch ($error_code) {
+					case 0:
+						echo 'Votre demande a bien été envoyée.<br/>';
+						echo 'Nous nous efforcerons de la satisfaire dans les plus brefs délais.<br/>';
+						break;
+					case 1:
+						echo 'Erreur, le code de vérification n\'est pas le bon.<br/>';
+						break;
+					case 2:
+						echo 'Erreur, le fichier n\'a pas le type requis.<br/>';
+						break;
+					case 3:
+						echo 'Erreur, le fichier est trop volumineux.<br/>';
+						break;
+					case 4:
+						echo 'L\'album spécifié n\'existe pas ou plus.<br/>';
+						break;
+					case 5:
+						echo 'Il y\'a eu un problème durant le transfert de votre pièce d\'identité.<br/>';
+						break;
+				}
+				if ($error_code > 0){
+					echo 'Veuillez réessayer.<br/>';
+					echo '<input id="goback" type="button" class="button" value="Réessayer" onClick="history.back();"></input>';
 				}
 			?>
-			<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input><?php if ($errorCaptcha){echo "</form>";} ?>
+			<input id="gohome" type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
 			<div class="separator10" style="height:150px;"></div>
 		</div>
 	<?php

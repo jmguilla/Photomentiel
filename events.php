@@ -9,8 +9,8 @@
  * Since : 1.0.0
  *
  */
-?>
-<?php
+$HEADER_TITLE = "Recherche et visualisation des événements";
+$HEADER_DESCRIPTION = "Page de recherche, visualisation et gestion des événements";
 include("header.php");
 include_once("classes/PMError.class.php");
 include_once("classes/modele/Evenement.class.php");
@@ -30,11 +30,11 @@ if (isset($_GET['ev'])) {
 
 $addEvent = false;
 if (isset($_GET['action']) && $utilisateurObj){
-	$addEvent = $_GET['action'] == 'add';
+	$addEvent = $_GET['action'] === 'add';
 }
 
 $evtectMatches = false;
-if ($eventSelected && isset($_GET['action']) && $_GET['action'] == 'mailing' && $utilisateurObj){
+if ($eventSelected && isset($_GET['action']) && $_GET['action'] === 'mailing' && $utilisateurObj){
 	if (!EvenementEcouteur::exists($_GET['ev'],$utilisateurObj->getUtilisateurID())){
 		$evtEc = new EvenementEcouteur($utilisateurObj->getUtilisateurID(),$_GET['ev']);
 		$evtEc->create();

@@ -160,7 +160,7 @@ input.email:hover, input.email:focus, input.password:hover, input.password:focus
 	color:aqua;
 }
 
-input#valider {
+input#valider,input#valider2 {
 	text-align:center;
 	text-decoration:none;
 	height:20px;
@@ -169,7 +169,7 @@ input#valider {
 	vertical-align:middle;
 }
 
-span#form_connect_error {
+span#form_connect_error,span#form_connect_error2 {
 	color:red;
 	font-size:13px;
 	margin-left:15px;

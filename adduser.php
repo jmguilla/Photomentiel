@@ -9,22 +9,24 @@
  * Since : 1.0.0
  *
  */
+$HEADER_TITLE = "Ajout/modification d'un utilisateur";
+$HEADER_DESCRIPTION = "Ajoute ou modifie un utlisateur";
 
 include("header.php");
 include_once("classes/modele/Adresse.class.php");
 
 if (isset($_SESSION['userID'])){
 	$typeSet = true;
-	$photographMode = $_SESSION['userClass'] == 'Photographe';
+	$photographMode = $_SESSION['userClass'] === 'Photographe';
 	$createMode = false;
 } else {
 	$typeSet = isset($_GET['type']);
-	$photographMode = $typeSet && $_GET['type'] == 'ph';
+	$photographMode = $typeSet && $_GET['type'] === 'ph';
 	$createMode = true;
 }
 
 $accountCreated = false;
-if (isset($_GET['action']) && $_GET['action'] == 'ac'){
+if (isset($_GET['action']) && $_GET['action'] === 'ac'){
 	$accountCreated = true;
 }
 
@@ -364,6 +366,7 @@ if (isset($_GET["np"])){
 			</table>
 		</div>
 		<div class="separator10"></div>
+		<input type="button" class="button" value="Retour" onClick="history.back();"/>
 		<input class="button" type="submit" id="userSubmit" value="<?php echo $createMode?'Créer mon compte':'Sauvegarder les modifications'; ?>"/>
 	</form>
 	<?php
