@@ -126,4 +126,11 @@ div.recap_info img {
 	margin-left:20px;
 	margin-right:20px;
 }
-
+div#bag_login {
+	padding:5px;
+	text-align:left;
+	width:600px;
+	background-color:#E5F2FF;
+	border:1px #5555FF solid;
+	margin-top:8px;
+}

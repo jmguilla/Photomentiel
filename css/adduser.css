@@ -93,6 +93,7 @@ div.addu_body table td.aster {
 
 input#userSubmit {
 	width:250px;
+	margin-left:100px;
 }
 
 div#content_created {

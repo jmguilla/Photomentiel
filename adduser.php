@@ -366,6 +366,7 @@ if (isset($_GET["np"])){
 			</table>
 		</div>
 		<div class="separator10"></div>
+		<input type="button" class="button" value="Retour" onClick="history.back();"/>
 		<input class="button" type="submit" id="userSubmit" value="<?php echo $createMode?'Créer mon compte':'Sauvegarder les modifications'; ?>"/>
 	</form>
 	<?php

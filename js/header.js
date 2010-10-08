@@ -6,12 +6,15 @@ var re_mail = new RegExp('^[^@]+@[^.@]+[.].+$');
 //create data regexp
 var re_date = new RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}$');
 //check username//pwd is correct and connect if so
-function checkUserOrConnect(scriptname){
-	if (scriptname != null && scriptname == 'validaccount'){
-		$('#form_connect').attr('action','index.php?');
+function checkUserOrConnect(scriptname, id){
+	if (id==undefined){
+		id = '';
 	}
-	var email = $("#user_email").val();
-	var pwd = $("#user_pwd").val();
+	if (scriptname != null && scriptname == 'validaccount'){
+		$('#form_connect'+id).attr('action','index.php?');
+	}
+	var email = $("#user_email"+id).val();
+	var pwd = $("#user_pwd"+id).val();
 	if (email == "" || pwd == ""){
 		alert("Vous devez spécifier votre adresse e-mail et votre mot de passe");
 		return false;
@@ -26,12 +29,12 @@ function checkUserOrConnect(scriptname){
 		data:"action=logon&email=" + email + "&pwd=" + pwd,
 		dataType:"json",
 		success:function(data){
-			$("#form_connect_error").hide();
+			$("#form_connect_error"+id).hide();
 			if(data.result == true && "-1" != data.value){
-				$('#form_connect').submit();
+				$('#form_connect'+id).submit();
 			} else {
-				$("#form_connect_error").show();
-				$("#user_pwd").val("");
+				$("#form_connect_error"+id).show();
+				$("#user_pwd"+id).val("");
 				return;
 			}
 		},

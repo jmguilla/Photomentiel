@@ -220,7 +220,22 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 							<br/><br/>
 							<li>Si vous venez de créer un compte, veuillez l'activer en suivant le lien qui vous a été envoyé par E-mail, puis connectez vous en utilisant les champs ci-dessus.</li>
 							<br/>
-							<li>Pour vous connecter à votre compte, veuillez vous identifier en utilisant les champs ci-dessus, sous la bannière.</li>
+							<li>
+								Pour vous connecter à votre compte, veuillez vous identifier en utilisant les champs ci-dessous :<br/>
+								<div id="bag_login">
+									<form id="form_connect2" method="POST" action="?<?php echo getRequestParamFromPost(); ?>">
+									<table><tr><td width="100px">
+									E-mail  </td><td width="160px"><input style="width:150px;" name="user_email" id="user_email2" class="email" type="text" title="Entrez votre adresse E-mail"/><br/>
+									</td></tr><tr><td>
+									Mot de passe  </td><td><input style="width:150px;" name="user_pwd" id="user_pwd2" class="password" style="width:100px;" type="password" title="Entrez votre mot de passe"/>
+									</td><td>
+									<input style="margin-top:3px;" class="button" id="valider2" type="submit" value="Go" title="Me connecter" onClick="return checkUserOrConnect('<?php echo Utils::getScriptName();?>',2);"/>
+									</td><td>
+									<span id="form_connect_error2">Email ou mot de passe incorrect</span>
+									</td></tr></table>
+								</div>
+							</form>
+							</li>
 							<br/>
 							<li>Pour créer un compte, <a href="adduser.php?type=cl&np=confirmbag.php">cliquez ici.</a></li>
 						</ul>
