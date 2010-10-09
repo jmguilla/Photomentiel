@@ -43,7 +43,7 @@ include("header.php");
 			<li><i>Visiteur</i> <br/>désigne toute personne se présentant sur ce site, elle est ainsi désignée et identifiée via son adresse IP.</li>
 			<li><i>Utilisateur</i>  <br/>désigne tout visiteur enregistré sur ce site, et par conséquent ayant procédé à la création d'un compte sur ce site.</li>
 			<li><i>Photographe</i>  <br/>désigne tout utilisateur enregistré comme photographe sur le présent site, et par conséquent, ayant créé un compte photographe.</li>
-			<li><i>Album</i>  <br/>désigne l'ensemble des photos associées à un évènement et qui sont la propriété de son photographe. Un album peut être privé : il ne sera visible que
+			<li><i>Album</i>  <br/>désigne l'ensemble des photos associées à un événement et qui sont la propriété de son photographe. Un album peut être privé : il ne sera visible que
 			par l'ensemble des utilisateurs qui auront en leur possession le code de cet album par carte de visite ou mails. 
 			Un album peut être aussi public : il sera donc disponible en recherche public sur le site dans la rubrique albums publics, ou encore en page d'accueil du site s'il est récent.</li>
 			<li><i>Evénement</i>  <br/>désigne une date, un lieu et un type de manifestations qui se produit et sur lequel un photographe peut être amené à prendre des photos.</li>

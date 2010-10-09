@@ -82,7 +82,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php?np=myaccount.php';"/><br>
 				<center><hr id="separator"/><center>
 				<input id="view_albums" type="button" class="button" value="Voir les albums publics" onClick="document.location.href='albums.php';"/><br>
-				<input id="view_events" type="button" class="button" value="Voir les évènements" onClick="document.location.href='events.php';"/><br>
+				<input id="view_events" type="button" class="button" value="Voir les événements" onClick="document.location.href='events.php';"/><br>
 			</div>
 			<div id="right">
 				<div class="content_box" <?php if(!$photographMode) { ?>style="height:230px"<?php } ?>>

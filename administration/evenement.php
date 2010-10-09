@@ -21,7 +21,7 @@ $_SESSION['message'] = '';
 <h3>Evenements</h3>
 <?php
 $date = date("Y-m-d", time() - (60 * 60 * 24 * 31 * 3));
-echo '<span>10 évènements antérieurs à ' . $date . ':<br/>';
+echo '<span>10 événements antérieurs à ' . $date . ':<br/>';
 $assocs = Evenement::getNProchainsEvenementsEntreDates(10, NULL, $date);
 if($assocs){
 ?>
@@ -31,7 +31,7 @@ if($assocs){
 	foreach($assocs as $assoc){
 		$event = $assoc['Evenement'];
 		$user = $assoc['Utilisateur'];
-		echo '<tr><td>#' . $event->getEvenementID() . ' - </td><td><a target="blank" href="../events.php?ev=' . $event->getEvenementID() . '">' . $EVENTS_TYPES[$event->getType()] . '</a></td><td> - ' . $event->getDate() . '</td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="supprimer_evenement"/><input type="hidden" name="id" value="' . $event->getEvenementID() . '"/><input type="submit" onclick="return confirm(\'Vous êtes sur le point de supprimer un évènement!\nLes albums associés ne seront pas supprimés.\nContinuer?\');" value="supprimer"/></form></td></tr>' . "\n";
+		echo '<tr><td>#' . $event->getEvenementID() . ' - </td><td><a target="blank" href="../events.php?ev=' . $event->getEvenementID() . '">' . $EVENTS_TYPES[$event->getType()] . '</a></td><td> - ' . $event->getDate() . '</td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="supprimer_evenement"/><input type="hidden" name="id" value="' . $event->getEvenementID() . '"/><input type="submit" onclick="return confirm(\'Vous êtes sur le point de supprimer un événement!\nLes albums associés ne seront pas supprimés.\nContinuer?\');" value="supprimer"/></form></td></tr>' . "\n";
 	}
 ?>
 	</table>
