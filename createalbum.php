@@ -63,7 +63,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"login=".$utilisateurObj->getEmail().
 			"&homePhotograph=".$sidObj->getHomePhotographe().
 			"&stringID=".$sidObj->getStringID().
-			"&openAlbum=".$utilisateurObj->getOpenFTP(), false);
+			"&openAlbum=".$utilisateurObj->getOpenFTP().
+			"&watermark=".$albumObj->getFiligramme(), false);
 		if ($retcode != 0){
 			//TODO manage if error in httpPost
 		}
