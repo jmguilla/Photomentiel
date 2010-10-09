@@ -1,7 +1,7 @@
 <?php
 $dir_administration_controleur_album_php = dirname(__FILE__);
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Album.class.php";
-include_once $dir_administration_controleur_album_php . "/../../classes/modele/String.class.php";
+include_once $dir_administration_controleur_album_php . "/../../classes/modele/StringID.class.php";
 
 switch($action){
 	case supprimer_photo:
