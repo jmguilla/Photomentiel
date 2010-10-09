@@ -260,7 +260,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					Formats & tarifs : <br/>
 					<span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span>
 				</td><td colspan="2">
-					<table border=1>
+					<table>
 						<?php
 							$papers = TaillePapier::getTaillePapiers();
 							foreach($papers as $paper){
