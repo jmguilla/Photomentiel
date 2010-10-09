@@ -2,7 +2,7 @@
 $prdPossibleRootDir = array();
 array_push($prdPossibleRootDir,"D:/test/www/pictures/");
 array_push($prdPossibleRootDir,"D:/WorkingDir/eclipse/Photomentiel/pictures/");
-array_push($prdPossibleRootDir,"E:/EasyPHP-5.3.2i/www/pictures/");
+array_push($prdPossibleRootDir,"C:/EasyPHP-5.3.3/www/pictures/");
 array_push($prdPossibleRootDir,"D:/EasyPHP-5.3.3/www/pictures/");
 array_push($prdPossibleRootDir,"D:/test/www/pictures/");
 array_push($prdPossibleRootDir,"D:/www/pictures/");
