@@ -17,7 +17,7 @@ class Album {
 	private $mailing = '';
 	private $prixTaillePapier = NULL;
 	private $gainTotal = 0;
-	private $transfert = false;
+	private $transfert = true;
 
 	public function __construct($aid = -1, $h = NULL, $idp = -1, $ide = NULL, $d = NULL, $isPublique = false, $etat = NULL, $module = NULL){
 		$this->albumID = $aid;
