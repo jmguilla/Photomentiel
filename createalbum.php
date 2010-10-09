@@ -260,18 +260,18 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					Formats & tarifs : <br/>
 					<span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span>
 				</td><td colspan="2">
-					<table>
+					<table border=1>
 						<?php
 							$papers = TaillePapier::getTaillePapiers();
 							foreach($papers as $paper){
 								echo 
 								'<tr>
-									<td>
-										'.$paper->getDimensions().' :&nbsp;
-									</td><td class="price">
-										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixMinimum().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364; <span class="prix_conseille">( Prix min: <b>'.$paper->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
-									</td><td>
-										<div class="checkform" style="width:300px;" id="r'.$paper->getTaillePapierID().'"></div>
+									<td width="60px">
+										'.$paper->getDimensions().' :
+									</td><td class="price" width="350px">
+										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixMinimum().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'.$paper->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
+									</td><td width="290px">
+										<div class="checkform" id="r'.$paper->getTaillePapierID().'"></div>
 									</td>
 								</tr>';
 							}
