@@ -284,7 +284,7 @@ include("head.php");
 		<?php
 			} else {
 		?>
-			Vous êtes déjà inscrit à la publication de cet évènement.
+			Vous êtes déjà inscrit à la publication de cet événement.
 		<?php
 			}
 		?>

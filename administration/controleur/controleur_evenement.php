@@ -11,13 +11,13 @@ switch($action){
 		}
 		$event = Evenement::getEvenementDepuisID($id);
 		if(!$event){
-			$_SESSION['message'] .= "Aucun évènement ne correspond à l'id #" . $id . "<br/>";
+			$_SESSION['message'] .= "Aucun événement ne correspond à l'id #" . $id . "<br/>";
 		}else{
 			$result = $event->delete();
 			if($result){
 				$_SESSION['message'] .= "Evènement #" . $id . " supprimé avec succès<br/>";
 			}else{
-				$_SESSION['message'] .= "Impossible de supprimer l'évènement #" . $id ."<br/>";
+				$_SESSION['message'] .= "Impossible de supprimer l'événement #" . $id ."<br/>";
 			}
 		}
 	break;

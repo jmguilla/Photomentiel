@@ -52,6 +52,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 	//check if state change is demanded
 	if (isset($_POST['cb_gonext']) && $albumObj->getEtat() == 0){
 		$albumObj->etatSuivant();
+		//decrement create album count
+		$utilisateurObj->decOpenFTP();
+		//send request for FTP
+		if (!isset($sidObj)){
+			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
+		}
+		$retcode = httpPost(
+			"http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",
+			"login=".$utilisateurObj->getEmail().
+			"&homePhotograph=".$sidObj->getHomePhotographe().
+			"&stringID=".$sidObj->getStringID().
+			"&openAlbum=".$utilisateurObj->getOpenFTP(), false);
+		if ($retcode != 0){
+			//TODO manage if error in httpPost
+		}
 	}
 	$updateMode = true;
 } else if (isset($_POST['title'])) {
@@ -97,18 +112,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		$albumCreated = true;
 		$updateMode = true;
 		$_SESSION['lastCreatedAlbum'] = $albumObj->getAlbumID();
+		//increment create album count
+		$utilisateurObj->incOpenFTP();
 		//send request for FTP
 		if (!isset($sidObj)){
 			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
 		}
-		//TODO manage if error in httpPost
 		$retcode = httpPost(
 			"http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php",
 			"login=".$utilisateurObj->getEmail().
 			"&homePhotograph=".$sidObj->getHomePhotographe().
 			"&stringID=".$sidObj->getStringID().
 			"&passwordHash=".$utilisateurObj->getMDP(), false);
-		
+		if ($retcode != 0){
+			//TODO manage if error in httpPost
+		}
 	} else {
 		if (!isset($_SESSION['lastCreatedAlbum'])){
 			photomentiel_die(new PMError("Erreur lors de la création de l'album !","Une tentative de duplication de l'album a généré un problème."),false);
