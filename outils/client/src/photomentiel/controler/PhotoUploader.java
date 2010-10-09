@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Properties;
 
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
@@ -16,15 +17,21 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
 public class PhotoUploader {
-	private final String login, mdp;
-	private final String server = "ftp.photomentiel.fr";
+	private String login, mdp;
+	private String server;
+	private int port;
 	//la racine de l'arborescence pour l'upload. s'en suit, le photographe home, et stringID
-	private final String root = "/www/pictures";
+	private String root;
 	private final String photographeHome;
 	private final String stringID;
 	private FTPClient ftp;
 
 	public PhotoUploader(String log, String mdp, String pHome, String sid) throws IOException, FTPException, NoSuchAlgorithmException{
+		Properties prop = new Properties();
+		prop.load(this.getClass().getResourceAsStream("uploader.prop"));
+		this.server = prop.getProperty("server");
+		this.root = prop.getProperty("root");
+		this.port = Integer.parseInt(prop.getProperty("port"));
 		this.login = log;
 		this.mdp = mdp;
 		this.photographeHome = pHome;
@@ -168,7 +175,7 @@ public class PhotoUploader {
 		ftp.addProtocolCommandListener(new PrintCommandListener(
 				new PrintWriter(System.out)));
 		try {
-			ftp.connect(server);
+			ftp.connect(server, port);
 			int reply = ftp.getReplyCode();
 			if (!FTPReply.isPositiveCompletion(reply))
 			{
