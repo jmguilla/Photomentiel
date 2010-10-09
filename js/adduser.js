@@ -97,11 +97,19 @@ function checkSIREN(){
 	var errorSiren = false;
 	var mess = '';
 	if ($('#siren').val() != ''){
-		var siren = parseInt($('#siren').val());
+		var siren = /*parseInt(*/$('#siren').val()/*)*/;
 		var sum = 0;
-		for (var i=0;i<9;i++){
-			sum += siren%10*(i%2==0?1:2);
-			siren = parseInt(siren/10);
+		var tmp;
+		for (var i = 0; i<siren.length; i++) {
+			if ((i % 2) == 1) { // Les positions paires : 2ème, 4ème, 6ème et 8ème chiffre
+				tmp = siren.charAt(i) * 2; // On le multiplie par 2
+				if (tmp > 9){
+					tmp -= 9; // Si le résultat est supérieur à 9, on lui soustrait 9
+				}
+			} else {
+				tmp = siren.charAt(i);
+			}
+			sum += parseInt(tmp);
 		}
 		if (sum%10!=0){
 			$('#rsiren').css('background-image','url(design/misc/unchecked.gif)');
