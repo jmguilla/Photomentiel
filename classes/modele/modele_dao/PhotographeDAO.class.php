@@ -9,6 +9,48 @@ class PhotographeDAO extends UtilisateurDAO{
 		parent::__construct();
 	}
 	/**
+	 * pour augmenter de 1 le nombre openFTP,
+	 * retourne true/false et gere les transaction
+	 */
+	public function incOpenFTP($ph){
+		$current = $ph->getOpenFTP();
+		$next = $current + 1;
+		$query = "update Photographe set openftp = " .
+		mysql_real_escape_string($next) . " where photographeID = " .
+		mysql_real_escape_string($ph->getPhotographeID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() == 1){
+			$ph->setOpenFTP($next);
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	/**
+	 * pour diminuer de 1 le nombre openFTP,
+	 * retourne true/false et gere les transaction
+	 */
+	public function decOpenFTP($ph){
+		$current = $ph->getOpenFTP();
+		$next = $current - 1;
+		$query = "update Photographe set openftp = " .
+		mysql_real_escape_string($next) . " where photographeID = " .
+		mysql_real_escape_string($ph->getPhotographeID());
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() == 1){
+			$ph->setOpenFTP($next);
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
+	/**
 	 * Renvoie un photographe au hasard
 	 */
 	public function getPhotographeAleatoire(){

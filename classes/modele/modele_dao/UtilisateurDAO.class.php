@@ -229,6 +229,8 @@ class UtilisateurDAO extends DAO{
 			$pourcentage = $row->offsetGet($prefix . "pourcentage");
 			$note = $row->offsetGet($prefix . "note");
 			$nv = $row->offsetGet($prefix . "nombreVotant");
+			$ftp = $row->offsetGet($prefix . "openftp");
+			$result->setOpenFTP($ftp);
 			$result->setNombreVotant($nv);
 			$result->setNote($note);
 			$result->setHome($home);
