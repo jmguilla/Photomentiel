@@ -436,7 +436,7 @@ class Album {
 		return false;
 	}
 
-	public function getTransert(){
+	public function getTransfert(){
 		return $this->transfert;
 	}
 
@@ -446,12 +446,12 @@ class Album {
 
 	public function commencerTransfert(){
 		$dao = new AlbumDAO();
-		return $dao->commencerTransfert();		
+		return $dao->commencerTransfert($this);		
 	}
 
 	public function finirTransfert(){
 		$dao = new AlbumDAO();
-		return $dao->finirTransfert();
+		return $dao->finirTransfert($this);
 	}
 }
 ?>

@@ -12,8 +12,7 @@ class AlbumDAO extends DAO {
 		parent::__construct($dsn);
 	}
 	public function finirTransfert($a){
-		$query = "update Album set transfert = " . 
-		mysql_real_escape_string(false) . " where albumID = " .
+		$query = "update Album set transfert = 0 where albumID = " .
 		mysql_real_escape_string($a->getAlbumID());
 		$this->startTransaction();
 		$tmp = $this->update($query);
@@ -27,8 +26,7 @@ class AlbumDAO extends DAO {
 		}
 	}
 	public function commencerTransfert($a){
-		$query = "update Album set transfert = " . 
-		mysql_real_escape_string(true) . " where albumID = " .
+		$query = "update Album set transfert = 1 where albumID = " .
 		mysql_real_escape_string($a->getAlbumID());
 		$this->startTransaction();
 		$tmp = $this->update($query);

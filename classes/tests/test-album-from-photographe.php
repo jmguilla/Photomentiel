@@ -1,12 +1,22 @@
 <?php
 include_once "../modele/Album.class.php";
 include_once "../modele/Photographe.class.php";
-$photo = new Photographe();
-$photo->setPhotographeID(1);
-$assocs = Album::getAlbumFromPhotographe($photo, true);
+$assocs = Album::getAlbumEtImageEtStringIDDepuisID_Photographe(1, true);
 foreach($assocs as $assoc){
 	$album = $assoc["Album"];
 	$sid = $assoc["StringID"];
-	echo $album->getAlbumID() . " - " . $sid->getStringID() . "<br/>";
+	echo $album->getAlbumID() . " - " . $album->getTransfert() . "<br/>";
+}
+foreach($assocs as $assoc){
+	$album = $assoc["Album"];
+	$album->commencerTransfert();
+	$sid = $assoc["StringID"];
+	echo $album->getAlbumID() . " - " . $album->getTransfert() . "<br/>";
+}
+foreach($assocs as $assoc){
+	$album = $assoc["Album"];
+	$album->finirTransfert();
+	$sid = $assoc["StringID"];
+	echo $album->getAlbumID() . " - " . (false == $album->getTransfert()) . "<br/>";
 }
 ?>
