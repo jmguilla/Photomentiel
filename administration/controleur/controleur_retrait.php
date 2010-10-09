@@ -50,13 +50,29 @@ switch($action){
 			echo '<table border="1px"><tr><td>' . $raison . '</td></tr></table>';
 		}
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
+		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
 		$refs = explode(';,',$retrait->getRef());
-		if(isset($refs) && $refs != ''){
+		$toRemove = array();
+		foreach($listExtensions as $extension){
+			$picPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . trim($ref) . $extension;
+			$thumbPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . THUMB_DIRECTORY . trim($ref) . $extension;
+			if(file_exists($picPath) && file_exists($thumbPath)){
+				$toRemove[] = array("Thumb" => $thumbPath, "Picture" => $picPath, "Ref" => (trim($ref) . $extension));
+			}
+			if((file_exists($picPath) && !file_exists($thumbPath))){
+				echo '<div>Path de picture :' . $picPath . ' n\'a aucune miniature associée, supprimer à la mains SVP & controler svp</div><br/>';
+			}
+			if( (!file_exists($picPath) && file_exists($thumbPath))){
+				echo '<div>Path de miniature :' . $picPath . ' n\'a aucune image associée, supprimer à la mains SVP & controler svp</div><br/>';
+			}
+		}
+		if(count($toRemove) > 0){
 			echo '<table>';
-			foreach($refs as $ref){
-				if(trim($ref) != ''){
-					echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . trim($ref) . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . trim($ref) . '"/><input type="hidden" name="thumb" value="' . PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . $sid->getStringID() . THUMB_DIRECTORY . trim($ref) . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit" value="supprimer"/></form></td>' ;
-				}
+			foreach($toRemove as $assoc){
+				$ref = $assoc["Ref"];
+				$thumbPath = $assoc["Thumb"];
+				$picPath = $assoc["Picture"];
+				echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . $ref . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . $picPath . '"/><input type="hidden" name="thumb" value="' . $thumbPath . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit" value="supprimer"/></form></td>' ;
 			}
 			echo '</table>';
 		}
