@@ -48,5 +48,5 @@ define('ADRESSE1','Photomentiel');
 define('ADRESSE2','Pouet Pouet CEDEX 3');
 define('ADRESSE3','Sophia Antipolis');
 
-define('FTP_TRANSFER_IP','11.22.33.44');
+define('FTP_TRANSFER_IP','89.85.32.28');
 ?>

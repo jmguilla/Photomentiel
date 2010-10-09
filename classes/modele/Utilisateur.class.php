@@ -103,7 +103,7 @@ class Utilisateur {
 			throw new InvalidArgumentException("activerUtilisateur requires an ID as parameter");
 		}
 		$daoUtilisateur = new UtilisateurDAO();
-		return $daoUtilisateur->activer($id);		
+		return $daoUtilisateur->activer($id);
 	}
 
 	public function delete(){
