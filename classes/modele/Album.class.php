@@ -17,6 +17,7 @@ class Album {
 	private $mailing = '';
 	private $prixTaillePapier = NULL;
 	private $gainTotal = 0;
+	private $transfert = false;
 
 	public function __construct($aid = -1, $h = NULL, $idp = -1, $ide = NULL, $d = NULL, $isPublique = false, $etat = NULL, $module = NULL){
 		$this->albumID = $aid;
@@ -433,6 +434,24 @@ class Album {
 			}
 		}
 		return false;
+	}
+
+	public function getTransert(){
+		return $this->transfert;
+	}
+
+	public function setTransfert($t){
+		$this->transfert = $t;
+	}
+
+	public function commencerTransfert(){
+		$dao = new AlbumDAO();
+		return $dao->commencerTransfert();		
+	}
+
+	public function finirTransfert(){
+		$dao = new AlbumDAO();
+		return $dao->finirTransfert();
 	}
 }
 ?>
