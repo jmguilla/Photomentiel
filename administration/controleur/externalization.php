@@ -29,4 +29,5 @@ define("modifier_photographe", "modifier_photographe");
 //retraits
 define("supprimer_retrait", "supprimer_retrait");
 define("detail_retrait", "detail_retrait");
+define("suppression_demande_retrait" , "suppression_demande_retrait");
 ?>

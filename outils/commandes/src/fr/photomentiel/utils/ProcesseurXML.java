@@ -88,7 +88,7 @@ public class ProcesseurXML {
 								adresse2 = tmp.getTextContent();
 							}else if("codePostal".equals(tmp.getNodeName())){
 								String cpString = tmp.getTextContent();
-								cp = Integer.parseInt(cpString);
+								cp = Integer.parseInt(cpString, 10);
 							}else if("ville".equals(tmp.getNodeName())){
 								ville = tmp.getTextContent();
 							}else{

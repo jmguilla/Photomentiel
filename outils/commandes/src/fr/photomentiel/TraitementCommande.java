@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import fr.photomentiel.commande.Commande;
 import fr.photomentiel.commande.LigneCommande;
@@ -39,6 +40,30 @@ public class TraitementCommande {
 				throw new TraitementCommandeException("Impossible de copier le fichier " + source.getAbsolutePath(), e);
 			} catch (IOException e) {
 				throw new TraitementCommandeException("Impossible de copier le fichier " + source.getAbsolutePath() + " vers " + dest.getAbsolutePath());
+			}
+		}
+		copyAdresse(destDir);
+	}
+
+	private void copyAdresse(File dest) throws TraitementCommandeException {
+		File recap = new File(dest.getAbsoluteFile() + File.separator + "index.html");
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(recap);
+			pw.println("<html><head><title>recapitulatif commande #" + commande.numero + "</title></head>");
+			pw.println("<body>");
+			pw.println("<h3>Destinataire<b>" + commande.addresse.prenom + " " + commande.addresse.nom + "</b></h3>");
+			pw.println("adresse:");
+			pw.println("<h3>" + commande.addresse.adresse1);
+			if(commande.addresse.adresse2!=null && !commande.addresse.adresse2.equals("")){
+				pw.println("<h3>" + commande.addresse.adresse2 + "</h3>");
+			}
+			pw.println("<h3>" + String.format("%05d",commande.addresse.codePostal) + " " + commande.addresse.ville);
+		} catch (FileNotFoundException e) {
+			throw new TraitementCommandeException("Impossible de générer le fichier de récap " + dest.getAbsoluteFile() + File.separator + "index.html", e);
+		}finally{
+			if(pw != null) {
+				pw.close();
 			}
 		}
 	}

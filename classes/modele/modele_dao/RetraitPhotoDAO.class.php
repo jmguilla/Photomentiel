@@ -55,6 +55,7 @@ class RetraitPhotoDAO extends DAO{
 		$query = "update RetraitPhoto set ref = '" .
 		mysql_real_escape_string($rp->getRef()) . "' where retraitPhotoID = " .
 		mysql_real_escape_string($rp->getRetraitPhotoID());
+		$this->startTransaction();
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() == 1){
 			$this->commit();
