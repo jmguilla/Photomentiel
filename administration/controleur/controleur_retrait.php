@@ -4,6 +4,20 @@ include_once $dir_administration_controleur_retrait_php . "/../../classes/modele
 include_once $dir_administration_controleur_retrait_php . "/../../classes/Config.php";
 
 switch($action){
+	case suppression_demande_retrait:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Pas d'id fourni, impossible de supprimer.<br/>";
+			break;
+		}
+		$retrait = RetraitPhoto::getRetraitPhoto($_POST['id']);
+		if($retrait && $retrait->delete()){
+			$_SESSION['message'] .= "Suppression de la demande de retrait #" . $_POST['id'] . " OK.<br/>";
+			break;
+		}else{
+			$_SESSION['message'] .= "Suppression de la demande de retrait #" . $_POST['id'] . " impossible.<br/>";
+			break;
+		}
+	break;
 	case supprimer_retrait:
 		if(!isset($_POST['thumb']) || !isset($_POST['path']) || !isset($_POST['id']) || !isset($_POST['ref'])){
 			$_SESSION['message'] .= "Pas de path fourni/id, impossible de supprimer l'image.<br/>";
@@ -41,6 +55,11 @@ switch($action){
 		$sid = StringID::getStringIDDepuisID($retrait->getStringID());
 		$album = Album::getAlbumDepuisID($sid->getID_Album());
 		include $dir_administration_controleur_retrait_php . "/../header.php";
+		if(isset($_SESSION['message'])){
+			echo $_SESSION['message'];
+			unset($_SESSION['message']);
+		}
+		$_SESSION['message'] = '';
 		echo '<h3>Détail du retrait #'. $retrait->getRetraitPhotoID() . ' appartenant à l\'album #'. $album->getAlbumID() . '</h3>';
 		echo '<a target="_blank" href="retraits/' . $retrait->getJustificatif() . '">justificatif</a><br/>';
 		$raison = $retrait->getRaison();
@@ -49,21 +68,25 @@ switch($action){
 		}else{
 			echo '<table border="1px"><tr><td>' . $raison . '</td></tr></table>';
 		}
+		echo '<form action="dispatcher.php" method="post">suppression de la demande:<input type="hidden" name="action" value="suppression_demande_retrait"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="submit" onclick="return confirm(\'Continuer la suppression?\');" value="supprimer"/></form>';
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
-		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png", ".JPG", ".JPEG", ".TIF", ".PNG");
-		$refs = explode(';,',$retrait->getRef());
+		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
+		$refs = str_replace(',',';',$retrait->getRef());
+		$refs = explode(';',$refs);
 		$toRemove = array();
-		foreach($listExtensions as $extension){
-			$picPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . trim($ref) . $extension;
-			$thumbPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . THUMB_DIRECTORY . trim($ref) . $extension;
-			if(file_exists($picPath) && file_exists($thumbPath)){
-				$toRemove[] = array("Thumb" => $thumbPath, "Picture" => $picPath, "Ref" => (trim($ref) . $extension));
-			}
-			if((file_exists($picPath) && !file_exists($thumbPath))){
-				echo '<div>Path de picture :' . $picPath . ' n\'a aucune miniature associée, supprimer à la mains SVP & controler svp</div><br/>';
-			}
-			if( (!file_exists($picPath) && file_exists($thumbPath))){
-				echo '<div>Path de miniature :' . $picPath . ' n\'a aucune image associée, supprimer à la mains SVP & controler svp</div><br/>';
+		foreach($refs as $ref){
+			foreach($listExtensions as $extension){
+				$picPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . PICTURE_DIRECTORY . trim($ref) . $extension;
+				$thumbPath = PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . THUMB_DIRECTORY . trim($ref) . $extension;
+				if(file_exists($picPath) && file_exists($thumbPath)){
+					$toRemove[] = array("Thumb" => $thumbPath, "Picture" => $picPath, "Ref" => (trim($ref)));
+				}
+				if((file_exists($picPath) && !file_exists($thumbPath))){
+					echo '<div>Path de picture :' . $picPath . ' n\'a aucune miniature associée, supprimer à la mains SVP & controler svp</div><br/>';
+				}
+				if( (!file_exists($picPath) && file_exists($thumbPath))){
+					echo '<div>Path de miniature :' . $picPath . ' n\'a aucune image associée, supprimer à la mains SVP & controler svp</div><br/>';
+				}
 			}
 		}
 		if(count($toRemove) > 0){
@@ -72,7 +95,7 @@ switch($action){
 				$ref = $assoc["Ref"];
 				$thumbPath = $assoc["Thumb"];
 				$picPath = $assoc["Picture"];
-				echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . $ref . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . $picPath . '"/><input type="hidden" name="thumb" value="' . $thumbPath . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit" value="supprimer"/></form></td>' ;
+				echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . PICTURE_DIRECTORY . $ref . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . $picPath . '"/><input type="hidden" name="thumb" value="' . $thumbPath . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit"  onclick="return confirm(\'Continuer la suppression?\');" value="supprimer"/></form></td>' ;
 			}
 			echo '</table>';
 		}
