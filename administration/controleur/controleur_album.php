@@ -1,8 +1,27 @@
 <?php
 $dir_administration_controleur_album_php = dirname(__FILE__);
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Album.class.php";
+include_once $dir_administration_controleur_album_php . "/../../classes/modele/String.class.php";
 
 switch($action){
+	case supprimer_photo:
+		$stringID = StringID::getStringIDDepuisID($_POST['id']);
+		$pix = $_POST['photo_id'];
+		$path = PHOTOGRAPHE_ROOT_DIRECTORY . $stringID->getHomePhotographe() . "/" . $stringID->getStringID() . "/" . PICTURE_DIRECTORY . $pix;
+		$thumb = PHOTOGRAPHE_ROOT_DIRECTORY . $stringID->getHomePhotographe() . "/" . $stringID->getStringID() . "/" . THUMB_DIRECTORY . $pix;
+		if(!file_exists($path)){
+			$_SESSION['message'] .= "L'image n'existe pas, impossible de la supprimer.<br/>";
+		}
+		if(!file_exists($thumb)){
+			$_SESSION['message'] .= "La miniature n'existe pas, impossible de la supprimer.<br/>";
+		}
+		if(unlink($path) && unlink($thumb)){
+			$_SESSION['message'] .= "Image supprimée avec succes<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible de supprimer l'image<br/>";
+		}
+		header('Location: visu_validation_album.php?sid='.$stringID->getStringID());
+	exit();
 	case valider_upload:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id fourni, impossible de valider l'upload<br/>";

@@ -8,6 +8,7 @@ define("cloturer_album", "cloturer_album");
 define("supprimer_album", "supprimer_album");
 define("montrer_album_cree", "montrer_album_cree");
 define("valider_upload", "valider_upload");
+define("supprimer_photo", "supprimer_photo");
 
 //evenement
 define("supprimer_evenement", "supprimer_evenement");
