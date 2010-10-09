@@ -47,7 +47,7 @@ public class PhotoUploader {
 	 */
 	public void upload(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
 		if(ftp != null && ftp.isConnected()){
-			String remote = this.root + "/" + this.photographeHome + "/" + this.stringID + "/";
+			String remote = this.root + this.photographeHome + "/" + this.stringID + "/";
 			ftp.changeWorkingDirectory(remote);
 			int circuitBroker = 5;
 			int current = 0;
@@ -102,7 +102,7 @@ public class PhotoUploader {
 
 	public boolean upload(File file) throws IOException, NoSuchAlgorithmException{
 		if(ftp != null && ftp.isConnected()){
-			String remote = this.root + "/" + this.photographeHome + "/" + this.stringID + "/";
+			String remote = this.root + this.photographeHome + "/" + this.stringID + "/";
 			ftp.changeWorkingDirectory(remote);
 			int circuitBroker = 5;
 			while(circuitBroker > 0){
