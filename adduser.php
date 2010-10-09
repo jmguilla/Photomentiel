@@ -156,7 +156,7 @@ if (isset($_GET["np"])){
 					<td width="220px">
 						Adresse E-mail<?php echo $star; ?> : 
 					</td><td>
-						<input name="email" class="textfield" type="text" id="email" <?php echo $createMode?'required="required"':'value="'.$utilisateurObj->getEmail().'"  disabled="true"'; ?>/>
+						<input name="email" class="textfield" type="text" maxlength="50" id="email" <?php echo $createMode?'required="required"':'value="'.$utilisateurObj->getEmail().'"  disabled="true"'; ?>/>
 					</td><td>
 						<div class="checkform" id="remail"></div>
 					</td>
