@@ -97,6 +97,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		$albumCreated = true;
 		$updateMode = true;
 		$_SESSION['lastCreatedAlbum'] = $albumObj->getAlbumID();
+		//send request for FTP
+		if (!isset($sidObj)){
+			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
+		}
+		httpPost(
+			"http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php",
+			"login=".$utilisateurObj->getEmail().
+			"&homePhotograph=".$sidObj->getHomePhotographe().
+			"&stringID=".$sidObj->getStringID().
+			"&passwordHash=".$utilisateurObj->getMDP(), false);
 	} else {
 		if (!isset($_SESSION['lastCreatedAlbum'])){
 			photomentiel_die(new PMError("Erreur lors de la création de l'album !","Une tentative de duplication de l'album a généré un problème."),false);
