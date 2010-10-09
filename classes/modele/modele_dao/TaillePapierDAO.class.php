@@ -44,6 +44,7 @@ class TaillePapierDAO extends DAO{
 		$result->setDescription($desc);
 		$result->setPrixConseille($prix);
 		$result->setPrixFournisseur($pf);
+		$result->setPrixMinimum($pm);
 		return $result;
 	}
 }
