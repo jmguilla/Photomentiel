@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Sam 09 Octobre 2010 à 13:57
+-- Généré le : Sam 09 Octobre 2010 à 16:40
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -29,9 +29,6 @@ CREATE TABLE IF NOT EXISTS `Activate` (
 -- Contenu de la table `Activate`
 --
 
-INSERT INTO `Activate` (`activateID`, `id_utilisateur`) VALUES
-('3fe3c423d2d847d38589e9aae1d1dbd921', 21),
-('f0aa6c9d8adef6cf19dddd71455ed0cc17', 17);
 
 -- --------------------------------------------------------
 
@@ -160,25 +157,29 @@ CREATE TABLE IF NOT EXISTS `Album` (
   `balance` float(7,2) NOT NULL default '0.00',
   `mailing` varchar(5000) NOT NULL default '',
   `date` datetime NOT NULL,
+  `transfert` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`albumID`),
   KEY `fk_album_photographe` (`id_photographe`),
   KEY `fk_album_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `Album`
 --
 
-INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`) VALUES
-(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 386.79, 85.77, '', '2010-06-28 15:20:25'),
-(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42'),
-(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00'),
-(4, 'Mariage bien réussi', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 500.68, 8.58, '', '2010-08-01 12:55:17'),
-(5, 'Anniversaire Christian', 0, 10, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39'),
-(7, 'l''album', 0, 1, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20'),
-(8, 'l''album l''retour', 0, 1, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23'),
-(9, 'l''album l''retour l''retour', 0, 1, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02'),
-(10, 'hjghfdfghjkl', 0, 1, NULL, 1, '521000018', 'www.photomentiel.fr', 0.00, 0.00, '', '2010-10-08 23:10:15');
+INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`, `transfert`) VALUES
+(1, 'Rencontre OK', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 386.79, 85.77, '', '2010-06-28 15:20:25', 0),
+(2, 'Tunning Jacky', 1, 1, 3, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42', 0),
+(3, 'Mariage Chris', 1, 2, 3, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00', 0),
+(4, 'Mariage bien réussi', 1, 4, 3, 2, '521000018', 'www.photomentiel.fr', 500.68, 8.58, '', '2010-08-01 12:55:17', 0),
+(5, 'Anniversaire Christian', 0, 10, 1, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39', 0),
+(7, 'l''album', 0, 1, NULL, 0, '523919066', 'nouveau', 0.00, 0.00, 'guillauj@gmail.com;\r\njmichel.guillaume@gmail.com', '2010-09-26 22:28:20', 0),
+(8, 'l''album l''retour', 0, 1, NULL, 0, '523919066', 'l''album', 0.00, 0.00, '', '2010-09-26 23:52:23', 0),
+(9, 'l''album l''retour l''retour', 0, 1, NULL, 2, '521000018', 'l''retour', 0.00, 0.00, 'guillauj@gmail.com; tchitchoubyne@msn.com', '2010-09-27 00:02:02', 0),
+(10, 'hjghfdfghjkl', 0, 1, NULL, 1, '521000018', 'www.photomentiel.fr', 0.00, 0.00, '', '2010-10-08 23:10:15', 0),
+(11, 'tout marche!!!', 1, 4, NULL, 0, '521000018', 'tout_marce', 0.00, 0.00, 'guillauj@gmail.Com', '2010-10-09 14:38:51', 0),
+(12, 'tout marche!!! pas', 1, 4, NULL, 0, '521000018', '_poiusmfkl_j', 0.00, 0.00, 'guillauj@gmail.Com', '2010-10-09 14:40:11', 0),
+(13, 'yet another album created', 0, 4, NULL, 0, '521000018', 'perso_le_filigrane', 0.00, 0.00, '', '2010-10-09 14:45:21', 0);
 
 -- --------------------------------------------------------
 
@@ -809,7 +810,7 @@ CREATE TABLE IF NOT EXISTS `PrixTaillePapierAlbum` (
   PRIMARY KEY  (`prixTaillePapierAlbumID`),
   KEY `fk_prixtaillepapieralbum_taillepapier` (`id_taillePapier`),
   KEY `fk_prixtaillepapieralbum_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
 
 --
 -- Contenu de la table `PrixTaillePapierAlbum`
@@ -846,7 +847,18 @@ INSERT INTO `PrixTaillePapierAlbum` (`prixTaillePapierAlbumID`, `prix`, `id_tail
 (47, 43.00, 1, 9),
 (48, 2.00, 1, 10),
 (49, 5.00, 4, 10),
-(50, 6.00, 7, 10);
+(50, 6.00, 7, 10),
+(51, 5.00, 1, 11),
+(52, 5.00, 2, 11),
+(53, 5.00, 3, 11),
+(54, 5.00, 4, 11),
+(55, 5.00, 1, 12),
+(56, 5.00, 2, 12),
+(57, 5.00, 3, 12),
+(58, 5.00, 4, 12),
+(59, 10.00, 5, 12),
+(60, 10.00, 6, 12),
+(61, 100.00, 8, 13);
 
 -- --------------------------------------------------------
 
@@ -937,8 +949,11 @@ CREATE TABLE IF NOT EXISTS `StringID` (
 INSERT INTO `StringID` (`stringID`, `homePhotographe`, `id_album`) VALUES
 ('a2c5j7yt', '2010072801', 3),
 ('a5f8t1v5', '2010051201', 1),
+('d1w6a85h', '2010082000', 12),
 ('f9rix16l', '2010051201', 9),
+('g585dmgl', '2010082000', 11),
 ('hiw255cf', '2010092500', 5),
+('l6zle9gm', '2010082000', 13),
 ('luhhvm17', '2010051201', 10),
 ('nlwwgkh1', '2010051201', 8),
 ('r5v7ttri', '2010051201', 2),
