@@ -39,7 +39,7 @@ class EvenementDAO extends DAO {
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .	
 		"u.utilisateurID as u_utilisateurID, u.email as u_email, u.mdp as u_mdp, u.actif as u_actif, u.dateInscription as u_dateInscription, ".
-		"p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
+		"p.openftp as u_openftp, p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
 		"a.adresseID as ad_adresseID, a.nom as ad_nom, a.prenom as ad_prenom, a.nomRue as ad_nomRue, a.complement as ad_complement, a.codePostal as ad_codePostal, a.ville as ad_ville, a.id_utilisateur as ad_id_utilisateur " .	
 		"from Utilisateur as u left join Photographe as p on u.utilisateurID = p.id_utilisateur left join Adresse as a on u.utilisateurID = a.id_utilisateur, Evenement as e " . 
 		"left join departement as d on e.id_departement = d.id_departement " .
@@ -68,7 +68,7 @@ class EvenementDAO extends DAO {
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		"u.utilisateurID as u_utilisateurID, u.email as u_email, u.mdp as u_mdp, u.actif as u_actif, u.dateInscription as u_dateInscription, ".
-		"p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
+		"p.openftp as u_openftp, p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
 		"a.adresseID as ad_adresseID, a.nom as ad_nom, a.prenom as ad_prenom, a.nomRue as ad_nomRue, a.complement as ad_complement, a.codePostal as ad_codePostal, a.ville as ad_ville, a.id_utilisateur as ad_id_utilisateur " .	
 		"from Utilisateur as u left join Photographe as p on u.utilisateurID = p.id_utilisateur left join Adresse as a on u.utilisateurID = a.id_utilisateur, Evenement as e " . 
 		"left join departement as d on e.id_departement = d.id_departement " .
@@ -169,7 +169,7 @@ class EvenementDAO extends DAO {
 		"d.id_departement as did_departement, d.id_region as did_region, d.code as dcode, d.nom as dnom, " .
 		"v.id_departement as vid_departement, v.id_ville as vid_ville, v.nom as vnom, v.cp as vcp, v.lat as vlat, v.lon as vlon, " .
 		"u.utilisateurID as u_utilisateurID, u.email as u_email, u.mdp as u_mdp, u.actif as u_actif, u.dateInscription as u_dateInscription, ".
-		"p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
+		"p.openftp as u_openftp, p.note as u_note, p.nombreVotant as u_nombreVotant, p.pourcentage as u_pourcentage, p.photographeID as u_photographeID, p.nomEntreprise as u_nomEntreprise, p.siren as u_siren, p.telephone as u_telephone, p.siteWeb as u_siteWeb, p.home as u_home, p.rib_b as u_rib_b, p.rib_g as u_rib_g, p.rib_c as u_rib_c, p.rib_k as u_rib_k, p.bic as u_bic, p.iban as u_iban, p.id_utilisateur as u_id_utilisateur, " .
 		"a.adresseID as ad_adresseID, a.nom as ad_nom, a.prenom as ad_prenom, a.nomRue as ad_nomRue, a.complement as ad_complement, a.codePostal as ad_codePostal, a.ville as ad_ville, a.id_utilisateur as ad_id_utilisateur " .	
 		"from Utilisateur as u left join Photographe as p on u.utilisateurID = p.id_utilisateur left join Adresse as a on u.utilisateurID = a.id_utilisateur, Evenement as e " .
 		"left join region as r on e.id_region = r.id_region " .

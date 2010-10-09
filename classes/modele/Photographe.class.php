@@ -14,6 +14,7 @@ class Photographe extends Utilisateur{
 	protected $pourcentage = PHOTOGRAPH_INITIAL_PERCENT;
 	protected $note = 6;
 	protected $nombreVotant = 1;
+	protected $openft = 0;
 	protected $rib_b;
 	protected $rib_g;
 	protected $rib_c;
@@ -203,6 +204,24 @@ class Photographe extends Utilisateur{
 		}
 		$dao = new PhotographeDAO();
 		return $dao->voter($this, $note);
+	}
+
+	public function setOpenFTP($i){
+		$this->openft = $i;
+	}
+
+	public function getOpenFTP(){
+		return $this->openft;
+	}
+
+	public function incOpenFTP(){
+		$dao = new PhotographeDAO();
+		return $dao->incOpenFTP($this);
+	}
+
+	public function decOpenFTP(){
+		$dao = new PhotographeDAO();
+		return $dao->decOpenFTP($this);
 	}
 }
 ?>
