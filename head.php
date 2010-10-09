@@ -53,5 +53,5 @@ ini_set('url_rewriter.tags','');
 	?>
 
  </head>
- <body>
+ <body onContextMenu="return false;">
  

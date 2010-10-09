@@ -35,7 +35,7 @@ function changeAlbumsContent(){
         	},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
 			clearInterval(intervalCAC);
-			alert('Error with code 5');
+			//alert('Error with code 5');
 		}
 	});
 }
