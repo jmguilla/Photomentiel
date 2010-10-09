@@ -148,7 +148,7 @@ function checkMaxChar(inputID){
 			$('#r'+ inputID).html('');
 		}
 	} else {
-		$('input[maxlength][required=required]').each(function() {
+		$('input[exactlength][required=required]').each(function() {
 	    	//raz
 	    	$('#r'+ this.id).css('background-image','url(design/misc/checked.gif)');
 	    	$('#r'+ this.id).html('');
