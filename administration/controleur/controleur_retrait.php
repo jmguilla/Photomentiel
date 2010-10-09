@@ -5,7 +5,7 @@ include_once $dir_administration_controleur_retrait_php . "/../../classes/Config
 
 switch($action){
 	case supprimer_retrait:
-		if(!isset($_POST['path']) || !isset($_POST['id']) || !isset($_POST['ref'])){
+		if(!isset($_POST['thumb']) || !isset($_POST['path']) || !isset($_POST['id']) || !isset($_POST['ref'])){
 			$_SESSION['message'] .= "Pas de path fourni/id, impossible de supprimer l'image.<br/>";
 			break;
 		}
@@ -13,7 +13,11 @@ switch($action){
 			$_SESSION['message'] .= "L'image n'existe pas, impossible de la supprimer.<br/>";
 			break;
 		}
-		if(unlink($_POST['path'])){
+		if(!file_exists($_POST['thumb'])){
+			$_SESSION['message'] .= "La miniature n'existe pas, impossible de la supprimer.<br/>";
+			break;
+		}
+		if(unlink($_POST['path']) && unlink($_POST['thumb'])){
 			$retrait = RetraitPhoto::getRetraitPhoto($_POST['id']);
 			$ref = $_POST['ref'];
 			$retrait->setRef(str_replace($ref,'',$retrait->getRef()));
@@ -46,12 +50,12 @@ switch($action){
 			echo '<table border="1px"><tr><td>' . $raison . '</td></tr></table>';
 		}
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
-		$refs = explode(';',$retrait->getRef());
+		$refs = explode(';,',$retrait->getRef());
 		if(isset($refs) && $refs != ''){
 			echo '<table>';
 			foreach($refs as $ref){
 				if(trim($ref) != ''){
-					echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . trim($ref) . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . trim($ref) . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit" value="supprimer"/></form></td>' ;
+					echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . trim($ref) . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . PICTURE_DIRECTORY . trim($ref) . '"/><input type="hidden" name="thumb" value="' . PHOTOGRAPHE_ROOT_DIRECTORY . $sid->getHomePhotographe() . "/" . $sid->getStringID() . THUMB_DIRECTORY . trim($ref) . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit" value="supprimer"/></form></td>' ;
 				}
 			}
 			echo '</table>';
