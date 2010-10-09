@@ -50,7 +50,7 @@ switch($action){
 			echo '<table border="1px"><tr><td>' . $raison . '</td></tr></table>';
 		}
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
-		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
+		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png", ".JPG", ".JPEG", ".TIF", ".PNG");
 		$refs = explode(';,',$retrait->getRef());
 		$toRemove = array();
 		foreach($listExtensions as $extension){
