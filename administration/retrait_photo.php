@@ -18,8 +18,12 @@ $_SESSION['message'] = '';
 <table>
 <?php 
 $retraits = RetraitPhoto::getRetraitsPhoto();
+if($retraits){
 foreach($retraits as $retrait){
 	echo '<tr><td>#' . $retrait->getRetraitPhotoID() . '</td><td> - ' . $retrait->getStringID() . '</td><td><form method="post" action="dispatcher.php" target="_blank"><input type="hidden" name="action" value="detail_retrait"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="submit" name="detail" value="detail"/></form></td></tr>';
+}
+}else{
+	echo'<tr><td>Aucun!!</td><tr>';
 }
 ?>
 </table>
