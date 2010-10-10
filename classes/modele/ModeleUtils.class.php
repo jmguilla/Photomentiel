@@ -1,7 +1,7 @@
 <?php
 class ModeleUtils{
 	public static function getFileFromDirectory($dir_nom){
-		$dir = opendir($dir_nom);
+		$dir = @opendir($dir_nom);
 		if($dir == false){
 			return false;
 		}

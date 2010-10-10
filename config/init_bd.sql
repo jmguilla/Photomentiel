@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Sam 09 Octobre 2010 à 17:09
+-- Généré le : Dim 10 Octobre 2010 à 15:00
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`adresseID`),
   KEY `fk_adresse_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2621 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `Adresse`
@@ -57,7 +57,8 @@ INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `vi
 (4, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 4),
 (5, 'nom anonyme', 'prenom anonyme', '42 rue du Plop', '', 'Sophia Antipolis', '06560', 5),
 (7, 'Guillaume', 'Jean-Michel', 'test', '', 'Cannes', '06400', 7),
-(23, 'Bluat', 'Christophe', '3 Avenue Emile Herault', '', 'Lorgues', '83510', 24);
+(23, 'Bluat', 'Christophe', '3 Avenue Emile Herault', '', 'Lorgues', '83510', 24),
+(26, 'Guillaume', 'Jean-Luc', '6 rue du murier', '', 'Les Arcs', '83460', 27);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2345 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -106,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `Album` (
   PRIMARY KEY  (`albumID`),
   KEY `fk_album_photographe` (`id_photographe`),
   KEY `fk_album_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2512 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `Album`
@@ -117,7 +118,8 @@ INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evene
 (2, 'Tunning Jacky', 1, 1, NULL, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42', 0),
 (3, 'Mariage Chris', 1, 2, NULL, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00', 0),
 (4, 'Mariage bien réussi', 1, 4, NULL, 2, '521000018', 'www.photomentiel.fr', 500.68, 8.58, '', '2010-08-01 12:55:17', 0),
-(5, 'Anniversaire Christian', 0, 10, NULL, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39', 0);
+(5, 'Anniversaire Christian', 0, 10, NULL, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39', 0),
+(15, 'Les Voiles D''Antibes', 0, 11, NULL, 0, '521000018', 'www.photomentiel.fr', 0.00, 0.00, '', '2010-10-09 19:45:14', 1);
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2134 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
 
 --
 -- Contenu de la table `Commande`
@@ -159,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `CommandeArchive` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `prix` float(5,2) NOT NULL,
   PRIMARY KEY  (`commandeArchiveID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
 
 --
 -- Contenu de la table `CommandeArchive`
@@ -188,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `id_commande` (`id_commande`),
   KEY `fk_commandePhoto_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3617 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=368 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -335,6 +337,23 @@ INSERT INTO `departement` (`id_departement`, `id_region`, `code`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Error`
+--
+
+CREATE TABLE IF NOT EXISTS `Error` (
+  `errorID` mediumint(9) NOT NULL auto_increment,
+  `message` varchar(300) NOT NULL default '',
+  PRIMARY KEY  (`errorID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `Error`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Evenement`
 --
 
@@ -355,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `Evenement` (
   KEY `fk_evenement_region` (`id_region`),
   KEY `fk_evenement_departement` (`id_departement`),
   KEY `fk_evenement_ville` (`id_ville`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2134 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `Evenement`
@@ -375,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `EvenementEcouteur` (
   PRIMARY KEY  (`evenementEcouteurID`),
   KEY `fk_evenementEcouteur_utilisateur` (`id_utilisateur`),
   KEY `fk_evenementEcouteur_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `EvenementEcouteur`
@@ -408,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`photographeID`),
   KEY `fk_photographe_user` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2314 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `Photographe`
@@ -418,7 +437,8 @@ INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone
 (1, 'ET tu s''auras pas n''a', '521000018', '+33620375962', 'www.site2.com', '2010051201', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 4),
 (2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 73, 6.00, 1, 0, '', '', '', '', '', '', 5),
 (4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', '', 7),
-(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24);
+(10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24),
+(11, 'JLG', '518000021', '0494475595', 'http://', '2010100900', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 27);
 
 -- --------------------------------------------------------
 
@@ -434,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `PrixTaillePapierAlbum` (
   PRIMARY KEY  (`prixTaillePapierAlbumID`),
   KEY `fk_prixtaillepapieralbum_taillepapier` (`id_taillePapier`),
   KEY `fk_prixtaillepapieralbum_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
 
 --
 -- Contenu de la table `PrixTaillePapierAlbum`
@@ -461,7 +481,11 @@ INSERT INTO `PrixTaillePapierAlbum` (`prixTaillePapierAlbumID`, `prix`, `id_tail
 (27, 4.00, 2, 5),
 (28, 4.00, 3, 5),
 (29, 6.00, 4, 5),
-(30, 10.00, 5, 5);
+(30, 10.00, 5, 5),
+(70, 3.00, 2, 15),
+(71, 3.70, 4, 15),
+(72, 4.80, 6, 15),
+(73, 5.70, 8, 15);
 
 -- --------------------------------------------------------
 
@@ -520,11 +544,16 @@ CREATE TABLE IF NOT EXISTS `RetraitPhoto` (
   `raison` varchar(200) character set utf8 NOT NULL,
   PRIMARY KEY  (`retraitPhotoID`),
   KEY `fk_retraitPhoto_stringID` (`stringID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `RetraitPhoto`
 --
+
+INSERT INTO `RetraitPhoto` (`retraitPhotoID`, `nom`, `prenom`, `mail`, `stringID`, `ref`, `justificatif`, `raison`) VALUES
+(1, 'lerelou', 'chiant', 'em@ai.l', 'x442y888', '123456789', '20101004232512.jpg', 'Ceci est un test de retrait de photo, je trouve ma position gênante :)'),
+(2, 'mon nom', 'mon', 'tchitchoubyne@msn.com', 'a2c5j7yt', 'jmoiqsme; jmliqsjdf  ; jfmlqksj mlkj; ', '20101007105415.JPG', 'qsetgzetrsqd fqs df '),
+(3, 'Gastinel', 'Arnaud', 'guillauj@gmail.com', 'x442y888', '00000000000000_0071, 00000000000000_0066 ; 00000000000000_0069 ', '20101009104820.JPG', 'Et bien, c''est juste histoire de tester un peu... Si les retrait ça marche');
 
 -- --------------------------------------------------------
 
@@ -545,11 +574,12 @@ CREATE TABLE IF NOT EXISTS `StringID` (
 --
 
 INSERT INTO `StringID` (`stringID`, `homePhotographe`, `id_album`) VALUES
+('6uihlnm5', '2010100900', 15),
 ('a2c5j7yt', '2010072801', 3),
 ('a5f8t1v5', '2010051201', 1),
 ('hiw255cf', '2010092500', 5),
 ('r5v7ttri', '2010051201', 2),
-('x442y888', '2010072901', 4);
+('x442y888', '2010082000', 4);
 
 -- --------------------------------------------------------
 
@@ -598,7 +628,7 @@ CREATE TABLE IF NOT EXISTS `transactionID` (
 --
 
 INSERT INTO `transactionID` (`id`, `transactionID`) VALUES
-(1, 19);
+(1, 20);
 
 -- --------------------------------------------------------
 
@@ -635,7 +665,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateInscription` datetime NOT NULL,
   PRIMARY KEY  (`utilisateurID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2217 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Contenu de la table `Utilisateur`
@@ -645,7 +675,8 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (4, 'jm@jm.jm', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-01 11:56:04'),
 (5, 'photographe2.prenom-photographe2@email.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-01 11:56:04'),
 (7, 'guillauj@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-08-18 18:51:02'),
-(24, 'jmichel.guillaume@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-25 19:08:00');
+(24, 'jmichel.guillaume@gmail.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-09-25 19:08:00'),
+(27, 'tchitchoubyne@msn.com', 'f71dbe52628a3f83a77ab494817525c6', 1, '2010-10-09 18:34:23');
 
 -- --------------------------------------------------------
 

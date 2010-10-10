@@ -2,6 +2,9 @@
 $dir_administration_controleur_album_php = dirname(__FILE__);
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Album.class.php";
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/StringID.class.php";
+include_once $dir_administration_controleur_album_php . "/../../classes/modele/Photographe.class.php";
+include_once $dir_administration_controleur_album_php . "/../../classes/modele/Utilisateur.class.php";
+include_once $dir_administration_controleur_album_php . "/../../functions.php";
 
 switch($action){
 	case supprimer_photo:
@@ -28,7 +31,19 @@ switch($action){
 			break;
 		}
 		$album = Album::getAlbumDepuisID($_POST['id']);
+		$stringID = StringID::getStringIDDepuisID_Album($_POST['id']);
+		$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
 		if($album->validerUpload()){
+			$retcode = httpPost(
+            "http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",
+            "login=".$photographe->getEmail().
+            "&homePhotograph=".$stringID->getHomePhotographe().
+            "&stringID=".$stringID->getStringID().
+            "&openAlbum=".$photographe->getOpenFTP().
+            "&watermark=".$album->getFiligramme(), false);
+        if ($retcode != 0){
+            //TODO manage if error in httpPost
+        }
 			$_SESSION['message'] .= "Changement d'état de l'album #" . $album->getAlbumID() . " effectué avec success<br/>";
 		}else{
 			$_SESSION['message'] .= "Impossible de changer l'état de l'album #" . $album->getAlbumID() . "<br/>";
@@ -40,12 +55,12 @@ switch($action){
 		$assocs = Album::getNDerniersAlbumsEtImageEtStringIDEtPhotographeEtEvenementEntreDates(0, NULL, NULL, false, 0);
 		if($assocs){
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";
-			echo "<table><tr><td>id</td><td>nom album</td><td>photographe</td><td>gain total</td></tr>";
+			echo "<table><tr><td>id</td><td> - sid</td><td> - nom album</td><td> - photographe</td><td></td></tr>";
 			foreach($assocs as $assoc){
 				$album = $assoc['Album'];
 				$photo = $assoc['Photographe'];
 				$stringid = $assoc['StringID'];
-				echo '<tr><td>#' . $album->getAlbumID() . ' - </td><td> <a target="_blank" href="../viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a> </td><td>' . $photo->getAdresse()->getPrenom() . " - " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form></td></tr>' . "\n";
+				echo '<tr><td>#' . $album->getAlbumID() . '</td><td> - ' . $stringid->getStringID() . '</td><td> - ' . $album->getNom() . '</td><td> - ' . $photo->getAdresse()->getPrenom() . " " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form></td></tr>' . "\n";
 			}
 			echo "</table>";
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";

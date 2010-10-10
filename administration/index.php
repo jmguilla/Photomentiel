@@ -22,6 +22,9 @@ Rendez-vous dans la section désirée:<br/>
 <form method="post" action="retrait_photo.php">
 	<input type="submit" value="Gestion Retraits Photo"/>
 </form>
+<form method="post" action="error.php">
+	<input type="submit" value="Gestion Des Erreurs"/>
+</form>
 </div>
 <?php 
 include $dir_administration_index_php . "/header.php";

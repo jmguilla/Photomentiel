@@ -57,7 +57,7 @@ class Album {
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
-				$assoc["Thumb"] = $thumb[0]["Thumb"];
+				$assoc["Thumb"] = @$thumb[0]["Thumb"];
 			}
 		}
 		return $tmp;
@@ -76,7 +76,7 @@ class Album {
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
-				$assoc["Thumb"] = $thumb[0]["Thumb"];
+				$assoc["Thumb"] = @$thumb[0]["Thumb"];
 			}
 		}
 		return $tmp;
@@ -97,7 +97,7 @@ class Album {
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
-				$assoc["Thumb"] = $thumb[0]["Thumb"];
+				$assoc["Thumb"] = @$thumb[0]["Thumb"];
 			}
 		}
 		return $tmp;
@@ -117,7 +117,7 @@ class Album {
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
-				$assoc["Thumb"] = $thumb[0]["Thumb"];
+				$assoc["Thumb"] = @$thumb[0]["Thumb"];
 			}
 		}
 		return $tmp;
@@ -139,7 +139,7 @@ class Album {
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
 				if($thumb){
-					$assoc["Thumb"] = $thumb[0]["Thumb"];
+					$assoc["Thumb"] = @$thumb[0]["Thumb"];
 				}else{
 					$assoc["Thumb"] = '';
 				}

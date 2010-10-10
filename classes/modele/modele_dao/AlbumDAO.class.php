@@ -40,10 +40,10 @@ class AlbumDAO extends DAO {
 		}
 	}
 	public function validerUpload($album){
-		if($album->getEtat() != 0){
+		if(($album->getEtat()) != 0 && ($album->getTransfert() != true)){
 			return false;
 		}
-		$query = "update Album set etat = 1 where etat = 0 and albumID = " .
+		$query = "update Album set etat = 1 where etat = 0 and transfert = true and albumID = " .
 		mysql_real_escape_string($album->getAlbumID());
 		$this->startTransaction();
 		$tmp = $this->update($query);

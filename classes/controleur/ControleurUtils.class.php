@@ -3,8 +3,30 @@ $dir_controleurutils_class_php = dirname(__FILE__);
 include_once $dir_controleurutils_class_php . "/../vue/JSONVue.class.php";
 include_once $dir_controleurutils_class_php . "/externalization.php";
 include_once $dir_controleurutils_class_php . "/../modele/TaillePapier.class.php";
+include_once $dir_controleurutils_class_php . "/../modele/Error.class.php";
 
 class ControleurUtils{
+	public static function addError($message, $sendEmail = false){
+		$error = new Error();
+		$error->setMessage($message);
+		$error->create();
+		if($sendEmail){
+			ControleurUtils::sendErrorEmail("Une erreur est survenue sur le backend photomentiel!!\n\n" . $message);
+		}
+	}
+	public static function sendErrorEmail($content){
+		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
+			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
+     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+     		$headers .='Content-Transfer-Encoding: 8bit'; 
+			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
+			"Error Photomentiel backend",
+			$content,
+			$headers
+			);
+		}
+	}
+
 	public static function serialize_object_json($obj, $result = true, $cause = NULL){
 		if(is_object($obj)){
 			echo '{"result" : ' . json_encode($result) . ",";

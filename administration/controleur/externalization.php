@@ -1,4 +1,7 @@
 <?php
+//erreurs
+define("supprimer_error", "supprimer_error");
+
 //album
 define("valider_album", "valider_album");
 define("activer_album", "activer_album");
