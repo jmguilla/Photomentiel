@@ -896,7 +896,7 @@ class AlbumDAO extends DAO {
 		$photographeDirectory = PHOTOGRAPHE_ROOT_DIRECTORY . $phome;
 		$error = false;
 		if(!is_dir($photographeDirectory)){
-			if(!mkdir($photographeDirectory, 0744)){
+			if(!mkdir($photographeDirectory, 0755)){
 				$error = true;
 			}
 		}
@@ -910,7 +910,7 @@ class AlbumDAO extends DAO {
 		//puis celui de l'album
 		$albumDirectory = $photographeDirectory . DIRECTORY_SEPARATOR . $stringID;
 		if(!is_dir($albumDirectory)){
-			if(!mkdir($albumDirectory, 0744)){
+			if(!mkdir($albumDirectory, 0755)){
 				$error = true;
 			}
 		}
@@ -956,7 +956,7 @@ class AlbumDAO extends DAO {
 		//et enfin pics & thumbs
 		$thumbs = $albumDirectory . DIRECTORY_SEPARATOR . THUMB_DIRECTORY;
 		if(!is_dir($thumbs)){
-			if(!mkdir($thumbs, 0744)){
+			if(!mkdir($thumbs, 0755)){
 				$error = true;
 			}
 		}
@@ -968,7 +968,7 @@ class AlbumDAO extends DAO {
 		}
 		$pictures = $albumDirectory . DIRECTORY_SEPARATOR . PICTURE_DIRECTORY;
 		if(!is_dir($pictures)){
-			if(!mkdir($pictures, 0744)){
+			if(!mkdir($pictures, 0755)){
 				$error = true;
 			}
 		}
