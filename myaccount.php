@@ -160,12 +160,14 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 						/***************************** PHOTOGRAPH ALBUMS  ******************************/
 				?>
 				<div class="content_box">
-					<div class="title">Mes albums :</div>
+					<div class="title" style="text-decoration:none;"><u>Mes albums :</u> <span id="displayFullGain"></span></div>
 					<div class="content_flow">
 						<?php
 							$albums = Album::getAlbumEtImageEtStringIDDepuisID_Photographe($utilisateurObj->getPhotographeID(), false);
 							if ($albums) {
 								$i=1;
+								$total_a = 0;
+								$total_m = 0;
 								foreach($albums as $alb){
 									if ($i%2==0){
 										$idi = 'id="impair"'; 
@@ -177,11 +179,18 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 									} else if($alb["Album"]->getEtat() == 1){
 										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> (en attente de validation par Photomentiel)';
 									} else {
-										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
+										$total_a += $alb["Album"]->getGainTotal();
+										$total_m += $alb["Album"]->getBalance();
+										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain mensuel : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
 									}
 									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img height="38px" src="'.$alb["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
 									$i++;
 								}
+								?>
+								<script language="javascript">
+									$("#displayFullGain").html("(Gain mensuel : <b><?php echo $total_m; ?> &#8364</b> - Gain total : <b><?php echo $total_a; ?> &#8364</b>)");
+								</script>
+								<?php
 							} else {
 						?>
 							<table>

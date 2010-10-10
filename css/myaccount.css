@@ -111,3 +111,9 @@ div#album_link {
 	text-align:left;
 	margin-left:60px;
 }
+
+span#displayFullGain {
+	color:#444444;
+	font-weight:normal;
+	text-decoration:none;
+}

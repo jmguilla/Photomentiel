@@ -12,6 +12,7 @@
 session_start();
 include_once("classes/PMError.class.php");
 include_once("classes/modele/StringID.class.php");
+include_once("classes/controleur/ControleurUtils.class.php");
 include_once("classes/modele/Album.class.php");
 include_once("classes/modele/Evenement.class.php");
 include_once("classes/modele/TaillePapier.class.php");
@@ -58,15 +59,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		if (!isset($sidObj)){
 			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
 		}
-		$retcode = httpPost(
-			"http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",
-			"login=".$utilisateurObj->getEmail().
+		$postParam = "login=".$utilisateurObj->getEmail().
 			"&homePhotograph=".$sidObj->getHomePhotographe().
 			"&stringID=".$sidObj->getStringID().
 			"&openAlbum=".$utilisateurObj->getOpenFTP().
-			"&watermark=".$albumObj->getFiligramme(), false);
+			"&watermark=".$albumObj->getFiligramme();
+		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",$postParam);
 		if ($retcode != 0){
-			//TODO manage if error in httpPost
+			ControleurUtils::addError(
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php\n".
+					$postParam."\n" .
+					"Code retour : ".$retcode);
 		}
 	}
 	$updateMode = true;
@@ -119,14 +122,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		if (!isset($sidObj)){
 			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
 		}
-		$retcode = httpPost(
-			"http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php",
-			"login=".$utilisateurObj->getEmail().
+		$postParam = "login=".$utilisateurObj->getEmail().
 			"&homePhotograph=".$sidObj->getHomePhotographe().
 			"&stringID=".$sidObj->getStringID().
-			"&passwordHash=".$utilisateurObj->getMDP(), false);
+			"&passwordHash=".$utilisateurObj->getMDP();
+		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php", $postParam);
 		if ($retcode != 0){
-			//TODO manage if error in httpPost
+			ControleurUtils::addError(
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php\n".
+					$postParam."\n" .
+					"Code retour : ".$retcode);
 		}
 	} else {
 		if (!isset($_SESSION['lastCreatedAlbum'])){

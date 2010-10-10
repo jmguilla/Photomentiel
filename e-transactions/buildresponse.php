@@ -6,7 +6,7 @@
         //   ex :
         //    -> Windows : $pathfile="pathfile=c:\\repertoire\\pathfile";
         //    -> Unix    : $pathfile="pathfile=/home/repertoire/pathfile";
-        $pathfile="pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
+    $pathfile="pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
 
 	// Initialisation du chemin de l'executable response
 	// ex :

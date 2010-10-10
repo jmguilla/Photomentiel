@@ -81,7 +81,7 @@ function removeExtension($fileName){
 	return substr($fileName,0,sizeof($fileName)-5);
 }
 
-function httpPost($url, $data, $ssl){
+function httpPost($url, $data, $ssl = false){
 	$ch = curl_init();  
 	curl_setopt($ch, CURLOPT_URL,$url);
 	curl_setopt($ch, CURLOPT_POST, 1);

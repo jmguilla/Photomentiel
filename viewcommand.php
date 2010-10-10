@@ -141,7 +141,9 @@ if ($utilisateurObj && $commandObj){
 								$_SESSION['last_command'] = $commandObj->getCommandeID();
 								include("e-transactions/selectcard.php");
 								$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
-								displayCards($albumObj->getModule(),toBankAmount($total),sprintf("%06d",TransactionID::get()),$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								$transactionID = TransactionID::get();
+								if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
+								displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 							?>
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>
