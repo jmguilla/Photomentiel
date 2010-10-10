@@ -5,7 +5,7 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	$SIREN_JM = '521000018';
 	if ($p_module == $SIREN_A){
 		//Arnaud
-		$parm="merchant_id=013044876511111";
+		$parm="merchant_id=052100001800015";//celui de JM en attendant
 	} else {
 		//JM
 		$parm="merchant_id=052100001800015";
@@ -18,21 +18,15 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 
 	// Initialisation du chemin du fichier pathfile
 	//   ex :
-        //    -> Windows : $parm="$parm pathfile=c:\\repertoire\\pathfile";
-        //    -> Unix    : $parm="$parm pathfile=/home/repertoire/pathfile";
-    if ($p_module == '521000018'){
-		//JM
-		$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
-	} else {
-		//Arnaud
-		$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
-	}
+    //    -> Windows : $parm="$parm pathfile=c:\\repertoire\\pathfile";
+    //    -> Unix    : $parm="$parm pathfile=/home/repertoire/pathfile";
+	$parm="$parm pathfile=/homez.368/photomen/www/e-transactions/payment/param/pathfile";
 
 	//		Si aucun transaction_id n'est affecté, request en génère
 	//		un automatiquement à partir de heure/minutes/secondes
 	//		Référez vous au Guide du Programmeur pour
 	//		les réserves émises sur cette fonctionnalité
-	if (isset($p_transactionID)){
+	if (isset($p_transactionID) && $p_transactionID != false){
 		$parm="$parm transaction_id=$p_transactionID";
 	}
 	$parm="$parm language=fr";
@@ -60,9 +54,9 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//$parm="$parm normal_return_logo=";
 	//$parm="$parm cancel_return_logo=";
 	//$parm="$parm submit_logo=";
-	//$parm="$parm logo_id=";
+	$parm="$parm logo_id=logo_id.png";
 	//$parm="$parm logo_id2=";
-	//$parm="$parm advert=";
+	$parm="$parm advert=advert.png";
 	//$parm="$parm background_id=";
 	//$parm="$parm templatefile=";
 
