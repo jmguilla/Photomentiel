@@ -127,7 +127,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"&stringID=".$sidObj->getStringID().
 			"&passwordHash=".$utilisateurObj->getMDP();
 		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php", $postParam);
-		if ($retcode != 0){
+		echo ">".$retcode."<";
+		if ($retcode !== "0"){
 			ControleurUtils::addError(
 					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php\n".
 					$postParam."\n" .
@@ -323,7 +324,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 			<tr>
 				<td colspan="3" height="66px;">
 					<span class="note">La zone suivante vous permet de créer une liste de mails, que vous pouvez remplir ou compléter plus tard.<br/>
-					Photomentiel enverra un E-mail à toutes ces personnes dès que l'album sera prêt, ainsi qu'un rappel 2 semaines plus tard.</span><br/>
+					Photomentiel enverra un E-mail à toutes ces personnes dès que l'album sera prêtes.</span><br/>
 					<u>Si vous avez déjà une liste de mails, veuillez les insérer maintenant :</u>
 				</td>
 			</tr>
