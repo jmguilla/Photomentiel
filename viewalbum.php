@@ -99,7 +99,9 @@ if (!$displayMailing) {
 		$scan = opendir($picturesPath.$thumbsDir);
 		while ($fileName = readdir($scan)) {
 		    if ($fileName != "." && $fileName != "..") {
-			array_push($picsArray,$fileName);
+		    	if (strtoupper(substr($fileName,-4)) === ".JPG"){
+					array_push($picsArray,$fileName);
+		    	}
 		    }
 		}
 		closedir($scan);
