@@ -125,11 +125,12 @@ function validForm(update){
 		return;
 	} else {
 		if (update){
-				$('#update_form').submit();
+			$('#update_form').submit();
 		} else {
 			$('input[min]').each(function() {
 				$('#'+ this.id).val($('#'+ this.id).val().replace(",","."));
 		    	});
+			$("#create_submit").attr("disabled","true");
 			$('#create_form').submit();
 		}
 	}
@@ -140,6 +141,7 @@ function changeAlbumState(){
 		alert("Vous devez cocher la case \"J'ai terminé de télécharger mes photos\" pour valider.");
 		return false;
 	} else {
+		$("#b_gonext").attr("disabled","true");
 		return true;
 	}
 }

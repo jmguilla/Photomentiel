@@ -65,11 +65,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"&openAlbum=".$utilisateurObj->getOpenFTP().
 			"&watermark=".$albumObj->getFiligramme();
 		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",$postParam);
-		if ($retcode != 0){
+		if ($retcode !== "0"){
 			ControleurUtils::addError(
 					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php\n".
 					$postParam."\n" .
-					"Code retour : ".$retcode);
+					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}
 	}
 	$updateMode = true;
@@ -127,12 +127,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"&stringID=".$sidObj->getStringID().
 			"&passwordHash=".$utilisateurObj->getMDP();
 		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php", $postParam);
-		echo ">".$retcode."<";
 		if ($retcode !== "0"){
 			ControleurUtils::addError(
 					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php\n".
 					$postParam."\n" .
-					"Code retour : ".$retcode);
+					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}
 	} else {
 		if (!isset($_SESSION['lastCreatedAlbum'])){
@@ -341,7 +340,10 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 		</table>
 	</fieldset>
 		<div class="separator10"></div>
-		<center><input type="button" class="button" value="Annuler" onClick="document.location.href='myaccount.php'"/><input id="create_submit" type="button" class="button" value="Créer mon album" onClick="validForm();"/><center/>
+		<center>
+			<input type="button" class="button" value="Annuler" onClick="document.location.href='myaccount.php'"/>
+			<input id="create_submit" type="button" class="button" value="Créer mon album" onClick="validForm();"/>
+		<center/>
 		</form>
 		<?php
 			} else if ($updateMode){
@@ -463,7 +465,10 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				if ($continueUpdateState){
 			?>
 		<div class="separator10"></div>
-		<center><input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/><input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/><center/>
+		<center>
+			<input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/>
+			<input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/>
+		<center/>
 			<?php
 				}
 			?>
