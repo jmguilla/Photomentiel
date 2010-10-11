@@ -223,7 +223,7 @@ if(typeof thickox == 'undefined') {
 					} else if (imageGroup == "bag_confirm"){
 						//nothing special
 					} else {
-						content += '<a href="javascript:addToBasket(\''+getPictureNameOnly(url)+'\');">Ajouter au panier</a> (ou appuyer sur <i>Entrée</i>)<br/>';
+						content += '<a href="javascript:addToBasket(\''+getPictureNameOnly(url)+'\');">Ajouter au panier</a> (ou <i>Entrée</i>)<br/>';
 					}
 					content += '<a id="TB_goPrev_a" title="Image suivante" href="">&lt;- Précédente</a> | <a id="TB_goNext_a" title="Image suivante" href="">Suivante -&gt;</a> (ou utiliser les <i>touches fléchées</i>)';
 					
