@@ -21,7 +21,7 @@ define('DBTYPE', 'mysql');
 if($_SERVER['SERVER_ADDR'] == "213.186.33.16"){
 	define('DBHOST', 'mysql5-17.bdb');
 	define('DBUSER', 'photomentiel');
-	define('DBPWD', 'ajljm2010');
+	define('DBPWD', 'adlt8f3j1y8d');
 	define('PHOTOGRAPHE_ROOT_DIRECTORY', '/homez.368/photomen/www/pictures/');
 }else{
 	define('DBHOST', '127.0.0.1');
@@ -48,5 +48,6 @@ define('ADRESSE1','Photomentiel');
 define('ADRESSE2','Pouet Pouet CEDEX 3');
 define('ADRESSE3','Sophia Antipolis');
 
-define('FTP_TRANSFER_IP','89.85.32.28');
+define('FTP_TRANSFER_IP','upload.photomentiel.fr');
+define('FTP_PORT','21000');
 ?>
