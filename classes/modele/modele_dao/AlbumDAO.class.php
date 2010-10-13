@@ -244,7 +244,7 @@ class AlbumDAO extends DAO {
 			}
 		}
 		//table album
-		$query = "select select a.transfert as altransfert, a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+		$query = "select a.transfert as altransfert, a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
@@ -396,7 +396,7 @@ class AlbumDAO extends DAO {
 			}
 		}
 		//table album
-		$query = "select select a.transfert as altransfert, a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
+		$query = "select a.transfert as altransfert, a.filigramme as alfiligramme, a.gainTotal as algainTotal, a.mailing as almailing, a.balance as albalance, a.albumID as alalbumID, a.nom as alnom, a.isPublique as alisPublique, a.id_photographe as alid_photographe, a.id_evenement as alid_evenement, a.etat as aletat, a.module as almodule, a.date as aldate, " .
 		//table stringID
 		"s.stringID as sstringID, s.homePhotographe as shomePhotographe, s.id_album as sid_album, " .
 		//table utilisateur
