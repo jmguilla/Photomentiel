@@ -41,9 +41,12 @@ switch($action){
             "&stringID=".$stringID->getStringID().
             "&openAlbum=".$photographe->getOpenFTP().
             "&watermark=".$album->getFiligramme(), false);
-        if ($retcode != 0){
-            //TODO manage if error in httpPost
-        }
+		if ($retcode !== "0"){
+			ControleurUtils::addError(
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php\n".
+					$postParam."\n" .
+					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
+		}
 			$_SESSION['message'] .= "Changement d'état de l'album #" . $album->getAlbumID() . " effectué avec success<br/>";
 		}else{
 			$_SESSION['message'] .= "Impossible de changer l'état de l'album #" . $album->getAlbumID() . "<br/>";
