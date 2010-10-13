@@ -34,11 +34,11 @@ switch($action){
 			echo "<br/>Par:<br/><b>" . $userAdresse->getPrenom() . " " . $userAdresse->getNom() . "</b><br/>\n" . $userAdresse->getNomRue() . "<br/>\n" . ((isset($userAdresseCmp) && $userAdresseCmp!='')?($userAdresseCmp . "<br/>\n"):'') . $userAdresse->getCodePostal() . "<br/>\n" . $userAdresse->getVille() . "<br/>\n";
 			echo "</td><td width=\"40px\"></td><td>\n";
 			echo "<br/>Destinataire:<br/><b>" . $commandeAdresse->getPrenom() . " " . $commandeAdresse->getNom() . "</b><br/>\n" . $commandeAdresse->getNomRue() . "<br/>\n" . ((isset($commandeAdresseCmp) && $commandeAdresseCmp!='')?($commandeAdresseCmp . "<br/>\n"):'') . $commandeAdresse->getCodePostal() . "<br/>\n" . $commandeAdresse->getVille() . "<br/>\n";
-			echo "</td></tr></table><br/>Concernant l'album <b>#" . $album->getAlbumID() . "</b> -  <a target=\"_blank\" href=\"../viewalbum.php?al=" . $stringid->getStringID() . '">' . $album->getNom() . "</a><br/>\n";
+			echo "</td></tr></table><br/>Concernant l'album <b>#" . $album->getAlbumID() . "</b> -  <a target=\"_blank\" href=\"http://www.photomentiel.fr/viewalbum.php?al=" . $stringid->getStringID() . '">' . $album->getNom() . "</a><br/>\n";
 			echo "Pour un montant total de <b>" . $total . "&#x20AC;<b><br/><br/>\n";
 			echo "Détails:<br/>\n<table>";
 			foreach($commande->getCommandesPhoto() as $commandePhoto){
-				echo "<tr><td>#" . $commandePhoto->getCommandePhotoID() . "</td><td> - dim: " . TaillePapier::getTaillePapierDepuisID($commandePhoto->getID_TaillePapier())->getDimensions() . "</td><td> - qtt: " . $commandePhoto->getNombre() . "</td><td> - prix: " . $commandePhoto->getPrix() . "&#x20AC;</td><td> - <a href=\"../../" . PICTURE_ROOT_DIRECTORY . $stringid->getHomePhotographe() . "/" . $stringid->getStringID() . "/" . PICTURE_DIRECTORY . $commandePhoto->getPhoto() . "\" target=\"_blank\">" . $commandePhoto->getPhoto() . "</a></td></tr>\n";
+				echo "<tr><td>#" . $commandePhoto->getCommandePhotoID() . "</td><td> - dim: " . TaillePapier::getTaillePapierDepuisID($commandePhoto->getID_TaillePapier())->getDimensions() . "</td><td> - qtt: " . $commandePhoto->getNombre() . "</td><td> - prix: " . $commandePhoto->getPrix() . "&#x20AC;</td><td> - <a href=\"http://www.photomentiel.fr/" . PICTURE_ROOT_DIRECTORY . $stringid->getHomePhotographe() . "/" . $stringid->getStringID() . "/" . PICTURE_DIRECTORY . $commandePhoto->getPhoto() . "\" target=\"_blank\">" . $commandePhoto->getPhoto() . "</a></td></tr>\n";
 			}
 				echo "<tr><td>fdp: " . $commande->getFDP() . "</td><td></td><td></td><td></td><td></td></tr>\n";
 			echo "</table>";

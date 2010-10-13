@@ -61,7 +61,7 @@ switch($action){
 		}
 		$_SESSION['message'] = '';
 		echo '<h3>Détail du retrait #'. $retrait->getRetraitPhotoID() . ' appartenant à l\'album #'. $album->getAlbumID() . '</h3>';
-		echo '<a target="_blank" href="retraits/' . $retrait->getJustificatif() . '">justificatif</a><br/>';
+		echo '<a target="_blank" href="http://admin.photomentiel.fr/retraits/' . $retrait->getJustificatif() . '">justificatif</a><br/>';
 		$raison = $retrait->getRaison();
 		if(!isset($raison) || $raison == ''){
 			echo '<table border="1px"><tr><td>pas de raison donnée</td></tr></table>';
@@ -95,7 +95,7 @@ switch($action){
 				$ref = $assoc["Ref"];
 				$thumbPath = $assoc["Thumb"];
 				$picPath = $assoc["Picture"];
-				echo '<tr><td><a target="_blank" href="../../pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . PICTURE_DIRECTORY . $ref . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . $picPath . '"/><input type="hidden" name="thumb" value="' . $thumbPath . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit"  onclick="return confirm(\'Continuer la suppression?\');" value="supprimer"/></form></td>' ;
+				echo '<tr><td><a target="_blank" href="http://www.photomentiel.fr/pictures/' . $sid->getHomePhotographe() . "/" . $sid->getStringID() . "/" . PICTURE_DIRECTORY . $ref . '">voir la photo</a></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_retrait"/><input type="hidden" name="path" value="' . $picPath . '"/><input type="hidden" name="thumb" value="' . $thumbPath . '"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="hidden" name="ref" value="' . $ref . '"/><input type="submit"  onclick="return confirm(\'Continuer la suppression?\');" value="supprimer"/></form></td>' ;
 			}
 			echo '</table>';
 		}
