@@ -67,6 +67,7 @@ try{
 	}
 }catch(Exception $e){
 	include_once $dir_dispatcher_php . "/classes/controleur/ControleurUtils.class.php";
+	ControleurUtils::addError($e->getMessage(), true);
 	ControleurUtils::serialize_object_json(NULL, false, $e->getMessage());
 }
 ?>
