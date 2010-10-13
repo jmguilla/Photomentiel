@@ -19,7 +19,7 @@ class ControleurUtils{
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
      		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
      		$headers .='Content-Transfer-Encoding: 8bit'; 
-			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
+			return mail("guillauj@gmail.com",
 			"Error Photomentiel backend",
 			$content,
 			$headers
