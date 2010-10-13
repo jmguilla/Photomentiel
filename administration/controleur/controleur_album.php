@@ -55,12 +55,12 @@ switch($action){
 		$assocs = Album::getNDerniersAlbumsEtImageEtStringIDEtPhotographeEtEvenementEntreDates(0, NULL, NULL, false, 0);
 		if($assocs){
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";
-			echo "<table><tr><td>id</td><td> - sid</td><td> - nom album</td><td> - photographe</td><td></td></tr>";
+			echo "<table><tr><td>id</td><td> - sid</td><td> - nom album</td><td> - photographe</td><td></td><td></td></tr>";
 			foreach($assocs as $assoc){
 				$album = $assoc['Album'];
 				$photo = $assoc['Photographe'];
 				$stringid = $assoc['StringID'];
-				echo '<tr><td>#' . $album->getAlbumID() . '</td><td> - ' . $stringid->getStringID() . '</td><td> - ' . $album->getNom() . '</td><td> - ' . $photo->getAdresse()->getPrenom() . " " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="supprimer"/></form></td></tr>' . "\n";
+				echo '<tr><td>#' . $album->getAlbumID() . '</td><td> - ' . $stringid->getStringID() . '</td><td> - ' . $album->getNom() . '</td><td> - ' . $photo->getAdresse()->getPrenom() . " " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="supprimer"/></form></td></tr>' . "\n";
 			}
 			echo "</table>";
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";
