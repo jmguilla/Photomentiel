@@ -44,6 +44,7 @@ switch($action){
 		ControleurUtils::serialize_assoc_array_json($evenements, true, NULL, $filtre);
 	break;
 	case ss_album:
+		ControleurUtils::addError("test error " , true);
 		$query = NULL; $d1 = NULL; $d2 = NULL;
 		if(isset($_POST['query'])){
 			$query = $_POST['query'];
