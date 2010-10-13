@@ -267,6 +267,9 @@ class Evenement {
 		include_once $dir_evenement_class_php . "/Utilisateur.class.php";
 		$mailing = $this->getMailing();
 		$mailing = str_replace("\n", "", $mailing);
+		if(!strpos($mailing,"@")){
+			return true;
+		}
 		if(ModeleUtils::sendEvenementAlbumDisponible($this, $mailing)){
 			$ees = EvenementEcouteur::getEvenementEcouteurDepuisID_Evenement($this->getEvenementID());
 			$count = count($ees);

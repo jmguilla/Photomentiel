@@ -429,6 +429,9 @@ class Album {
 		$mailing = str_replace("\n", "", $mailing);
 		$sid = StringID::getStringIDDepuisID_Album($this->albumID);
 		if($sid){
+			if(!strpos($mailing,"@")){
+				return true;
+			}
 			if(ModeleUtils::sendAlbumDisponible($this, $sid, $mailing)){
 				return true;
 			}
