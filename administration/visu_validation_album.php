@@ -16,6 +16,6 @@ if(isset($_SESSION['message'])){
 }
 $_SESSION['message'] = '';
 foreach($files as $file){
-	echo '<img src="../' . $rootHTML . $file . '"/><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_photo"/><input type="hidden" name="id" value="' . $sid . '"/><input type="hidden" name="photo_id" value="' . $file . '"/><input type="submit" value="supprimer"/></form><br/>';
+	echo '<img src="http://www.photomentiel.fr/' . $rootHTML . $file . '"/><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_photo"/><input type="hidden" name="id" value="' . $sid . '"/><input type="hidden" name="photo_id" value="' . $file . '"/><input type="submit" value="supprimer"/></form><br/>';
 }
 ?>

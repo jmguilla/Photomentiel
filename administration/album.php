@@ -64,7 +64,7 @@ if($assocs){
 		$album = $assoc["Album"];
 		$stringid = $assoc['StringID'];
 		$photographe = $assoc['Photographe'];
-		echo "\t\t" . '<tr><td><a target="_blank" href="http://www.photomentiel.fr/viewalbum.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
+		echo "\t\t" . '<tr><td><a target="_blank" href="http://admin.photomentiel.fr/visu_validation_album.php?al=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
 		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="activer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return validate(\"Confirmer réactivation album.\");" name="activer_album"  value="réactiver"/></form></td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\"Confirmer activation album.\");" name="supprimer_album"  value="supprimer"/></form></td></tr>' . "\n";
 	}
 ?>
