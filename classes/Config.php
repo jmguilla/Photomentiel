@@ -33,6 +33,8 @@ define('DBMAPS', 'photomentiel');
 define('DBPHOTOMENTIEL', 'photomentiel');
 define('APPLICATION_ROOT_DIRECTORY', '/');
 define('PICTURE_ROOT_DIRECTORY', 'pictures/');
+define('ADMIN_DIRECTORY', 'administration');
+define('RETRAIT_DIRECTORY', 'retraits');
 define('THUMB_DIRECTORY', 'thumbs/');
 define('PICTURE_DIRECTORY', 'pics/');
 define('STRINGID_LENGTH', 8);

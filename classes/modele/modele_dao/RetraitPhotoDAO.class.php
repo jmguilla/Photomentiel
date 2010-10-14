@@ -44,6 +44,7 @@ class RetraitPhotoDAO extends DAO{
 		mysql_real_escape_string($rp->getRetraitPhotoID());
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() == 1){
+			$this->deleteJustificatif($rp);
 			$this->commit();
 			return true;
 		}else{
@@ -64,6 +65,10 @@ class RetraitPhotoDAO extends DAO{
 			$this->rollback();
 			return false;
 		}
+	}
+	public function deleteJustificatif($rp){
+		$path = PHOTOGRAPHE_ROOT_DIRECTORY. "/../".ADMIN_DIRECTORY."/".RETRAIT_DIRECTORY."/".$rp->getJustificatif();
+		unlink($path);
 	}
 	public function buildRetraitPhotoFromRow($row, $prefix = ''){
 		$id = $row->offsetGet($prefix . "retraitPhotoID");

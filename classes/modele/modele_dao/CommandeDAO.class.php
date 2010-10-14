@@ -11,6 +11,22 @@ class CommandeDAO extends DAO{
 		parent::__construct($dsn);
 	}
 
+	public function setTermineePourVielleCommandes(){
+		list($usec, $sec) = explode(" ", microtime());
+		$deuxSemaines = 60 * 60 * 24 * 14;
+		$origin = date("Y-m-d", $sec - $deuxSemaines);
+		$query = "update Commande set etat = 4 where date <= '".
+		$origin . "' and etat = 3";
+		$this->startTransaction();
+		$tmp = $this->update($query);
+		if($tmp && $this->getAffectedRows() >=0){
+			$this->commit();
+			return true;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
 	public function getCommandeEtPhotosDepuisID_Album($ida){
 		$query = "select * from Commande as c left join CommandePhoto as cp on c.commandeID = cp.id_commande left join AdresseCommande as a on a.id_commande = c.commandeID where cp.id_album = " .
 		mysql_real_escape_string($ida);

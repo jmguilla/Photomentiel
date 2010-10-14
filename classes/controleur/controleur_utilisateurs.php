@@ -205,7 +205,7 @@ switch($action){
 			throw new Exception(((isset($errorMess))?$errorMess:'') . "Impossible de sauver les modifications du compte utilisateur.");
 		}else{
 			if(isset($pwd) && $pwd != ''){
-				$utilisateur = $utilisateur->saveMDP($pwd);
+				$utilisateur = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
 				if(!$utilisateur){
 					$errorMess .= "Impossible de changer le mot de passe du compte utilisateur.";
 				} else {
