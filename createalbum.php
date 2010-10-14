@@ -173,7 +173,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 		<a href="myaccount.php">Mon compte</a> &gt; 
 		<?php
 			if ($updateMode){
-				$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
+				$sid = $sidObj->getStringID();
 				echo "Album <b>".$sid."</b>"; 
 			} else {
 				echo "Nouvel album"; 
@@ -493,24 +493,14 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					<div id="dl">
 						Il existe plusieurs moyens de nous faire parvenir vos photos :
 						<ol>
-							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : <?php echo FTP_TRANSFER_IP; ?> avec vos identifiants Photomentiel.</li>
-							<li>Utiliser <i>notre</i> client FTP (Java doit être installé sur votre ordinateur)</li>
-							<li>
-								Par voie postale, en nous envoyant vos photos sur n'importe quel support (clé USB, carte mémoire, CD, DVD, etc.) à l'adresse suivante :
-								<div class="photograph_adress">
-								<?php
-									echo ADRESSE1.'<br/>';
-									echo ADRESSE2.'<br/>';
-									echo ADRESSE3;
-								?>
-								</div>
-							</li>
-							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Allez à la page contact pour prendre un rendez vous</a></li>
+							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : <b><?php echo "ftp://".FTP_TRANSFER_IP."</b> sur le port <b>".FTP_PORT; ?></b> avec vos identifiants Photomentiel. Un dossier <b><?php echo $sid; ?></b> a été créé pour vous, vous n'aurez plus qu'à placer vos photos à l'intérieur. (<i>Aucun autre dossier ne doit être créé</i>)</li>
+							<li>Utiliser notre client FTP <a href="/pictures/<?php echo $sidObj->getHomePhotographe()."/".$sid; ?>/client.jnlp">en cliquant ici.</a> (<i>Java doit être installé sur votre ordinateur</i>)</li>
+							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Nous contacter</a></li>
 						</ol>
 						<br/>
 						Si <span class="h">vous avez terminé de télécharger vos photos pour cet album</span>, veuillez cocher la case ci-dessous et valider.<br/>
-						<span class="note">Attention, une fois validée, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails à contacter jusqu'à la validation de votre album par nos équipes.<br/>
-						Cette étape n'est pas nécessaire lorsque vous nous faites parvenir vos photos comme décrit dans les points 3 et 4.</span>
+						<span class="note">Attention, une fois validé, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails à contacter jusqu'à la validation de votre album par notre équipe.<br/>
+						<font color="red">IMPORTANT : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</font></span>
 					</div>
 					<div class="separator10"></div>
 					<div id="enddl">
