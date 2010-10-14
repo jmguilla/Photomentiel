@@ -56,10 +56,15 @@ class ModeleUtils{
 	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 	     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
 	     	$headers .='Bcc:' . $mails;
+	     	$content = "L'album intitulé '" . $album->getNom() . "' vient d'être mis en ligne!!\n";
+			if($album->isPublique()){
+				$content .= "Rendez-vous à l'adresse http://www.photomentiel.fr/album-" . $sid->getStringID() . ".php\n";
+			}else{
+				$content .= "Vous pouvez le consulter en vous rendant sur le site http://www.photomentiel.fr\n".
+				"et en précisant le code album: " . $sid->getStringID();
+			}
 			return mail('',
-			"Photomentiel - Un nouvel album est disponible!",
-			"L'album intitulé '" . $album->getNom() . "' vient d'être mis en ligne!!\n" .
-			"Rendez-vous à l'adresse http://www.photomentiel.fr/album-" . $sid->getStringID() . ".php\n" ,
+			"Photomentiel - Un nouvel album est disponible!", $content,
 			$headers
 			);
 		}
