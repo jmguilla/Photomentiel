@@ -35,7 +35,7 @@ switch($action){
 		$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
 		if($album->validerUpload()){
 			$retcode = httpPost(
-            "http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",
+            "http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php",
             "login=".$photographe->getEmail().
             "&homePhotograph=".$stringID->getHomePhotographe().
             "&stringID=".$stringID->getStringID().
@@ -43,7 +43,7 @@ switch($action){
             "&watermark=".$album->getFiligramme(), false);
 		if ($retcode !== "0"){
 			ControleurUtils::addError(
-					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php\n".
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php\n".
 					$postParam."\n" .
 					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}

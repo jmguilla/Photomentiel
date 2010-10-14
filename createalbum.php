@@ -64,10 +64,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"&stringID=".$sidObj->getStringID().
 			"&openAlbum=".$utilisateurObj->getOpenFTP().
 			"&watermark=".$albumObj->getFiligramme();
-		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php",$postParam);
+		$retcode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php",$postParam);
 		if ($retcode !== "0"){
 			ControleurUtils::addError(
-					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/close_ftp.php\n".
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php\n".
 					$postParam."\n" .
 					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}
@@ -101,13 +101,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		if(isset($_POST['mails'])){
 			$albToCreate->setMailing($_POST['mails']);
 		}
-		$i=1;
-		while(isset($_POST["$i"])){
-			if ($_POST["$i"] != ''){
-				$albToCreate->addPrixTaillePapier(new PrixTaillePapierAlbum(-1,$_POST["$i"],$i));
+		//create format and prices
+		$papers = TaillePapier::getTaillePapiers();
+		foreach($papers as $paper){
+			if (isset($_POST[$paper->getTaillePapierID()]) && $_POST[$paper->getTaillePapierID()] != ''){
+				if ($_POST[$paper->getTaillePapierID()] >= $paper->getPrixMinimum()){
+					$albToCreate->addPrixTaillePapier(new PrixTaillePapierAlbum(-1,$_POST[$paper->getTaillePapierID()],$paper->getTaillePapierID()));
+				}
 			}
-			$i++;
 		}
+		//finally create album
 		$albToCreate = $albToCreate->create();
 		if (!$albToCreate){
 			photomentiel_die(new PMError("L'album n'a pas été créé !","Un problème est survenu lors de la création de l'album, veuillez réessayer ultérieurement."), false);
@@ -126,10 +129,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			"&homePhotograph=".$sidObj->getHomePhotographe().
 			"&stringID=".$sidObj->getStringID().
 			"&passwordHash=".$utilisateurObj->getMDP();
-		$retcode = httpPost("http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php", $postParam);
+		$retcode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/open_ftp.php", $postParam);
 		if ($retcode !== "0"){
 			ControleurUtils::addError(
-					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":21080/private/open_ftp.php\n".
+					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/open_ftp.php\n".
 					$postParam."\n" .
 					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}
@@ -140,6 +143,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 		$albumCreated = true;
 		$updateMode = true;
 		$albumObj = Album::getAlbumDepuisID($_SESSION['lastCreatedAlbum']);
+		if (!isset($sidObj)){
+			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
+		}
 	}
 }
 if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['title'])){
