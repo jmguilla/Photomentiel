@@ -70,9 +70,9 @@ switch($action){
 		}
 		echo '<form action="dispatcher.php" method="post">suppression de la demande:<input type="hidden" name="action" value="suppression_demande_retrait"/><input type="hidden" name="id" value="' . $retrait->getRetraitPhotoID() . '"/><input type="submit" onclick="return confirm(\'Continuer la suppression?\');" value="supprimer"/></form>';
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
-		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
+		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png",".JPG", ".JPEG", ".TIF", ".PNG");
 		$refs = str_replace(',',';',$retrait->getRef());
-		if(strpos($mailing,";")){
+		if(strpos($refs,";")){
 			$refs = explode(';',$refs);
 		}else{
 			$refs = array($refs);
