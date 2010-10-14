@@ -31,7 +31,6 @@ switch($action){
 			$_SESSION['message'] .= "La miniature n'existe pas, impossible de la supprimer.<br/>";
 			break;
 		}
-		$anchor = @$_POST['anchor'];
 		if(unlink($_POST['path']) && unlink($_POST['thumb'])){
 			$retrait = RetraitPhoto::getRetraitPhoto($_POST['id']);
 			$ref = $_POST['ref'];
@@ -44,8 +43,6 @@ switch($action){
 		}else{
 			$_SESSION['message'] .= "Impossible de supprimer l'image<br/>";
 		}
-		header('Location: retrait_photo.php#'.$anchor);
-		exit();
 	case detail_retrait:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id retrait fournie.<br/>";
@@ -75,7 +72,11 @@ switch($action){
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
 		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
 		$refs = str_replace(',',';',$retrait->getRef());
-		$refs = explode(';',$refs);
+		if(strpos($mailing,";")){
+			$refs = explode(';',$refs);
+		}else{
+			$refs = array($refs);
+		}
 		$toRemove = array();
 		foreach($refs as $ref){
 			foreach($listExtensions as $extension){
