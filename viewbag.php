@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * viewBag.php displays the content of the bag, format, and number of units per format.
  * One step before validation !
@@ -195,4 +196,7 @@ include("header.php");
 	</script>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>

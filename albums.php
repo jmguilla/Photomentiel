@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * albums.php is the page that displays every public album with search options
  * 
@@ -80,5 +81,8 @@ include_once("classes/modele/Adresse.class.php");
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>
 

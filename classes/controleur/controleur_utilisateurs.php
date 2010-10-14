@@ -208,6 +208,17 @@ switch($action){
 				$utilisateur = $utilisateur->saveMDP($pwd);
 				if(!$utilisateur){
 					$errorMess .= "Impossible de changer le mot de passe du compte utilisateur.";
+				} else {
+					//send new password to upload.photomentiel.fr
+					$postParam = "login=".$utilisateurObj->getEmail().
+						"&passwordHash=".$utilisateur->getMDP();
+					$retcode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/change_pwd.php", $postParam);
+					if ($retcode !== "0"){
+						ControleurUtils::addError(
+								"Erreur d'appel sur http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/change_pwd.php\n".
+								$postParam."\n" .
+								"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
+					}
 				}
 			}
 			if(isset($errorMess)){

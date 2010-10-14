@@ -162,7 +162,11 @@ class Album {
 		if($tmp){
 			foreach($tmp as &$assoc){
 				$thumb = Image::getRandomImageThumbPathDepuisStringID(array($assoc["StringID"]));
-				$assoc["Thumb"] = $thumb[0]["Thumb"];
+				if ($thumb){
+					$assoc["Thumb"] = @$thumb[0]["Thumb"];
+				} else {
+					$assoc["Thumb"] = '';
+				}
 			}
 		}
 		return $tmp;

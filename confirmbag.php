@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * confirmbag.php displays the validated content of the bag, format, and number of units per format.
  * One step before payment !
@@ -404,4 +405,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 	<div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>

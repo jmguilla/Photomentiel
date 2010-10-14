@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * createalbum.php is the page that is in charge to create a new album or update an existing one
  * 
@@ -182,4 +183,7 @@ if ($utilisateurObj && $commandObj){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>

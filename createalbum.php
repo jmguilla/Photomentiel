@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * createalbum.php is the page that is in charge to create a new album or update an existing one
  * 
@@ -528,5 +529,8 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 include("footer.php");
 if ($albumSaved){
 	echo '<script type="text/javascript">alert("Votre liste de mails a bien été mise à jour");</script>';
+}
+}catch (Exception $e){
+	echo "Internal server error !";
 }
 ?>

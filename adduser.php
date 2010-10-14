@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * adduser.php is the file that will be in charge to display forms to create account (photographe or not)
  * 
@@ -376,4 +377,7 @@ if (isset($_GET["np"])){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>

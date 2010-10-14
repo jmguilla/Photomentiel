@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * index.php is the first page on which user arrive
  * 
@@ -202,4 +203,7 @@ include_once("classes/modele/Evenement.class.php");
 </div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>
