@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Jeu 14 Octobre 2010 à 21:07
+-- Généré le : Jeu 14 Octobre 2010 à 21:40
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `Album` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `id_evenement` int(10) unsigned default NULL,
   `etat` smallint(5) unsigned NOT NULL default '0',
-  `module` enum('521000018','523919066') NOT NULL default '521000018',
+  `module` enum('521000018','525329272') NOT NULL default '521000018',
   `filigramme` varchar(20) NOT NULL default 'www.photomentiel.fr',
   `gainTotal` float(7,2) NOT NULL default '0.00',
   `balance` float(7,2) NOT NULL default '0.00',
