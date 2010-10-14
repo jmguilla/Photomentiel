@@ -289,7 +289,11 @@ class Album {
 	}
 
 	public function isPublique(){
-		return $this->isPublique;
+		if($this->isPublique){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function setIsPublique($p){
