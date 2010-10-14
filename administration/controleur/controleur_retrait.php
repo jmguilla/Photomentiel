@@ -72,7 +72,7 @@ switch($action){
 		echo 'liste de photos concernées: ' . $retrait->getRef() . '<br/>';
 		$listExtensions = array(".jpg", ".jpeg", ".tif", ".png");
 		$refs = str_replace(',',';',$retrait->getRef());
-		if(strpos($mailing,";")){
+		if(strpos($refs,";")){
 			$refs = explode(';',$refs);
 		}else{
 			$refs = array($refs);
