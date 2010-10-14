@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * myaccount.php is the file that is in charge to display the user account
  * it displays its albums, events, what he can do and its balance, etc...
@@ -214,4 +215,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>

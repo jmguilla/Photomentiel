@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * viewalbum.php is the page that will display an album
  * 
@@ -333,6 +334,9 @@ include("head.php");
  		<input id="form_input" type="hidden" name="pics"/>
  	</form>
  	<?php
+	}
+	}catch (Exception $e){
+		echo "Internal server error !";
 	}
 	?>
   </body>

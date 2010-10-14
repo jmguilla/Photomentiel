@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * contact.php is the page used to contact support photomentiel team
  * 
@@ -114,5 +115,8 @@ if ($utilisateurObj && isset($_POST['content'])){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>
 

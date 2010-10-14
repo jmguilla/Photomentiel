@@ -1,4 +1,5 @@
 <?php
+try {
 /*
  * privacy.php manage the way to delete a picture
  * 
@@ -266,4 +267,7 @@ if (isset($_POST['Captcha'])){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
+}catch (Exception $e){
+	echo "Internal server error !";
+}
 ?>
