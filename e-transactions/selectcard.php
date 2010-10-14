@@ -1,10 +1,10 @@
 <?php
 //File to be imported when selecting credit card
 function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albumID){
-	$SIREN_A  = '523919066';
+	$SIREN_JL  = '525329272';
 	$SIREN_JM = '521000018';
-	if ($p_module == $SIREN_A){
-		//Arnaud
+	if ($p_module == $SIREN_JL){
+		//JL
 		$parm="merchant_id=052100001800015";//celui de JM en attendant
 	} else {
 		//JM

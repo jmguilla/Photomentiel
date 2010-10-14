@@ -30,7 +30,7 @@ include("header.php");
 		<a href="#2"><div class="question">Quelle sera la qualité de la photographie reçu ? </div></a>
 		<a href="#3"><div class="question">J'ai selectionné mes photographies mais je ne peux accéder à la page de paiement, pourquoi ? </div></a>
 		<a href="#4"><div class="question">Je n'aime pas donner mon numéro de carte bancaire sur Internet, est ce vraiment sécurisé ? </div></a>
-		<a href="#5"><div class="question">Puis-je utiliser une photographie acheté sur www.photomentiel.fr à des fins commerciales (prospectus, flyer, carte de voeux, site web, ...) ? </div></a>
+		<a href="#5"><div class="question">Puis-je utiliser une photographie achetée sur www.photomentiel.fr à des fins commerciales (prospectus, flyer, carte de voeux, site web, ...) ? </div></a>
 		<a href="#6"><div class="question">Mais ce sont des photographies de moi, je peux quand même les mettre sur mon blog ? </div></a>
 		<a href="#7"><div class="question">Comment rentrer en contact avec le photographe ? </div></a>
 		<a href="#8"><div class="question">Je ne souhaite pas que des photographies de mes enfants soit disponibles sur Internet. </div></a>
@@ -59,7 +59,7 @@ include("header.php");
 		<div class="answer">
 			<span class="start"></span>Le système de paiement en ligne que nous utilisons est complètement indépendant de notre infrastructure, il nous est fourni par le Crédit Agricole avec la solution e-transaction, de ce fait la sécurité du paiement est assurée par une des plus grandes banques françaises, à aucun moment nous n'avons accés à vos informations bancaires. De plus l'ensemble des données que vous échangez avec le Crédit Agricole se font au travers d'un lien de communication chiffré basé sur SSL/TLS qui présente à ce jour une solution de sécurité prouvée et éprouvée ! Le paiement en ligne ne présente plus de danger à l'heure actuelle dés lors que vous étes en relation avec un organisme sérieux, encore une fois, ce n'est pas www.photomentiel.fr mais bien la banque française : Le Crédit Agricole qui vous assure une transaction sécurisée.
 		</div>
-		  <div class="question"><a name="5"></a>Puis-je utiliser une photographie acheté sur www.photomentiel.fr à des fins commerciales (prospectus, flyer, carte de voeux, site web, ...) ?</div>
+		  <div class="question"><a name="5"></a>Puis-je utiliser une photographie achetée sur www.photomentiel.fr à des fins commerciales (prospectus, flyer, carte de voeux, site web, ...) ?</div>
 		<div class="answer">
 		  <span class="start"></span>Non, pas en l'état. En utilisant les services de www.photomentiel.fr vous reconnaissez accepter les <a href=cgu.php>Conditions d'utilisation</a> qui stipule que les photographies mise à disposition par www.photomentiel.fr le sont pour un ordre privé et familiale uniquement. Nous vous invitons à rentrer en contact avec le photographe qui detient les droits de la photographie afin de convenir un accord.
 		</div>
