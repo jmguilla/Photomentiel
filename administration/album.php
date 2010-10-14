@@ -4,6 +4,7 @@ $dir_administration_album_php = dirname(__FILE__);
 include_once $dir_administration_album_php . "/../classes/modele/Album.class.php";
 include_once $dir_administration_album_php . "/../classes/modele/Evenement.class.php";
 include_once $dir_administration_album_php . "/../classes/modele/Utilisateur.class.php";
+include_once $dir_administration_album_php . "/../classes/modele/Upload.class.php";
 include $dir_administration_album_php . "/header.php";
 
 if(isset($_SESSION['message'])){
@@ -39,8 +40,24 @@ if($assocs){
 		$album = $assoc["Album"];
 		$stringid = $assoc['StringID'];
 		$photographe = $assoc['Photographe'];
+		
+		if ($album->getTransfert()){
+			$uploadObj = Upload::getUploadDepuisStringID($stringid->getStringID());
+			if ($uploadObj){
+				$toUploadPics = $uploadObj->getNombre();
+				$uploadedPics = count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".THUMB_DIRECTORY."*.JPG"));
+				$uploadedPics += count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".PICTURE_DIRECTORY."*.JPG"));
+				$percentPics = round($uploadedPics*100/$toUploadPics);
+				$transferStr = "transfert en cours ($uploadedPics/$toUploadPics - $percentPics%)";
+			} else {
+				$transferStr = "transfert en cours (?)";
+			}
+		} else {
+			$transferStr = "transfert terminé";
+		}
+		
 		echo "\t\t" . '<tr><td><a target="_blank" href="http://admin.photomentiel.fr/visu_validation_album.php?sid=' . $stringid->getStringID() . '">' . $album->getNom() . '</a></td>';
-		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td> - ' . ($album->getTransfert()? 'transfert en cours': 'pas de transfert en cours') . '</td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="valider_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" ' . ($album->getTransfert()? 'disabled="true"': '') . ' onclick="return validate(\"Confirmer validation album.\");" name="valider_album"  value="valider"/></form></td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\"Confirmer suppression album.\");" name="supprimer_album" '.($album->getTransfert()? 'disabled="true"': '').'  value="supprimer"/></form></td></tr>' . "\n";
+		echo '<td>[' . $photographe->getAdresse()->getPrenom() . ' ' . $photographe->getAdresse()->getNom() . ' - ' . $photographe->getTelephone() . ' - <a href="mailto:' . $photographe->getEmail() . '">' . $photographe->getEmail() . '</a>]</td><td> - ' . $transferStr . '</td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="valider_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" ' . ($album->getTransfert()? 'disabled="true"': '') . ' onclick="return validate(\"Confirmer validation album.\");" name="valider_album"  value="valider"/></form></td><td><form action="dispatcher.php" method="POST"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\"Confirmer suppression album.\");" name="supprimer_album" '.($album->getTransfert()? 'disabled="true"': '').'  value="supprimer"/></form></td></tr>' . "\n";
 	}
 ?>
 </table>
