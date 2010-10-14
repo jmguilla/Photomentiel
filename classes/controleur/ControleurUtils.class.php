@@ -183,7 +183,7 @@ class ControleurUtils{
      		$headers .='Reply-To: ' . $email ."\n"; 
      		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
      		$headers .='Content-Transfer-Encoding: 8bit'; 
-			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
+			return mail("jl@photomentiel.fr, jm@photomentiel.fr",
 			"Contact Photomentiel [".$userID."]",
 			$content,
 			$headers
@@ -197,7 +197,7 @@ class ControleurUtils{
      		$headers .='Reply-To: ' . $email ."\n";
      		$headers .='Content-Type: text/plain; charset="utf-8"'."\n";
      		$headers .='Content-Transfer-Encoding: 8bit';
-			return mail("jl@photomentiel.fr, arnaud@photomentiel.fr, jm@photomentiel.fr",
+			return mail("jl@photomentiel.fr, jm@photomentiel.fr",
 			"Nouveau retrait demandé",
 			$content,
 			$headers

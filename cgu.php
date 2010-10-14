@@ -51,7 +51,7 @@ include("header.php");
 		<br/>
 		<h1>Introduction :</h1>
 		<span class="start"></span>Le service proposé par l'intermédiaire du site </span><span class="photomentiel">www.photomentiel.fr</span> est un service mis à votre disposition
-		par deux associés dont les immatriculations au registre des entreprises sont les suivantes : 0521000018, 523919066.<br/>
+		par deux associés dont les immatriculations au registre des entreprises sont les suivantes : 0521000018, 525329272.<br/>
 		Ce service s'adresse principalement aux photographes et aux visiteurs qui ont été photographiés et leurs permet de :<br/>
 		<ul>
 			<li>Mettre en ligne des photographies sous forme de fichiers numériques et les proposer à la vente.</li>
