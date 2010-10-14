@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Dim 10 Octobre 2010 à 15:00
+-- Généré le : Jeu 14 Octobre 2010 à 21:40
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -77,12 +77,19 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- Contenu de la table `AdresseCommande`
 --
 
+INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `complement`, `ville`, `codePostal`, `id_commande`) VALUES
+(77, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 77),
+(78, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 78),
+(79, 'Guillaume', 'Jean-Luc', '6 rue du murier', '', 'Les Arcs', '83460', 79),
+(80, 'Guillaume', 'Jean-Michel', '11 Avenue Prado Provence', '2iem étage chez Mr Delmass', 'Cannes', '06400', 80),
+(82, 'dwxcWXCW', 'sdfsdf', 'sdsdf', 'sdfsf', 'Antibes', '06600', 82),
+(83, 'Léger', 'Arthur', '102 rue Evariste Galloie', 'Bâtiment B', 'Sophia Antipolis', '06902', 83);
 
 -- --------------------------------------------------------
 
@@ -97,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `Album` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `id_evenement` int(10) unsigned default NULL,
   `etat` smallint(5) unsigned NOT NULL default '0',
-  `module` enum('521000018','523919066') NOT NULL default '521000018',
+  `module` enum('521000018','525329272') NOT NULL default '521000018',
   `filigramme` varchar(20) NOT NULL default 'www.photomentiel.fr',
   `gainTotal` float(7,2) NOT NULL default '0.00',
   `balance` float(7,2) NOT NULL default '0.00',
@@ -107,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `Album` (
   PRIMARY KEY  (`albumID`),
   KEY `fk_album_photographe` (`id_photographe`),
   KEY `fk_album_evenement` (`id_evenement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `Album`
@@ -115,11 +122,14 @@ CREATE TABLE IF NOT EXISTS `Album` (
 
 INSERT INTO `Album` (`albumID`, `nom`, `isPublique`, `id_photographe`, `id_evenement`, `etat`, `module`, `filigramme`, `gainTotal`, `balance`, `mailing`, `date`, `transfert`) VALUES
 (1, 'Rencontre OK', 1, 1, NULL, 2, '521000018', 'www.photomentiel.fr', 386.79, 85.77, '', '2010-06-28 15:20:25', 0),
-(2, 'Tunning Jacky', 1, 1, NULL, 2, '521000018', 'www.photomentiel.fr', 64.40, 0.00, '', '2010-08-01 12:46:42', 0),
-(3, 'Mariage Chris', 1, 2, NULL, 2, '521000018', 'www.photomentiel.fr', 225.46, 0.00, '', '2010-08-01 12:53:00', 0),
-(4, 'Mariage bien réussi', 1, 4, NULL, 2, '521000018', 'www.photomentiel.fr', 500.68, 8.58, '', '2010-08-01 12:55:17', 0),
+(2, 'Tunning Jacky', 1, 1, NULL, 2, '521000018', 'www.photomentiel.fr', 87.98, 23.58, '', '2010-08-01 12:46:42', 0),
+(3, 'Mariage Chris', 1, 2, NULL, 2, '521000018', 'www.photomentiel.fr', 244.78, 19.32, '', '2010-08-01 12:53:00', 0),
+(4, 'Mariage bien réussi', 1, 4, NULL, 2, '521000018', 'www.photomentiel.fr', 526.58, 34.48, '', '2010-08-01 12:55:17', 0),
 (5, 'Anniversaire Christian', 0, 10, NULL, 2, '521000018', 'filigramme', 0.00, 0.00, 'tchitchoubyne@msn.com; guillauj@gmail.com;\r\njmichel.guillaume.list@gmail.com;michele.calles@gmail.com', '2010-09-25 19:12:39', 0),
-(15, 'Les Voiles D''Antibes', 0, 11, NULL, 0, '521000018', 'www.photomentiel.fr', 0.00, 0.00, '', '2010-10-09 19:45:14', 1);
+(21, 'test', 0, 1, NULL, 2, '521000018', 'www.photomentiel.fr', 0.00, 0.00, 'guillauj@gmail.com;jl@schee.fr', '2010-10-12 23:53:44', 0),
+(22, 'une journée avec les insectes', 1, 1, NULL, 2, '521000018', 'insectivore', 0.00, 0.00, 'jl@schee.fr', '2010-10-13 00:36:07', 0),
+(23, 'mariage stef and co', 0, 1, NULL, 2, '521000018', 'stef_and_co', 17.05, 17.05, 'guillauj@gmail.com', '2010-10-13 00:37:04', 0),
+(26, 'test', 1, 1, NULL, 2, '521000018', 'TEST', 0.00, 0.00, 'jl@schee.fr;guillauj@gmail.com', '2010-10-13 10:42:48', 0);
 
 -- --------------------------------------------------------
 
@@ -140,12 +150,19 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- Contenu de la table `Commande`
 --
 
+INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, `id_album`, `etat`, `preparateur`, `fdp`, `numero`) VALUES
+(77, '2010-10-10 17:49:09', '2010-10-10 17:52:04', 4, 4, 3, 'jl@jl.jl', 2.9, '101010170'),
+(78, '2010-10-10 17:54:13', '2010-10-10 17:55:25', 4, 2, 3, 'jl@jl.jl', 0, '101010171'),
+(79, '2010-10-10 18:38:19', '2010-10-10 18:42:30', 27, 4, 3, 'jm@jm.jm', 2.9, '101010180'),
+(80, '2010-10-10 18:52:25', '2010-10-10 18:53:20', 27, 3, 3, 'jm@jm.jm', 0, '101010181'),
+(82, '2010-10-13 01:15:36', '2010-10-13 01:17:24', 4, 23, 3, 'jl@jl.jl', 2.9, '101013010'),
+(83, '2010-10-13 10:15:47', NULL, 4, 22, 0, '', 2.9, '101013100');
 
 -- --------------------------------------------------------
 
@@ -161,12 +178,18 @@ CREATE TABLE IF NOT EXISTS `CommandeArchive` (
   `id_photographe` mediumint(8) unsigned NOT NULL,
   `prix` float(5,2) NOT NULL,
   PRIMARY KEY  (`commandeArchiveID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- Contenu de la table `CommandeArchive`
 --
 
+INSERT INTO `CommandeArchive` (`commandeArchiveID`, `date`, `id_utilisateur`, `numero`, `id_photographe`, `prix`) VALUES
+(44, '2010-10-10 17:49:09', 4, '101010170', 4, 18.90),
+(45, '2010-10-10 17:54:13', 4, '101010171', 1, 36.00),
+(46, '2010-10-10 18:38:19', 27, '101010180', 4, 22.90),
+(47, '2010-10-10 18:52:25', 27, '101010181', 2, 30.00),
+(48, '2010-10-13 01:15:36', 4, '101013010', 1, 26.90);
 
 -- --------------------------------------------------------
 
@@ -190,12 +213,34 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `id_commande` (`id_commande`),
   KEY `fk_commandePhoto_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=368 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=390 ;
 
 --
 -- Contenu de la table `CommandePhoto`
 --
 
+INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`, `id_typePapier`, `id_taillePapier`, `id_couleur`, `id_album`, `prix`) VALUES
+(368, '00000000000000.JPG', 2, 77, 1, 1, 1, 4, 8.00),
+(369, '00000000000000_0000.JPG', 2, 77, 1, 1, 1, 4, 8.00),
+(370, '20031102115838.JPG', 2, 78, 1, 1, 1, 2, 4.00),
+(371, '20031102115838.JPG', 2, 78, 1, 2, 1, 2, 8.00),
+(372, '20031102120421.JPG', 2, 78, 1, 2, 1, 2, 8.00),
+(373, '20031102120421.JPG', 1, 78, 1, 3, 1, 2, 6.00),
+(374, '20031102120823.JPG', 1, 78, 1, 1, 1, 2, 2.00),
+(375, '20031102120823.JPG', 2, 78, 1, 2, 1, 2, 8.00),
+(376, '00000000000000_0001.JPG', 1, 79, 1, 1, 1, 4, 4.00),
+(377, '00000000000000_0019.JPG', 1, 79, 1, 2, 1, 4, 8.00),
+(378, '00000000000000_0025.JPG', 1, 79, 1, 2, 1, 4, 8.00),
+(379, '00000000000000_0015.JPG', 1, 80, 1, 1, 1, 3, 3.00),
+(380, '00000000000000_0015.JPG', 1, 80, 1, 3, 1, 3, 9.00),
+(381, '00000000000000_0023.JPG', 1, 80, 1, 1, 1, 3, 3.00),
+(382, '00000000000000_0029.JPG', 1, 80, 1, 1, 1, 3, 3.00),
+(383, '00000000000000_0029.JPG', 1, 80, 1, 4, 1, 3, 12.00),
+(385, 'dhwi3b6p0002.JPG', 2, 82, 1, 2, 1, 23, 8.00),
+(386, 'dhwi3b6p0007.JPG', 2, 82, 1, 2, 1, 23, 8.00),
+(387, 'dhwi3b6p0006.JPG', 2, 82, 1, 4, 1, 23, 8.00),
+(388, '325tj2bj0000.JPG', 1, 83, 1, 1, 1, 22, 2.00),
+(389, '325tj2bj0001.JPG', 1, 83, 1, 1, 1, 22, 2.00);
 
 -- --------------------------------------------------------
 
@@ -344,12 +389,18 @@ CREATE TABLE IF NOT EXISTS `Error` (
   `errorID` mediumint(9) NOT NULL auto_increment,
   `message` varchar(300) NOT NULL default '',
   PRIMARY KEY  (`errorID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `Error`
 --
 
+INSERT INTO `Error` (`errorID`, `message`) VALUES
+(8, 'test error '),
+(9, 'test error '),
+(10, 'test error '),
+(11, 'test error '),
+(12, 'test error ');
 
 -- --------------------------------------------------------
 
@@ -438,7 +489,7 @@ INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone
 (2, 'nom entreprise 1', '15sq7d-f25seurt5df27sq', '+336204899545', 'www.site1.com', '2010072801', 73, 6.00, 1, 0, '', '', '', '', '', '', 5),
 (4, '', '521000018', '+33045848552', 'www.photomentiel.fr', '2010082000', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', '', 7),
 (10, 'Bluat', '521000018', '0620375697', 'www.bluat.fr', '2010092500', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 24),
-(11, 'JLG', '518000021', '0494475595', 'http://', '2010100900', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 27);
+(11, 'JLG', '518000021', '0494475595', 'http://', '2010100900', 73, 6.00, 1, 4, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 27);
 
 -- --------------------------------------------------------
 
@@ -454,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `PrixTaillePapierAlbum` (
   PRIMARY KEY  (`prixTaillePapierAlbumID`),
   KEY `fk_prixtaillepapieralbum_taillepapier` (`id_taillePapier`),
   KEY `fk_prixtaillepapieralbum_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=102 ;
 
 --
 -- Contenu de la table `PrixTaillePapierAlbum`
@@ -482,10 +533,17 @@ INSERT INTO `PrixTaillePapierAlbum` (`prixTaillePapierAlbumID`, `prix`, `id_tail
 (28, 4.00, 3, 5),
 (29, 6.00, 4, 5),
 (30, 10.00, 5, 5),
-(70, 3.00, 2, 15),
-(71, 3.70, 4, 15),
-(72, 4.80, 6, 15),
-(73, 5.70, 8, 15);
+(83, 2.00, 1, 21),
+(84, 2.00, 1, 22),
+(85, 3.00, 3, 22),
+(86, 4.00, 5, 22),
+(87, 5.00, 7, 22),
+(88, 4.00, 2, 23),
+(89, 4.00, 4, 23),
+(90, 4.00, 6, 23),
+(91, 4.00, 8, 23),
+(100, 2.00, 1, 26),
+(101, 2.50, 3, 26);
 
 -- --------------------------------------------------------
 
@@ -550,10 +608,6 @@ CREATE TABLE IF NOT EXISTS `RetraitPhoto` (
 -- Contenu de la table `RetraitPhoto`
 --
 
-INSERT INTO `RetraitPhoto` (`retraitPhotoID`, `nom`, `prenom`, `mail`, `stringID`, `ref`, `justificatif`, `raison`) VALUES
-(1, 'lerelou', 'chiant', 'em@ai.l', 'x442y888', '123456789', '20101004232512.jpg', 'Ceci est un test de retrait de photo, je trouve ma position gênante :)'),
-(2, 'mon nom', 'mon', 'tchitchoubyne@msn.com', 'a2c5j7yt', 'jmoiqsme; jmliqsjdf  ; jfmlqksj mlkj; ', '20101007105415.JPG', 'qsetgzetrsqd fqs df '),
-(3, 'Gastinel', 'Arnaud', 'guillauj@gmail.com', 'x442y888', '00000000000000_0071, 00000000000000_0066 ; 00000000000000_0069 ', '20101009104820.JPG', 'Et bien, c''est juste histoire de tester un peu... Si les retrait ça marche');
 
 -- --------------------------------------------------------
 
@@ -574,9 +628,12 @@ CREATE TABLE IF NOT EXISTS `StringID` (
 --
 
 INSERT INTO `StringID` (`stringID`, `homePhotographe`, `id_album`) VALUES
-('6uihlnm5', '2010100900', 15),
+('0ijdiit3', '2010051201', 26),
+('325tj2bj', '2010051201', 22),
+('37zqzhmb', '2010051201', 21),
 ('a2c5j7yt', '2010072801', 3),
 ('a5f8t1v5', '2010051201', 1),
+('dhwi3b6p', '2010051201', 23),
 ('hiw255cf', '2010092500', 5),
 ('r5v7ttri', '2010051201', 2),
 ('x442y888', '2010082000', 4);
@@ -628,7 +685,7 @@ CREATE TABLE IF NOT EXISTS `transactionID` (
 --
 
 INSERT INTO `transactionID` (`id`, `transactionID`) VALUES
-(1, 20);
+(1, 113168);
 
 -- --------------------------------------------------------
 
@@ -650,6 +707,25 @@ CREATE TABLE IF NOT EXISTS `TypePapier` (
 INSERT INTO `TypePapier` (`typePapierID`, `description`, `prix`) VALUES
 (1, 'Brillant', 0.2000),
 (2, 'Mat', 0.1500);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Upload`
+--
+
+CREATE TABLE IF NOT EXISTS `Upload` (
+  `uploadID` mediumint(9) NOT NULL auto_increment,
+  `stringID` varchar(8) character set utf8 NOT NULL,
+  `nombre` mediumint(9) NOT NULL,
+  PRIMARY KEY  (`uploadID`),
+  KEY `fk_upload_stringid` (`stringID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `Upload`
+--
+
 
 -- --------------------------------------------------------
 
@@ -35309,3 +35385,9 @@ ALTER TABLE `RetraitPhoto`
 --
 ALTER TABLE `StringID`
   ADD CONSTRAINT `fk_stringid_album` FOREIGN KEY (`id_album`) REFERENCES `Album` (`albumID`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `Upload`
+--
+ALTER TABLE `Upload`
+  ADD CONSTRAINT `Upload_ibfk_1` FOREIGN KEY (`stringID`) REFERENCES `StringID` (`stringID`) ON DELETE CASCADE;

@@ -902,11 +902,11 @@ class AlbumDAO extends DAO {
 		}
 		//on copie le index.html qui est a la racines pictures/
 		$photographeIndex = $photographeDirectory . "/index.html";
-		if(!is_file($photographeIndex)){
-			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $photographeIndex)){
-				$error = true;
-			}
-		}
+//		if(!is_file($photographeIndex)){
+//			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $photographeIndex)){
+//				$error = true;
+//			}
+//		}
 		//puis celui de l'album
 		$albumDirectory = $photographeDirectory . DIRECTORY_SEPARATOR . $stringID;
 		if(!is_dir($albumDirectory)){
@@ -947,12 +947,12 @@ class AlbumDAO extends DAO {
 			fclose($fh);		
 		}
 
-		$albumIndex = $albumDirectory . "/index.html";
-		if(!is_file($albumIndex)){
-			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $albumIndex)){
-				$error = true;
-			}
-		}
+//		$albumIndex = $albumDirectory . "/index.html";
+//		if(!is_file($albumIndex)){
+//			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $albumIndex)){
+//				$error = true;
+//			}
+//		}
 		//et enfin pics & thumbs
 		$thumbs = $albumDirectory . DIRECTORY_SEPARATOR . THUMB_DIRECTORY;
 		if(!is_dir($thumbs)){
@@ -960,24 +960,24 @@ class AlbumDAO extends DAO {
 				$error = true;
 			}
 		}
-		$thumbIndex = $thumbs . "/index.html";
-		if(!is_file($thumbIndex)){
-			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $thumbIndex)){
-				$error = true;
-			}
-		}
+//		$thumbIndex = $thumbs . "/index.html";
+//		if(!is_file($thumbIndex)){
+//			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $thumbIndex)){
+//				$error = true;
+//			}
+//		}
 		$pictures = $albumDirectory . DIRECTORY_SEPARATOR . PICTURE_DIRECTORY;
 		if(!is_dir($pictures)){
 			if(!mkdir($pictures, 0755)){
 				$error = true;
 			}
 		}
-		$picturesIndex = $pictures . "/index.html";
-		if(!is_file($picturesIndex)){
-			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $picturesIndex)){
-				$error = true;
-			}
-		}
+//		$picturesIndex = $pictures . "/index.html";
+//		if(!is_file($picturesIndex)){
+//			if(!copy(PHOTOGRAPHE_ROOT_DIRECTORY . "/index.html", $picturesIndex)){
+//				$error = true;
+//			}
+//		}
 		if($error){
 			$this->deleteAlbumDirectory(PHOTOGRAPHE_ROOT_DIRECTORY . $phome . DIRECTORY_SEPARATOR . $stringID);
 			return false;
