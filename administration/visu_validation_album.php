@@ -15,7 +15,9 @@ if(isset($_SESSION['message'])){
 	unset($_SESSION['message']);
 }
 $_SESSION['message'] = '';
+$increment = 0;
 foreach($files as $file){
-	echo '<img src="http://www.photomentiel.fr/' . $rootHTML . $file . '"/><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_photo"/><input type="hidden" name="id" value="' . $sid . '"/><input type="hidden" name="photo_id" value="' . $file . '"/><input type="submit" value="supprimer"/></form><br/>';
+	echo '<a name="id'.$increment.'"><img src="http://www.photomentiel.fr/' . $rootHTML . $file . '"/></a><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_photo"/><input type="hidden" name="id" value="' . $sid . '"/><input type="hidden" name="photo_id" value="' . $file . '"/><input type="hidden" name="anchor" value="id'.$increment.'"/><input type="submit" value="supprimer"/></form><br/>';
+	$increment++;
 }
 ?>
