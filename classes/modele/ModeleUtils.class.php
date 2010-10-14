@@ -40,10 +40,13 @@ class ModeleUtils{
 		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 		     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
 		     	$headers .='Bcc:' . $mails; 
-			return mail('',
-			"Photomentiel - Un nouvel album est disponible!",
+			return mail($utilisateur->getEmail(),
+			"Photomentiel - Nouvel album disponible !",
+			"Ce message vous a été envoyé suite à votre demande de notification de publication d'un album.\n\n".
 			"Un nouvel album vient d'être publié pour l'événement '" . $evt->getDescription() . "'\n" .
-			"Allez vérifier sur www.photomentiel.fr !!" ,
+			"Allez vérifier sur www.photomentiel.fr !!\n\n".
+			"Merci d'utiliser photomentiel.fr\n\n\n".
+			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
 			$headers
 			);
 		}
@@ -56,15 +59,20 @@ class ModeleUtils{
 	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 	     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
 	     	$headers .='Bcc:' . $mails;
-	     	$content = "L'album intitulé '" . $album->getNom() . "' vient d'être mis en ligne!!\n";
+	     	$content = "Ce message vous a été envoyé suite à votre demande de notification de publication d'un album.\n\n";
+	     	$content .= "L'album intitulé '" . $album->getNom() . "' est maintenant disponible !\n";
+			$content .= "Vous pouvez le consulter dès à présent en vous rendant à l'adresse suivante :\n";
 			if($album->isPublique()){
-				$content .= "Rendez-vous à l'adresse http://www.photomentiel.fr/album-" . $sid->getStringID() . ".php\n";
+				$content .= "http://www.photomentiel.fr/album-".$sid->getStringID().".php\n\n";
 			}else{
-				$content .= "Vous pouvez le consulter en vous rendant sur le site http://www.photomentiel.fr\n".
-				"et en précisant le code album: " . $sid->getStringID();
+				$content .= "http://www.photomentiel.fr\n";
+				$content .= "En entrant le code album suivant : ".$sid->getStringID()."\n\n";
 			}
+			$content .= "Merci d'utiliser photomentiel.fr\n\n\n";
+			$content .= "Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n";
 			return mail('',
-			"Photomentiel - Un nouvel album est disponible!", $content,
+			"Photomentiel - Nouvel album disponible !",
+			$content,
 			$headers
 			);
 		}

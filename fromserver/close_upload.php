@@ -1,6 +1,6 @@
 <?php
 /*
- * uploadComplete.php is just the request to close pictures upload comming from storage server
+ * close_upload.php is just the request to close pictures upload comming from storage server
  * 
  * Author : SCHIOUFF (All rights reserved)
  * 
@@ -12,6 +12,7 @@
  
 include_once("../classes/modele/StringID.class.php");
 include_once("../classes/modele/Album.class.php");
+include_once("../classes/modele/Upload.class.php");
 
 if (!isset($_GET['stringID'])){
 	echo 1;
@@ -32,6 +33,13 @@ if (!$retCode){
 	echo 4;
 	exit;
 }
+$uploadObj = Upload::getUploadDepuisStringID($_GET['stringID']);
+if (!$uploadObj){
+	echo 5;
+	exit;
+}
+$uploadObj->delete();
+
 echo 0;
 
 ?>
