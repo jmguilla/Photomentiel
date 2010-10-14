@@ -24,6 +24,10 @@ class Commande{
 		$this->etat = 0;
 		$commandesPhoto = array();
 	}
+	public static function setTermineePourVielleCommandes(){
+		$dao = new CommandeDAO();
+		return $dao->setTermineePourVielleCommandes();
+	}
 	public static function setEnCoursDePreparation($id, $prep){
 		if(!isset($id) || !isset($prep)){
 			return false;
