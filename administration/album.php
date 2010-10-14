@@ -44,7 +44,7 @@ if($assocs){
 		if ($album->getTransfert()){
 			$uploadObj = Upload::getUploadDepuisStringID($stringid->getStringID());
 			if ($uploadObj){
-				$toUploadPics = $uploadObj->getNombre();
+				$toUploadPics = $uploadObj->getNombre()*2;
 				$uploadedPics = count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".THUMB_DIRECTORY."*.JPG"));
 				$uploadedPics += count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".PICTURE_DIRECTORY."*.JPG"));
 				$percentPics = round($uploadedPics*100/$toUploadPics);
