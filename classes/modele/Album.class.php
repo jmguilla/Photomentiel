@@ -213,6 +213,9 @@ class Album {
 	 * (car contrainte on delete cascade) et le repertoire
 	 */
 	public function delete(){
+		if($this->getBalance() != 0){
+			return false;
+		}
 		$daoAlbum = new AlbumDAO();
 		return $daoAlbum->delete($this);
 	}
