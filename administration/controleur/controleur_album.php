@@ -24,7 +24,7 @@ switch($action){
 			$_SESSION['message'] .= "Impossible de supprimer l'image<br/>";
 		}
 		$anchor = @$_POST['anchor'];
-		header('Location: visu_validation_album.php#'.$anchor.'?sid='.$stringID->getStringID());
+		header('Location: visu_validation_album.php?sid='.$stringID->getStringID().'#'.$anchor);
 	exit();
 	case valider_upload:
 		if(!isset($_POST['id'])){
