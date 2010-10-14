@@ -15,8 +15,8 @@ class CommandeDAO extends DAO{
 		list($usec, $sec) = explode(" ", microtime());
 		$deuxSemaines = 60 * 60 * 24 * 14;
 		$origin = date("Y-m-d", $sec - $deuxSemaines);
-		$query = "update Commande set etat = 4 where datePaiement <= '".
-		$origin . "'";
+		$query = "update Commande set etat = 4 where date <= '".
+		$origin . "' and etat = 3";
 		$this->startTransaction();
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() >=0){
