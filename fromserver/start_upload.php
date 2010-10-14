@@ -17,7 +17,7 @@ if (!isset($_GET['stringID'])){
 	echo 1;
 	exit;
 }
-if (!isset($_GET['count'])){
+if (!isset($_GET['nbPics'])){
 	echo 2;
 	exit;
 }
