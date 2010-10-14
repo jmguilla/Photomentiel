@@ -50,4 +50,5 @@ define('ADRESSE3','Sophia Antipolis');
 
 define('FTP_TRANSFER_IP','upload.photomentiel.fr');
 define('FTP_PORT','21000');
+define('HTTP_PORT','21080');
 ?>
