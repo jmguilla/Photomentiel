@@ -91,6 +91,7 @@ switch($action){
 				if( (!file_exists($picPath) && file_exists($thumbPath))){
 					echo '<div>Path de miniature :' . $picPath . ' n\'a aucune image associée, supprimer à la mains SVP & controler svp</div><br/>';
 				}
+				echo $picPath."<br/>".$thumbPath."<br/>";
 			}
 		}
 		if(count($toRemove) > 0){
