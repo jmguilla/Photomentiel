@@ -13,15 +13,14 @@
 include_once("../classes/modele/StringID.class.php");
 include_once("../classes/modele/Upload.class.php");
 
-if (!isset($_GET['stringID'])){
+if (!isset($_GET['stringIDcount'])){
 	echo 1;
 	exit;
 }
-if (!isset($_GET['nbPics'])){
-	echo 2;
-	exit;
-}
-$sidObj = StringID::getStringIDDepuisID($_GET['stringID']);
+$tmp = explode("-",$_GET['stringIDcount']);
+$sid=$tmp[0];
+$count=$tmp[1];
+$sidObj = StringID::getStringIDDepuisID($sid);
 if (!$sidObj){
 	echo 3;
 	exit;
@@ -29,7 +28,7 @@ if (!$sidObj){
 
 $uploadObj = new Upload();
 $uploadObj->setStringID($sidObj->getStringID());
-$uploadObj->setNombre($_GET['count']);
+$uploadObj->setNombre($count);
 $uploadObj->create();
 
 echo 0;
