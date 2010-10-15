@@ -86,9 +86,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 				<input id="view_events" type="button" class="button" value="Voir les événements" onClick="document.location.href='events.php';"/><br>
 			</div>
 			<div id="right">
-				<div class="content_box" <?php if(!$photographMode) { ?>style="height:230px"<?php } ?>>
+				<div class="content_box" <?php echo $photographMode?'style="height:140px;"':'style="height:230px;"'; ?>>
 					<div class="title">Les événements qui m'intéressent :</div>
-					<div class="content_flow" <?php if(!$photographMode) { ?>style="height:205px"<?php } ?>>
+					<div class="content_flow" <?php echo $photographMode?'style="height:115px;"':'style="height:205px;"'; ?>>
 						<?php
 							/***************************** USER EVENTS  ******************************/
 							$events = EvenementEcouteur::getEvenementsAVenirDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
@@ -114,9 +114,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 						?>
 					</div>
 				</div>
-				<div class="content_box" <?php if(!$photographMode) { ?>style="height:230px"<?php } ?>>
+				<div class="content_box" <?php echo $photographMode?'style="height:140px;"':'style="height:230px;"'; ?>>
 					<div class="title">Mes commandes :</div>
-					<div class="content_flow" <?php if(!$photographMode) { ?>style="height:205px"<?php } ?>>
+					<div class="content_flow" <?php echo $photographMode?'style="height:115px;"':'style="height:205px;"'; ?>>
 						<?php
 							/***************************** USER COMMANDS  ******************************/
 							$commandes = Commande::getCommandesEtPhotosDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
@@ -160,9 +160,9 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 					if($photographMode) {
 						/***************************** PHOTOGRAPH ALBUMS  ******************************/
 				?>
-				<div class="content_box">
+				<div class="content_box" style="height:280px;">
 					<div class="title" style="text-decoration:none;"><u>Mes albums :</u> <span id="displayFullGain"></span></div>
-					<div class="content_flow">
+					<div class="content_flow" style="height:255px;">
 						<?php
 							$albums = Album::getAlbumEtImageEtStringIDDepuisID_Photographe($utilisateurObj->getPhotographeID(), false);
 							if ($albums) {
