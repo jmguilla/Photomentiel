@@ -207,13 +207,13 @@ switch($action){
 			if(isset($pwd) && $pwd != ''){
 				$dir_controleur_utilisateur_php = dirname(__FILE__);
 				include_once $dir_controleur_utilisateur_php . "/../../functions.php";
-				$result = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
-				if(!$result){
+				$pwdHash = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
+				if(!$pwdHash){
 					$errorMess .= "Impossible de changer le mot de passe du compte utilisateur.";
 				} else {
 					//send new password to upload.photomentiel.fr
 					$postParam = "login=".$utilisateur->getEmail().
-						"&passwordHash=".$utilisateur->getMDP();
+						"&passwordHash=".$pwdHash;
 					$retcode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/change_pwd.php", $postParam);
 					if ($retcode !== "0"){
 						ControleurUtils::addError(

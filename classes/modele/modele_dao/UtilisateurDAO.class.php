@@ -142,7 +142,7 @@ class UtilisateurDAO extends DAO{
 			$res = ControleurUtils::sendNouveauMDPEmail($utilisateur, $newMDP);
 			if($res){
 				$this->commit();
-				return true;
+				return md5($newMDP);
 			}
 		}
 		$this->rollback();
