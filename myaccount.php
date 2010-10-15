@@ -184,7 +184,12 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 										$total_m += $alb["Album"]->getBalance();
 										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> - Gain mensuel : <b>'.$alb["Album"]->getBalance().' &#8364</b>';
 									}
-									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img src="'.$alb["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
+									if ($alb["Thumb"]){
+										$picThumb = $alb["Thumb"];
+									} else {
+										$picThumb = "/design/misc/waiting.png";
+									}
+									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img src="'.$picThumb.'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
 									$i++;
 								}
 								?>

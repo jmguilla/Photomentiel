@@ -8,6 +8,7 @@
 	include_once($dir_bar_php."/../classes/modele/TaillePapier.class.php");
 	include_once($dir_bar_php."/../classes/modele/Album.class.php");
 	include_once($dir_bar_php."/../classes/modele/Photographe.class.php");
+	include_once($dir_bar_php."/../classes/modele/Utilisateur.class.php");
 	include_once($dir_bar_php."/../classes/controleur/ControleurUtils.class.php");
 	include($dir_bar_php."/buildresponse.php");
 
@@ -54,6 +55,14 @@
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
+				//print client facture
+				$photoFormatsDim = array();
+				foreach($tailles as $tp){
+					$photoFormatsDim[$tp->getTaillePapierID()] = $tp->getDimensions();
+				}
+				$utilisateurObj = Utilisateur::getUtilisateurDepuisID($customer_id);
+				$factureDestFile = "/homez.368/photomen/cgi-bin/factures/".$commandObj->getNumero().".pdf";
+				makePDF($commandObj, $utilisateurObj, $photoFormatsDim, $album->getModule(), $factureDestFile);
 			}
 		}
 	}
