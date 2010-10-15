@@ -35,8 +35,8 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 		<a href="#6"><div class="question">Je viens de recevoir mon nouveau téléphone qui dispose d'un capteur énorme, puis-je m'inscrire ?</div></a>
 		<a href="#8"><div class="question">Bon d'accord tout ceci semble tentant, mais qui vais-je photographier ?</div></a>
 		<a href="#9"><div class="question">Oui d'accord je suis emballé, je signe où ?</div></a>
-		<a href="#10"><div class="question">Mais au fait, comment puis-je vous transmettre mes photos ?</div></a>
 		<a href="#11"><div class="question">Et d'un point de vue général, comment je procède ?</div></a>
+		<a href="#10"><div class="question">Mais au fait, comment puis-je vous transmettre mes photos ?</div></a>
 		<div class="separator5"></div>
 		<center><hr/></center>
 		<div class="question"><a name="1"></a>Je suis photographe, si je passe par votre service, qu'est ce que cela va me coûter ?</div> 

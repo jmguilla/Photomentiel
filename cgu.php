@@ -124,6 +124,9 @@ include("header.php");
 			Example : la résolution numérique est 1200*1600. 1200/1600-10/13=-0.019 et 1200/1600-10/15=0.08, -0.019 est plus proche de 0 que 0.08, donc
 			le photographe devra choisir le format 10x13 et non 10x15.
 			<br/>
+			<span class="start"></span>Le photographe s'engage aussi à transférer des fichiers numériques d'images seulement et dont le nombre de pixels est supèrieur ou égal
+			à 5.5Millions de pixels. Tout fichier ne respectant pas ces conditions sera automatiquement supprimé et ne sera pas pris en compte dans la présentation de l'album.
+			<br/>
 			<span class="start"></span>La prise en charge de la commande sera effective dès la confirmation de son paiement. S'il s'avère que le paiement
 			est refusé par notre organisme bancaire ou qu'un problème survient lors du traitement de la commande, l'utilisateur en sera averti par email.<br/>
 			<span class="start"></span>Le prix d'une commande est calculé sur la base du prix affiché sur <span class="photomentiel">www.photomentiel.fr</span> au moment de la
