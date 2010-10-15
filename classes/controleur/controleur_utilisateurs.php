@@ -205,6 +205,8 @@ switch($action){
 			throw new Exception(((isset($errorMess))?$errorMess:'') . "Impossible de sauver les modifications du compte utilisateur.");
 		}else{
 			if(isset($pwd) && $pwd != ''){
+				$dir_controleur_utilisateur_php = dirname(__FILE__);
+				include_once $dir_controleur_utilisateur_php . "/../../functions.php";
 				$result = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
 				if(!$result){
 					$errorMess .= "Impossible de changer le mot de passe du compte utilisateur.";
