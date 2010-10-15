@@ -34,7 +34,7 @@ include("userconnection.php");
 				echo '<div id="user_connected">';
 				echo 'Connecté sous <b>'.$utilisateurObj->getEmail().'</b>';
 				if (get_class($utilisateurObj) === "Photographe"){
-					echo " - (Photographe)";
+					echo " - (".$utilisateurObj->getHome().")";
 				}
 				echo '</div>';
 			}
