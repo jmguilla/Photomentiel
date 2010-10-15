@@ -205,12 +205,12 @@ switch($action){
 			throw new Exception(((isset($errorMess))?$errorMess:'') . "Impossible de sauver les modifications du compte utilisateur.");
 		}else{
 			if(isset($pwd) && $pwd != ''){
-				$utilisateur = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
-				if(!$utilisateur){
+				$result = $utilisateur->saveMDPEtEnvoyerEmail($pwd);
+				if(!$result){
 					$errorMess .= "Impossible de changer le mot de passe du compte utilisateur.";
 				} else {
 					//send new password to upload.photomentiel.fr
-					$postParam = "login=".$utilisateurObj->getEmail().
+					$postParam = "login=".$utilisateur->getEmail().
 						"&passwordHash=".$utilisateur->getMDP();
 					$retcode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/change_pwd.php", $postParam);
 					if ($retcode !== "0"){
