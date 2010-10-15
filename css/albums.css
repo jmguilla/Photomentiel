@@ -100,6 +100,10 @@ div.album_pic {
 	padding-top:2px;
 	float:left;
 }
+div.album_pic img {
+	height:88px;
+	width:118px;
+}
 div.album_link {
 	float:left;
 	margin-left:10px;

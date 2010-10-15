@@ -106,6 +106,10 @@ div.event, div.album {
 div#album_pic {
 	float:left;
 }
+div#album_pic img {
+	height:38px;
+	width:50px;
+}
 div#album_link {
 	font-size:14px;
 	text-align:left;

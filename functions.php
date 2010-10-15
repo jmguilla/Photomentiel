@@ -106,12 +106,12 @@ function makePDF($command, $user, $photosFormatDim, $siren, $dest=null){
 	$PDF->SetFont('Times','B',12);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "PHOTOMENTIEL - www.photomentiel.fr");
-	$y+=5;
+	/*$y+=5;
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, ADRESSE2);
 	$y+=5;
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, ADRESSE3);
+	$PDF->Write(10, ADRESSE3);*/
 	$y+=5;
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "contact@photomentiel.fr");

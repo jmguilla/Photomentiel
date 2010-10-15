@@ -61,7 +61,7 @@ include_once("classes/modele/Evenement.class.php");
 						} else {
 							$idi = '';
 						}
-						echo '<a '.$idi.' class="last_album" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><div id="album_pic"><img height="37px" src="'.$tmp["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($tmp["Album"]->getDate())).'</span><br/>'.toNchar($tmp["Album"]->getNom(),65).'</div></a>';
+						echo '<a '.$idi.' class="last_album" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><div id="album_pic"><img height="37px" width="50px" src="'.$tmp["Thumb"].'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($tmp["Album"]->getDate())).'</span><br/>'.toNchar($tmp["Album"]->getNom(),65).'</div></a>';
 						if ($i == $nb_alb) {break;}
 						$i++;
 					}

@@ -58,7 +58,7 @@ include_once("classes/modele/Adresse.class.php");
 								$idi = '';
 							}
 							echo '<div '.$idi.' class="album">';
-							echo '<div class="album_pic"><a href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><img height="88px" src="'.$tmp["Thumb"].'"/></a></div>';
+							echo '<div class="album_pic"><a href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><img src="'.$tmp["Thumb"].'"/></a></div>';
 							echo '<div class="album_link">';
 							echo '<span class="date"><b>Date</b> : '.date("d/m/Y",strtotime($tmp["Album"]->getDate())).'</span><br/><span class="content">';
 							echo '<span class="intitule"><a class="intitule" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><b>Intitulé</b> : '.toNchar($tmp["Album"]->getNom(),92).'</a></span><br/>';
