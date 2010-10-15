@@ -115,22 +115,24 @@ class ControleurUtils{
 		}
 	}
 
-	public static function sendNouveauMDPEmail($utilisateur, $mdp){
+	public static function sendNouveauMDPEmail($utilisateur, $mdp, $generated = true){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
 	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
 	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-	     	$headers .='Content-Transfer-Encoding: 8bit'; 
+	     	$headers .='Content-Transfer-Encoding: 8bit';
+	     	$content = "Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n\n".
+			"Pour votre compte dont l'Email est : ".$utilisateur->getEmail()."\n";
+			if($generated){
+				$content .= "Voici votre nouveau mot de passe : ".$mdp."\n\n".
+				"Nous vous recommandons de changer ce mot de passe dans la rubrique mon compte sur www.photomentiel.fr.\n\n";
+			}else{
+				$content .= "Le changement a bien été effectué.\n\n";
+			}
+			$content.="Merci d'utiliser photomentiel.fr\n\n\n".
+			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n";
 			return mail($utilisateur->getEmail(),
-			"Photomentiel - Nouveau mot de passe",
-			"Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n\n".
-			"Pour votre compte dont l'Email est : ".$utilisateur->getEmail()."\n".
-			"Voici votre nouveau mot de passe : ".$mdp."\n\n".
-			"Nous vous recommandons de changer ce mot de passe dans la rubrique mon compte sur www.photomentiel.fr.\n\n".
-			"Merci d'utiliser photomentiel.fr\n\n\n".
-			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
-			$headers
-			);
+			"Photomentiel - Nouveau mot de passe",$content,$headers);
 		}
 	}
 

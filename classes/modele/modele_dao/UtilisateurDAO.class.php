@@ -139,7 +139,7 @@ class UtilisateurDAO extends DAO{
 		if($tmp && $this->getAffectedRows() >= 0){
 			$dir_utilisateurdao_class_php = dirname(__FILE__);
 			include_once $dir_utilisateurdao_class_php . "/../../controleur/ControleurUtils.class.php";
-			$res = ControleurUtils::sendNouveauMDPEmail($utilisateur, $newMDP);
+			$res = ControleurUtils::sendNouveauMDPEmail($utilisateur, $newMDP, false);
 			if($res){
 				$this->commit();
 				return md5($newMDP);
