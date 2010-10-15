@@ -139,12 +139,19 @@ if ($utilisateurObj && $commandObj){
 							<ul>
 							<li>La payer en choisissant un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
 							<?php
-								$_SESSION['last_command'] = $commandObj->getCommandeID();
-								include("e-transactions/selectcard.php");
-								$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
-								$transactionID = TransactionID::get();
-								if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
-								displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								if (!PAYMENT_MAINTENANCE){
+									$_SESSION['last_command'] = $commandObj->getCommandeID();
+									include("e-transactions/selectcard.php");
+									$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
+									$transactionID = TransactionID::get();
+									if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
+									displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
+								} else {
+									?>
+									<font color="darkred">Le service de paiement est momentanément indisponible. Il sera rétabli dans les plus brefs délais.<br/>
+									Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font><br/>
+									<?php
+								}
 							?>
 							<br/>
 							<li>Ou <a href="javascript:deleteCommand(<?php echo $commandObj->getCommandeID(); ?>);">Supprimer cette commande</a> si elle ne vous semble plus utile</li>

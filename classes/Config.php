@@ -4,7 +4,6 @@ array_push($prdPossibleRootDir,"D:/test/www/pictures/");
 array_push($prdPossibleRootDir,"D:/WorkingDir/eclipse/Photomentiel/pictures/");
 array_push($prdPossibleRootDir,"C:/EasyPHP-5.3.3/www/pictures/");
 array_push($prdPossibleRootDir,"D:/EasyPHP-5.3.3/www/pictures/");
-array_push($prdPossibleRootDir,"D:/test/www/pictures/");
 array_push($prdPossibleRootDir,"D:/www/pictures/");
 array_push($prdPossibleRootDir,"/var/www/html/pictures/");
 for ($i=0;$i<sizeof($prdPossibleRootDir);$i++) {
@@ -47,10 +46,15 @@ define('SHIPPING_RATE_UNTIL',30);
 define('PHOTOGRAPH_INITIAL_PERCENT', 73);
 
 define('ADRESSE1','Photomentiel');
-define('ADRESSE2','Pouet Pouet CEDEX 3');
+define('ADRESSE2','CEDEX 3');
 define('ADRESSE3','Sophia Antipolis');
 
 define('FTP_TRANSFER_IP','upload.photomentiel.fr');
 define('FTP_PORT','21000');
 define('HTTP_PORT','21080');
+
+//activate or desactivate functionalities
+define('SITE_MAINTENANCE',false);
+define('FTP_MAINTENANCE',false);
+define('PAYMENT_MAINTENANCE',false);
 ?>

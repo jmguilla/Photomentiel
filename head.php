@@ -11,6 +11,12 @@
  */
 include_once("functions.php");
 include_once("classes/Utils.php");
+
+if (SITE_MAINTENANCE){
+	header('Location:/maintenance.html'); 
+	exit;
+}
+
 @session_start();
 ini_set('url_rewriter.tags','');
 
@@ -29,15 +35,19 @@ ini_set('url_rewriter.tags','');
 	
  	<link rel="icon" type="image/png" href="/design/favicon.png" />
  
+	<?php
+		$p_scriptName = Utils::getScriptName();
+	?>
+
 	<link rel="stylesheet" type="text/css" href="/css/calendar.css" />
 	<link rel="stylesheet" type="text/css" href="/css/thickbox.css" />
  	<link rel="stylesheet" type="text/css" href="/css/main.css" />
- 	<link rel="stylesheet" type="text/css" href="/css/<?php echo Utils::getScriptName();?>.css" />
+ 	<link rel="stylesheet" type="text/css" href="/css/<?php echo $p_scriptName; ?>.css" />
  	
  	<script language="javascript" src="/js/cookies.js"></script>
 	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
 	<script language="javascript" src="/js/header.js"></script>
-	<script type="text/javascript" src="/js/<?php echo Utils::getScriptName();?>.js"></script>
+	<script type="text/javascript" src="/js/<?php echo $p_scriptName; ?>.js"></script>
 
 	<?php
 		if (isset($HEADER_TITLE)){
@@ -53,5 +63,12 @@ ini_set('url_rewriter.tags','');
 	?>
 
  </head>
- <body onContextMenu="return false;">
+<?php
+	if ($p_scriptName === "viewalbum" || $p_scriptName === "viewbag"){
+		$onContextMenu = 'onContextMenu="return false;"';
+	} else {
+		$onContextMenu = '';
+	}
+?>
+ <body <?php echo $onContextMenu; ?>>
  

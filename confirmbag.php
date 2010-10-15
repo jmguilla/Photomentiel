@@ -290,12 +290,20 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 								<div id="div_continue" style="border:2px #000099 solid;">
 									Veuillez choisir un moyen de paiement (<i>ceci vous conduira sur la page sécurisée de paiement</i><img src="e-transactions/payment/logo/CLEF.gif"/>) <br/><br/>
 									<?php
-										$_SESSION['last_command'] = $commande->getCommandeID();
-										include("e-transactions/selectcard.php");
-										$albumObj = Album::getAlbumDepuisID(StringID::getStringIDDepuisID($albumStringID)->getID_Album());
-										$transactionID = TransactionID::get();
-										if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
-										displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
+										if (!PAYMENT_MAINTENANCE){
+											$_SESSION['last_command'] = $commande->getCommandeID();
+											include("e-transactions/selectcard.php");
+											$albumObj = Album::getAlbumDepuisID(StringID::getStringIDDepuisID($albumStringID)->getID_Album());
+											$transactionID = TransactionID::get();
+											if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
+											displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
+										} else {
+											?>
+											<font color="darkred">Le service de paiement est momentanément indisponible. 
+											Il sera rétabli dans les plus brefs délais.<br/>
+											Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font><br/>
+											<?php
+										}
 									?>
 								</div>
 								<div class="separator10"></div>

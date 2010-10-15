@@ -496,6 +496,16 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				}
 
 				if($albumObj->getEtat() == 0){
+					if (FTP_MAINTENANCE){
+						
+					?>
+					<div id="dl">
+						<font color="darkred">Le système de téléchargement FTP est en cours de maintenance. Il sera rétabli dans les plus brefs délais.<br/>
+						Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font>
+					</div>
+					<?php
+
+					} else {
 		?>
 					<div id="dl">
 						Il existe plusieurs moyens de nous faire parvenir vos photos :
@@ -518,6 +528,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					</div>
 					<div class="separator10"></div>
 		<?php		
+					}
 				}
 			}
 		?>
