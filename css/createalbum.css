@@ -92,7 +92,7 @@ div#dl {
 	padding:5px;
 	font-size:14px;
 }
-div#dl ol li {
+div#dl ol li, div#ftp_help ol li {
 	margin-left:30px;
 	margin-top:8px;
 }
@@ -117,4 +117,28 @@ div#enddl {
 	width:80%;
 	padding:10px;
 	background-color: #E5F2FF;
+}
+div#ftp_help {
+	display:none;
+	padding:5px;
+	text-align:left;
+	font-size:13px;
+	color:#353535;
+}
+div#ftp_help hr {
+	margin-top:10px;
+	margin-bottom:20px;
+	width:30%;
+}
+div#ftp_help h4 {
+	margin-top:20px;
+	margin-bottom:5px;
+	margin-left:25px;
+	text-decoration:underline;
+}
+div#ftp_help ul li {
+	line-height:14px;
+}
+div#ftp_help ul li b {
+	font-size:12px;
 }
