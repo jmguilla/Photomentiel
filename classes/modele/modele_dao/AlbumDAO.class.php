@@ -25,6 +25,33 @@ class AlbumDAO extends DAO {
 			return false;
 		}
 	}
+	public function lockTableResetBalance(){
+	$query = "lock tables Album write";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function lockTableUpdateAmount(){
+		$query = "lock tables Album write, Photographe as p read, Utilisateur as u read, Adresse as a read";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function unlockTable(){
+		$query = "unlock tables";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function commencerTransfert($a){
 		$query = "update Album set transfert = 1 where albumID = " .
 		mysql_real_escape_string($a->getAlbumID());

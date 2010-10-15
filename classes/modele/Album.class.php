@@ -393,12 +393,31 @@ class Album {
 	 * Remet la balance à 0 et sauve en BD
 	 */
 	public function resetBalance(){
+		$dir_album_class_php = dirname(__FILE__);
+		include_once $dir_album_class_php . "/../controleur/ControleurUtils.class.php";
 		$dao = new AlbumDAO();
+		try{
+		if(!$dao->lockTableResetBalance()){
+				ControleurUtils::addError("Impossible de prendre le lock sur table Album pendant reset balance de l'album #" . $this->albumID);
+				return false;
+		}
 		if($dao->resetBalance($this)){
 			$this->balance = 0;
+			if(!$dao->unlockTable()){
+				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
+			}
 			return true;
+		}else{
+			ControleurUtils::addError("Impossible de reset la balance de l'album #" . $this->albumID, true);
+			if(!$dao->unlockTable()){
+				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
+			}
+			return false;
 		}
-		return false;
+		}catch(Exception $e){
+			$dao->unlockTable();
+			ControleurUtils::addError("Une exception s'est produit pdt un reset balance de l'album #" . $this->albumID . "\n" .$e->getMessage());
+		}
 	}
 	/**
 	 * Update balance et gaintotal avec le parametre et sauve en BD
@@ -407,12 +426,35 @@ class Album {
 		$dir_album_class_php = dirname(__FILE__);
 		include_once $dir_album_class_php . "/Utilisateur.class.php";
 		include_once $dir_album_class_php . "/Photographe.class.php";
-		$percentApplied = Photographe::getPhotographeDepuisID($this->getID_Photographe())->getPourcentage();
-		$amount = $amount*$percentApplied/100;
-		$this->balance += $amount;
-		$this->gainTotal += $amount;
+		include_once $dir_album_class_php . "/../controleur/ControleurUtils.class.php";
 		$dao = new AlbumDAO();
-		return $dao->saveAmounts($this);
+		try{
+			if(!$dao->lockTableUpdateAmount()){
+				ControleurUtils::addError("Impossible de prendre le lock sur table Album, le montant a ajouté est " . $amount, true);
+				return false;
+			}
+			//on récupère la vu la plus a jour
+			$album = Album::getAlbumDepuisID($this->getAlbumID());
+			$percentApplied = Photographe::getPhotographeDepuisID($this->getID_Photographe())->getPourcentage();
+			$amount = $amount*$percentApplied/100;
+			$this->balance += $amount;
+			$this->gainTotal += $amount;
+			if($dao->saveAmounts($this)){
+				if(!$dao->unlockTable()){
+					ControleurUtils::addError("Impossible de relacher le lock pendant update amount, le montant a ajouté est " . $amount. " a l'album #" . $this->albumID, true);
+				}
+				return true;
+			}else{
+				ControleurUtils::addError("Impossible de sauver l'album après update amount, le montant a ajouté est " . $amount. " a l'album #" . $this->albumID, true);
+				if(!$dao->unlockTable()){
+					ControleurUtils::addError("Impossible de relacher le lock, le montant a ajouté est " . $amount. " a l'album #" . $this->albumID, true);
+				}
+				return false;
+			}
+		}catch(Exception $e){
+			$dao->unlockTable();
+			ControleurUtils::addError("Une exception s'est produit pdt l'update d'un montant de " . $amount. " a l'album #" . $this->albumID . "\n" .$e->getMessage(), true);
+		}
 	}
 	/**
 	 * Cette méthode est uniquement utilisée en pour une éventuelle
