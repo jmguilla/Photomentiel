@@ -14,13 +14,12 @@ import photomentiel.gui.PhotomentielGui;
 public class Controler implements ActionListener{
 
 	private final PhotomentielGui gui;
-	private final String photographeHome, stringID;
+	private String stringID;
 	private PhotoUploader uploader;
 	private static final String newline = System.getProperty("line.separator");
 
-	public Controler(PhotomentielGui gui,String pHome,String sid){
+	public Controler(PhotomentielGui gui,String sid){
 		this.gui = gui;
-		this.photographeHome = pHome;
 		this.stringID =sid;
 		gui.initComponents(this);
 	}
@@ -90,20 +89,19 @@ public class Controler implements ActionListener{
      * this method should be invoked from the
      * event dispatch thread.
      */
-    private static void createAndShowGUI(String pHome, String sid) {
+    private static void createAndShowGUI(String sid) {
     	PhotomentielGui gui = new PhotomentielGui();
-    	Controler controler = new Controler(gui, pHome, sid);
+    	Controler controler = new Controler(gui, sid);
     }
 
 	public static void main(String[] args) {
-		final String pHome = args[0];
-		final String sid = args[1];
+		final String sid = args[0];
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //Turn off metal's use of bold fonts
-                createAndShowGUI(pHome, sid);
+                createAndShowGUI(sid);
             }
         });
     }
