@@ -148,8 +148,8 @@ if ($utilisateurObj && $commandObj){
 									displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 								} else {
 									?>
-									<font color="darkred">Le service de paiement est momentanément indisponible. Il sera rétabli dans les plus brefs délais.<br/>
-									Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font><br/>
+									<span class="warning">Le service de paiement est momentanément indisponible. Il sera rétabli dans les plus brefs délais.<br/>
+									Veuillez nous excuser pour l'éventuelle gêne occasionnée.</span><br/>
 									<?php
 								}
 							?>

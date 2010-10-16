@@ -263,7 +263,7 @@ function makeCard($stringID, $album, $photographe, $dest=null){
 	$x = 84;$y = 5;
 	$PDF->SetFont('Times','B',9);
 	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "www.photomentiel.fr");
+	$PDF->Write(10, "http://www.photomentiel.fr");
 	$x = 30;$y += 4;
 	$PDF->SetFont('Times','',9);
 	$PDF->SetXY($x,$y);

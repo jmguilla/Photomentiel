@@ -500,8 +500,8 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						
 					?>
 					<div id="dl">
-						<font color="darkred">Le système de téléchargement FTP est en cours de maintenance. Il sera rétabli dans les plus brefs délais.<br/>
-						Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font>
+						<span class="warning">Le système de téléchargement FTP est en cours de maintenance. Il sera rétabli dans les plus brefs délais.<br/>
+						Veuillez nous excuser pour l'éventuelle gêne occasionnée.</span>
 					</div>
 					<?php
 
@@ -517,7 +517,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						<br/>
 						Si <span class="h">vous avez terminé de télécharger vos photos pour cet album</span>, veuillez cocher la case ci-dessous et valider.<br/>
 						<span class="note">Attention, une fois validé, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails à contacter jusqu'à la validation de votre album par notre équipe.<br/>
-						<font color="red"><u><b>IMPORTANT</b></u> : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</font></span>
+						<span class="warning"><u><b>IMPORTANT</b></u> : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</span></span>
 					</div>
 					<div class="separator10"></div>
 					<div id="enddl">
@@ -554,7 +554,8 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 							<li>Zone 1 : Cette zone représente votre disque dur, choisissez ici le dossier contenant vos photos</li>
 							<li>Zone 2 : Une fois votre dossier de photo sélectionné, cette zone affichera toutes les photos qu'il contient</li>
 							<li>Zone 3 : Dans cette zone, sélectionnez le dossier de votre album : <i><?php echo $sid; ?></i></li>
-							<li>Zone 4 : Cette zone représente votre album chez nous. <br/>Pour nous envoyer vos photos, sélectionnez les dans la zone 2 et faites les glisser vers la zone 4</li>
+							<li>Zone 4 : Cette zone représente votre album chez nous. <br/>Pour nous envoyer vos photos, sélectionnez les dans la zone 2 et faites les glisser vers la zone 4<br/>
+							<span class="warning"><u>Attention</u> : pour des raisons de qualité d'impression, seul les <i>jpg</i> et <i>jpeg</i> de plus de 5.5 Million de pixels seront pris en compte</span></li>
 						</ul><br/>
 						<b>C'est tout ! Il ne vous reste plus qu'à attendre que le client vous notifie de la fin du téléchargement.</b>
 					</div>
