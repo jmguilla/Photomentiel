@@ -243,7 +243,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				<td>
 					Filigrane personnalisé :
 				</td><td>
-					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20"/>
+					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20" regexp="^[A-Za-z0-9.\-_ ]+$"/>
 				</td><td>
 					<div class="checkform" id="rfiligrane"></div>
 				</td>
@@ -500,8 +500,8 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						
 					?>
 					<div id="dl">
-						<font color="darkred">Le système de téléchargement FTP est en cours de maintenance. Il sera rétabli dans les plus brefs délais.<br/>
-						Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font>
+						<span class="warning">Le système de téléchargement FTP est en cours de maintenance. Il sera rétabli dans les plus brefs délais.<br/>
+						Veuillez nous excuser pour l'éventuelle gêne occasionnée.</span>
 					</div>
 					<?php
 
@@ -510,14 +510,14 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					<div id="dl">
 						Il existe plusieurs moyens de nous faire parvenir vos photos :
 						<ol>
-							<li>Utiliser un client FTP quelconque en vous connectant à cette adresse : <b><?php echo "ftp://".FTP_TRANSFER_IP."</b> sur le port <b>".FTP_PORT; ?></b> avec vos identifiants Photomentiel. Un dossier <b><?php echo $sid; ?></b> a été créé pour vous, vous n'aurez plus qu'à placer vos photos à l'intérieur. (<i>Aucun autre dossier ne doit être créé</i>)</li>
+							<li>Utiliser <a href="#cftpq" onClick="$('#ftp_help').css('display','inline');return true;">un client FTP quelconque</a>* en vous connectant à cette adresse : <b><?php echo "ftp://".FTP_TRANSFER_IP."</b> sur le port <b>".FTP_PORT; ?></b> avec vos identifiants Photomentiel. Un dossier <b><?php echo $sid; ?></b> a été créé pour vous, vous n'aurez plus qu'à placer vos photos à l'intérieur. (<i>Aucun autre dossier ne doit être créé</i>)</li>
 							<li>Utiliser notre client FTP <a href="/pictures/<?php echo $sidObj->getHomePhotographe()."/".$sid; ?>/client.jnlp">en cliquant ici.</a> (<i>Java doit être installé sur votre ordinateur</i>)</li>
-							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Nous contacter</a></li>
+							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Nous contacter...</a></li>
 						</ol>
 						<br/>
 						Si <span class="h">vous avez terminé de télécharger vos photos pour cet album</span>, veuillez cocher la case ci-dessous et valider.<br/>
 						<span class="note">Attention, une fois validé, vous ne pourrez plus ajouter de photos. Vous pourrez encore ajouter des mails à contacter jusqu'à la validation de votre album par notre équipe.<br/>
-						<font color="red">IMPORTANT : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</font></span>
+						<span class="warning"><u><b>IMPORTANT</b></u> : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</span></span>
 					</div>
 					<div class="separator10"></div>
 					<div id="enddl">
@@ -527,6 +527,38 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						</form>
 					</div>
 					<div class="separator10"></div>
+					<div id="ftp_help" id="ftp_help">
+						<center><hr/></center>
+						<a name="cftpq"></a>*Si vous n'êtes pas familier avec ce genre de client, nous en avons choisi un pour vous dont voici la procédure à suivre pour télécharger vos photos :
+						<h4>Téléchargement du client sur votre ordinateur :</h4>
+						<ol>
+						<li>Télécharger FileZilla à l'adresse suivante : <a target="_blank" href="http://filezilla-project.org/download.php?type=client">http://filezilla-project.org/download.php?type=client</a></li>
+						<li>Décompresser ou installer, puis lancer le client.</li>
+						<ol>
+						<h4>Connexion au server :</h4>
+						En haut du client vous trouverez cette barre de connexion :<br/>
+						<img src="/design/fztuto/connexion.png"></img><br/>
+						Entrer ici les informations suivantes (utilisez votre mot de passe Photomentiel) :
+						<ul>
+							<li>Hôte : <b><?php echo FTP_TRANSFER_IP; ?></b></li>
+							<li>Identifiant : <b><?php echo $utilisateurObj->getEmail(); ?></b></li>
+							<li>Mot de passe : <b>*******</b></li>
+							<li>Port : <b><?php echo FTP_PORT; ?></b></li>
+						</ul><br/>
+						Puis cliquez sur le bouton <i><u>Connexion rapide</u></i> (La petite flèche à droite vous permettra de vous reconnecter avec les mêmes informations)
+						<h4>Téléchargement de vos fichiers sur les serveurs de Photomentiel</h4>
+						Une fois connecté, dirigez vous vers les 4 zones centrales dont voici une illustration :<br/>
+						<img src="/design/fztuto/transfert.png"></img><br/>
+						Comment ça marche ?
+						<ul>
+							<li>Zone 1 : Cette zone représente votre disque dur, choisissez ici le dossier contenant vos photos</li>
+							<li>Zone 2 : Une fois votre dossier de photo sélectionné, cette zone affichera toutes les photos qu'il contient</li>
+							<li>Zone 3 : Dans cette zone, sélectionnez le dossier de votre album : <i><?php echo $sid; ?></i></li>
+							<li>Zone 4 : Cette zone représente votre album chez nous. <br/>Pour nous envoyer vos photos, sélectionnez les dans la zone 2 et faites les glisser vers la zone 4<br/>
+							<span class="warning"><u>Attention</u> : pour des raisons de qualité d'impression, seul les <i>jpg</i> et <i>jpeg</i> de plus de 5.5 Million de pixels seront pris en compte</span></li>
+						</ul><br/>
+						<b>C'est tout ! Il ne vous reste plus qu'à attendre que le client vous notifie de la fin du téléchargement.</b>
+					</div>
 		<?php		
 					}
 				}

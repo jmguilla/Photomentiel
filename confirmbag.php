@@ -299,9 +299,9 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 											displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
 										} else {
 											?>
-											<font color="darkred">Le service de paiement est momentanément indisponible. 
+											<span class="warning">Le service de paiement est momentanément indisponible. 
 											Il sera rétabli dans les plus brefs délais.<br/>
-											Veuillez nous excuser pour l'éventuelle gêne occasionnée.</font><br/>
+											Veuillez nous excuser pour l'éventuelle gêne occasionnée.</span><br/>
 											<?php
 										}
 									?>

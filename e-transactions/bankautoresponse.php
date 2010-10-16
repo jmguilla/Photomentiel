@@ -8,6 +8,7 @@
 	include_once($dir_bar_php."/../classes/modele/TaillePapier.class.php");
 	include_once($dir_bar_php."/../classes/modele/Album.class.php");
 	include_once($dir_bar_php."/../classes/modele/Photographe.class.php");
+	include_once($dir_bar_php."/../classes/modele/Utilisateur.class.php");
 	include_once($dir_bar_php."/../classes/controleur/ControleurUtils.class.php");
 	include($dir_bar_php."/buildresponse.php");
 
@@ -32,7 +33,7 @@
 
 	if ($CB_RETURN_EXIT_CODE == 0){
 		//$idCmd contient l'ID de la commande
-		if ($bank_response_code=='00' && $response_code=='00'){
+		if ($bank_response_code==='00' && $response_code==='00'){
 			$commandObj = Commande::getCommandeEtPhotosDepuisID($idCmd);
 			if ($commandObj->getEtat() == 0){
 				$lignes = $commandObj->getCommandesPhoto();
@@ -54,6 +55,14 @@
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);
+				//print client facture
+				$photoFormatsDim = array();
+				foreach($tailles as $tp){
+					$photoFormatsDim[$tp->getTaillePapierID()] = $tp->getDimensions();
+				}
+				$utilisateurObj = Utilisateur::getUtilisateurDepuisID($customer_id);
+				$factureDestFile = "/homez.368/photomen/cgi-bin/factures/".$commandObj->getNumero().".pdf";
+				makePDF($commandObj, $utilisateurObj, $photoFormatsDim, $album->getModule(), $factureDestFile);
 			}
 		}
 	}
