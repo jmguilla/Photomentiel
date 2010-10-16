@@ -243,7 +243,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				<td>
 					Filigrane personnalisé :
 				</td><td>
-					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20"/>
+					<input name="filigrane" class="textfield" type="text" id="filigrane" maxlength="20" regexp="^[A-Za-z0-9.\-_]+$"/>
 				</td><td>
 					<div class="checkform" id="rfiligrane"></div>
 				</td>
