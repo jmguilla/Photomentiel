@@ -32,7 +32,7 @@ public class Controler implements ActionListener{
 			String pwd = this.gui.getPassword();
 			if(this.uploader == null){
 				try {
-					this.uploader = new PhotoUploader(login, pwd, this.photographeHome, this.stringID);
+					this.uploader = new PhotoUploader(login, pwd, this.stringID);
 					this.gui.connect();
 				} catch (Exception e) {
 					this.gui.log("Impossible de se connecter" + newline);

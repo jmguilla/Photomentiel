@@ -21,20 +21,16 @@ public class PhotoUploader {
 	private String server;
 	private int port;
 	//la racine de l'arborescence pour l'upload. s'en suit, le photographe home, et stringID
-	private String root;
-	private final String photographeHome;
 	private final String stringID;
 	private FTPClient ftp;
 
-	public PhotoUploader(String log, String mdp, String pHome, String sid) throws IOException, FTPException, NoSuchAlgorithmException{
+	public PhotoUploader(String log, String mdp, String sid) throws IOException, FTPException, NoSuchAlgorithmException{
 		Properties prop = new Properties();
 		prop.load(this.getClass().getResourceAsStream("uploader.prop"));
 		this.server = prop.getProperty("server");
-		this.root = prop.getProperty("root");
 		this.port = Integer.parseInt(prop.getProperty("port"));
 		this.login = log;
 		this.mdp = mdp;
-		this.photographeHome = pHome;
 		this.stringID = sid;
 		this.connect();
 	}
@@ -47,8 +43,6 @@ public class PhotoUploader {
 	 */
 	public void upload(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
 		if(ftp != null && ftp.isConnected()){
-			String remote = this.root + this.photographeHome + "/" + this.stringID + "/";
-			ftp.changeWorkingDirectory(remote);
 			int circuitBroker = 5;
 			int current = 0;
 			while(files.size() > 0 && circuitBroker > 0){
@@ -56,7 +50,7 @@ public class PhotoUploader {
 				if(!file.isDirectory()){
 					InputStream input = null;
 					try {
-						String remoteFile = remote + file.getName();
+						String remoteFile = file.getName();
 						input = new FileInputStream(file);
 						ftp.storeFile(remoteFile, input);
 						circuitBroker = 5;
@@ -102,14 +96,12 @@ public class PhotoUploader {
 
 	public boolean upload(File file) throws IOException, NoSuchAlgorithmException{
 		if(ftp != null && ftp.isConnected()){
-			String remote = this.root + this.photographeHome + "/" + this.stringID + "/";
-			ftp.changeWorkingDirectory(remote);
 			int circuitBroker = 5;
 			while(circuitBroker > 0){
 				if(!file.isDirectory()){
 					InputStream input = null;
 					try {
-						String remoteFile = remote + file.getName();
+						String remoteFile = file.getName();
 						input = new FileInputStream(file);
 						ftp.storeFile(remoteFile, input);
 						return true;
@@ -189,6 +181,9 @@ public class PhotoUploader {
 			}
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			System.out.println("Connect\u00e9 à ftp.photomentiel.fr en tant que " + login);
+			String remote = this.stringID;
+			ftp.enterLocalPassiveMode();
+			ftp.changeWorkingDirectory(remote);
 		} catch (IOException e) {
 			ftp.disconnect();
 			ftp = null;
@@ -199,10 +194,9 @@ public class PhotoUploader {
 	public static void main(String[] args) throws IOException, FTPException, NoSuchAlgorithmException{
 		String login = args[0];
 		String mdp = args[1];
-		String pHome = args[2];
-		String sid = args[3];
-		String rep = args[4];
-		PhotoUploader pu = new PhotoUploader(login, mdp, pHome, sid);
+		String sid = args[2];
+		String rep = args[3];
+		PhotoUploader pu = new PhotoUploader(login, mdp, sid);
 		ArrayList<File> toUpload = new ArrayList<File>();
 		Collections.addAll(toUpload, new File(rep).listFiles());
 		pu.upload(toUpload);
