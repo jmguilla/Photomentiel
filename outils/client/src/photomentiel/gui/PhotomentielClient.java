@@ -113,7 +113,7 @@ public class PhotomentielClient extends JPanel
             	log.append(newline);
             }
         } else {
-            log.append("Envoie annulé." + newline);
+            log.append("Envoie annul\u00e9." + newline);
         }
         log.setCaretPosition(log.getDocument().getLength());
 

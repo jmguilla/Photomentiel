@@ -38,7 +38,7 @@ public class Controler implements ActionListener{
 					this.gui.log("Cause: " + e.getClass() + " - " + e.getMessage());
 				}
 			}
-		}else if(ae.getActionCommand().equals("Choisir r\u00e9pertoire/fichiers")){
+		}else if(ae.getActionCommand().equals("Choisir fichiers")){
 			this.gui.disableUpload();
 			final File[] files = gui.showFileChooser();
 			if(files != null){
@@ -69,7 +69,7 @@ public class Controler implements ActionListener{
 				};
 				toRun.start();
 			}else{
-				this.gui.logln("Aucun r\u00e9pertoire/fichiers choisi(ent).");
+				this.gui.logln("Aucun fichier choisi.");
 			}
 		}else if(ae.getActionCommand().equals("se d\u00e9connecter")){
 			if(this.uploader != null && this.uploader.isConnected()){

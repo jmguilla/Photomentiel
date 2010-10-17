@@ -17,10 +17,9 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
 public class PhotoUploader {
-	private String login, mdp;
-	private String server;
-	private int port;
-	//la racine de l'arborescence pour l'upload. s'en suit, le photographe home, et stringID
+	private final String login, mdp;
+	private final String server;
+	private final int port;
 	private final String stringID;
 	private FTPClient ftp;
 

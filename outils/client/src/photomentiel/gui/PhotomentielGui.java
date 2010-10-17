@@ -96,7 +96,7 @@ public class PhotomentielGui  {
 			}
 
 			//---- buttonFichier ----
-			buttonFichier.setText("Choisir r\u00e9pertoire/fichiers");
+			buttonFichier.setText("Choisir fichiers");
 			buttonFichier.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			buttonFichier.setEnabled(false);
 			buttonFichier.addActionListener(model);
