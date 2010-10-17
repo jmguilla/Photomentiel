@@ -29,7 +29,7 @@ public class Controler implements ActionListener{
 		if(ae.getActionCommand().equals("se connecter")){
 			String login = this.gui.getLogin();
 			String pwd = this.gui.getPassword();
-			if(this.uploader == null){
+			if(this.uploader == null || !this.uploader.isConnected()){
 				try {
 					this.uploader = new PhotoUploader(login, pwd, this.stringID);
 					this.gui.connect();
@@ -91,7 +91,7 @@ public class Controler implements ActionListener{
      */
     private static void createAndShowGUI(String sid) {
     	PhotomentielGui gui = new PhotomentielGui();
-    	Controler controler = new Controler(gui, sid);
+    	new Controler(gui, sid);
     }
 
 	public static void main(String[] args) {

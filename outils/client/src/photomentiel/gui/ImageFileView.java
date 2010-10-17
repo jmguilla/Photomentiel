@@ -62,13 +62,6 @@ public class ImageFileView extends FileView {
             if (extension.equals(Utils.jpeg) ||
                 extension.equals(Utils.jpg)) {
                 type = "JPEG Image";
-            } else if (extension.equals(Utils.gif)){
-                type = "GIF Image";
-            } else if (extension.equals(Utils.tiff) ||
-                       extension.equals(Utils.tif)) {
-                type = "TIFF Image";
-            } else if (extension.equals(Utils.png)){
-                type = "PNG Image";
             }
         }
         return type;
@@ -82,13 +75,6 @@ public class ImageFileView extends FileView {
             if (extension.equals(Utils.jpeg) ||
                 extension.equals(Utils.jpg)) {
                 icon = jpgIcon;
-            } else if (extension.equals(Utils.gif)) {
-                icon = gifIcon;
-            } else if (extension.equals(Utils.tiff) ||
-                       extension.equals(Utils.tif)) {
-                icon = tiffIcon;
-            } else if (extension.equals(Utils.png)) {
-                icon = pngIcon;
             }
         }
         return icon;

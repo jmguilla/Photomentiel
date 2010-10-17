@@ -6,7 +6,6 @@ package photomentiel.gui;
 
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -36,10 +35,6 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
  * @author Jean-Michel Guillaume
  */
 public class PhotomentielGui  {
-
-	private void buttonConnexionActionPerformed(ActionEvent e) {
-		// TODO add your code here
-	}
 
 	public void initComponents(Controler model) {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents

@@ -32,8 +32,8 @@
 package photomentiel.gui;
 
 import java.io.File;
-import javax.swing.*;
-import javax.swing.filechooser.*;
+
+import javax.swing.filechooser.FileFilter;
 
 /* ImageFilter.java is used by FileChooserDemo2.java. */
 public class ImageFilter extends FileFilter {
@@ -46,12 +46,8 @@ public class ImageFilter extends FileFilter {
 
         String extension = Utils.getExtension(f);
         if (extension != null) {
-            if (extension.equals(Utils.tiff) ||
-                extension.equals(Utils.tif) ||
-                extension.equals(Utils.gif) ||
-                extension.equals(Utils.jpeg) ||
-                extension.equals(Utils.jpg) ||
-                extension.equals(Utils.png)) {
+            if (extension.equals(Utils.jpeg) ||
+                extension.equals(Utils.jpg)) {
                     return true;
             } else {
                 return false;
