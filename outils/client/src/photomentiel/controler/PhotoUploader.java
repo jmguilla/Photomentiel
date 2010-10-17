@@ -40,7 +40,7 @@ public class PhotoUploader {
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void upload(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
+	public synchronized void upload(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
 		if(ftp != null && ftp.isConnected()){
 			int circuitBroker = 5;
 			int current = 0;
@@ -93,7 +93,7 @@ public class PhotoUploader {
 		}
 	}
 
-	public boolean upload(File file) throws IOException, NoSuchAlgorithmException{
+	public synchronized boolean upload(File file) throws IOException, NoSuchAlgorithmException{
 		if(ftp != null && ftp.isConnected()){
 			int circuitBroker = 5;
 			while(circuitBroker > 0){
@@ -144,7 +144,7 @@ public class PhotoUploader {
 		return false;		
 	}
 
-	public boolean isConnected(){
+	public synchronized boolean isConnected(){
 		if(this.ftp != null){
 			return this.ftp.isConnected();
 		}else{
@@ -152,7 +152,7 @@ public class PhotoUploader {
 		}
 	}
 
-	public boolean disconnect() throws IOException{
+	public synchronized boolean disconnect() throws IOException{
 		if(this.ftp != null && this.ftp.isConnected()){
 			this.ftp.disconnect();
 			return true;
@@ -160,7 +160,7 @@ public class PhotoUploader {
 		return false;
 	}
 
-	private void connect() throws IOException, FTPException, NoSuchAlgorithmException{
+	private synchronized void connect() throws IOException, FTPException, NoSuchAlgorithmException{
 		ftp = new FTPClient();
 		ftp.setRemoteVerificationEnabled(false);
 		ftp.addProtocolCommandListener(new PrintCommandListener(
