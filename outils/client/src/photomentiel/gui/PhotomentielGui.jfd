@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_20" class="java.beans.XMLDecoder"> 
  <object class="com.jformdesigner.model.FormModel"> 
   <void property="contentType"> 
    <string>form/swing</string> 
@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class> 
        <void method="setProperty"> 
         <string>$horizontalGroup</string> 
-        <string>par l {seq {space :::p, par l {comp sepFichier::l::422:x, comp spConsole::l::422:x, comp sepConnexion::l::422:x, seq {par l:::p {seq {comp labelLogin:::p::p, space :p:34:p, comp tfLogin:::p:157:p:1}, seq l:::1 {comp labelPwd:::p::p, space u:::p, comp jpPwd:::::x}}, space :p:33:p, par l {seq t {comp labelConnexion:::p::p, space ::22:x, comp labelEtatConnexion:::p:74:p}, comp buttonConnexion::l::172:x}}, comp sepConsole::l::422:x, seq l {comp buttonFichier:::p::p, space u:::p, comp labelUpEnCours:::p::p, space u:::p, comp labelPourcentage::::68:x}, seq t {comp labelAvancement:::p::p, space ::17:x, comp progressBar1:::p:341:p}}, space :::p}}</string> 
+        <string>par l {seq t {space :::p, par t {comp spConsole::l::509:x, comp sepFichier::l::509:x:1, comp sepConnexion::l::509:x, seq l {par l:::p {seq {comp labelLogin:::p::p, space :p:34:p, comp tfLogin:::p:157:p:1}, seq l:::1 {comp labelPwd:::p::p, space u:::p, comp jpPwd:::::x}}, space :p:33:p, par t {comp labelEtatConnexion::::251:x, comp buttonConnexion::l::251:x}}, seq l {comp buttonFichier:::p:166:p, space :::p, par l {seq {comp labelEtatUpload::::274:x, space :::p, comp labelUploadIcon:::p:44:p, space :p:8:p}, comp labelFichierEnCours::::332:x}}, seq l {comp labelAvancement:::p::p, space :p:18:p, comp pbAvancement::::328:x, space :::p, comp labelPourcentage:::p:70:p}, comp sepConsole::t::509:x}, space :::p}}</string> 
        </void> 
        <void method="setProperty"> 
         <string>$verticalGroup</string> 
-        <string>par l {seq l {space :::p, comp sepConnexion:::p::p, space :::p, par b {comp labelLogin::b:p::p, comp tfLogin::b:p::p, comp buttonConnexion::b:p::p}, space :::p, par b {comp labelPwd::b:p::p, comp jpPwd::b:p::p, comp labelEtatConnexion::b:p::p, comp labelConnexion::b:p::p}, space u:::p, comp sepFichier:::p::p, space :::p, par b {comp buttonFichier::b:p:36:p, comp labelUpEnCours::b:p::p, comp labelPourcentage::b:p::p}, space ::13:x, par l {comp progressBar1:::p::p, comp labelAvancement:::p::p}, space :::p, comp sepConsole:::p::p, space :::p, comp spConsole:::p:103:p, space :::p}}</string> 
+        <string>par l {seq {space :::p, comp sepConnexion:::p::p, space :::p, par b {comp labelLogin::b:p::p, comp tfLogin::b:p::p, comp buttonConnexion::b:p::p}, space :::p, par b {comp labelPwd::b:p::p, comp jpPwd::b:p::p, comp labelEtatConnexion::b:p::p}, space u:::p, comp sepFichier:::p::p, space :p:6:p, par l {seq {comp labelEtatUpload:::p::p, space u:::p, comp labelFichierEnCours:::p:24:p}, comp buttonFichier:::p:36:p, comp labelUploadIcon:::p:18:p}, space u:::p, par l {comp pbAvancement::l:p::p, comp labelPourcentage::l:p::p, comp labelAvancement:::p::p}, space :::p, comp sepConsole:::p::p, space :::p, comp spConsole::::103:x, space :::p}}</string> 
        </void> 
       </object> 
       <void method="setProperty"> 
@@ -69,7 +69,7 @@
         <string>javax.swing.JButton</string> 
         <void method="setProperty"> 
          <string>text</string> 
-         <string>se connecter</string> 
+         <string>Se Connecter</string> 
         </void> 
         <void property="name"> 
          <string>buttonConnexion</string> 
@@ -89,18 +89,6 @@
           <string>buttonConnexionActionPerformed</string> 
           <boolean>true</boolean> 
          </object> 
-        </void> 
-       </object> 
-      </void> 
-      <void method="add"> 
-       <object class="com.jformdesigner.model.FormComponent"> 
-        <string>javax.swing.JLabel</string> 
-        <void method="setProperty"> 
-         <string>text</string> 
-         <string>Etat connexion:</string> 
-        </void> 
-        <void property="name"> 
-         <string>labelConnexion</string> 
         </void> 
        </object> 
       </void> 
@@ -188,7 +176,7 @@
         <string>javax.swing.JButton</string> 
         <void method="setProperty"> 
          <string>text</string> 
-         <string>Choisir répertoire/fichiers</string> 
+         <string>Choisir Fichiers</string> 
         </void> 
         <void method="setProperty"> 
          <string>font</string> 
@@ -198,8 +186,20 @@
           <int>16</int> 
          </object> 
         </void> 
+        <void method="setProperty"> 
+         <string>toolTipText</string> 
+         <string>Selectionner les fichiers à envoyer sur www.photomentiel.fr</string> 
+        </void> 
         <void property="name"> 
          <string>buttonFichier</string> 
+        </void> 
+        <void method="addEvent"> 
+         <object class="com.jformdesigner.model.FormEvent"> 
+          <string>java.awt.event.ActionListener</string> 
+          <string>actionPerformed</string> 
+          <string>buttonFichierActionPerformed</string> 
+          <boolean>true</boolean> 
+         </object> 
         </void> 
        </object> 
       </void> 
@@ -208,7 +208,7 @@
         <string>javax.swing.JLabel</string> 
         <void method="setProperty"> 
          <string>text</string> 
-         <string>Upload en cours:</string> 
+         <string>Pas d&apos;upload en cours</string> 
         </void> 
         <void method="setProperty"> 
          <string>font</string> 
@@ -218,8 +218,12 @@
           <int>16</int> 
          </object> 
         </void> 
+        <void method="setProperty"> 
+         <string>horizontalAlignment</string> 
+         <int>0</int> 
+        </void> 
         <void property="name"> 
-         <string>labelUpEnCours</string> 
+         <string>labelEtatUpload</string> 
         </void> 
        </object> 
       </void> 
@@ -238,6 +242,14 @@
           <int>16</int> 
          </object> 
         </void> 
+        <void method="setProperty"> 
+         <string>toolTipText</string> 
+         <string>Avancement</string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>horizontalAlignment</string> 
+         <int>4</int> 
+        </void> 
         <void property="name"> 
          <string>labelPourcentage</string> 
         </void> 
@@ -247,7 +259,7 @@
        <object class="com.jformdesigner.model.FormComponent"> 
         <string>javax.swing.JProgressBar</string> 
         <void property="name"> 
-         <string>progressBar1</string> 
+         <string>pbAvancement</string> 
         </void> 
        </object> 
       </void> 
@@ -263,6 +275,30 @@
         </void> 
        </object> 
       </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>horizontalAlignment</string> 
+         <int>0</int> 
+        </void> 
+        <void property="name"> 
+         <string>labelFichierEnCours</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>horizontalAlignment</string> 
+         <int>0</int> 
+        </void> 
+        <void property="name"> 
+         <string>labelUploadIcon</string> 
+        </void> 
+       </object> 
+      </void> 
       <void property="name"> 
        <string>photomentielFrame</string> 
       </void> 
@@ -272,15 +308,15 @@
       <void method="setProperty"> 
        <string>location</string> 
        <object class="java.awt.Point"> 
-        <int>45</int> 
-        <int>0</int> 
+        <int>65</int> 
+        <int>15</int> 
        </object> 
       </void> 
       <void method="setProperty"> 
        <string>size</string> 
        <object class="java.awt.Dimension"> 
-        <int>450</int> 
-        <int>350</int> 
+        <int>545</int> 
+        <int>370</int> 
        </object> 
       </void> 
      </object> 

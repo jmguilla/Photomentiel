@@ -6,6 +6,8 @@ package photomentiel.gui;
 
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -13,6 +15,7 @@ import java.io.PipedOutputStream;
 import java.io.PrintStream;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -24,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -36,16 +40,25 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
  */
 public class PhotomentielGui  {
 
-	public void initComponents(Controler model) {
+	private Controler controler;
+
+	private void buttonConnexionActionPerformed(ActionEvent ae) {
+		this.controler.actionPerformed(ae);
+	}
+
+	private void buttonFichierActionPerformed(ActionEvent e) {
+		this.controler.actionPerformed(e);
+	}
+
+	public void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - Jean-Michel Guillaume
+		// Generated using JFormDesigner Evaluation license - Sophie Leger
 		DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
 		photomentielFrame = new JFrame();
 		labelLogin = new JLabel();
 		labelPwd = new JLabel();
 		tfLogin = new JTextField();
 		buttonConnexion = new JButton();
-		labelConnexion = new JLabel();
 		labelEtatConnexion = new JLabel();
 		spConsole = new JScrollPane();
 		taConsole = new JTextArea();
@@ -54,10 +67,12 @@ public class PhotomentielGui  {
 		sepFichier = compFactory.createSeparator("Fichiers");
 		sepConsole = compFactory.createSeparator("Console");
 		buttonFichier = new JButton();
-		labelUpEnCours = new JLabel();
+		labelEtatUpload = new JLabel();
 		labelPourcentage = new JLabel();
 		pbAvancement = new JProgressBar();
 		labelAvancement = new JLabel();
+		labelFichierEnCours = new JLabel();
+		labelUploadIcon = new JLabel();
 
 		//======== photomentielFrame ========
 		{
@@ -73,11 +88,14 @@ public class PhotomentielGui  {
 			labelPwd.setText("password:");
 
 			//---- buttonConnexion ----
-			buttonConnexion.setText("se connecter");
-			buttonConnexion.addActionListener(model);
-
-			//---- labelConnexion ----
-			labelConnexion.setText("Etat connexion:");
+			buttonConnexion.setText("Se Connecter");
+			buttonConnexion.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					buttonConnexionActionPerformed(e);
+					buttonConnexionActionPerformed(e);
+				}
+			});
 
 			//---- labelEtatConnexion ----
 			labelEtatConnexion.setText("d\u00e9connect\u00e9");
@@ -91,36 +109,47 @@ public class PhotomentielGui  {
 			}
 
 			//---- buttonFichier ----
-			buttonFichier.setText("Choisir fichiers");
+			buttonFichier.setText("Choisir Fichiers");
 			buttonFichier.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			buttonFichier.setEnabled(false);
-			buttonFichier.addActionListener(model);
+			buttonFichier.setToolTipText("Selectionner les fichiers \u00e0 envoyer sur www.photomentiel.fr");
+			buttonFichier.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					buttonFichierActionPerformed(e);
+				}
+			});
 
-			//---- labelUpEnCours ----
-			labelUpEnCours.setText("Upload en cours:");
-			labelUpEnCours.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			//---- labelEtatUpload ----
+			labelEtatUpload.setText("Pas d'upload en cours");
+			labelEtatUpload.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			labelEtatUpload.setHorizontalAlignment(SwingConstants.CENTER);
 
 			//---- labelPourcentage ----
 			labelPourcentage.setText("0/0");
 			labelPourcentage.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			labelPourcentage.setToolTipText("Avancement");
+			labelPourcentage.setHorizontalAlignment(SwingConstants.RIGHT);
 
 			//---- labelAvancement ----
 			labelAvancement.setText("Avancement:");
 
-			//---- pbAvancement ----
-			pbAvancement.setMaximum(100);
+			//---- labelFichierEnCours ----
+			labelFichierEnCours.setHorizontalAlignment(SwingConstants.CENTER);
+
+			//---- labelUploadIcon ----
+			labelUploadIcon.setHorizontalAlignment(SwingConstants.CENTER);
 
 			GroupLayout photomentielFrameContentPaneLayout = new GroupLayout(photomentielFrameContentPane);
 			photomentielFrameContentPane.setLayout(photomentielFrameContentPaneLayout);
 			photomentielFrameContentPaneLayout.setHorizontalGroup(
 				photomentielFrameContentPaneLayout.createParallelGroup()
-					.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, photomentielFrameContentPaneLayout.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
-							.addComponent(sepFichier, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-							.addComponent(spConsole, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-							.addComponent(sepConnexion, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-							.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+							.addComponent(spConsole, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+							.addComponent(sepFichier, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+							.addComponent(sepConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
 								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 									.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
 										.addComponent(labelLogin)
@@ -131,23 +160,26 @@ public class PhotomentielGui  {
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(jpPwd)))
 								.addGap(33, 33, 33)
+								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+									.addComponent(labelEtatConnexion, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+									.addComponent(buttonConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
+							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
+								.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
-									.addGroup(GroupLayout.Alignment.TRAILING, photomentielFrameContentPaneLayout.createSequentialGroup()
-										.addComponent(labelConnexion)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-										.addComponent(labelEtatConnexion, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-									.addComponent(buttonConnexion, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
-							.addComponent(sepConsole, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-							.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-								.addComponent(buttonFichier)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(labelUpEnCours)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(labelPourcentage, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-							.addGroup(GroupLayout.Alignment.TRAILING, photomentielFrameContentPaneLayout.createSequentialGroup()
+									.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+										.addComponent(labelEtatUpload, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+										.addGap(8, 8, 8))
+									.addComponent(labelFichierEnCours, GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)))
+							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
 								.addComponent(labelAvancement)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-								.addComponent(pbAvancement, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)))
+								.addGap(18, 18, 18)
+								.addComponent(pbAvancement, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(labelPourcentage, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+							.addComponent(sepConsole, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
 						.addContainerGap())
 			);
 			photomentielFrameContentPaneLayout.setVerticalGroup(
@@ -164,41 +196,41 @@ public class PhotomentielGui  {
 						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(labelPwd)
 							.addComponent(jpPwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelEtatConnexion)
-							.addComponent(labelConnexion))
+							.addComponent(labelEtatConnexion))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(sepFichier, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addGap(6, 6, 6)
+						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
+							.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+								.addComponent(labelEtatUpload)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+								.addComponent(labelFichierEnCours, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 							.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelUpEnCours)
-							.addComponent(labelPourcentage))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+							.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
 							.addComponent(pbAvancement, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelPourcentage)
 							.addComponent(labelAvancement))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(sepConsole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(spConsole, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+						.addComponent(spConsole, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
 						.addContainerGap())
 			);
-			this.setOutputRedirection();
 			photomentielFrame.pack();
 			photomentielFrame.setLocationRelativeTo(photomentielFrame.getOwner());
-			photomentielFrame.setVisible(true);
 		}
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Jean-Michel Guillaume
+	// Generated using JFormDesigner Evaluation license - Sophie Leger
 	private JFrame photomentielFrame;
 	private JLabel labelLogin;
 	private JLabel labelPwd;
 	private JTextField tfLogin;
 	private JButton buttonConnexion;
-	private JLabel labelConnexion;
 	private JLabel labelEtatConnexion;
 	private JScrollPane spConsole;
 	private JTextArea taConsole;
@@ -207,10 +239,12 @@ public class PhotomentielGui  {
 	private JComponent sepFichier;
 	private JComponent sepConsole;
 	private JButton buttonFichier;
-	private JLabel labelUpEnCours;
+	private JLabel labelEtatUpload;
 	private JLabel labelPourcentage;
 	private JProgressBar pbAvancement;
 	private JLabel labelAvancement;
+	private JLabel labelFichierEnCours;
+	private JLabel labelUploadIcon;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
 	private JFileChooser fc;
@@ -219,6 +253,13 @@ public class PhotomentielGui  {
     private PipedInputStream piErr;
     private PipedOutputStream poOut;
     private PipedOutputStream poErr;
+
+    public void show(){
+    	this.setOutputRedirection();
+    	this.photomentielFrame.setVisible(true);
+    	this.buttonFichier.setEnabled(false);
+    	this.photomentielFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
     private void setOutputRedirection(){
     	piOut = new PipedInputStream();
@@ -285,27 +326,46 @@ public class PhotomentielGui  {
 	}
 
 	public void connect(){
-		this.labelEtatConnexion.setText("connect\u00e9");
-		this.buttonConnexion.setText("se d\u00e9connecter");
+		this.labelEtatConnexion.setText("Connect\u00e9");
+		this.buttonConnexion.setText("Se D\u00e9connecter");
 		this.buttonFichier.setEnabled(true);
 		this.tfLogin.setEditable(false);
 		this.jpPwd.setEditable(false);
 	}
 
+	public void setUploadEnCours(){
+		this.labelEtatUpload.setText("Upload en cours");
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("loading_icon.gif"));
+		this.labelUploadIcon.setIcon(icon);
+	}
+
+	public void setUploadTermine(){
+		this.labelEtatUpload.setText("Pas d'upload en cours");
+		this.labelUploadIcon.setIcon(null);
+	}
+
 	public void setCurrentUpload(String file){
-		if(file.length() > 10){
-			file = file.substring(0, 10) + "...";
+		if(file.length() > 40){
+			file = file.substring(0, 20) + "[...]" + file.substring(file.length()-15);
 		}
-		this.labelUpEnCours.setText(file);
+		this.labelFichierEnCours.setText(file);
+	}
+
+	public void connectionEnCours(){
+		this.labelEtatConnexion.setText("Connexion en cours...");
 	}
 
 	public void disconnect(){
-		this.labelEtatConnexion.setText("d\u00e9connect\u00e9");
-		this.buttonConnexion.setText("se connecter");
+		this.labelEtatConnexion.setText("D\u00e9connect\u00e9");
+		this.buttonConnexion.setText("Se Connecter");
 		this.buttonFichier.setEnabled(false);
 		this.tfLogin.setEditable(true);
 		this.jpPwd.setEditable(true);
 		this.jpPwd.setText("");
+	}
+
+	public void setControler(Controler controler){
+		this.controler = controler;
 	}
 
 	public void setAvancement(int a){
