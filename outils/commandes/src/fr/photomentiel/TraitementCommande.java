@@ -52,13 +52,17 @@ public class TraitementCommande {
 			pw = new PrintWriter(recap);
 			pw.println("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><title>recapitulatif commande #" + commande.numero + "</title></head>");
 			pw.println("<body>");
-			pw.println("<h3>Destinataire<b>" + commande.addresse.prenom + " " + commande.addresse.nom + "</b></h3>");
+			pw.println("<h3>Destinataire - <b>" + commande.addresse.prenom + " " + commande.addresse.nom + "</b></h3>");
 			pw.println("adresse:");
 			pw.println("<h3>" + commande.addresse.adresse1 + "</h3>");
 			if(commande.addresse.adresse2!=null && !commande.addresse.adresse2.equals("")){
 				pw.println("<h3>" + commande.addresse.adresse2 + "</h3>");
 			}
 			pw.println("<h3>" + String.format("%05d",commande.addresse.codePostal) + " " + commande.addresse.ville + "</h3>");
+			for(LigneCommande lc : commande.lignes){
+				pw.println("<h4>" + lc.photo + " - " + lc.dimension + "<img height=\"10%\" width=\"10%\" src=\"" + lc.photo + "\"/></h4>");
+			}
+			pw.println("</body></html>");
 		} catch (FileNotFoundException e) {
 			throw new TraitementCommandeException("Impossible de générer le fichier de récap " + dest.getAbsoluteFile() + File.separator + "index.html", e);
 		}finally{
