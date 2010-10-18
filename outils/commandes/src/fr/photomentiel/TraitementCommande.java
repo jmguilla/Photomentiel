@@ -29,7 +29,7 @@ public class TraitementCommande {
 			}
 		}
 		for(LigneCommande ligne : commande.lignes){
-			File source = new File(reps + File.separator + commande.homePhotographe + File.separator + ligne.photo);
+			File source = new File(reps + File.separator + commande.homePhotographe + File.separator + commande.stringID + File.separator + ligne.photo);
 			if(!source.exists()){
 				throw new TraitementCommandeException("La photo " + source.getAbsolutePath() + " n'existe pas");
 			}
@@ -50,15 +50,15 @@ public class TraitementCommande {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(recap);
-			pw.println("<html><head><title>recapitulatif commande #" + commande.numero + "</title></head>");
+			pw.println("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><title>recapitulatif commande #" + commande.numero + "</title></head>");
 			pw.println("<body>");
 			pw.println("<h3>Destinataire<b>" + commande.addresse.prenom + " " + commande.addresse.nom + "</b></h3>");
 			pw.println("adresse:");
-			pw.println("<h3>" + commande.addresse.adresse1);
+			pw.println("<h3>" + commande.addresse.adresse1 + "</h3>");
 			if(commande.addresse.adresse2!=null && !commande.addresse.adresse2.equals("")){
 				pw.println("<h3>" + commande.addresse.adresse2 + "</h3>");
 			}
-			pw.println("<h3>" + String.format("%05d",commande.addresse.codePostal) + " " + commande.addresse.ville);
+			pw.println("<h3>" + String.format("%05d",commande.addresse.codePostal) + " " + commande.addresse.ville + "</h3>");
 		} catch (FileNotFoundException e) {
 			throw new TraitementCommandeException("Impossible de générer le fichier de récap " + dest.getAbsoluteFile() + File.separator + "index.html", e);
 		}finally{

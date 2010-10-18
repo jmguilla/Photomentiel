@@ -7,10 +7,12 @@ public class Commande {
 	public final Adresse addresse;
 	public final String homePhotographe;
 	public final String numero;
-	public Commande(ArrayList<LigneCommande> lignes, Adresse addresse, String numero, String hp){
+	public final String stringID;
+	public Commande(ArrayList<LigneCommande> lignes, Adresse addresse, String numero, String hp, String sid){
 		this.lignes = lignes;
 		this.addresse = addresse;
 		this.numero = numero;
 		this.homePhotographe = hp;
+		this.stringID = sid;
 	}
 }

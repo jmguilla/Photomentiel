@@ -29,7 +29,8 @@ public class ProcesseurXML {
 			ArrayList<LigneCommande> lignes = this.buildLignes(document);
 			String numero = this.getNumero(document);
 			String hp = this.getHomePhotographe(document);
-			return new Commande(lignes, adresse, numero, hp);
+			String sid = this.getStringID(document);
+			return new Commande(lignes, adresse, numero, hp, sid);
 		} catch (ParserConfigurationException e) {
 			throw new TraitementCommandeException("Aucun processeur xml trouvé", e);
 		} catch (SAXException e) {
@@ -37,6 +38,11 @@ public class ProcesseurXML {
 		} catch (IOException e) {
 			throw new TraitementCommandeException("Fichier " + commande.getAbsolutePath() + " non trouvé", e);
 		}
+	}
+
+	private String getStringID(Document document) {
+		Element root = document.getDocumentElement();
+		return root.getAttribute("stringID");
 	}
 
 	private String getHomePhotographe(Document document) {
