@@ -61,27 +61,27 @@ include("header.php");
 		</div>
 		  <div class="question"><a name="5"></a>Puis-je utiliser une photographie achetée sur www.photomentiel.fr à des fins commerciales (prospectus, flyer, carte de voeux, site web, ...) ?</div>
 		<div class="answer">
-		  <span class="start"></span>Non, pas en l'état. En utilisant les services de www.photomentiel.fr vous reconnaissez accepter les <a href=cgu.php>Conditions d'utilisation</a> qui stipule que les photographies mise à disposition par www.photomentiel.fr le sont pour un ordre privé et familiale uniquement. Nous vous invitons à rentrer en contact avec le photographe qui detient les droits de la photographie afin de convenir un accord.
+		  <span class="start"></span>Non, pas en l'état. En utilisant les services de www.photomentiel.fr vous reconnaissez accepter les <a href=cgu.php>Conditions d'utilisation</a> qui stipulent que les photographies mises à disposition par www.photomentiel.fr le sont pour un ordre privé et familiale uniquement. Nous vous invitons à rentrer en contact avec le photographe qui detient les droits de la photographie afin de convenir d'un accord.
 		</div>
 		  <div class="question"><a name="6"></a>Mais ce sont des photographies de moi, je peux quand même les mettre sur mon blog ?</div>
 		<div class="answer">
-		  <span class="start"></span>Même si vous étes le sujet de la photographie, vous n'en detenez pas la propriété intellectuelle. Dés lors que votre blog à une visée privée et/ou familiale, vous étes autorisé à utiliser la photographie. Dans le cas contraire merci de valider l'utilisation avec le photographe.
+		  <span class="start"></span>Même si vous êtes le sujet de la photographie, vous n'en detenez pas la propriété intellectuelle. Dès lors que votre blog à une visée privée et/ou familiale, vous êtes autorisé à utiliser la photographie. Dans le cas contraire merci de valider l'utilisation avec le photographe.
 		</div>
 		<div class="question"><a name="7"></a>Comment rentrer en contact avec le photographe ?</div>
 		<div class="answer">
 		  <span class="start"></span>Chaque photographe dispose d'une fiche de profil accessible depuis l'album via le panneau de gauche. Vous trouverez alors toutes les informations que le photographe décide de partager, dans le cas où aucune information n'est présente, contactez nous via la page <a href=contact.php> contact </a>, nous nous chargerons de transmettre votre requête. 
 		</div>
-		<div class="question"><a name="8"></a>Je ne souhaite pas que des photographies de mes enfants soit disponibles sur Internet.</div>
+		<div class="question"><a name="8"></a>Je ne souhaite pas que des photographies de mes enfants soient disponibles sur Internet.</div>
 		<div class="answer">
-			<span class="start"></span>Bien sur, nous vous comprenons tout à fait, les albums que nous mettons en ligne ne sont pas accessibles aux moteurs de recherche et ne peuvent donc pas être référencé de manière automatique. L'accès à un album de fait au moyen d'un identifiant alpha-numérique de 8 caractères généré aléatoirement, autant dire qu'il y a autant de chance de tomber dessus par hasard que d'être percuté par un asteroïde le jour de son mariage ! Nos conditions d'utilisations stipulent, qu'il est interdit de diffuser publiquement cet identifiant et nous feront valoir cette interdiction à chaque fois que nous constaterons un manquement à cette règle.
+			<span class="start"></span>Bien sur, nous vous comprenons tout à fait, les albums que nous mettons en ligne ne sont pas accessibles aux moteurs de recherche et ne peuvent donc pas être référencés de manière automatique. L'accès à un album se fait au moyen d'un identifiant alpha-numérique de 8 caractères générés aléatoirement, autant dire qu'il y a autant de chance de tomber dessus par hasard que d'être percuté par un asteroïde le jour de son mariage ! Nos conditions d'utilisations stipulent, qu'il est interdit de diffuser publiquement cet identifiant et nous feront valoir cette interdiction à chaque fois que nous constaterons un manquement à cette règle.
 		</div>
 		<div class="question"><a name="9"></a>Une photographie dont je suis le sujet m'indispose, puis-je la faire retirer ?</div>
 		<div class="answer">
-		  <span class="start"></span>Conformément aux lois informatiques, vous étes autorisé à demander le retrait de photographies sur lesquelles vous apparaissez. Pour cela rendez vous à la rubrique <a href=privacy.php> vie privée</a> et remplissez le formulaire. Vous devez impérativement être le sujet principal de la photgraphie ou bien nettement visible pour que votre demande soit prise en compte, merci de votre compréhension. 
+		  <span class="start"></span>Conformément aux lois informatiques, vous êtes autorisé à demander le retrait de photographies sur lesquelles vous apparaissez. Pour cela rendez vous à la rubrique <a href=privacy.php> vie privée</a> et remplissez le formulaire. Vous devez impérativement être le sujet principal de la photographie ou bien nettement visible pour que votre demande soit prise en compte, merci de votre compréhension. 
 		</div>
 		  <div class="question"><a name="10"></a>Mon enfant participe à un tournoi de ping-pong le mois prochain, puis je demander la couverture de cet événement ?</div>
 		<div class="answer">
-		  <span class="start"></span> Oui ! Notre but est de mettre en relation les particuliers désireux de profiter des services de photographes professionnels et les-dits photographes. Pour cela, rendez vous dans la section <a href=events.php> calendrier </a> et, après avoir vérifié que votre événement n'y figure pas déjà, notifiez le au moyen du bouton "Ajouter un événement". Dés lors l'ensemble des photographes sera notifié de la date et du lieu de votre événement. Au moment où l'un d'entre validera sa présence sur cet événement, vous serez notifié par e-mail.
+		  <span class="start"></span> Oui ! Notre but est de mettre en relation les particuliers désireux de profiter des services de photographes professionnels et les-dits photographes. Pour cela, rendez vous dans la section <a href=events.php> calendrier </a> et, après avoir vérifié que votre événement n'y figure pas déjà, notifiez le au moyen du bouton "Ajouter un événement". Dès lors l'ensemble des photographes sera notifié de la date et du lieu de votre événement. Au moment où l'un d'entre eux validera sa présence sur cet événement, vous serez notifié par e-mail.
 		</div>
 		<br/>
 	</div>

@@ -41,11 +41,11 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 		<center><hr/></center>
 		<div class="question"><a name="1"></a>Je suis photographe, si je passe par votre service, qu'est ce que cela va me coûter ?</div> 
 		<div class="answer">
-			<span class="start"></span>D'un certain point de vue rien. En effet vous ne pouvez en aucun cas perdre de l'argent. Nous nous rémunerons en prenant une commission sur la vente de vos photos. Vous gagnerez <?php echo (100-$PERCENT); ?>% de vos ventes dans un premier temps, et cela pourra augmenter au fur et à mesure de votre fidélité et de vos préstations.
+			<span class="start"></span>Absolument rien! Vous serez rémunérés à hauteur de <?php echo (100-$PERCENT); ?>% de vos ventes. Ce pourcentage pourra augmenter au fur et à mesure de votre fidélité et de vos prestations, les <?php echo $PERCENT; ?>% restants étant destinés à rémunérer ce service.
 		</div>
 		<div class="question"><a name="2"></a>Ok, je ne peux rien perdre, mais je pourrais gagner plus ?</div>
 		<div class="answer">
-			<span class="start"></span>Réellement ? Avez vous considéré les coûts de mise à disposition des photographies, le temps nécessaire et le risque ? Et oui le risque puisque dans un tel cas vous êtes obligé d'investir du temps et de l'argent.<br/>
+			<span class="start"></span>Réellement ? Avez-vous considéré les coûts de mise à disposition des photographies, le temps nécessaire et le risque ? Et oui le risque puisque dans un tel cas vous êtes obligé d'investir du temps et de l'argent.<br/>
 			En participant à l'aventure <b>Photomentiel</b>, vous ne prenez aucun risque, vous bénéficiez d'ailleurs de notre renommée, de notre sérieux et aussi de notre système de notation qui permet aux clients de vous faire confiance parce que nous vous faisons confiance !
 		</div>
 		<div class="question"><a name="3"></a>Pourquoi devrais-je perdre une commission au lieu de mettre ma solution en place ?</div>
