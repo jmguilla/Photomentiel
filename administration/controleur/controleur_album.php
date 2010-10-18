@@ -186,6 +186,11 @@ switch($action){
 		$result = Album::validerListeAlbum(array($album));
 		if($result){
 			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " validé avec succés<br/>";
+			if(!isset($_POST['stringid'])){
+				$_SESSION['message'] .= "Aucun stringid fourni, httppost(rmrf.php) non operationnel.<br/>";
+			}else{
+				httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/rmrf.php","stringID=".$_POST['stringid'], false);
+			}
 		}else{
 			$_SESSION['message'] .= "Un problème est survenue pendant la validation de l'album #" . $album->getAlbumID() . "<br/>";
 		}
