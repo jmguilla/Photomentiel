@@ -88,6 +88,20 @@ function filterEvent(){
 	});
 }
 
+function checkRadio(){
+	var errorRadio = false;
+	var mess = '';
+	$('#rpublic').css('background-image','url(null)');
+	$('#rpublic').html('');
+	if (!$('#public1').attr('checked') && !$('#public2').attr('checked')){
+		errorRadio = true;
+		mess = "\nChoisissez si votre album est privé ou public";
+		$('#rpublic').css('background-image','url(design/misc/unchecked.gif)');
+		$('#rpublic').html('Aucun élément sélectionné');
+	}
+	return { "error" : errorRadio, "mess" : mess };
+}
+
 function validForm(update){
 	$('input[regexp]').each(function() {
 		$('#r'+ this.id).css('background-image','url(null)');
@@ -98,6 +112,10 @@ function validForm(update){
 	var mess = '';
 	//pour tous les champs requis
 	var tmp = checkRequired();
+	error = error || tmp.error;
+	mess += tmp.mess;
+	//pour les champs radio
+	tmp = checkRadio();
 	error = error || tmp.error;
 	mess += tmp.mess;
 	//pour les champs avec une regexp
