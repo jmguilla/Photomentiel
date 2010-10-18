@@ -552,7 +552,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						Comment ça marche ?
 						<ul>
 							<li>Zone 1 : Cette zone représente votre disque dur, choisissez ici le dossier contenant vos photos</li>
-							<li>Zone 2 : Une fois votre dossier de photo sélectionné, cette zone affichera toutes les photos qu'il contient</li>
+							<li>Zone 2 : Une fois votre dossier de photos sélectionné, cette zone affichera toutes les photos qu'il contient</li>
 							<li>Zone 3 : Dans cette zone, sélectionnez le dossier de votre album : <i><?php echo $sid; ?></i></li>
 							<li>Zone 4 : Cette zone représente votre album chez nous. <br/>Pour nous envoyer vos photos, sélectionnez les dans la zone 2 et faites les glisser vers la zone 4<br/>
 							<span class="warning"><u>Attention</u> : pour des raisons de qualité d'impression, seul les <i>jpg</i> et <i>jpeg</i> de plus de 5.5 Million de pixels seront pris en compte</span></li>
