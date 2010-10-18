@@ -43,7 +43,7 @@ class ModeleUtils{
 			return mail($utilisateur->getEmail(),
 			"Photomentiel - Nouvel album disponible !",
 			"Ce message vous a été envoyé suite à votre demande de notification de publication d'un album.\n\n".
-			"Un nouvel album vient d'être publié pour l'événement '" . $evt->getDescription() . "'\n" .
+			"Un nouvel album vient d'être publié pour l'événement '" . htmlspecialchars_decode ($evt->getDescription()) . "'\n" .
 			"Allez vérifier sur www.photomentiel.fr !!\n\n".
 			"Merci d'utiliser photomentiel.fr\n\n\n".
 			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
@@ -60,7 +60,7 @@ class ModeleUtils{
 	     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
 	     	$headers .='Bcc:' . $mails;
 	     	$content = "Ce message vous a été envoyé suite à votre demande de notification de publication d'un album.\n\n";
-	     	$content .= "L'album intitulé '" . $album->getNom() . "' est maintenant disponible !\n";
+	     	$content .= "L'album intitulé '" . htmlspecialchars_decode ($album->getNom()) . "' est maintenant disponible !\n";
 			$content .= "Vous pouvez le consulter dès à présent en vous rendant à l'adresse suivante :\n";
 			if($album->isPublique()){
 				$content .= "http://www.photomentiel.fr/album-".$sid->getStringID().".php\n\n";
