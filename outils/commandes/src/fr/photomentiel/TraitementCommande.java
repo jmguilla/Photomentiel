@@ -23,13 +23,13 @@ public class TraitementCommande {
 		File destDir = new File(reps2.getAbsoluteFile() + File.separator + "commande#" + commande.numero);
 		if(!destDir.exists()){
 			if(!destDir.mkdir()){
-				throw new TraitementCommandeException("Impossible de créer le répertoire de destination " + destDir.getAbsolutePath());
+				throw new TraitementCommandeException("Impossible de crÃ©er le rÃ©pertoire de destination " + destDir.getAbsolutePath());
 			}else{
-				System.out.println("Création du répertoire de destination " + destDir.getAbsolutePath());
+				System.out.println("CrÃ©ation du rÃ©pertoire de destination " + destDir.getAbsolutePath());
 			}
 		}
 		for(LigneCommande ligne : commande.lignes){
-			File source = new File(reps + File.separator + ligne.photo);
+			File source = new File(reps + File.separator + commande.homePhotographe + File.separator + ligne.photo);
 			if(!source.exists()){
 				throw new TraitementCommandeException("La photo " + source.getAbsolutePath() + " n'existe pas");
 			}
@@ -60,7 +60,7 @@ public class TraitementCommande {
 			}
 			pw.println("<h3>" + String.format("%05d",commande.addresse.codePostal) + " " + commande.addresse.ville);
 		} catch (FileNotFoundException e) {
-			throw new TraitementCommandeException("Impossible de générer le fichier de récap " + dest.getAbsoluteFile() + File.separator + "index.html", e);
+			throw new TraitementCommandeException("Impossible de gÃ©nÃ©rer le fichier de rÃ©cap " + dest.getAbsoluteFile() + File.separator + "index.html", e);
 		}finally{
 			if(pw != null) {
 				pw.close();
@@ -77,7 +77,7 @@ public class TraitementCommande {
 			while(( c = reader.read()) != -1){
 				writer.write(c);
 			}
-			System.out.println("Copie effectuée avec succès");
+			System.out.println("Copie effectuÃ©e avec succÃ©s");
 		}finally{
 			writer.close();
 			reader.close();

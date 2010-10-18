@@ -14,7 +14,7 @@ public class Main {
 		File[] reps = traiterParam(args);
 		TraitementCommande tc = new TraitementCommande(reps[0]);
 		tc.traiter(reps[1], reps[2]);
-		System.out.println("Commande traitée avec succès");
+		System.out.println("Commande traitÃ©e avec succÃ¨s");
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class Main {
 			destDir = new File(dest);
 			commandeFile = new File(commande);
 			if(!sourceDir.exists()){
-				throw new TraitementCommandeException("Le répertoire source " + sourceDir.getAbsolutePath() + " n'existe pas");
+				throw new TraitementCommandeException("Le rï¿½pertoire source " + sourceDir.getAbsolutePath() + " n'existe pas");
 			}
 			if(!sourceDir.isDirectory()){
-				throw new TraitementCommandeException("Le fichier " + sourceDir.getAbsolutePath() + " n'est pas un répertoire");
+				throw new TraitementCommandeException("Le fichier " + sourceDir.getAbsolutePath() + " n'est pas un rï¿½pertoire");
 			}
 			if(!destDir.exists()){
 				creerRepertoire(destDir);
@@ -67,13 +67,13 @@ public class Main {
 		if(!parentDir.exists()){
 			creerRepertoire(parentDir);
 		}if(!parentDir.isDirectory()){
-			throw new TraitementCommandeException("Impossible de créer le répertoire de destination " + destDir.getAbsolutePath());
+			throw new TraitementCommandeException("Impossible de crï¿½er le rï¿½pertoire de destination " + destDir.getAbsolutePath());
 		}
 		if(destDir.mkdir()){
-			System.out.println("Répertoire " + destDir.getAbsolutePath() + " créé");
+			System.out.println("Rï¿½pertoire " + destDir.getAbsolutePath() + " crï¿½ï¿½");
 			return;
 		}else{
-			throw new TraitementCommandeException("Impossible de créer le répertoire de destination " + destDir.getAbsolutePath());
+			throw new TraitementCommandeException("Impossible de crï¿½er le rï¿½pertoire de destination " + destDir.getAbsolutePath());
 		}
 	}
 
@@ -81,10 +81,10 @@ public class Main {
 		if(e!=null){
 			System.out.println(e.getMessage());
 		}
-		System.out.println(Main.class.getName() + " [-s répertoire source] [-d répertoire destination] [-f commande]");
-		System.out.println("Par défaut, source et dest valent ., commande vaut commande.xml");
-		System.out.println("Produit un répertoire \"commande#numCommande\" dans le répertoire dest");
-		System.out.println("depuis le fichier xml fourni avec les photos du répertoire source");
-		System.out.println("Si le répertoire destination n'existe pas, il sera créé.");
+		System.out.println(Main.class.getName() + " [-s rï¿½pertoire source] [-d rï¿½pertoire destination] [-f commande]");
+		System.out.println("Par dï¿½faut, source et dest valent ., commande vaut commande.xml");
+		System.out.println("Produit un rï¿½pertoire \"commande#numCommande\" dans le rï¿½pertoire dest");
+		System.out.println("depuis le fichier xml fourni avec les photos du rï¿½pertoire source");
+		System.out.println("Si le rï¿½pertoire destination n'existe pas, il sera crï¿½ï¿½.");
 	}
 }

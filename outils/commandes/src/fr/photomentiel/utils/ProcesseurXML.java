@@ -28,14 +28,20 @@ public class ProcesseurXML {
 			Adresse adresse = this.buildAdresse(document);
 			ArrayList<LigneCommande> lignes = this.buildLignes(document);
 			String numero = this.getNumero(document);
-			return new Commande(lignes, adresse, numero);
+			String hp = this.getHomePhotographe(document);
+			return new Commande(lignes, adresse, numero, hp);
 		} catch (ParserConfigurationException e) {
-			throw new TraitementCommandeException("Aucun processeur xml trouvé", e);
+			throw new TraitementCommandeException("Aucun processeur xml trouvÃ©", e);
 		} catch (SAXException e) {
 			throw new TraitementCommandeException("XML Invalide", e);
 		} catch (IOException e) {
-			throw new TraitementCommandeException("Fichier " + commande.getAbsolutePath() + " non trouvé", e);
+			throw new TraitementCommandeException("Fichier " + commande.getAbsolutePath() + " non trouvÃ©", e);
 		}
+	}
+
+	private String getHomePhotographe(Document document) {
+		Element root = document.getDocumentElement();
+		return root.getAttribute("homePhotographe");
 	}
 
 	private String getNumero(Document document) {
@@ -61,7 +67,7 @@ public class ProcesseurXML {
 			}
 			return result;
 		}catch(Exception e){
-			throw new TraitementCommandeException("Impossible de créer la commande", e);
+			throw new TraitementCommandeException("Impossible de crï¿½er la commande", e);
 		}
 	}
 
@@ -99,7 +105,7 @@ public class ProcesseurXML {
 						}
 					}
 					if(prenom == null || nom == null || adresse1 == null || ville == null || cp < 0){
-						throw new TraitementCommandeException("Impossible de créer l'adresse. Informations manquantes");
+						throw new TraitementCommandeException("Impossible de crï¿½er l'adresse. Informations manquantes");
 					}else{
 						return new Adresse(prenom, nom, adresse1, adresse2, cp, ville);
 					}
@@ -108,8 +114,8 @@ public class ProcesseurXML {
 		}catch(TraitementCommandeException e){
 			throw e;
 		}catch(Exception e){
-			throw new TraitementCommandeException("Impossible de créer la commande", e);
+			throw new TraitementCommandeException("Impossible de crï¿½er la commande", e);
 		}
-		throw new TraitementCommandeException("Aucune adresse trouvée");
+		throw new TraitementCommandeException("Aucune adresse trouvï¿½e");
 	}
 }
