@@ -226,7 +226,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				<td height="25px">
 					Album public ? : 
 				</td><td>
-					<input type="radio" id="public1" name="public" value="0" checked="true"/> Non (Album privé)
+					<input type="radio" id="public1" name="public" value="0"/> Non (Album privé)
 					<input type="radio" id="public2" name="public" value="1"/> Oui (Album public)
 				</td><td>
 					<div class="checkform" id="rpublic"></div>
