@@ -90,7 +90,6 @@ public class PhotomentielGui  {
 			//---- buttonConnexion ----
 			buttonConnexion.setText("Se Connecter");
 			buttonConnexion.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					buttonConnexionActionPerformed(e);
 					buttonConnexionActionPerformed(e);
@@ -113,7 +112,6 @@ public class PhotomentielGui  {
 			buttonFichier.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			buttonFichier.setToolTipText("Selectionner les fichiers \u00e0 envoyer sur www.photomentiel.fr");
 			buttonFichier.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					buttonFichierActionPerformed(e);
 				}

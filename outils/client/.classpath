@@ -5,6 +5,6 @@
 	<classpathentry kind="lib" path="lib/commons-net-ftp-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/forms.jar"/>
 	<classpathentry kind="lib" path="lib/swing-layout.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_18"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

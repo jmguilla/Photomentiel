@@ -26,7 +26,6 @@ public class Controler implements ActionListener{
 		this.stringID =sid;
 	}
 
-	@Override
 	public void actionPerformed(final ActionEvent ae) {
 		TimerTask tt = new TimerTask(){
 			public void run(){
