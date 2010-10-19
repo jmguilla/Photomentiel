@@ -2,13 +2,35 @@
 $dir_transactioniddao_class_php = dirname(__FILE__);
 include_once $dir_transactioniddao_class_php . "/../../Config.php";
 include_once $dir_transactioniddao_class_php . "/daophp5/DAO.class.php";
+include_once $dir_transactioniddao_class_php . "/../../controleur/ControleurUtils.class.php";
 
 class TransactionIDDAO extends DAO {
 	public function __construct() {
 		$dsn = DBTYPE."://".DBUSER.":".DBPWD."@".DBHOST."/".DBPHOTOMENTIEL;
 		parent::__construct($dsn);
 	}
+	public function lockTableGet(){
+		$query = "lock tables transactionID write";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function unlockTable(){
+		$query = "unlock tables";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function get(){
+		if(!$this->lockTableGet()){
+			ControleurUtils::addError("Impossible de locker la table transactionID pdt get", true);
+		}
 		$query = "select * from transactionID";
 		$this->startTransaction();
 		$tmp = $this->retrieve($query);
@@ -29,9 +51,15 @@ class TransactionIDDAO extends DAO {
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() == 1){
 			$this->commit();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible de unlocker la table transactionID pdt get sur succes", true);
+			}
 			return $transactionID;
 		}else{
 			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible de unlocker la table transactionID pdt get sur echec", true);
+			}
 			return false;
 		}
 	}	
