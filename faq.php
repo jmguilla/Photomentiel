@@ -40,7 +40,7 @@ include("header.php");
 		<center><hr/></center>
 		<div class="question"><a name="1"></a>J'ai reçu une carte de votre site, quelle est la marche à suivre ?</div> 
 		<div class="answer">
-		  <span class="start"></span>Rendez vous sur la <a href="/index.php">page d'accueil</a> et saississez le code inscrit en bas de la carte qui vous a été remise. Vous accèdez alors aux photographies prises lors de l'événement auquel vous avez participé, faites votre sélection et laissez vous guider jusqu'à la phase de paiement. Vous recevrez ensuite les photographies sélectionnées par les services postaux.
+		  <span class="start"></span>Rendez vous sur la <a href="/index.php">page d'accueil</a> et saisissez le code inscrit en bas de la carte qui vous a été remise. Vous accèdez alors aux photographies prises lors de l'événement auquel vous avez participé, faites votre sélection et laissez vous guider jusqu'à la phase de paiement. Vous recevrez ensuite les photographies sélectionnées par les services postaux.
 		</div>
 		<div class="question"><a name="11"></a>Un filigrane est visible au milieu des photos, sera-t-il imprimé sur ma photo papier ? </div> 
 		<div class="answer">
