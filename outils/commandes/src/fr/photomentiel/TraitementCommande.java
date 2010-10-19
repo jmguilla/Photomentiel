@@ -1,5 +1,7 @@
 package fr.photomentiel;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,13 +75,15 @@ public class TraitementCommande {
 	}
 
 	private void copyFile(File source, File dest) throws IOException {
-		FileInputStream reader = new FileInputStream(source);
-		FileOutputStream writer = new FileOutputStream(dest);
+		final int bufferSize = 1024 * 1000;
+		BufferedInputStream reader = new BufferedInputStream(new FileInputStream(source), bufferSize);
+		BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(dest), bufferSize);
+		byte[] buffer = new byte[bufferSize];
 		System.out.println("Copie de " + source.getAbsolutePath() + " vers " + dest.getAbsolutePath());
 		try{
 			int c = -1;
-			while(( c = reader.read()) != -1){
-				writer.write(c);
+			while(( c = reader.read(buffer)) != -1){
+				writer.write(buffer, 0, c);
 			}
 			System.out.println("Copie effectuée avec succés");
 		}finally{
