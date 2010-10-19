@@ -1,6 +1,7 @@
 <?php
 //File to be imported when selecting credit card
 function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albumID){
+	$cmdID = isset($_SESSION['last_command'])?$_SESSION['last_command']:null;
 	$SIREN_JL  = '525329272';
 	$SIREN_JM = '521000018';
 	if ($p_module == $SIREN_JL){
@@ -46,7 +47,9 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//$parm="$parm data=";
 	//$parm="$parm return_context=";
 	//$parm="$parm target=";
-	//$parm="$parm order_id=";
+	if ($cmdID){
+		$parm="$parm order_id=$cmdID";
+	}
 
 	//		Les valeurs suivantes ne sont utilisables qu'en pré-production
 	//		Elles nécessitent l'installation de vos fichiers sur le serveur de paiement
