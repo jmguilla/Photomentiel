@@ -121,3 +121,11 @@ span#displayFullGain {
 	font-weight:normal;
 	text-decoration:none;
 }
+div#indispo {
+	width:96%;
+	text-align:left;
+	padding:5px;
+	font-size:11px;
+	color:darkred;
+}
+

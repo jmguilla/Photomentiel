@@ -73,8 +73,17 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 			<div id="left">
 				<?php
 					if($photographMode) {
+						if (FTP_MAINTENANCE){
 				?>
-				<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
+						<input id="create_album" type="button" class="button" value="Créer un nouvel album" disabled="true"/><br>
+						<div id="indispo">La création d'album est temporairement indisponible. Elle sera rétablie dans les plus brefs délais.</div>
+				<?php
+						} else {
+				?>
+						<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
+				<?php
+						}
+				?>
 				<center><hr id="separator"/><center>
 				<?php
 					}
