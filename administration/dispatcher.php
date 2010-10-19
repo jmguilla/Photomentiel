@@ -32,6 +32,7 @@ switch($action){
 	case commande_expediee:
 	case supprimer_commande:
 	case down_xml:
+	case offrir_commande:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_commande.php";
 	break;
 	case supprimer_evenement:

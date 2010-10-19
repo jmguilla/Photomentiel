@@ -22,6 +22,7 @@ define("down_xml", "download_commande_xml");
 define("commande_expediee", "commande_expediee");
 define("supprimer_commande", "supprimer_commande");
 define("detail_commande", "detail_commande");
+define("offrir_commande", "offrir_commande");
 
 //utilisateur
 define("renvoyer_email_confirmation", "renvoyer_email_confirmation");

@@ -3,6 +3,19 @@ $dir_administration_controleur_commande_php = dirname(__FILE__);
 include_once $dir_administration_controleur_commande_php . "/../../classes/modele/Commande.class.php";
 
 switch($action){
+	case offrir_commande:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id, impossible d'offrir la commande<br/>";
+			break;
+		}
+		$id = $_POST['id'];
+		$commande = Commande::getCommandeDepuisID($id);
+		if($commande->etatSuivant()){
+			$_SESSION['message'] .= "Commande offerte<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible d'offrir la commande<br/>";
+		}
+	break;
 	case detail_commande:
 		$dir_administration_controleur_commande_php = dirname(__FILE__);
 		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/Utilisateur.class.php";
