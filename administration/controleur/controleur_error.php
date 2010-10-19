@@ -13,7 +13,7 @@ switch($action){
 		if($error && $error->delete()){
 			$_SESSION['message'] .= "Error #" . $error->getErrorID() . " supprimee avec succes.<br/>";
 		}else{
-			$_SESSION['message'] .= "Error #" . $error->getErrorID() . " n'a pas ete supprimee.<br/>";
+			$_SESSION['message'] .= "L'error n'a pas ete supprimee.<br/>";
 		}
 	break;
 	default:

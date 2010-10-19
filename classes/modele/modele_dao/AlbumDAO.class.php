@@ -5,6 +5,7 @@ include_once $dir_albumdao_class_php . "/daophp5/DAO.class.php";
 include_once $dir_albumdao_class_php . "/../CreateException.class.php";
 include_once $dir_albumdao_class_php . "/StringIDDAO.class.php";
 include_once $dir_albumdao_class_php . "/PhotographeDAO.class.php";
+include_once $dir_albumdao_class_php . "/../../controleur/ControleurUtils.class.php";
 
 class AlbumDAO extends DAO {
 	public function __construct() {
@@ -574,6 +575,9 @@ class AlbumDAO extends DAO {
 		$filigramme = $album->getFiligramme();
 		//creation album
 		try{
+			if(!$this->lockTableCreateRandomStringID()){
+				ControleurUtils::addError("Impossible de prendre le lock sur stringID pour creer un album", true);
+			}
 			$this->startTransaction();
 			$query = "insert into Album(filigramme, mailing, balance, gainTotal, nom, id_photographe, id_evenement, isPublique, date, etat, module) values ('" . 
 			mysql_real_escape_string($filigramme) . "', '" .
@@ -664,6 +668,9 @@ class AlbumDAO extends DAO {
 			$stringIDOBJ->setHomePhotographe($photographeHome);
 			$stringIDOBJ->setID_Album($lid);			
 			$newStringID = $stringIDOBJ->create();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible d'unlocker stringID a la creation d'un album", true);
+			}
 			if(!$newStringID){
 				$this->rollback();
 				throw new CreateAlbumException('Impossible de créer le nouvel identifiant ' . $stringID . " pour la création de l'album");
@@ -674,6 +681,8 @@ class AlbumDAO extends DAO {
 			}
 		}catch(Exception $e){
 			$this->rollback();
+			ControleurUtils::addError("Une exception est survenue a la creation d'un album\n" . $e->getMessage(), true);
+			$this->unlockTable();
 			throw new CreateAlbumException("Impossible de créer l'album à cause d'une exception: " . $e->getMessage());
 		}
 		$this->commit();		
@@ -893,6 +902,16 @@ class AlbumDAO extends DAO {
 		$evtDAO = new EvenementDAO();
 		$result["Evenement"] = $evtDAO->buildEvenementFromRow($row);
 		return $result;
+	}
+
+	public function lockTableCreateRandomStringID(){
+		$query = "lock tables StringID write, Photographe as p read, Utilisateur as u read, Adresse as a read";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	private function createRandomStringID(){
