@@ -11,7 +11,7 @@ for ($i=0;$i<sizeof($prdPossibleRootDir);$i++) {
 		$prdRootDir = $prdPossibleRootDir[$i];
 	}
 }
-$EVENTS_TYPES=array('Mariage','Evenement Sportif','Shooting Perso','Autre');
+$EVENTS_TYPES=array('Mariage','Evénement Sportif','Shooting Perso','Fête','Autre');
 $COMMAND_STATES=array('En attente','Payée','En cours de préparation','Expédiée','Terminée');
 $ALBUM_STATES=array('Créé','Prêt','Ouvert','Cloturé');
 $MODULES=array('521000018');
