@@ -121,8 +121,8 @@ class ControleurUtils{
 	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
 	     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 	     	$headers .='Content-Transfer-Encoding: 8bit';
-	     	$content = "Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n\n".
-			"Pour votre compte dont l'Email est : ".$utilisateur->getEmail()."\n";
+	     	$content = "Ce message vous a été envoyé suite à votre demande de changement de mot de passe.\n".
+			"Changement de mot de passe pour votre compte dont l'Email est : ".$utilisateur->getEmail()."\n";
 			if($generated){
 				$content .= "Voici votre nouveau mot de passe : ".$mdp."\n\n".
 				"Nous vous recommandons de changer ce mot de passe dans la rubrique mon compte sur www.photomentiel.fr.\n\n";
