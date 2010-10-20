@@ -34,6 +34,7 @@ switch($action){
 		$album = Album::getAlbumDepuisID($_POST['id']);
 		$stringID = StringID::getStringIDDepuisID_Album($_POST['id']);
 		$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
+		$photographe->decOpenFTP();
 		if($album->validerUpload()){
 			$retcode = httpPost(
             "http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php",
@@ -80,6 +81,14 @@ switch($action){
 			break;
 		}
 		$album = Album::getAlbumDepuisID($_POST['id']);
+		if($album->getEtat() == 0){
+			$utilisateur = Photographe::getPhotographeDepuisID($album->getID_Photographe());
+			$utilisateur->decOpenFTP();
+			$retCode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/dec_ftp.php","login=".$utilisateur->getEmail()."&counter=".$utilisateur->getOpenFTP(), false);
+			if($retCode!=0){
+				$_SESSION['message'] .= "Impossible de decrementer le nombre de ftp ouvert pour le photographe #".$utilisateur->getID_Photographe()."<br/>";
+			}
+		}
 		if($album->delete()){
 			$_SESSION['message'] .= "Album #" . $album->getAlbumID() . " supprimé avec success<br/>";
 		}else{

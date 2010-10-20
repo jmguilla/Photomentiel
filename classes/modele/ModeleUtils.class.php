@@ -40,7 +40,7 @@ class ModeleUtils{
 		     	$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
 		     	$headers .='Content-Transfer-Encoding: 8bit' . "\n";
 		     	$headers .='Bcc:' . $mails; 
-			return mail($utilisateur->getEmail(),
+			return mail('',
 			"Photomentiel - Nouvel album disponible !",
 			"Ce message vous a été envoyé suite à votre demande de notification de publication d'un album.\n\n".
 			"Un nouvel album vient d'être publié pour l'événement '" . htmlspecialchars_decode ($evt->getDescription()) . "'\n" .
