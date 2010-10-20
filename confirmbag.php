@@ -295,7 +295,7 @@ if ($utilisateurObj && isset($_POST['payment']) && $_POST['payment'] == 'true'){
 											include("e-transactions/selectcard.php");
 											$albumObj = Album::getAlbumDepuisID(StringID::getStringIDDepuisID($albumStringID)->getID_Album());
 											$transactionID = TransactionID::get();
-											if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
+											if ($transactionID){ $transactionID = sprintf("%06d",$transactionID);}
 											displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commande->getCommandeID());
 										} else {
 											?>

@@ -144,7 +144,7 @@ if ($utilisateurObj && $commandObj){
 									include("e-transactions/selectcard.php");
 									$albumObj = Album::getAlbumDepuisID($commandObj->getID_Album());
 									$transactionID = TransactionID::get();
-									if ($transactionID){ $transactionID = sprintf("%06d",TransactionID::get());}
+									if ($transactionID){ $transactionID = sprintf("%06d",$transactionID);}
 									displayCards($albumObj->getModule(),toBankAmount($total),$transactionID,$utilisateurObj->getUtilisateurID(),$commandObj->getCommandeID());
 								} else {
 									?>
