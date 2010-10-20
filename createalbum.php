@@ -489,7 +489,6 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					echo '<div class="separator10" style="height:50px;"></div>';
 				} else if($albumObj->getEtat() == 2){
 					echo '<div id="catitle2">Votre album est actuellement ouvert à la vente.&nbsp;&nbsp;<a href="viewalbum.php?al='.StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID().'">Aller voir l\'album...</a></div>';
-					echo '<div class="separator10" style="height:150px;"></div>';
 				} else {
 					echo '<div id="catitle3">Votre album a été <u>fermé</u>, il n\'est plus accessible à la vente.<br/>les photos seront supprimées sous peu.</div>';
 					echo '<div class="separator10" style="height:150px;"></div>';
@@ -551,7 +550,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						<img src="/design/fztuto/transfert.png"></img><br/>
 						Comment ça marche ?
 						<ul>
-							<li>Zone 1 : Cette zone représente votre disque dur, choisissez ici le dossier contenant vos photos</li>
+							<li>Zone 1 : Cette zone représente votre disque dur, choisissez ici le dossier contenant vos photos</li>isPubli
 							<li>Zone 2 : Une fois votre dossier de photos sélectionné, cette zone affichera toutes les photos qu'il contient</li>
 							<li>Zone 3 : Dans cette zone, sélectionnez le dossier de votre album : <i><?php echo $sid; ?></i></li>
 							<li>Zone 4 : Cette zone représente votre album chez nous. <br/>Pour nous envoyer vos photos, sélectionnez les dans la zone 2 et faites les glisser vers la zone 4<br/>
@@ -561,6 +560,32 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					</div>
 		<?php		
 					}
+				} else if($albumObj->getEtat() == 2){
+		?>
+					<div id="dl">
+					<?php
+					if ($albumObj->isPublique()){
+					?>
+					Vous pouvez inclure le lien suivant dans votre site web personnel afin de créer un lien vers votre album Photomentiel depuis votre site :
+					<div class="separator5"></div>
+					<font color="darkblue">http://www.photomentiel.fr/viewalbum.php?al=<?php echo $sid; ?></font>
+					<div class="separator2" style="height:50px;"></div>
+					<?php
+					} else {
+					?>
+					Vous pouvez inclure le code suivant dans votre site web personnel afin de créer un lien vers votre album Photomentiel depuis votre site :
+					<div class="separator5"></div>
+<textarea id="code_web" cols="95" rows="5" readonly="true" style="padding:2px;">
+<form method="POST" action="http://www.photomentiel.fr/viewalbum.php">
+	Veuillez entrer le code album : 
+	<input name="al" type="text" maxlength="<?php echo STRINGID_LENGTH; ?>"/>
+	<input type="submit" value="Valider" title="Accéder à l'album" style="width:70px;"/>
+</form></textarea>
+					<?php
+					}
+					?>
+					</div>
+		<?php
 				}
 			}
 		?>
