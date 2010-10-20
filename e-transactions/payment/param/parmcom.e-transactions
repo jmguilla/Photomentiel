@@ -1,8 +1,9 @@
 ###############################################################################
 #
-#	Fichier des parametres E-TRANSACTIONS 
+#	Fichier des parametres E-TRANSACTIONS/MERCANET
 #
 #	Remarque :	Ce fichier parametre est sous la responsabilite du CA
+#			ET/OU de BNPPARIBAS
 #
 ###############################################################################
 
@@ -49,7 +50,7 @@ TARGET!_top!
 
 # Nom du template de la page de paiement e-transactions
 
-TEMPLATE!template_ca_fr!
+#TEMPLATE!template_ca_fr!
 
 # Couleur du text (noir)
 

@@ -22,10 +22,10 @@ DEBUG!NO!
 D_LOGO!/e-transactions/payment/logo/!
 #
 # --------------------------------------------------------------------------
-#  Fichiers parametres lies a l'api e-transactions paiement	
+#  Fichiers parametres lies a l'api e-transactions/mercanet paiement	
 # --------------------------------------------------------------------------
 #
-# fichier des  parametres e-transactions
+# fichier des  parametres e-transactions/mercanet
 #
 F_DEFAULT!/homez.368/photomen/www/e-transactions/payment/param/parmcom.e-transactions!
 #
