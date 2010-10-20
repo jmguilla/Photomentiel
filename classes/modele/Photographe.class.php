@@ -43,9 +43,9 @@ class Photographe extends Utilisateur{
 		return $daoPhotographe->getPhotographeAleatoire();
 	}
 	/** Renvoie tous les photographes */
-	public static function getPhotographes(){
+	public static function getPhotographes($actif = true){
 		$daoPhotographe = new PhotographeDAO();
-		return $daoPhotographe->getPhotographes();
+		return $daoPhotographe->getPhotographes($actif);
 	}
 
 	/**  Renvoie le photographe avec l'ID correspondant */

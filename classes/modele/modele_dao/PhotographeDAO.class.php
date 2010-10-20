@@ -71,8 +71,11 @@ class PhotographeDAO extends UtilisateurDAO{
 		return $this->extractObjectQuery($tmp, $this, "buildUtilisateurFromRow");		
 	}
 
-	public function getPhotographes(){
+	public function getPhotographes($actif = true){
 		$query = "select * from Photographe as p, Utilisateur as u, Adresse as a where p.id_utilisateur = u.utilisateurID and a.id_utilisateur = u.utilisateurID";
+		if($actif){
+			$query .=" and u.actif = true";
+		}
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildUtilisateurFromRow");
 	}
