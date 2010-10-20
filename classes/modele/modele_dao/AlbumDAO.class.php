@@ -1063,7 +1063,7 @@ class AlbumDAO extends DAO {
 		$result = true;
 		foreach($liste as $album){
 			$id_evt = $album->getID_Evenement();
-			if(isset($id_evt)){
+			if($album->isPublique() && isset($id_evt)){
 				$evt = Evenement::getEvenementDepuisID($id_evt);
 				$result &= $evt->envoyerMailing();
 			}
