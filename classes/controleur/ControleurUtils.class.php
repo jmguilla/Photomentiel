@@ -115,7 +115,7 @@ class ControleurUtils{
 		}
 	}
 
-	public static function sendNouveauMDPEmail($utilisateur, $mdp, $generated = true){
+	public static function sendNouveauMDPEmail($utilisateur, $mdp, $generated = false){
 		if($_SERVER['SERVER_ADDR'] != "127.0.0.1"){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n"; 
 	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
