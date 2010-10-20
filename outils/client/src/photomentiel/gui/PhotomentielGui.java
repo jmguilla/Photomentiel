@@ -288,6 +288,7 @@ public class PhotomentielGui  {
             fc.setMultiSelectionEnabled(true);
             fc.addChoosableFileFilter(new ImageFilter());
             fc.setAcceptAllFileFilterUsed(false);
+            fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Add custom icons for file types.
             //fc.setFileView(new ImageFileView());
             //Add the preview pane.

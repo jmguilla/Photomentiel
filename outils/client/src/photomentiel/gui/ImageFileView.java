@@ -38,10 +38,6 @@ import javax.swing.filechooser.*;
 /* ImageFileView.java is used by FileChooserDemo2.java. */
 public class ImageFileView extends FileView {
     ImageIcon jpgIcon = Utils.createImageIcon("images/jpgIcon.gif");
-    ImageIcon gifIcon = Utils.createImageIcon("images/gifIcon.gif");
-    ImageIcon tiffIcon = Utils.createImageIcon("images/tiffIcon.gif");
-    ImageIcon pngIcon = Utils.createImageIcon("images/pngIcon.png");
-
     public String getName(File f) {
         return null; //let the L&F FileView figure this out
     }

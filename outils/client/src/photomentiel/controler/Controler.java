@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,19 +44,17 @@ public class Controler implements ActionListener{
 					}
 				}else if(ae.getActionCommand().equals("Choisir Fichiers")){
 					Controler.this.gui.disableUpload();
-					final File[] files = gui.showFileChooser();
+					final ArrayList<File> files = Controler.this.extractPictures(gui.showFileChooser());
 					if(files != null){
 						Thread toRun = new Thread(){
 							public void run(){
-								ArrayList<File> tmp = new ArrayList<File>();
-								Collections.addAll(tmp, files);
 								gui.setAvancement(0);
-								int total = tmp.size();
+								int total = files.size();
 								int partial = 0;
-								while(tmp.size() > 0){
+								while(files.size() > 0){
 									gui.setUploadEnCours();
 									partial++;
-									File file = tmp.remove(0);
+									File file = files.remove(0);
 									gui.setCurrentUpload(file.getName());
 									gui.setPourcentage(String.valueOf(partial) + "/" + total);
 									try{
@@ -93,8 +90,34 @@ public class Controler implements ActionListener{
 					}
 				}
 			}
+
 		};
 		this.timer.schedule(tt, 0);
+	}
+
+	/**
+	 * To be sure that we only have .jpeg in the parameter
+	 * @param showFileChooser
+	 * @return
+	 */
+	private ArrayList<File> extractPictures(File[] showFileChooser) {
+		ArrayList<File> result = new ArrayList<File>();
+		for(File file : showFileChooser){
+			if(file.isFile() && file.exists()){
+				String name = file.getName();
+				int iddot = name.lastIndexOf(".");
+				String ext = "";
+				if(iddot!=-1){
+					ext = name.substring(iddot);
+				}
+				if(".jpg".equalsIgnoreCase(ext) || ".jpeg".equalsIgnoreCase(ext)){
+					result.add(file);
+				}
+			}else if(file.isDirectory() && file.exists()){
+				result.addAll(this.extractPictures(file.listFiles()));
+			}
+		}
+		return result;
 	}
 
 	/**
