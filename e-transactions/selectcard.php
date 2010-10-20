@@ -57,7 +57,7 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//$parm="$parm normal_return_logo=";
 	//$parm="$parm cancel_return_logo=";
 	//$parm="$parm submit_logo=";
-	$parm="$parm logo_id=logo_id.png";
+	//$parm="$parm logo_id=logo_id.png";
 	//$parm="$parm logo_id2=";
 	$parm="$parm advert=advert.png";
 	//$parm="$parm background_id=";
