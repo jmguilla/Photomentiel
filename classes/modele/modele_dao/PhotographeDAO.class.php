@@ -36,6 +36,9 @@ class PhotographeDAO extends UtilisateurDAO{
 	public function decOpenFTP($ph){
 		$current = $ph->getOpenFTP();
 		$next = $current - 1;
+		if($next < 0){
+			return;
+		}
 		$query = "update Photographe set openftp = " .
 		mysql_real_escape_string($next) . " where photographeID = " .
 		mysql_real_escape_string($ph->getPhotographeID());
