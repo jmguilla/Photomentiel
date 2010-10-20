@@ -130,7 +130,7 @@ class UtilisateurDAO extends DAO{
 	 * @param Utilisateur $utilisateur
 	 * @param string $newMDP
 	 */
-	public function saveMDPEtEnvoyerEmail($utilisateur, $newMDP){
+	public function saveMDPEtEnvoyerEmail($utilisateur, $newMDP, $genere = false){
 		$query = "update Utilisateur set mdp = md5('" . 
 		mysql_real_escape_string($newMDP) . "') where email = '" . 
 		mysql_real_escape_string($utilisateur->getEmail()) . "'";
@@ -139,7 +139,7 @@ class UtilisateurDAO extends DAO{
 		if($tmp && $this->getAffectedRows() >= 0){
 			$dir_utilisateurdao_class_php = dirname(__FILE__);
 			include_once $dir_utilisateurdao_class_php . "/../../controleur/ControleurUtils.class.php";
-			$res = ControleurUtils::sendNouveauMDPEmail($utilisateur, $newMDP, false);
+			$res = ControleurUtils::sendNouveauMDPEmail($utilisateur, $newMDP, $genere);
 			if($res){
 				$this->commit();
 				return md5($newMDP);

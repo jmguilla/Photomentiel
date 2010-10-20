@@ -143,7 +143,7 @@ switch($action){
 		}
 		$user = new Utilisateur();
 		$user->setEmail($email);
-		$res = $user->saveMDPEtEnvoyerEmail($mdp);
+		$res = $user->saveMDPEtEnvoyerEmail($mdp, true);
 		if($res){//on envoie un email avec le nouveau mdp
 			ControleurUtils::serialize_object_json(true, true);
 		}else{

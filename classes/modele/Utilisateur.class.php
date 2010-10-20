@@ -80,9 +80,9 @@ class Utilisateur {
 	 * @param Utilisateur $utilisateur
 	 * @param string $newMDP
 	 */
-	public function saveMDPEtEnvoyerEmail($newMDP){
+	public function saveMDPEtEnvoyerEmail($newMDP, $genere = false){
 		$dao = new UtilisateurDAO();
-		return $dao->saveMDPEtEnvoyerEmail($this, $newMDP);
+		return $dao->saveMDPEtEnvoyerEmail($this, $newMDP, $genere);
 	}
 
 	public static function getUtilisateurs(){
