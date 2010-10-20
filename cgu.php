@@ -166,9 +166,10 @@ include("header.php");
 			<span class="start"></span>Le délai de livraison annoncé ci-aprés est calculé en jours ouvrés (sous réserve de validation de votre commande).
 			La date de livraison est calculée en tenant compte des délais de préparation et d’expédition auxquels est ajouté le délai de livraison du transporteur
 			(La Poste / Transporteur).<br/>
-			<span class="start"></span>Le délai de livraison est en moyenne de 3 à 5 jours ouvrés, mais il dépend aussi du délai d'acheminement de la Poste.<br/>
-			<span class="photomentiel">www.photomentiel.fr</span> ne peut être tenu responsable des retards dûs à l'acheminement de la commande.<br/>
-			Livraison uniquement en France Métropolitaine.
+			<span class="start"></span>Le délai de livraison est en moyenne de 4 à 6 jours ouvrés selon les formats à produire, mais il dépend aussi du délai d'acheminement de la Poste.<br/>
+			<span class="photomentiel">www.photomentiel.fr</span> ne peut être tenu responsable des retards dûs à l'acheminement de la commande par le transporteur.<br/>
+			Livraison uniquement en France Métropolitaine.<br/>
+			<span class="start"></span>Les différents formats commandés peuvent arriver avec des décalages dûs au temps de production des différents supports.
 			<br/>
 			
 			

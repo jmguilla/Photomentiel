@@ -7,3 +7,5 @@ Disallow: /events.php?ev=
 Disallow: /cgu.php
 Disallow: /mentions.php
 Disallow: /privacy.php
+Disallow: /e-transactions/
+

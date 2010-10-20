@@ -152,7 +152,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 									} else {
 										$cmdst = "<b>".$COMMAND_STATES[$commande->getEtat()]."</b>";
 									}
-									echo '<a '.$idi.' class="event" href="viewcommand.php?cmd='.$commande->getCommandeID().'"><div class="event"><span id="date">Date : '.$date_e.'</span><span id="event">Etat : '.$cmdst.'</span><br/>Nombre de photos : '.$nb.' - Prix Total : '.$price.' &#8364;</div></a>';
+									echo '<a '.$idi.' class="event" href="viewcommand.php?cmd='.$commande->getCommandeID().'"><div class="event"><span id="date">Date : '.$date_e.'</span><span id="event">Etat : '.$cmdst.'</span><br/>Nombre de photos : '.$nb.' - Prix Total : '.sprintf('%.2f',$price).' &#8364;</div></a>';
 									$i++;
 								}
 							} else {

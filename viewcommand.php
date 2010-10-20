@@ -171,7 +171,7 @@ if ($utilisateurObj && $commandObj){
 							</div>
 							<div class="<?php echo ($etatc >= 3)?'state_ok':'state'; ?>" id="cmd3">
 								<span class="<?php echo ($etatc >= 3)?'state_title_ok':'state_title'; ?>">Votre commande a été expédiée</span> 
-								<?php if($etatc == 3){echo '(Elle est en cours de livraison par voie postale)';} ?>
+								<?php if($etatc == 3){echo '(Elle est en cours de livraison par voie postale - Les différents formats peuvent arriver séparément.)';} ?>
 							</div>
 							<div class="<?php echo ($etatc >= 4)?'state_ok':'state'; ?>" id="cmd4">
 								<span class="<?php echo ($etatc >= 4)?'state_title_ok':'state_title'; ?>">Votre commande est terminée</span> 
