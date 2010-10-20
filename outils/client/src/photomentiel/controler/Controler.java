@@ -51,6 +51,7 @@ public class Controler implements ActionListener{
 							public void run(){
 								ArrayList<File> tmp = new ArrayList<File>();
 								Collections.addAll(tmp, files);
+								gui.setAvancement(0);
 								int total = tmp.size();
 								int partial = 0;
 								while(tmp.size() > 0){
