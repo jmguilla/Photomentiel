@@ -69,6 +69,8 @@ class Commande{
 		if(!isset($etat)){
 			return false;
 		}
+		$dir_commande_class_php = dirname(__FILE__);
+		include_once $dir_commande_class_php . "/CommandePhoto.class.php";
 		$dao = new CommandeDAO();
 		return $dao->getCommandeEtPhotosDepuisEtat($etat);
 	}
