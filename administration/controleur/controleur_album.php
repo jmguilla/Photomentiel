@@ -34,6 +34,7 @@ switch($action){
 		$album = Album::getAlbumDepuisID($_POST['id']);
 		$stringID = StringID::getStringIDDepuisID_Album($_POST['id']);
 		$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
+		$photographe->decOpenFTP();
 		if($album->validerUpload()){
 			$retcode = httpPost(
             "http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php",
