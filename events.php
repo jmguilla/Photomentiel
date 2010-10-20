@@ -1,5 +1,5 @@
 <?php
-try {
+/*try {*/
 /*
  * events.php displays all events
  * 
@@ -404,8 +404,8 @@ if (isset($_POST['ftype'])){
 <div id="full_content_bot"></div>
 <?php
 include("footer.php");
-}catch (Exception $e){
+/*}catch (Exception $e){
 	echo "Internal server error !";
-}
+}*/
 ?>
 
