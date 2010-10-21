@@ -16,7 +16,7 @@ if($files && count($files) >= 8){
 	}
 	unlink("/homez.368/photomen/cgi-bin/sauvegarde/db/".$toDelete);
 }
-$date = date("d-m-Y");
+$date = date("d-m-Y-c");
 system("mysqldump --host=".DBHOST." --user=".DBUSER." --password=".DBPWD." ".DBPHOTOMENTIEL." > /homez.368/photomen/cgi-bin/sauvegarde/db/save-".$date.".sql");
 
 ?>
