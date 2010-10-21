@@ -422,8 +422,6 @@ public class PhotomentielGui  {
 				}
 			}
 			try {
-				taConsole.append("Impossible de continuer a ecrire sur la console...");
-				taConsole.setCaretPosition(taConsole.getDocument().getLength());
 				isr.close();
 			} catch (IOException e) {
 				//miam miam
