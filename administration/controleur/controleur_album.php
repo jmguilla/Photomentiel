@@ -65,7 +65,7 @@ switch($action){
 				$album = $assoc['Album'];
 				$photo = $assoc['Photographe'];
 				$stringid = $assoc['StringID'];
-				echo '<tr><td>#' . $album->getAlbumID() . '</td><td> - ' . $stringid->getStringID() . '</td><td> - ' . $album->getNom() . '</td><td> - ' . $photo->getAdresse()->getPrenom() . " " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="supprimer"/></form></td></tr>' . "\n";
+				echo '<tr><td>#' . $album->getAlbumID() . '</td><td> - ' . $stringid->getStringID() . '</td><td> - ' . $album->getNom() . '</td><td> - ' . $photo->getAdresse()->getPrenom() . " " . $photo->getAdresse()->getNom() . ' </td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="valider_upload"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="valider upload"/></form></td><td><form method="post" action="dispatcher.php"><input type="hidden" name="action" value="supprimer_album"/><input type="hidden" name="id" value="' . $album->getAlbumID() . '"/><input type="hidden" name="stringid" value="' . $stringid->getStringID() . '"/><input type="submit" onclick="return confirm(\'Confirmez action:\');"  value="supprimer"/></form></td></tr>' . "\n";
 			}
 			echo "</table>";
 			echo '<form action="album.php"><input type="submit" value="retour gestion albums"/></form>' . "\n";
@@ -87,6 +87,10 @@ switch($action){
 			$retCode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/dec_ftp.php","login=".$utilisateur->getEmail()."&counter=".$utilisateur->getOpenFTP(), false);
 			if($retCode!=0){
 				$_SESSION['message'] .= "Impossible de decrementer le nombre de ftp ouvert pour le photographe #".$utilisateur->getID_Photographe()."<br/>";
+			}
+			$retCode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/rmrf.php","stringID=".$_POST['stringid'], false);
+			if($retCode!=0){
+				$_SESSION['message'] .= "Impossible de supprimer le repertoire temporaire sur le serveur<br/>";
 			}
 		}
 		if($album->delete()){
