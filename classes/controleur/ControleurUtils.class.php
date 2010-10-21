@@ -215,6 +215,7 @@ class ControleurUtils{
      		$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($photographe->getEmail(),
 			"Contact Photomentiel",
+			"Un utilisateur vous a envoyé un message (utilisez répondre pour répondre à son adresse mail) :\n\n".
 			$content,
 			$headers
 			);
