@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
@@ -92,7 +93,6 @@ public class PhotomentielGui  {
 			buttonConnexion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonConnexionActionPerformed(e);
-					buttonConnexionActionPerformed(e);
 				}
 			});
 
@@ -140,81 +140,81 @@ public class PhotomentielGui  {
 			GroupLayout photomentielFrameContentPaneLayout = new GroupLayout(photomentielFrameContentPane);
 			photomentielFrameContentPane.setLayout(photomentielFrameContentPaneLayout);
 			photomentielFrameContentPaneLayout.setHorizontalGroup(
-				photomentielFrameContentPaneLayout.createParallelGroup()
+					photomentielFrameContentPaneLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, photomentielFrameContentPaneLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-							.addComponent(spConsole, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-							.addComponent(sepFichier, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-							.addComponent(sepConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
-								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-									.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-										.addComponent(labelLogin)
-										.addGap(34, 34, 34)
-										.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
-									.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-										.addComponent(labelPwd)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(jpPwd)))
-								.addGap(33, 33, 33)
-								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-									.addComponent(labelEtatConnexion, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-									.addComponent(buttonConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
-							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
-								.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
-									.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-										.addComponent(labelEtatUpload, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addGap(8, 8, 8))
-									.addComponent(labelFichierEnCours, GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)))
-							.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
-								.addComponent(labelAvancement)
-								.addGap(18, 18, 18)
-								.addComponent(pbAvancement, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(labelPourcentage, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-							.addComponent(sepConsole, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
-						.addContainerGap())
+							.addContainerGap()
+							.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+									.addComponent(spConsole, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+									.addComponent(sepFichier, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+									.addComponent(sepConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+									.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
+											.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+													.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+															.addComponent(labelLogin)
+															.addGap(34, 34, 34)
+															.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+															.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+																	.addComponent(labelPwd)
+																	.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																	.addComponent(jpPwd)))
+																	.addGap(33, 33, 33)
+																	.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+																			.addComponent(labelEtatConnexion, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+																			.addComponent(buttonConnexion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
+																			.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
+																					.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+																					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+																					.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
+																							.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+																									.addComponent(labelEtatUpload, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+																									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+																									.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+																									.addGap(8, 8, 8))
+																									.addComponent(labelFichierEnCours, GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)))
+																									.addGroup(GroupLayout.Alignment.LEADING, photomentielFrameContentPaneLayout.createSequentialGroup()
+																											.addComponent(labelAvancement)
+																											.addGap(18, 18, 18)
+																											.addComponent(pbAvancement, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+																											.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(labelPourcentage, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+																											.addComponent(sepConsole, GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+																											.addContainerGap())
 			);
 			photomentielFrameContentPaneLayout.setVerticalGroup(
-				photomentielFrameContentPaneLayout.createParallelGroup()
+					photomentielFrameContentPaneLayout.createParallelGroup()
 					.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(sepConnexion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(labelLogin)
-							.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(buttonConnexion))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(labelPwd)
-							.addComponent(jpPwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelEtatConnexion))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(sepFichier, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(6, 6, 6)
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
-							.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
-								.addComponent(labelEtatUpload)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(labelFichierEnCours, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-							.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
-							.addComponent(pbAvancement, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(labelPourcentage)
-							.addComponent(labelAvancement))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(sepConsole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(spConsole, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-						.addContainerGap())
+							.addContainerGap()
+							.addComponent(sepConnexion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(labelLogin)
+									.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(buttonConnexion))
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addGroup(photomentielFrameContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+											.addComponent(labelPwd)
+											.addComponent(jpPwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(labelEtatConnexion))
+											.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+											.addComponent(sepFichier, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addGap(6, 6, 6)
+											.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
+													.addGroup(photomentielFrameContentPaneLayout.createSequentialGroup()
+															.addComponent(labelEtatUpload)
+															.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+															.addComponent(labelFichierEnCours, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+															.addComponent(buttonFichier, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+															.addComponent(labelUploadIcon, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+															.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+															.addGroup(photomentielFrameContentPaneLayout.createParallelGroup()
+																	.addComponent(pbAvancement, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																	.addComponent(labelPourcentage)
+																	.addComponent(labelAvancement))
+																	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+																	.addComponent(sepConsole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+																	.addComponent(spConsole, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+																	.addContainerGap())
 			);
 			photomentielFrame.pack();
 			photomentielFrame.setLocationRelativeTo(photomentielFrame.getOwner());
@@ -247,65 +247,65 @@ public class PhotomentielGui  {
 
 	private JFileChooser fc;
 	private static final String newline = System.getProperty("line.separator");
-    private PipedInputStream piOut;
-    private PipedInputStream piErr;
-    private PipedOutputStream poOut;
-    private PipedOutputStream poErr;
+	private PipedInputStream piOut;
+	private PipedInputStream piErr;
+	private PipedOutputStream poOut;
+	private PipedOutputStream poErr;
 
-    public void show(){
-    	this.setOutputRedirection();
-    	this.photomentielFrame.setVisible(true);
-    	this.buttonFichier.setEnabled(false);
-    	this.photomentielFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+	public void show(){
+		this.setOutputRedirection();
+		this.photomentielFrame.setVisible(true);
+		this.buttonFichier.setEnabled(false);
+		this.photomentielFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
-    private void setOutputRedirection(){
-    	piOut = new PipedInputStream();
-        try {
+	private void setOutputRedirection(){
+		piOut = new PipedInputStream();
+		try {
 			poOut = new PipedOutputStream(piOut);
 		} catch (IOException e) {
 			this.logln("Impossible de cr\u00e9er la console convenablement, des informations n'apparaitront pas.");
 			this.logln("Cause: " + e.getClass() + " - " + e.getMessage());
 		}
-        System.setOut(new PrintStream(poOut, true));
+		System.setOut(new PrintStream(poOut, true));
 
-        // Set up System.err
-        piErr = new PipedInputStream();
-        try {
+		// Set up System.err
+		piErr = new PipedInputStream();
+		try {
 			poErr = new PipedOutputStream(piErr);
 		} catch (IOException e) {
 			this.logln("Impossible de cr\u00e9er la console convenablement, des informations n'apparaitront pas.");
 			this.logln("Cause: " + e.getClass() + " - " + e.getMessage());
 		}
-        System.setErr(new PrintStream(poErr, true));
-        new ReaderThread(piOut).start();
-        new ReaderThread(piErr).start();
-    }
+		System.setErr(new PrintStream(poErr, true));
+		new ReaderThread(piOut).start();
+		new ReaderThread(piErr).start();
+	}
 
 	public File[] showFileChooser(){
-        if (fc == null) {
-            fc = new JFileChooser();
-            fc.setMultiSelectionEnabled(true);
-            fc.addChoosableFileFilter(new ImageFilter());
-            fc.setAcceptAllFileFilterUsed(false);
-            fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            //Add custom icons for file types.
-            //fc.setFileView(new ImageFileView());
-            //Add the preview pane.
-            fc.setAccessory(new ImagePreview(fc));
-        }
-        //Show it.
-        int returnVal = fc.showDialog(this.photomentielFrame,"Envoyer");
+		if (fc == null) {
+			fc = new JFileChooser();
+			fc.setMultiSelectionEnabled(true);
+			fc.addChoosableFileFilter(new ImageFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			//Add custom icons for file types.
+			//fc.setFileView(new ImageFileView());
+			//Add the preview pane.
+			fc.setAccessory(new ImagePreview(fc));
+		}
+		//Show it.
+		int returnVal = fc.showDialog(this.photomentielFrame,"Envoyer");
 
-        //Process the results.
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File[] files = fc.getSelectedFiles();
-            fc.setSelectedFile(null);
-            return files;
-        } else {
-        	fc.setSelectedFile(null);
-        	return null;
-        }
+		//Process the results.
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File[] files = fc.getSelectedFiles();
+			fc.setSelectedFile(null);
+			return files;
+		} else {
+			fc.setSelectedFile(null);
+			return null;
+		}
 	}
 
 	public String getLogin(){
@@ -325,6 +325,8 @@ public class PhotomentielGui  {
 	}
 
 	public void connect(){
+		this.buttonConnexion.setEnabled(true);
+		this.labelUploadIcon.setIcon(null);
 		this.labelEtatConnexion.setText("Connect\u00e9");
 		this.buttonConnexion.setText("Se D\u00e9connecter");
 		this.buttonFichier.setEnabled(true);
@@ -351,16 +353,21 @@ public class PhotomentielGui  {
 	}
 
 	public void connectionEnCours(){
+		this.buttonConnexion.setEnabled(false);
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("loading_icon.gif"));
+		this.labelUploadIcon.setIcon(icon);
 		this.labelEtatConnexion.setText("Connexion en cours...");
 	}
 
 	public void disconnect(){
 		this.labelEtatConnexion.setText("D\u00e9connect\u00e9");
 		this.buttonConnexion.setText("Se Connecter");
+		this.buttonConnexion.setEnabled(true);
 		this.buttonFichier.setEnabled(false);
 		this.tfLogin.setEditable(true);
 		this.jpPwd.setEditable(true);
 		this.jpPwd.setText("");
+		this.labelUploadIcon.setIcon(null);
 	}
 
 	public void setControler(Controler controler){
@@ -384,35 +391,42 @@ public class PhotomentielGui  {
 	}
 
 	class ReaderThread extends Thread {
-		PipedInputStream pi;
+		InputStreamReader isr;
 		ReaderThread(PipedInputStream pi) {
-			this.pi = pi;
+			isr = new InputStreamReader(pi);
 		}
 		public void run() {
-			try {
-				while (true) {
-					final int len = pi.read();
+			int circuitBreaker = 5;
+			final char[] buffer = new char[256];
+			while (true && circuitBreaker > 0) {
+				try {
+					final int len = isr.read(buffer);
 					if (len == -1) {
 						break;
 					}
 					SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
-							taConsole.append(new Character((char)len).toString());
-
-							// Make sure the last line is always visible
+							taConsole.append(String.copyValueOf(buffer, 0, len));
 							taConsole.setCaretPosition(taConsole.getDocument().getLength());
-
-//							// Keep the text area down to a certain character size
-//							int idealSize = 1000;
-//							int maxExcess = 500;
-//							int excess = taConsole.getDocument().getLength() - idealSize;
-//							if (excess >= maxExcess) {
-//								taConsole.replaceRange("", 0, excess);
-//							}
+							//							// Keep the text area down to a certain character size
+							//							int idealSize = 1000;
+							//							int maxExcess = 500;
+							//							int excess = taConsole.getDocument().getLength() - idealSize;
+							//							if (excess >= maxExcess) {
+							//								taConsole.replaceRange("", 0, excess);
+							//							}
 						}
 					});
+				} catch (IOException e) {
+					circuitBreaker--;
 				}
+			}
+			try {
+				taConsole.append("Impossible de continuer a ecrire sur la console...");
+				taConsole.setCaretPosition(taConsole.getDocument().getLength());
+				isr.close();
 			} catch (IOException e) {
+				//miam miam
 			}
 		}
 	}

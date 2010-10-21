@@ -163,8 +163,6 @@ public class PhotoUploader {
 	private synchronized void connect() throws IOException, FTPException, NoSuchAlgorithmException{
 		ftp = new FTPClient();
 		ftp.setRemoteVerificationEnabled(false);
-		ftp.addProtocolCommandListener(new PrintCommandListener(
-				new PrintWriter(System.out)));
 		try {
 			ftp.connect(server, port);
 			int reply = ftp.getReplyCode();
@@ -180,6 +178,8 @@ public class PhotoUploader {
 			}
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			System.out.println("Connect\u00e9 à ftp.photomentiel.fr en tant que " + login);
+			ftp.addProtocolCommandListener(new PrintCommandListener(
+					new PrintWriter(System.out)));
 			String remote = this.stringID;
 			ftp.enterLocalPassiveMode();
 			ftp.changeWorkingDirectory(remote);

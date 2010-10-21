@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import photomentiel.gui.PhotomentielGui;
@@ -40,6 +41,7 @@ public class Controler implements ActionListener{
 							Controler.this.gui.log("Impossible de se connecter" + newline);
 							Controler.this.gui.log("Cause: " + e.getClass() + " - " + e.getMessage());
 							Controler.this.gui.disconnect();
+						    JOptionPane.showMessageDialog(null, "Impossible de se connecter en tant que " + Controler.this.gui.getLogin(), "Photomentiel - Erreur de connexion", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}else if(ae.getActionCommand().equals("Choisir Fichiers")){
@@ -51,6 +53,7 @@ public class Controler implements ActionListener{
 								gui.setAvancement(0);
 								int total = files.size();
 								int partial = 0;
+								ArrayList<File> failed = new ArrayList<File>();
 								while(files.size() > 0){
 									gui.setUploadEnCours();
 									partial++;
@@ -64,6 +67,7 @@ public class Controler implements ActionListener{
 									}catch(Exception e){
 										gui.logln("Impossible d'uploader le fichier: " + file.getName());
 										gui.logln("Cause: " + e.getClass());
+										failed.add(file);
 									}
 									gui.setPourcentage(String.valueOf(partial) + "/" + total);
 									gui.setAvancement((int)((((double)partial)/total) * 100));
@@ -72,6 +76,15 @@ public class Controler implements ActionListener{
 								gui.setCurrentUpload("");
 								gui.logln("Upload termin\u00e9.");
 								gui.enableUpload();
+								if(failed.size()>0){
+									StringBuilder sb = new StringBuilder();
+									sb.append("Impossible d'uploader les fihiers:");
+									for(File fail : failed){
+										sb.append(Controler.newline);
+										sb.append(fail.getName());
+									}
+									JOptionPane.showMessageDialog(null, sb.toString(), "Photomentiel - Erreur d'upload", JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						};
 						toRun.start();
