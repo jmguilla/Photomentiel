@@ -83,10 +83,23 @@ switch($action){
 		$album = Album::getAlbumDepuisID($_POST['id']);
 		if($album->getEtat() == 0){
 			$utilisateur = Photographe::getPhotographeDepuisID($album->getID_Photographe());
-			$utilisateur->decOpenFTP();
-			$retCode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/dec_ftp.php","login=".$utilisateur->getEmail()."&counter=".$utilisateur->getOpenFTP(), false);
-			if($retCode!=0){
-				$_SESSION['message'] .= "Impossible de decrementer le nombre de ftp ouvert pour le photographe #".$utilisateur->getID_Photographe()."<br/>";
+			$sid = StringID::getStringIDDepuisID_Album($album->getAlbumID());
+			if(!$sid){
+				$_SESSION['message'] .= "Impossible de retrouver le sid associe<br/>";
+			}
+			if(!$utilisateur){
+				$_SESSION['message'] .= "Impossible de retrouver le photographe associe<br/>";
+			}
+			if(!$sid || !$utilisateur){
+				$_SESSION['message'] .= "Dec_ftp impossible!!<br/>";
+			}else{
+				if(!$utilisateur->decOpenFTP()){
+					$_SESSION['message'] .= "Impossible de decrementer le counter ftp sur la bd ovh!! le faire a la main!<br/>";
+				}
+				$retCode = httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/dec_ftp.php","login=".$utilisateur->getEmail()."&counter=".$utilisateur->getOpenFTP()."&homePhotograph=".$sid->getHomePhotographe()."&stringID=".$sid->getStringID(), false);
+				if($retCode!=0){
+					$_SESSION['message'] .= "Impossible de decrementer le nombre de ftp ouvert pour le photographe #".$utilisateur->getID_Photographe()."<br/>";
+				}
 			}
 		}
 		if($album->delete()){
