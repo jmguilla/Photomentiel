@@ -563,16 +563,6 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				} else if($albumObj->getEtat() == 2){
 		?>
 					<div id="dl">
-					<?php
-					if ($albumObj->isPublique()){
-					?>
-					Vous pouvez inclure le lien suivant dans votre site web personnel afin de créer un lien vers votre album Photomentiel depuis votre site :
-					<div class="separator5"></div>
-					<font color="darkblue">http://www.photomentiel.fr/viewalbum.php?al=<?php echo $sid; ?></font>
-					<div class="separator2" style="height:50px;"></div>
-					<?php
-					} else {
-					?>
 					Vous pouvez inclure le code suivant dans votre site web personnel afin de créer un lien vers votre album Photomentiel depuis votre site :
 					<div class="separator5"></div>
 <textarea id="code_web" cols="95" rows="5" readonly="true" style="padding:2px;">
@@ -581,6 +571,14 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 	<input name="al" type="text" maxlength="<?php echo STRINGID_LENGTH; ?>"/>
 	<input type="submit" value="Valider" title="Accéder à l'album" style="width:70px;"/>
 </form></textarea>
+					<?php
+					if ($albumObj->isPublique()){
+					?>
+					<div class="separator10"></div>
+					Ou vous pouvez aussi inclure le lien suivant :
+					<div class="separator5"></div>
+					<font color="darkblue">http://www.photomentiel.fr/viewalbum.php?al=<?php echo $sid; ?></font>
+					<div class="separator10"></div>
 					<?php
 					}
 					?>
