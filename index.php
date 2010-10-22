@@ -165,7 +165,7 @@ include_once("classes/modele/Evenement.class.php");
 				}
 			?>
 			<?php $account_text = isset($_SESSION['userID'])?'Modifier mon compte':'<b>Créer un compte</b>'; ?>
-			<a title="<?php echo isset($_SESSION['userID'])?'Modifier mon compte':'Créer un compte'; ?>" class="know_more_item" id="create_account" href="adduser.php"><img height="45px" width="45px" align="middle" src="design/misc/<?php echo isset($_SESSION['userID'])?'update_account.png':'create_account.png'; ?>"/><?php echo $account_text; ?></a>
+			<a title="<?php echo isset($_SESSION['userID'])?'Modifier mon compte':'Créer un compte'; ?>" class="know_more_item" id="create_account" href="adduser.php?np=index.php"><img height="45px" width="45px" align="middle" src="design/misc/<?php echo isset($_SESSION['userID'])?'update_account.png':'create_account.png'; ?>"/><?php echo $account_text; ?></a>
 			<a title="Les réponses à toutes vos questions" class="know_more_item" href="faq.php"><img height="45px" width="45px" align="middle" src="design/misc/help.png"/>Foire aux questions</a>
 			<a title="Cliquez si vous désirez retirer une photo" class="know_more_item" href="privacy.php"><img height="45px" width="45px" align="middle" src="design/misc/key.png"/>Vie privée et retrait de photos</a>
 		</div>

@@ -354,13 +354,11 @@ $(document).ready(function() {
 						previousMail='';
 						if (nextPage != 'false'){
 							document.location.href = nextPage;
-						}/* else {
-							history.back();
-						}*/
+						}
 					}else{
 						alert(data.cause);
+						$('#userSubmit').removeAttr("disabled");
 					}
-					$('#userSubmit').removeAttr("disabled");
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
 					alert('Error with code 8');

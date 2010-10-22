@@ -45,33 +45,39 @@ function checkUserOrConnect(scriptname, id){
 	return false;
 }
 
+var lostPasswordSent = false;
 //check mail for user connection
 function checkEmail(){
 	var email = $("#user_email").val();
 	if (email == ""){
-		alert("Spécifiez d'abord votre adresse dans le champ E-mail à gauche.");
+		alert("Spécifiez d'abord votre adresse dans le champ E-mail à gauche");
 		return false;
 	}
 	if (!re_mail.test(email)){
 		alert("Vous devez spécifier une adresse e-mail valide");
 		return false;
 	}
-	$.ajax({
-		type: "GET",
-		url: "/dispatcher.php",
-		data:"action=lostpwd&email=" + email,
-		dataType:"json",
-		success:function(data){
-			if (data.result == true){
-				alert("Un E-mail vient de vous être envoyé à l'adresse suivante : "+email);
-			} else {
-				alert(data.cause);
+	if (lostPasswordSent){
+		alert("Votre demande de changement de mot de passe a bien été prise en compte");
+	} else {
+		$.ajax({
+			type: "GET",
+			url: "/dispatcher.php",
+			data:"action=lostpwd&email=" + email,
+			dataType:"json",
+			success:function(data){
+				if (data.result == true){
+					lostPasswordSent = true;
+					alert("Un E-mail vient de vous être envoyé à l'adresse suivante : "+email);
+				} else {
+					alert(data.cause);
+				}
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert('Error with code 1');
 			}
-		},
-		error:function(XMLHttpRequest, textStatus, errorThrown){
-			alert('Error with code 1');
-		}
-	});
+		});
+	}
 	return false;
 }
 //*********************************************************************
