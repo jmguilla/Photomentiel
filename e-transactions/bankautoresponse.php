@@ -61,7 +61,12 @@
 					$photoFormatsDim[$tp->getTaillePapierID()] = $tp->getDimensions();
 				}
 				$utilisateurObj = Utilisateur::getUtilisateurDepuisID($customer_id);
-				$factureDestFile = "/homez.368/photomen/cgi-bin/factures/".$commandObj->getNumero().".pdf";
+				//create facture path
+				$factureDestFile = "/homez.368/photomen/cgi-bin/factures/clients/".date("Ym");
+				if (!file_exists($factureDestFile)){
+					mkdir($factureDestFile, 0755);
+				}
+				$factureDestFile = $factureDestFile."/".$commandObj->getNumero().".pdf";
 				makePDF($commandObj, $utilisateurObj, $photoFormatsDim, $album->getModule(), $factureDestFile);
 			}
 		}

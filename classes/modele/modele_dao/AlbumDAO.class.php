@@ -554,7 +554,7 @@ class AlbumDAO extends DAO {
 	 * cree l'album passé en parametre en BD et gere
 	 * en plus la création d'un stringID associé et
 	 * celle du repertoire album.
-	 * si un problème survient, une erreur et jetee et
+	 * si un problème survient, une erreur est jetee et
 	 * la creation est annulee
 	 * @param unknown_type $album
 	 */
