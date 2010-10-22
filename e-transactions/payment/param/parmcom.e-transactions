@@ -50,7 +50,7 @@ TARGET!_top!
 
 # Nom du template de la page de paiement e-transactions
 
-#TEMPLATE!template_ca_fr!
+#TEMPLATE!pm_template!
 
 # Couleur du text (noir)
 
