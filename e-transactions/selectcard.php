@@ -6,7 +6,7 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	$SIREN_JM = '521000018';
 	if ($p_module == $SIREN_JL){
 		//JL
-		$parm="merchant_id=082584341411111";
+		$parm="merchant_id=052532927200013";
 	} else {
 		//JM
 		$parm="merchant_id=052100001800015";
