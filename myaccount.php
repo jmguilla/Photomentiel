@@ -203,7 +203,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 								}
 								?>
 								<script language="javascript">
-									$("#displayFullGain").html("(Gain mensuel : <b><?php echo $total_m; ?> &#8364</b> - Gain total : <b><?php echo $total_a; ?> &#8364</b>)");
+									$("#displayFullGain").html("(Gain mensuel : <b><?php echo sprintf('%.2f',$total_m); ?> &#8364</b> - Gain total : <b><?php echo sprintf('%.2f',$total_a); ?> &#8364</b>)");
 								</script>
 								<?php
 							} else {
