@@ -1,0 +1,33 @@
+<body style="background-image:url(vertical.png);background-repeat:repeat-x;">
+<br/>
+<table width="100%">
+	<tr>
+		<td align="center">
+			<img src="pm_title.png" title="www.photomentiel.fr"></img>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<table width="1024px">
+				<tr>
+					<td align="left">
+						<img src="pm_logo.png" title="www.photomentiel.fr"></img>
+					</td>
+					<td align="right">
+						<img src="pm_bnpca.png" title="www.photomentiel.fr"></img>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<table width="1024px" border="1" cellpadding="10px">
+				<tr><td align="left">
+				[SIPS]
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
