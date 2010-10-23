@@ -15,8 +15,8 @@ class ControleurUtils{
 			return mail("jl@photomentiel.fr, jm@photomentiel.fr",
 			"Nouveau photographe sur photomentiel.fr",
 			"Répondez lui directement...\n\n".
-			"Nom: ".$utilisateur->getNom().
-			"\nPrenom: ".$utilisateur->getPrenom().
+			"Nom: ".$utilisateur->getAdresse()->getNom().
+			"\nPrenom: ".$utilisateur->getAdresse()->getPrenom().
 			"\ntel: ".$utilisateur->getTelephone().
 			"\nhabite: ".$utilisateur->getAdresse()->getCodePostal() . " - " .$utilisateur->getAdresse()->getVille(),
 			$headers
