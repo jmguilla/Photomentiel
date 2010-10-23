@@ -25,6 +25,7 @@ include("header.php");
 	<div id="faqc">
 		<center><h2>Vous avez été pris en photo ? Ces questions peuvent vous interesser !</h2></center><br/>
 		 
+		<a href="#12"><div class="question">La photo papier... des souvenirs qui restent...</div></a>
 		<a href="#1"><div class="question">J'ai reçu une carte de votre site, quelle est la marche à suivre ? </div></a>
 		<a href="#11"><div class="question">Un filigrane est visible au milieu des photos, sera-t-il imprimé sur ma photo papier ? </div></a>
 		<a href="#2"><div class="question">Quelle sera la qualité de la photographie reçu ? </div></a>
@@ -38,6 +39,13 @@ include("header.php");
 		<a href="#10"><div class="question">Mon enfant participe à un tournoi de ping-pong le mois prochain, puis je demander la couverture de cet événement ?</div></a>
 		<div class="separator5"></div>
 		<center><hr/></center>
+		<div class="question"><a name="12"></a>La photo papier... des souvenirs qui restent...</div> 
+		<div class="answer">
+		  <span class="start"></span>Vous avez peut être déjà remarqué combien il est difficile de revenir sur des albums numériques dont les dossiers sont peuplés de centaines et centaines de photos dont on ne sait plus par où commencer pour les visionner...<br/>
+		  Photomentiel, au travers de son service, vous propose de sélectionner les meilleurs clichés, les meilleurs souvenirs parmi les centaines d'exemplaires numériques présents et de les ranger soigneusement dans un bel album photo, retraçant tous vos souvenirs.
+		  Quoi de plus convivial que de se retrouver quelques temps plus tard, derrière un bel album, à revivre tous ces moments au travers de ces meilleurs photos.<br/>
+		  Plus besoin de mettre le nez dans des centaines de dossiers et des milliers de photos, Photomentiel, c'est la possibilité de vous offrir simplement les meilleurs souvenirs en ouvrant un simple album photos qui retrace votre vie en image. Un album photo, c'est le livre de votre vie.
+		</div>
 		<div class="question"><a name="1"></a>J'ai reçu une carte de votre site, quelle est la marche à suivre ?</div> 
 		<div class="answer">
 		  <span class="start"></span>Rendez vous sur la <a href="/index.php">page d'accueil</a> et saisissez le code inscrit en bas de la carte qui vous a été remise. Vous accèdez alors aux photographies prises lors de l'événement auquel vous avez participé, faites votre sélection et laissez vous guider jusqu'à la phase de paiement. Vous recevrez ensuite les photographies sélectionnées par les services postaux.
