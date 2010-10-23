@@ -69,6 +69,7 @@ switch($action){
 		}
 	case c_usr:
 		if($action == c_photographe){
+			$send_mail = true;
 			$utilisateur = new Photographe();
 			$utilisateur->setNomEntreprise($ne);
 			$utilisateur->setSiren($siren);
@@ -79,6 +80,7 @@ switch($action){
 			$utilisateur->setRIB_c($rib_c);
 			$utilisateur->setRIB_k($rib_k);
 		}else{
+			$send_mail = false;
 			$utilisateur = new Utilisateur();			
 		}
 		$nom = $_POST['nom'];
@@ -109,6 +111,7 @@ switch($action){
 		if($utilisateur){//maintenant on va valider l'email par retour
 			if(ControleurUtils::sendValidationEmail($utilisateur,$activateID)){				
 				ControleurUtils::serialize_object_json($utilisateur);
+				ControleurUtils::sendNouveauPhotographeEmail($utilisateur);
 				return;
 			}else{
 				//erreur, on detruit l'utilisateur & retourne.
