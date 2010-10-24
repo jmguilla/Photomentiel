@@ -15,6 +15,7 @@ class Commande{
 	private $numero = '';
 	private $id_album = NULL;
 	private $preparateur = '';
+	private $commandeFoto = '';
 
 	public function __construct($i = -1, $idu = -1, $date = NULL, $etat = NULL){
 		$this->id = $i;
@@ -203,6 +204,27 @@ class Commande{
 	}
 	public function setDatePaiement($dp){
 		$this->datePaiement = $dp;
+	}
+	public function getCommandeFoto(){
+		return $this->commandeFoto;
+	}
+	public function setCommandeFoto($cf){
+		$this->commandeFoto = $cf;
+	}
+	public function addCommandeFoto($cf){
+		$previous = $this->commandeFoto;
+		if((!isset($this->commandeFoto)) || ('' === $this->commandeFoto)){
+			$this->commandeFoto = trim($cf);
+		}else{
+			$this->commandeFoto .= ';' . trim($cf);
+		}
+		$dao = new CommandeDAO();
+		if($dao->saveCommandeFoto($this)){
+			return true;
+		}else{
+			$this->commandeFoto = $previous;
+			return false;
+		}
 	}
 }
 ?>

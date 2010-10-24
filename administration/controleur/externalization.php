@@ -17,6 +17,7 @@ define("supprimer_photo", "supprimer_photo");
 define("supprimer_evenement", "supprimer_evenement");
 
 //commande
+define("set_commande_foto", "set_commande_foto");
 define("traiter_commande", "traiter_commande");
 define("down_xml", "download_commande_xml");
 define("commande_expediee", "commande_expediee");

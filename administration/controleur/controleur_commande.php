@@ -3,6 +3,27 @@ $dir_administration_controleur_commande_php = dirname(__FILE__);
 include_once $dir_administration_controleur_commande_php . "/../../classes/modele/Commande.class.php";
 
 switch($action){
+	case set_commande_foto:
+		if(!isset($_POST['id'])){
+			$_SESSION['message'] .= "Aucun id commande fournie<br/>";
+			break;
+		}
+		if(!isset($_POST['number']) || ''===trim($_POST['number'])){
+			$_SESSION['message'] .= "numero de commande foto.com invalide<br/>";
+			break;
+		}
+		$number = trim($_POST['number']);
+		$commande = Commande::getCommandeDepuisID($_POST['id']);
+		if(!$commande){
+			$_SESSION['message'] .= "Aucune commande ne correspond a l'id #".$_POST['id']."#<br/>";
+			break;
+		}
+		if($commande->addCommandeFoto($number)){
+			$_SESSION['message'] .= "Changement effectue avec succes<br/>";
+		}else{
+			$_SESSION['message'] .= "Impossible d'appliquer le changement<br/>";
+		}
+	break;
 	case offrir_commande:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id, impossible d'offrir la commande<br/>";
@@ -67,6 +88,10 @@ switch($action){
 			break;
 		}
 		$commande = Commande::getCommandeDepuisID($_POST['id']);
+		if(!$commande){
+			$_SESSION['message'] .= "Aucune commande ne correspond a l'id #".$_POST['id'].".<br/>\n";
+			break;
+		}
 		if($commande->delete()){
 			$_SESSION['message'] .= "Commande supprimée avec succès.<br/>\n";
 		}else{
