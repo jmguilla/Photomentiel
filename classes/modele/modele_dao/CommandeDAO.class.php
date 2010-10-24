@@ -172,7 +172,7 @@ class CommandeDAO extends DAO{
 		return false;
 	}
 	/**
-	 * cree la commande en base de donn�e et retourne
+	 * cree la commande en base de donnée et retourne
 	 * la nouvelle commande créée.
 	 * @param Commande $commande
 	 */

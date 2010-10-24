@@ -6,6 +6,22 @@ include_once $dir_controleurutils_class_php . "/../modele/TaillePapier.class.php
 include_once $dir_controleurutils_class_php . "/../modele/Error.class.php";
 
 class ControleurUtils{
+	public static function sendPaiementPhotographeEmail($utilisateur){
+		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
+			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n";
+	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
+     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
+     		$headers .='Content-Transfer-Encoding: 8bit'; 
+			return mail($utilisateur->getEmail(),
+			"Paiement photomentiel.fr",
+			"Un paiement vient d'être éffectué en votre faveur par".
+			" l'équipe photomentiel.\n\n".
+			"Merci d'utiliser www.photomentiel.fr",
+			$headers
+			);
+		}
+	}
+
 	public static function sendNouveauPhotographeEmail($utilisateur){
 		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n";
