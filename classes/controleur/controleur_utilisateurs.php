@@ -111,7 +111,9 @@ switch($action){
 		if($utilisateur){//maintenant on va valider l'email par retour
 			if(ControleurUtils::sendValidationEmail($utilisateur,$activateID)){				
 				ControleurUtils::serialize_object_json($utilisateur);
-				ControleurUtils::sendNouveauPhotographeEmail($utilisateur);
+				if($action == c_photographe){
+					ControleurUtils::sendNouveauPhotographeEmail($utilisateur);
+				}
 				return;
 			}else{
 				//erreur, on detruit l'utilisateur & retourne.
