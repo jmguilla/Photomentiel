@@ -4,7 +4,7 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	$cmdID = isset($_SESSION['last_command'])?$_SESSION['last_command']:null;
 	$SIREN_JL  = '525329272';
 	$SIREN_JM = '521000018';
-	if ($p_module == $SIREN_JL){
+	if ($p_module === $SIREN_JL){
 		//JL
 		$parm="merchant_id=052532927200013";
 	} else {
@@ -61,7 +61,9 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//$parm="$parm logo_id2=";
 	$parm="$parm advert=advert.png";
 	//$parm="$parm background_id=";
-	//$parm="$parm templatefile=";
+	if ($p_module === $SIREN_JL){//TODO remove and set it in parmcom.e-transaction
+		$parm="$parm templatefile=pm_template";
+	}
 
 	// Initialisation du chemin de l'executable request
 	// ex :
