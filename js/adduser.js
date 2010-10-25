@@ -240,19 +240,6 @@ function updateUserDataAction(){
 	});
 	return o;
 }
-function displayContract(){
-	var reqArgs = '?';
-	if ($('#nom').val() != ''){
-		reqArgs += 'nom='+$('#nom').val()+'&';
-	}
-	if ($('#prenom').val() != ''){
-		reqArgs += 'prenom='+$('#prenom').val();
-	}
-	if (reqArgs == '?'){
-		reqArgs = '';
-	}
-	window.open('contratPhotographe.php'+reqArgs);
-}
 $(document).ready(function() {
 	/***********************************************
 	 * controle du formulaire
@@ -398,4 +385,17 @@ $(document).ready(function() {
 		return false;
 	});
 });
+function displayContract(){
+	var reqArgs = '?';
+	if ($('#nom').val() != ''){
+		reqArgs += 'nom='+$('#nom').val()+'&';
+	}
+	if ($('#prenom').val() != ''){
+		reqArgs += 'prenom='+$('#prenom').val();
+	}
+	if (reqArgs == '?'){
+		reqArgs = '';
+	}
+	window.open('p-contrat.pdf'+reqArgs);
+}
 
