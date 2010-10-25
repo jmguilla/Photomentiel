@@ -828,16 +828,21 @@ class AlbumDAO extends DAO {
 	 * Remet la balance à 0 en BD
 	 */
 	public function resetBalance($album){
+		$albumClone = $this->getAlbumDepuisID($album->getAlbumID());
 		$query = "update Album set balance = 0 where albumID = " .
 		mysql_real_escape_string($album->getAlbumID());
 		$this->startTransaction();
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() >= 0){
 			$this->commit();
-			return true;
+			if($albumClone->getBalance() >= 0){
+				return $albumClone->getBalance();
+			}else{
+				return -1;
+			}
 		}else{
 			$this->rollback();
-			return false;
+			return -1;
 		}
 	}
 

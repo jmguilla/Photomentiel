@@ -26,6 +26,7 @@ define("detail_commande", "detail_commande");
 define("offrir_commande", "offrir_commande");
 
 //utilisateur
+define("envoyer_confirmation_paiement", "envoyer_confirmation_paiement");
 define("renvoyer_email_confirmation", "renvoyer_email_confirmation");
 define("activer_utilisateur", "activer_utilisateur");
 define("reinitialiser_mdp", "reinitialiser_mdp");

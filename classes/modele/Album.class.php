@@ -401,18 +401,19 @@ class Album {
 				ControleurUtils::addError("Impossible de prendre le lock sur table Album pendant reset balance de l'album #" . $this->albumID);
 				return false;
 		}
-		if($dao->resetBalance($this)){
+		$previousBalance = $dao->resetBalance($this);
+		if($previousBalance >= 0){
 			$this->balance = 0;
 			if(!$dao->unlockTable()){
 				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
 			}
-			return true;
+			return $previousBalance;
 		}else{
 			ControleurUtils::addError("Impossible de reset la balance de l'album #" . $this->albumID, true);
 			if(!$dao->unlockTable()){
 				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
 			}
-			return false;
+			return $previousBalance;
 		}
 		}catch(Exception $e){
 			$dao->unlockTable();

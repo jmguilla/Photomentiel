@@ -6,9 +6,22 @@ include_once $dir_administration_controleur_utilisateur_php . "/../../classes/mo
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/controleur/ControleurUtils.class.php";
 
 switch($action){
+	case envoyer_confirmation_paiement:
+		if(!isset($_POST['id'])){
+			echo "<h1>Aucun id photographe fournie</h1>";
+			exit();
+		}
+		$photographe = Photographe::getPhotographeDepuisID($_POST['id']);
+		if(ControleurUtils::sendPaiementPhotographeEmail($photographe)){
+			echo "<h1>Email de confirmation envoye!</h1>";
+		}else{
+			echo "<h1>Impossible d'envoyer l'email de confirmation</h1>";
+		}
+		exit();
+	break;
 	case modifier_photographe:
 		if(!isset($_POST['id'])){
-			$_SESSION['message'] .= "Aucun id fourni, annulation.<br/>";
+			$_SESSION['message'] .= "Aucun id fourni, annulation.<br1>";
 			break;
 		}
 		if(!isset($_POST['pourcentage'])){
@@ -32,23 +45,31 @@ switch($action){
 		exit();
 	case payer:
 		if(!isset($_POST['id'])){
-			$_SESSION['message'] .= "Aucun id fourni, annulation.<br/>";
-			break;
+			echo "<h1>Aucun id fourni, annulation.</h1>";
+			exit();
 		}
 		$photographe = Photographe::getPhotographeDepuisID($_POST['id']);
 		if(!$photographe){
-			$_SESSION['message'] .= "Aucun photographe ne correspond à cet id.<br/>";
-			break;
+			echo "<h1>Aucun photographe ne correspond à cet id.</h1>";
+			exit();
 		}
 		$albums = Album::getAlbumDepuisID_Photographe($photographe->getPhotographeID(), false);
+		$totalAVerser = 0;
 		foreach($albums as $album){
-			if($album->resetBalance()){
-				$_SESSION['message'] .= "Balance réinitialisée pour l'album #" . $album->getAlbumID() . ".<br/>";
+			$previousBalance = $album->resetBalance();
+			if($previousBalance >= 0){
+				$totalAVerser += $previousBalance;
+				echo "<h3>Balance reinitialisee pour l'album #" . $album->getAlbumID() . ".</h3>";
 			}else{
-				$_SESSION['message'] .= "<font color=\"red\">Impossible de réinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
+				echo "<font color=\"red\">Impossible de reinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
 			}
 		}
-		header('Location: photographe.php');
+		echo "<h1>Versement de " . $totalAVerser . " a effectuer sur le compte:</h1>";
+		echo "<h2>rib: " . $photographe->getRIB_b() . $photographe->getRIB_g() . $photographe->getRIB_c() . $photographe->getRIB_k() . "</h2>";
+		echo "<h2>iban: " . $photographe->getIBAN() . "</h2>";
+		echo "<h2>pour le photographe:</h2>";
+		echo "<h2>" . $photographe->getAdresse()->getPrenom() . " " . $photographe->getAdresse()->getNom() . "</h2>";
+		echo '<form method="post" action="dispatcher.php" target="_blank"><input type="hidden" name="action" value="envoyer_confirmation_paiement"/><input type="hidden" name="id" value="'.$photographe->getPhotographeID().'"/><input type="submit" value="envoyer confirmation"/></form>';
 		exit();
 	case reinitialiser_mdp:
 		if(!isset($_POST['id'])){

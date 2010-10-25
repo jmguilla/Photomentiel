@@ -39,6 +39,7 @@ switch($action){
 	case supprimer_evenement:
 		include_once $dir_administration_dispatcher_php . "/controleur/controleur_evenement.php";
 	break;
+	case envoyer_confirmation_paiement:
 	case renvoyer_email_confirmation:
 	case activer_utilisateur:
 	case reinitialiser_mdp:
