@@ -92,7 +92,7 @@ $PERCENT = 100 - PHOTOGRAPH_INITIAL_PERCENT;
 		<div class="answer">
 			<span class="start"></span>Pour cela plusieurs solutions, tout d'abord, vous ne souhaitez pas vous déplacer et l'ensemble des données que vous souhaitez transmettre n'est pas trop volumineux, alors vous pouvez transmettre vos photos directement au travers d'internet, les explications sur le transfert des photos vous seront communiquées à la création d'un album. Le temps de transfert dépendra de votre connexion internet.<br/>
 			<!--<span class="start"></span>Si le temps de transfert est un problème, vous pouvez aussi nous transmettre vos photographies sur n'importe quel support numérique (carte mémoire, CD-ROM, DVD-ROM, clé usb, etc.) par les services postaux à l'adresse :-->
-			<span class="start"></span>Si le temps de transfert est un problème, vous pouvez aussi nous contacter pour nous remettre les photos en mains propres si vous êtes en région PACA !
+			<span class="start"></span>Si le temps de transfert est un problème, vous pouvez aussi nous contacter pour nous remettre les photos en mains propres si vous êtes en région PACA !<br/>
 			<span class="start"></span>Vous pourrez aussi <u>bientôt</u> nous faire parvenir vos photographies sur n'importe quel support numérique (carte mémoire, CD-ROM, DVD-ROM, clé usb, etc.) par les services postaux.
 			<br/>
 			<br/>
