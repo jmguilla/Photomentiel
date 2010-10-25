@@ -160,6 +160,18 @@ function checkCGU() {
 	}
 	return { "error" : errorCGU, "mess" : mess };
 }
+function checkContract() {
+	var errorContract = false;
+	var mess = '';
+	if (!$('#pcontrat').attr('checked')){
+		errorContract = true;
+		mess = "\nVous devez accepter les termes du contrat de partenariat";
+		$('#rpcontrat').css('background-image','url(design/misc/unchecked.gif)');
+	} else {
+		$('#rpcontrat').css('background-image','url(design/misc/checked.gif)');
+	}
+	return { "error" : errorContract, "mess" : mess };
+}
 
 function checkForm () {
     var error = false;
@@ -199,7 +211,10 @@ function checkForm () {
 	if(createMode){
 		tmp = checkCGU();
 		error = error || tmp.error;
-	    mess += tmp.mess;
+	    	mess += tmp.mess;
+		tmp = checkContract();
+		error = error || tmp.error;
+	    	mess += tmp.mess;
 	}
 	//result
     return { "error" : error, "mess" : mess };
@@ -224,6 +239,19 @@ function updateUserDataAction(){
 		}
 	});
 	return o;
+}
+function displayContract(){
+	var reqArgs = '?';
+	if ($('#nom').val() != ''){
+		reqArgs += 'nom='+$('#nom').val()+'&';
+	}
+	if ($('#prenom').val() != ''){
+		reqArgs += 'prenom='+$('#prenom').val();
+	}
+	if (reqArgs == '?'){
+		reqArgs = '';
+	}
+	window.open('contratPhotographe.php'+reqArgs);
 }
 $(document).ready(function() {
 	/***********************************************
@@ -370,3 +398,4 @@ $(document).ready(function() {
 		return false;
 	});
 });
+
