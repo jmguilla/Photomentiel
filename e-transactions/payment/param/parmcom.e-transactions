@@ -50,7 +50,7 @@ TARGET!_top!
 
 # Nom du template de la page de paiement MERCANET/e-transactions
 
-TEMPLATE!pm_template!
+#TEMPLATE!pm_template!
 
 # Couleur du text (noir)
 
