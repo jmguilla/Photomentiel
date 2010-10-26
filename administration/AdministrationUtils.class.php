@@ -8,7 +8,7 @@ class AdministrationUtils {
 			return mail("jl@photomentiel.fr, jm@photomentiel.fr",
 			"Commande en attente de traitement sur www.photomentiel.fr",
 			"Au moins une commande est en attente de traitement\n".
-			"RDV sur http://admin.photomentiel.fr",
+			"RDV sur http://admin.photomentiel.fr/commande.php",
 			$headers
 			);
 		}
