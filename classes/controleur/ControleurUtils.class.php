@@ -6,6 +6,29 @@ include_once $dir_controleurutils_class_php . "/../modele/TaillePapier.class.php
 include_once $dir_controleurutils_class_php . "/../modele/Error.class.php";
 
 class ControleurUtils{
+	public static function sendMailEtPDF($utilisateur, $sujet, $content, $pathVersPDF){
+		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
+			$boundary = "azertyuioppoiuytrezaqsdfghjklmmlkjhgfdsq";
+			$headers = 'From: "Photomentiel"<contact@photomentiel.fr>'."\n";
+	     	$headers .= 'Reply-To: no-reply@photomentiel.fr'."\n"; 
+			$headers .= "MIME-Version: 1.0\n";
+			$headers .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\n\n";
+     		$body = '--'. $boundary . "\n";
+     		$body .= 'Content-Type: text/plain; charset="utf-8"'."\n\n";
+     		$body .= $content . "\n\n";
+     		$body .= '--' . $boundary . "\n";
+     		$body .= 'Content-Type: application/pdf; name="fichier.pdf"'."\n\n";
+     		$fichier=file_get_contents($pathVersPDF);
+			$fichier=chunk_split(base64_encode($fichier));
+			$body .= $fichier;
+			return mail($utilisateur->getEmail(),
+			$sujet,
+			$body,
+			$headers
+			);
+		}
+	}
+
 	public static function sendPaiementPhotographeEmail($utilisateur){
 		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
 			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n";
