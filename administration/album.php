@@ -48,7 +48,8 @@ if($assocs){
 				$uploadedPics = count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".THUMB_DIRECTORY."*.JPG"));
 				$uploadedPics += count(glob(PHOTOGRAPHE_ROOT_DIRECTORY.$stringid->getHomePhotographe()."/".$stringid->getStringID()."/".PICTURE_DIRECTORY."*.JPG"));
 				$percentPics = round($uploadedPics*100/$toUploadPics);
-				$transferStr = "Transfert en cours ($uploadedPics/$toUploadPics - $percentPics%)";
+				$debut = $uploadObj->getDebut();
+				$transferStr = "Transfert en cours ($uploadedPics/$toUploadPics - $percentPics%) commence a $debut";
 			} else {
 				$transferStr = "Compression en cours";
 			}

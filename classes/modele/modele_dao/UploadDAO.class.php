@@ -50,10 +50,12 @@ class UploadDAO extends DAO{
 		$id = $row->offsetGet($prefix . "uploadID");
 		$sid = $row->offsetGet($prefix . "stringID");
 		$nombre = $row->offsetGet($prefix . "nombre");
+		$debut = $row->offsetGet($prefix . "debut");
 		$result = new Upload();
 		$result->setUploadID($id);
 		$result->setStringID($sid);
 		$result->setNombre($nombre);
+		$result->setDebut($debut);
 		return $result;
 	}
 }

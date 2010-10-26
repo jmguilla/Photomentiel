@@ -6,6 +6,7 @@ class Upload{
 	private $id = 0;
 	private $stringID = '';
 	private $nombre = '';
+	private $debut = 0;
 
 	function __construct(){}
 
@@ -49,6 +50,14 @@ class Upload{
 
 	public function setNombre($n){
 		$this->nombre = $n;
+	}
+
+	public function getDebut(){
+		return $this->debut;
+	}
+
+	public function setDebut($d){
+		$this->debut = $d;
 	}
 }
 ?>
