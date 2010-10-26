@@ -18,6 +18,8 @@ class ControleurUtils{
      		$body .= $content . "\n\n";
      		$body .= '--' . $boundary . "\n";
      		$body .= 'Content-Type: application/pdf; name="fichier.pdf"'."\n\n";
+     		$body .= "Content-Transfer-Encoding: base64\n";
+			$body .= "Content-Disposition: attachment; filename=\"fichier.pdf\"\n\n";
      		$fichier=file_get_contents($pathVersPDF);
 			$fichier=chunk_split(base64_encode($fichier));
 			$body .= $fichier;
