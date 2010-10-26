@@ -55,6 +55,6 @@ define('HTTP_PORT','21080');
 
 //activate or desactivate functionalities
 define('SITE_MAINTENANCE',false);
-define('FTP_MAINTENANCE',false);
+define('FTP_MAINTENANCE',true);
 define('PAYMENT_MAINTENANCE',false);
 ?>
