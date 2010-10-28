@@ -235,7 +235,7 @@ class UtilisateurDAO extends DAO{
 			$ftp = $row->offsetGet($prefix . "openftp");
 			$result->setTVA($tva);
 			$result->setIsTelephonePublique($isTelPub);
-			$result->setIsReadey($isReady);
+			$result->setIsReady($isReady);
 			$result->setOpenFTP($ftp);
 			$result->setNombreVotant($nv);
 			$result->setNote($note);
