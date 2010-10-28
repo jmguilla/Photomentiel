@@ -272,9 +272,9 @@ if (isset($_GET["np"])){
 					</tr>
 					<tr>
 						<td>
-							Nom de l'Entreprise : 
+							Nom de l'Entreprise* : 
 						</td><td>
-							<input name="entreprise" class="textfield" type="text" id="entreprise" <?php echo $createMode?'':'value="'.$utilisateurObj->getNomEntreprise().'"'; ?>/>
+							<input name="entreprise" class="textfield" type="text" id="entreprise" required="required" <?php echo $createMode?'':'value="'.$utilisateurObj->getNomEntreprise().'"'; ?>/>
 						</td><td>
 							<div  class="checkform" id="rentreprise"></div>
 						</td>
@@ -292,9 +292,28 @@ if (isset($_GET["np"])){
 						<td>
 							N° Tel : 
 						</td><td>
-							<input name="telephone" class="textfield" type="text" id="telephone" maxlength="12" regexp="^[+]?[0-9]+$" <?php echo $createMode?'':'value="'.$utilisateurObj->getTelephone().'"'; ?>/>
+							<input name="telephone" class="textfield" type="text" id="telephone" maxlength="12" regexp="^[+]?[0-9]+$" required="required" <?php echo $createMode?'':'value="'.$utilisateurObj->getTelephone().'"'; ?>/><br/>
+							<input style="margin-top:2px;" type="checkbox" name="telephone_r" id="telephone_r" <?php echo (!$createMode && $utilisateurObj->isTelephonePublique())?'checked="checked"':''; ?>></input> Rendre mon numéro public
 						</td><td>
 							<div  class="checkform" id="rtelephone"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							TVA appliqué : 
+						</td><td>
+							<select id="tva" name="tva">
+								<?php
+									$i = 0;
+									foreach($TVA as $t) {
+										$tvac = (!$createMode && $utilisateurObj->getTVA() == $i)?'selected="selected"':'';
+										echo '<option value="'.$i.'">'.$t.'</option>';
+										$i++;
+									}
+								?>
+							</select>
+						</td><td>
+							
 						</td>
 					</tr>
 					<tr>
