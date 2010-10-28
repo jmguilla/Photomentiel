@@ -276,6 +276,11 @@ $(document).ready(function() {
 		/* telephone */
 		$('#telephone').blur(function(){
 			checkRegexp('telephone');
+			checkRequired('telephone');
+		});
+		/* nom entreprise */
+		$('#entreprise').blur(function(){
+			checkRequired('entreprise');
 		});
 		/* siren */
 		$('#siren').blur(function(){

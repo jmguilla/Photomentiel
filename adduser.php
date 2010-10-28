@@ -183,6 +183,7 @@ if (isset($_GET["np"])){
 				<tr>
 					<td colspan="3" height="5px;"></td>
 				</tr>
+				<tr>
 				<td colspan="3" height="30px;">
 					<u>Vos coordonnées personnelles :</u>
 				</td>
@@ -293,7 +294,7 @@ if (isset($_GET["np"])){
 							N° Tel : 
 						</td><td>
 							<input name="telephone" class="textfield" type="text" id="telephone" maxlength="12" regexp="^[+]?[0-9]+$" required="required" <?php echo $createMode?'':'value="'.$utilisateurObj->getTelephone().'"'; ?>/><br/>
-							<input style="margin-top:2px;" type="checkbox" name="telephone_r" id="telephone_r" <?php echo (!$createMode && $utilisateurObj->isTelephonePublique())?'checked="checked"':''; ?>></input> Rendre mon numéro public
+							<input style="margin-top:2px;" type="checkbox" name="telephone_r" id="telephone_r" <?php echo (!$createMode && $utilisateurObj->isTelephonePublique())?'checked="checked"':''; ?> /> Rendre mon numéro public
 						</td><td>
 							<div  class="checkform" id="rtelephone"></div>
 						</td>
@@ -370,7 +371,7 @@ if (isset($_GET["np"])){
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input id="cgu" name="cgu" type="checkbox"></input> J'ai lu et j'accepte les <a target="blank_" href="cgu.php">conditions générales de vente et d'utilisation</a>
+							<input id="cgu" name="cgu" type="checkbox" /> J'ai lu et j'accepte les <a target="blank_" href="cgu.php">conditions générales de vente et d'utilisation</a>
 						</td><td>
 							<div class="checkform" id="rcgu"></div>
 						</td>
