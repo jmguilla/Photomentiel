@@ -323,7 +323,21 @@ class Album {
 			}
 		}
 		$dao = new AlbumDAO();
-		return $dao->saveEtat($this);
+		if($dao->saveEtat($this)){
+			if($this->etat == (count($ALBUM_STATES) - 1)){
+				$dir_album_class_php = dirname(__FILE__);
+				include_once $dir_album_class_php . "/Commande.class.php";
+				$commandes = Commande::getCommandeEtPhotosDepuisID_Album($this->getAlbumID());
+				foreach($commandes as $commande){
+					if($commande->getEtat() == 0){
+						$commande->delete();
+					}
+				}
+			}
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function getModule(){
@@ -332,7 +346,20 @@ class Album {
 
 	public function cloturer(){
 		$dao = new AlbumDAO();
-		return $dao->cloturer($this);
+		if($dao->cloturer($this)){
+			$dir_album_class_php = dirname(__FILE__);
+			include_once $dir_album_class_php . "/Commande.class.php";
+			include_once $dir_album_class_php . "/CommandePhoto.class.php";
+			$commandes = Commande::getCommandeEtPhotosDepuisID_Album($this->getAlbumID());
+			foreach($commandes as $commande){
+				if($commande->getEtat() == 0){
+					$commande->delete();
+				}
+			}
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function validerUpload(){
