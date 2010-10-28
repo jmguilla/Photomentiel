@@ -13,7 +13,7 @@
 ?>
 <div id="title">CONTRAT LIANT LE PHOTOGRAPHE ET PHOTOMENTIEL</div>
 <br/><br/>
-<i>Ce contrat est établit, entre d'une part le photographe, ci-aprés dénommé "le Photographe" :</i><br/>
+<i>Ce contrat est établi, entre d'une part le photographe, ci-aprés dénommé "le Photographe" :</i><br/>
 La Société : <?php echo $utilisateurObj->getNomEntreprise(); ?><br/>
 <?php $adress = $utilisateurObj->getAdresse(); ?>
 représenté par : <?php echo $adress->getNom()." ".$adress->getPrenom(); ?><br/>
@@ -58,24 +58,29 @@ Le Photographe peut supprimer un album manuellement, ce qui le place dans les co
 <span class="start"></span>Photomentiel facturera au Photographe le montant de cette commission et procèdera au paiement par virement bancaire de la différence. Le virement sera effectué aux coordonnées bancaires du Photographe grâce au RIB qu'il a fourni lors de la création de son compte.<br/>
 Pour chaque commande payée par un client et validée par la banque, Photomentiel prélève :<br/>
 <ul>
-	<li>une commission de TODO% (pourcentage initial par défaut : voir article 10) sur le chiffre d'affaire (montant de la commande client)
+	<li>une commission de <?php echo (100-PHOTOGRAPH_INITIAL_PERCENT); ?>% (pourcentage initial par défaut : voir article 10) sur le chiffre d'affaire (montant de la commande client)
 	<li>les coûts de productions et frais de port, dont voici les détails :
 		<ul>
-		<li>Frais de port : TODO €</li>
-		<li>10x13  |  TODO</li>
-	    	<li>10x15  |  TODO</li>
-	    	<li>.....TODO</li>
+			<li>Frais de port : <?php echo SHIPPING_RATE; ?> &#8364;</li>
+			<?php
+				$papers = TaillePapier::getTaillePapiers();
+				$tf = 0;
+				foreach($papers as $paper){
+					echo '<li>'.$paper->getDimensions().' : '.$paper->getPrixFournisseur().' &#8364;</li>';
+				}
+			?>
 		</ul>
 	</li>
 </ul>
 <br/>
-A titre d'exemple, pour une commande client de 10 formats 13x17 à 2.50€ et 5 formats 20x30 à 6.00€ (Pour nos clients, les Frais de port sont offerts au delà de TODO€ d'achat) :<br/>
+<?php $nb1 = 14;$nb2=5; ?>
+A titre d'exemple, pour une commande client de <?php echo $nb1; ?> formats <?php echo $papers[3]->getDimensions(); ?> à <?php echo $papers[3]->getPrixConseille(); ?>&#8364; et <?php echo $nb2; ?> formats <?php echo $papers[7]->getDimensions(); ?> à <?php echo $papers[7]->getPrixConseille(); ?>&#8364; :<br/>
 <ul>
-	<li>Paiement enregistré (chiffre d'affaire) : 10*2.50 + 5*6.00 = 55.00€ ttc</li>
-	<li>Commission Photomentiel : 55.00 * TODO% = TODO€</li>
-	<li>Coût de production : 10*TODO + 5*TODO = TODO€</li>
-	<li>Frais d'envoi : TODO€</li>
-	<li>Revenu net Photographe : 55.00 - com - prod - fdp = TODO € ttc</li>
+	<li>Paiement enregistré (chiffre d'affaire) : <?php echo $nb1; ?>*<?php echo $papers[3]->getPrixConseille(); ?> + <?php echo $nb2; ?>*<?php echo $papers[7]->getPrixConseille(); ?> = <?php $ca = $nb1*$papers[3]->getPrixConseille()+$nb2*$papers[7]->getPrixConseille();echo sprintf('%.2f',$ca); ?>&#8364; ttc</li>
+	<li>Commission Photomentiel : <?php echo $ca."*".(100-PHOTOGRAPH_INITIAL_PERCENT); ?>% = <?php $com=$ca*(100-PHOTOGRAPH_INITIAL_PERCENT)/100;echo sprintf('%.2f',$com); ?>&#8364;</li>
+	<li>Coût de production : <?php echo $nb1; ?>*<?php echo $papers[3]->getPrixFournisseur(); ?> + <?php echo $nb2; ?>*<?php echo $papers[7]->getPrixFournisseur(); ?> = <?php $cp = $nb1*$papers[3]->getPrixFournisseur()+$nb2*$papers[7]->getPrixFournisseur();echo sprintf('%.2f',$cp); ?>&#8364;</li>
+	<li>Frais d'envoi : <?php echo sprintf('%.2f',SHIPPING_RATE); ?>&#8364;</li>
+	<li>Revenu net Photographe : <?php echo sprintf('%.2f',$ca); ?> - <?php echo sprintf('%.2f',$com); ?> - <?php echo sprintf('%.2f',$cp); ?> - <?php echo sprintf('%.2f',SHIPPING_RATE); ?> = <?php echo sprintf('%.2f',$ca-$com-$cp-SHIPPING_RATE); ?> &#8364; ttc</li>
 </ul>
 <br/>
 
@@ -90,7 +95,7 @@ A titre d'exemple, pour une commande client de 10 formats 13x17 à 2.50€ et 5 
 	<li>Incitant au suicide</li>
 	<li>Toute autre photo violente ou choquante</li>
 </ul>
-<span class="start"></span>Tout manquement à une de ces règles pourra être sanctionné. De plus, Photomentiel se réserve le droit de supprimer sans préavis le compte d'un photographe ne respectant pas ces règles. Il s'engage aussi à informer les personnes présentes sur les photographies de leur diffusion sur internet dans le cas d'un album public.<br/>
+Tout manquement à une de ces règles pourra être sanctionné. De plus, Photomentiel se réserve le droit de supprimer sans préavis le compte d'un photographe ne respectant pas ces règles. Il s'engage aussi à informer les personnes présentes sur les photographies de leur diffusion sur internet dans le cas d'un album public.<br/>
 <br/>
 Le Photographe est seul responsable de l’obtention des droits de la propriété intellectuelle des photos et/ou des objets photographiés présents dans ses albums. Le Photographe s’engage à respecter les droits des personnes et des biens, et plus précisément :<br/>
 <ul>
@@ -121,11 +126,11 @@ Toutefois, par dérogation à ce qui précède, Photomentiel pourra prendre tout
 <h1>Article 8 : Responsabilité de Photomentiel</h1>
 <span class="start"></span>Photomentiel assure techniquement l’hébergement des photos, mais n’est en aucun cas responsable de leur contenu ni de leur utilisation.<br/>
 Dans le cadre du maintien de son site Internet, Photomentiel se réserve le droit d’interrompre temporairement ses services, notamment lors d’opérations ponctuelles sur les serveurs.<br/>
-La responsabilité de Photomentiel ne peut être engagée en cas d’indisponibilité de ses services à la suite d’incidents techniques du réseau Internet.<br/>
-La responsabilité de l’Hébergeur ne peut être engagée en cas de perte, partielle ou totale des données stockées, pour des raisons techniques. Il incombe aux Photographes de sauvegarder des copies personnelles de leurs fichiers.<br/>
-La responsabilité de Photomentiel ne peut être engagée pour toute interception, de la part des visiteurs ou actes de piraterie, des photos téléchargées ou en cours de téléchargement depuis le site <span class="photomentiel">www.photomentiel.fr</span>.<br/>
-La responsabilité de Photomentiel ne peut être engagée pour les préjudices subis suite à l’interception éventuelle des fichiers. Le Photographe déclare connaître et accepter ces risques liés au réseau Internet.<br/>
-Photomentiel se réserve le droit de mettre fin ou modifier les caractéristiques de ses services à tout moment, et cela, sans préavis.<br/>
+<span class="start"></span>La responsabilité de Photomentiel ne peut être engagée en cas d’indisponibilité de ses services à la suite d’incidents techniques du réseau Internet.<br/>
+<span class="start"></span>La responsabilité de l’Hébergeur ne peut être engagée en cas de perte, partielle ou totale des données stockées, pour des raisons techniques. Il incombe aux Photographes de sauvegarder des copies personnelles de leurs fichiers.<br/>
+<span class="start"></span>La responsabilité de Photomentiel ne peut être engagée pour toute interception, de la part des visiteurs ou actes de piraterie, des photos téléchargées ou en cours de téléchargement depuis le site <span class="photomentiel">www.photomentiel.fr</span>.<br/>
+<span class="start"></span>La responsabilité de Photomentiel ne peut être engagée pour les préjudices subis suite à l’interception éventuelle des fichiers. Le Photographe déclare connaître et accepter ces risques liés au réseau Internet.<br/>
+<span class="start"></span>Photomentiel se réserve le droit de mettre fin ou modifier les caractéristiques de ses services à tout moment, et cela, sans préavis.<br/>
 
 
 <h1>Article 9 : Durée de validité du présent contrat</h1>
@@ -139,17 +144,17 @@ Il peut prendre fin pour les raisons suivantes :<br/>
 
 
 <h1>Article 10 : Pourcentage de reversion</h1>
-<span class="start"></span>Photomentiel s'engage à reverser au photographe TODO% des bénéfices de ces ventes, le reste étant utilisé pour assurer le bon fonctionnement de ce service. Photomentiel précise aussi que le pourcentage reversé au photographe faisant foi est celui qui apparaît sur le présent contrat. Si Photomentiel est amené à augmenter ce pourcentage, il ne sera pas changé pour les photographes ayant déjà un compte sur le site sans leur accord préalable.<br/>
-En créant un compte, le photographe s'engage à accepter tous les termes évoqués dans les différents articles du présent contrat.<br/>
-Il s'engage aussi à conserver une copie de ce document afin de fixer le pourcentage qui lui a été attribué au jour de son inscription. Si toutefois il ne pouvait pas le prouver, le pourcentage appliqué serait alors immédiatement le pourcentage en vigueur appliqué pour les nouveaux contrats.<br/>
+<span class="start"></span>Photomentiel s'engage à reverser au photographe <?php echo PHOTOGRAPH_INITIAL_PERCENT; ?>% des bénéfices de ces ventes déduit des différents frais de traitement cités plus haut, le reste étant utilisé pour assurer le bon fonctionnement de ce service. Photomentiel précise aussi que le pourcentage reversé au photographe faisant foi est celui qui apparaît sur le présent contrat. Si Photomentiel est amené à augmenter ce pourcentage, il ne sera pas changé pour les photographes ayant déjà un compte sur le site sans leur accord préalable.<br/>
+<span class="start"></span>En créant un compte, le photographe s'engage à accepter tous les termes évoqués dans les différents articles du présent contrat. Il s'engage aussi à conserver une copie de ce document afin de fixer le pourcentage qui lui a été attribué au jour de son inscription. Si toutefois il ne pouvait pas le prouver, le pourcentage appliqué serait alors immédiatement le pourcentage en vigueur appliqué pour les nouveaux contrats.<br/>
 
 
 <h1>Article 11</h1>
 <span class="start"></span>Si toutefois, une ou plusieurs clauses du présent contrat, étaient déclarées nulles en application d’une loi ou d’un règlement ou par décision de justice, les autres clauses conserveraient leur force et leur portée. Les deux parties conviennent alors de remplacer la clause déclarée nulle et non valide par une clause qui se rapprochera le plus du contenu de la clause initialement arrêtée. Toute modification apportée au présent contrat fera l'objet d'une notification à tous les photographes inscrits ainsi qu'une ré-acceptation du contrat modifié.<br/>
-En demandant l’ouverture d’un compte chez Photomentiel, le contrat qui régit les relations entre les deux parties est alors formé. Ce contrat est l’unique contrat entre les parties. Il remplace et annule notamment tout accord antérieur.
-
+<span class="start"></span>En demandant l’ouverture d’un compte chez Photomentiel, le contrat qui régit les relations entre les deux parties est alors formé. Ce contrat est l’unique contrat entre les parties. Il remplace et annule notamment tout accord antérieur.
+<br/><br/>
 <u>IMPORTANT</u> : Conformément à la loi du 13 mars 2000 sur la signature électronique, tout contrat signé du Photographe par «double clic de validation» constitue une acceptation irrévocable qui ne peut être remise en cause que dans les cas limitativement prévus dans le présent contrat.<br/>
 Le «double clic» associé à la procédure complète de création de compte, de non répudiation et de protection de l’intégrité des messages constitue une signature électronique. Cette signature électronique a valeur de signature manuscrite entre les parties pour l’ensemble du présent contrat.
+<br/>
 <br/>
 <br/>
 
