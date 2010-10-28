@@ -181,13 +181,7 @@ class PhotographeDAO extends UtilisateurDAO{
 			$query .= "false";
 		}
 		$query .= ", TVA = " .
-		mysql_real_escape_string($photographe->getTVA()) . ", isReady = ";
-		if($photographe->isReady()){
-			$query .= "true";
-		}else{
-			$query .= "false";
-		}
-		$query .= " where Utilisateur.utilisateurID = " . 
+		mysql_real_escape_string($photographe->getTVA()) . " where Utilisateur.utilisateurID = " . 
 		"Photographe.id_utilisateur and Adresse.id_utilisateur = Utilisateur.utilisateurID and Utilisateur.utilisateurID = " .
 		mysql_real_escape_string($photographe->getUtilisateurID()) . " and Photographe.photographeID = " .
 		mysql_real_escape_string($photographe->getPhotographeID());
@@ -246,7 +240,6 @@ class PhotographeDAO extends UtilisateurDAO{
 		$rib_c = $photographe->getRIB_c();
 		$rib_k = $photographe->getRIB_k();
 		$tva = $photographe->getTVA();
-		$isReady = $photographe->isReady();
 		$isTelPub = $photographe->isTelephonePublique();
 		$uid = $photographe->getUtilisateurID();
 		$bic = $photographe->getBIC();
@@ -264,13 +257,7 @@ class PhotographeDAO extends UtilisateurDAO{
 			break;
 		}
 		$home = $hometmp . sprintf("%02d", $homeDelta);
-		$query = "insert into Photographe(isReady, TVA, isTelephonePublique, nomEntreprise, siren, telephone, siteWeb, home, pourcentage, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values (";
-		if($isReady){
-			$query.= "true";
-		}else{
-			$query.= "false";
-		}
-		$query .= ", ".
+		$query = "insert into Photographe(TVA, isTelephonePublique, nomEntreprise, siren, telephone, siteWeb, home, pourcentage, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values (".
 		mysql_real_escape_string($tva) . ", ";
 		if($isTelPub){
 			$query .= "true";
