@@ -64,6 +64,8 @@ switch($action){
 		$rib_g = $_POST['guichet'];
 		$rib_c = $_POST['numero_compte'];
 		$rib_k = $_POST['cle_rib'];
+		$tva = $_POST['tva'];
+		$isTelPub = $_POST['telephonePublic'];
 		if(!ControleurUtils::check_rib($rib_b, $rib_g, $rib_c, $rib_k)){
 			throw new InvalidArgumentException("RIB invalide. Vous devez fournir un RIB correct.");
 		}
@@ -71,6 +73,9 @@ switch($action){
 		if($action == c_photographe){
 			$send_mail = true;
 			$utilisateur = new Photographe();
+			$utilisateur->setIsReadey(false);
+			$utilisateur->setIsTelephonePublique($isTelPub);
+			$utilisateur->setTVA($tva);
 			$utilisateur->setNomEntreprise($ne);
 			$utilisateur->setSiren($siren);
 			$utilisateur->setTelephone($tel);
