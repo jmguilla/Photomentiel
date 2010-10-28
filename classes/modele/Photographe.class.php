@@ -15,6 +15,9 @@ class Photographe extends Utilisateur{
 	protected $note = 6;
 	protected $nombreVotant = 1;
 	protected $openft = 0;
+	protected $isTelephonePublique = false;
+	protected $isReady = false;
+	protected $tva = 0;
 	protected $rib_b;
 	protected $rib_g;
 	protected $rib_c;
@@ -222,6 +225,30 @@ class Photographe extends Utilisateur{
 	public function decOpenFTP(){
 		$dao = new PhotographeDAO();
 		return $dao->decOpenFTP($this);
+	}
+
+	public function setIsTelephonePublique($tp){
+		$this->isTelephonePublique = $tp;
+	}
+
+	public function isTelephonePublique(){
+		return $this->isTelephonePublique;
+	}
+
+	public function isReady(){
+		return $this->isReady;
+	}
+
+	public function setIsReadey($ir){
+		$this->isReady = $ir;
+	}
+
+	public function setTVA($tv){
+		$this->tva = $tv;
+	}
+
+	public function getTVA(){
+		return $this->tva;
 	}
 }
 ?>

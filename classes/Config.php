@@ -15,6 +15,7 @@ $EVENTS_TYPES=array('Mariage','Evénement Sportif','Shooting Perso','Fête','Aut
 $COMMAND_STATES=array('En attente','Payée','En cours de préparation','Expédiée','Terminée');
 $ALBUM_STATES=array('Créé','Prêt','Ouvert','Cloturé');
 $MODULES=array('521000018');
+$TVA=array('19.6','5.5','Non assujetti');
 
 define('DBTYPE', 'mysql');
 if($_SERVER['SERVER_ADDR'] == "213.186.33.16"){
