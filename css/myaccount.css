@@ -129,3 +129,65 @@ div#indispo {
 	color:darkred;
 }
 
+/*linked to contract*/
+div.contr {
+	width:99%;
+	font-size:14px;
+	text-align:left;
+	height:30px;
+	text-decoration:underline;
+}
+div#p_contrat {
+	margin-top:5px;
+	margin-left:4%;
+	margin-right:3%;
+	height:450px;
+	text-align:justify;
+	font-size:13px;
+	padding:4px;
+	border:1px solid #AABBFF;
+	overflow:auto;
+	line-height:16px;
+	padding-left:25px;
+	padding-right:25px;
+}
+div#finalize {
+	margin-left:4%;
+	margin-right:3%;
+	font-size:13px;
+	line-height:16px;
+	text-align:left;
+}
+div#title {
+	width:100%;
+	text-align:center;
+	line-height:30px;
+	font-size:16px;
+	font-weight:bold;
+}
+h1 {
+	margin-top:20px;
+	line-height:30px;
+	font-size:16px;
+	font-weight:bold;
+	padding-left:10px;
+}
+ul, li, ol {
+	margin-left:10px;
+}
+
+span.level1 {
+	line-height:25px;
+	font-size:15px;
+	padding-left:10px;
+	color:blue;
+}
+span.start{
+	padding-left:25px;
+}
+span.photomentiel{
+	font-weight:bold;
+	font-size:13px;
+}
+
+
