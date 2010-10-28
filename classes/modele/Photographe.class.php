@@ -250,5 +250,14 @@ class Photographe extends Utilisateur{
 	public function getTVA(){
 		return $this->tva;
 	}
+
+	/**
+	 * Pour signaler qu'un photographe a lue le contrat
+	 * retourne true si succes false sinon
+	 */
+	public function validContrat(){
+		$dao = new PhotographeDAO();
+		return $dao->validContrat($this);
+	}
 }
 ?>
