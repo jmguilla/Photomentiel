@@ -1,7 +1,7 @@
 div#cguc {
 	margin-top:5px;
-	margin-left:4%;
-	margin-right:3%;
+	margin-left:7%;
+	margin-right:6%;
 	height:550px;
 	text-align:justify;
 	font-size:14px;
@@ -11,6 +11,7 @@ div#cguc {
 	line-height:18px;
 	padding-left:25px;
 	padding-right:25px;
+	background-color:#E5E5E5;
 }
 div#title {
 	width:100%;
