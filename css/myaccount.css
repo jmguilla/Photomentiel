@@ -175,13 +175,6 @@ h1 {
 ul, li, ol {
 	margin-left:10px;
 }
-
-span.level1 {
-	line-height:25px;
-	font-size:15px;
-	padding-left:10px;
-	color:blue;
-}
 span.start{
 	padding-left:25px;
 }

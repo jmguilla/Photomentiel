@@ -160,18 +160,6 @@ function checkCGU() {
 	}
 	return { "error" : errorCGU, "mess" : mess };
 }
-function checkContract() {
-	var errorContract = false;
-	var mess = '';
-	if (!$('#pcontrat').attr('checked')){
-		errorContract = true;
-		mess = "\nVous devez accepter les termes du contrat de partenariat";
-		$('#rpcontrat').css('background-image','url(design/misc/unchecked.gif)');
-	} else {
-		$('#rpcontrat').css('background-image','url(design/misc/checked.gif)');
-	}
-	return { "error" : errorContract, "mess" : mess };
-}
 
 function checkForm () {
     var error = false;
@@ -210,9 +198,6 @@ function checkForm () {
 	}
 	if(createMode){
 		tmp = checkCGU();
-		error = error || tmp.error;
-	    	mess += tmp.mess;
-		tmp = checkContract();
 		error = error || tmp.error;
 	    	mess += tmp.mess;
 	}

@@ -24,6 +24,10 @@ if ($utilisateurObj){
 	$photographMode = $_SESSION['userClass'] === 'Photographe';
 }
 
+if ($photographMode && isset($_POST['pcontrat'])){
+	//TODO $utilisateurObj->validContrat();
+}
+
 $accountRemoved = false;
 if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 	//T O D O remove account
@@ -45,13 +49,13 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 	<div class="separator10"></div>
 	<div id="content">
 		<?php
-			if (true/* photograph has not yet read the contract */){
+			if (true/* TODO photograph has not yet read the contract */){
 				/***************************** DISPLAY CONTACT ******************************/
 				echo '<div class="contr">Afin de pouvoir utiliser votre compte, vous devez avoir pris connaissance et accepter le présent contrat :</div>';
 				echo '<div id="p_contrat">';
 				include("contratPhotographe.php");
 				echo '</div>';
-				echo '<form method="POST" action="myaccount.php">';
+				echo '<form method="POST" action="myaccount.php" onSubmit="return checkContrat();">';
 				echo '<div id="finalize"><br/><input id="pcontrat" name="pcontrat" type="checkbox"></input> En cochant la case ci-contre et en finalisant mon inscription, je déclare ("le Photographe" désigné dans le présent contrat) avoir pris connaissance et accepte de manière inconditionnelle le présent contrat d\'utilisation des services fournis par Photomentiel au travers de son site internet <span class="photomentiel">www.photomentiel.fr</span></div><br/>';
 				echo '<center><input class="button" type="submit" value="Finaliser mon inscription" style="width:220px;"></input></center>';
 				echo '</form>';

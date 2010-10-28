@@ -356,16 +356,6 @@ if (isset($_GET["np"])){
 							<div class="checkform" id="rcgu"></div>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="3" height="2px;"></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input id="pcontrat" name="pcontrat" type="checkbox"></input> J'ai lu et j'accepte les termes du <a href="javascript:displayContract();">contrat de partenariat</a>
-						</td><td>
-							<div class="checkform" id="rpcontrat"></div>
-						</td>
-					</tr>
 				<?php
 					}
 				?>
