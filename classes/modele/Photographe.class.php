@@ -239,7 +239,7 @@ class Photographe extends Utilisateur{
 		return $this->isReady;
 	}
 
-	public function setIsReadey($ir){
+	public function setIsReady($ir){
 		$this->isReady = $ir;
 	}
 
