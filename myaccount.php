@@ -51,8 +51,10 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 				echo '<div id="p_contrat">';
 				include("contratPhotographe.php");
 				echo '</div>';
+				echo '<form method="POST" action="myaccount.php">';
 				echo '<div id="finalize"><br/><input id="pcontrat" name="pcontrat" type="checkbox"></input> En cochant la case ci-contre et en finalisant mon inscription, je déclare ("le Photographe" désigné dans le présent contrat) avoir pris connaissance et accepte de manière inconditionnelle le présent contrat d\'utilisation des services fournis par Photomentiel au travers de son site internet <span class="photomentiel">www.photomentiel.fr</span></div><br/>';
-				echo '<center><input class="button" type="button" value="Finaliser mon inscription" style="width:220px;"></input></center>';
+				echo '<center><input class="button" type="submit" value="Finaliser mon inscription" style="width:220px;"></input></center>';
+				echo '</form>';
 			} else {
 
 			if (!$utilisateurObj) {
