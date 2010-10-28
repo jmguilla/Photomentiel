@@ -28,6 +28,8 @@ class ControleurUtils{
 			$body,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -44,6 +46,8 @@ class ControleurUtils{
 			"Merci d'utiliser www.photomentiel.fr",
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -62,6 +66,8 @@ class ControleurUtils{
 			"\nhabite: ".$utilisateur->getAdresse()->getCodePostal() . " - " .$utilisateur->getAdresse()->getVille(),
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 	public static function addError($message, $sendEmail = false){
@@ -82,6 +88,8 @@ class ControleurUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -170,6 +178,8 @@ class ControleurUtils{
 			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -191,6 +201,8 @@ class ControleurUtils{
 			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n";
 			return mail($utilisateur->getEmail(),
 			"Photomentiel - Nouveau mot de passe",$content,$headers);
+		}else{
+			return true;
 		}
 	}
 
@@ -234,6 +246,8 @@ class ControleurUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -248,6 +262,8 @@ class ControleurUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 	
@@ -262,6 +278,8 @@ class ControleurUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -277,6 +295,8 @@ class ControleurUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 	/**

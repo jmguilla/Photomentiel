@@ -73,7 +73,7 @@ switch($action){
 		if($action == c_photographe){
 			$send_mail = true;
 			$utilisateur = new Photographe();
-			$utilisateur->setIsReadey(false);
+			$utilisateur->setIsReady(false);
 			$utilisateur->setIsTelephonePublique($isTelPub);
 			$utilisateur->setTVA($tva);
 			$utilisateur->setNomEntreprise($ne);
