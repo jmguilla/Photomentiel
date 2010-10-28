@@ -159,7 +159,20 @@ class PhotographeDAO extends UtilisateurDAO{
 		mysql_real_escape_string($photographe->getRIB_k()) . "', bic = '" . 
 		mysql_real_escape_string($photographe->getBIC()) . "', iban = '" .
 		mysql_real_escape_string($photographe->getIBAN()) . "', pourcentage = " .
-		mysql_real_escape_string($photographe->getPourcentage()) . " where Utilisateur.utilisateurID = " . 
+		mysql_real_escape_string($photographe->getPourcentage()) . ", isTelephonePublique = '";
+		if($photographe->isTelephonePublique()){
+			$query .= "1";
+		}else{
+			$query .= "0";
+		}
+		$query .= "', TVA = " .
+		mysql_real_escape_string($photographe->getTVA()) . ", isReady = '";
+		if($photographe->isReady()){
+			$query .= "1";
+		}else{
+			$query .= "0";
+		}
+		$query .= "' where Utilisateur.utilisateurID = " . 
 		"Photographe.id_utilisateur and Adresse.id_utilisateur = Utilisateur.utilisateurID and Utilisateur.utilisateurID = " .
 		mysql_real_escape_string($photographe->getUtilisateurID()) . " and Photographe.photographeID = " .
 		mysql_real_escape_string($photographe->getPhotographeID());
@@ -217,6 +230,9 @@ class PhotographeDAO extends UtilisateurDAO{
 		$rib_g = $photographe->getRIB_g();
 		$rib_c = $photographe->getRIB_c();
 		$rib_k = $photographe->getRIB_k();
+		$tva = $photographe->getTVA();
+		$isReady = $photographe->isReady();
+		$isTelPub = $photographe->isTelephonePublique();
 		$uid = $photographe->getUtilisateurID();
 		$bic = $photographe->getBIC();
 		$iban = $photographe->getIBAN();
@@ -233,7 +249,20 @@ class PhotographeDAO extends UtilisateurDAO{
 			break;
 		}
 		$home = $hometmp . sprintf("%02d", $homeDelta);
-		$query = "insert into Photographe(nomEntreprise, siren, telephone, siteWeb, home, pourcentage, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values ('" .
+		$query = "insert into Photographe(isReady, TVA, isTelephonePublique, nomEntreprise, siren, telephone, siteWeb, home, pourcentage, id_utilisateur, rib_b, rib_g, rib_c, rib_k, bic, iban) values ('";
+		if($isReady){
+			$query.= "1";
+		}else{
+			$query.= "0";
+		}
+		$query .= "', ".
+		mysql_real_escape_string($tva) . ", '";
+		if($isTelPub){
+			$query .= "1";
+		}else{
+			$query .= "0";
+		}
+		$query .= "', '" .
 		mysql_real_escape_string($ne) . "', '" . 
 		mysql_real_escape_string($siren) . "', '" . 
 		mysql_real_escape_string($tel) . "', '" . 

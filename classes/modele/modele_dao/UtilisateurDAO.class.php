@@ -215,6 +215,9 @@ class UtilisateurDAO extends DAO{
 			$dirname = dirname(__FILE__);
 			include_once $dirname . "/../Photographe.class.php";
 			$result = new Photographe();
+			$isTelPub = htmlspecialchars($row->offsetGet($prefix . "isTelephonePublique"));
+			$isReady = htmlspecialchars($row->offsetGet($prefix . "isReady"));
+			$tva = htmlspecialchars($row->offsetGet($prefix . "TVA"));
 			$siren = htmlspecialchars($row->offsetGet($prefix . "siren"));
 			$sw = htmlspecialchars($row->offsetGet($prefix . "siteWeb"));
 			$tel = htmlspecialchars($row->offsetGet($prefix . "telephone"));
@@ -230,6 +233,9 @@ class UtilisateurDAO extends DAO{
 			$note = $row->offsetGet($prefix . "note");
 			$nv = $row->offsetGet($prefix . "nombreVotant");
 			$ftp = $row->offsetGet($prefix . "openftp");
+			$result->setTVA($tva);
+			$result->setIsTelephonePublique($isTelPub);
+			$result->setIsReadey($isReady);
 			$result->setOpenFTP($ftp);
 			$result->setNombreVotant($nv);
 			$result->setNote($note);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Mar 26 Octobre 2010 à 19:02
+-- Généré le : Jeu 28 Octobre 2010 à 19:46
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `Adresse` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`adresseID`),
   KEY `fk_adresse_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Contenu de la table `Adresse`
@@ -60,7 +60,8 @@ INSERT INTO `Adresse` (`adresseID`, `nom`, `prenom`, `nomRue`, `complement`, `vi
 (30, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 31),
 (31, 'lebas', 'julie', '61blvr marechal juin ', 'le grimaldi', 'Cagnes-sur-Mer', '06800', 32),
 (32, 'guillaume', 'michele', '6 rue du murier', '', 'les arcs', '83460', 33),
-(36, 'Callès', 'Gérard', 'l''oumède', '', 'Ramatuelle', '83350', 37);
+(36, 'Callès', 'Gérard', 'l''oumède', '', 'Ramatuelle', '83350', 37),
+(40, 'callès', 'Gérard', 'Quartier de l''Oumède', '', 'RAMATUELLE', '83350', 41);
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=92 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -90,7 +91,9 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (87, 'Guillaume', 'Jean-Michel', '11 Avenue Prado Provence', '2nd étage', 'Cannes', '06400', 87),
 (88, 'Guillaume', 'Jean-Michel', '11 Avenue Prado Provence', '2iem étage chez Mr Delmass', 'Cannes', '06400', 88),
 (90, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 90),
-(91, 'Léger', 'Anne-Sophie', '63 BD Croisette', 'Le Lerina', 'Cannes', '06400', 91);
+(91, 'Léger', 'Anne-Sophie', '63 BD Croisette', 'Le Lerina', 'Cannes', '06400', 91),
+(93, 'callès', 'Gérard', 'Quartier de l''Oumède', '', 'RAMATUELLE', '83350', 93),
+(94, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 94);
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=92 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
 
 --
 -- Contenu de la table `Commande`
@@ -164,7 +167,9 @@ INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, 
 (87, '2010-10-19 22:02:43', '2010-10-19 22:07:22', 28, 43, 2, 'jm', 2.9, '101019220', 'un numéro au hazard'),
 (88, '2010-10-19 23:08:46', '2010-10-19 23:09:33', 28, 43, 2, 'jm', 2.9, '101019230', ''),
 (90, '2010-10-20 14:49:25', NULL, 31, 45, 0, '', 2.9, '101020140', ''),
-(91, '2010-10-24 18:14:55', NULL, 28, 58, 0, '', 2.9, '101024180', '');
+(91, '2010-10-24 18:14:55', NULL, 28, 58, 0, '', 2.9, '101024180', ''),
+(93, '2010-10-27 20:18:40', NULL, 41, 43, 0, '', 2.9, '101027200', ''),
+(94, '2010-10-28 15:20:43', NULL, 31, 58, 0, '', 2.9, '101028150', '');
 
 -- --------------------------------------------------------
 
@@ -211,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `id_commande` (`id_commande`),
   KEY `fk_commandePhoto_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=412 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=415 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -232,7 +237,9 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (406, 'umkn91u20071.JPG', 1, 88, 1, 2, 1, 43, 3.00),
 (409, 'qtmtva8i0000.JPG', 1, 90, 1, 1, 1, 45, 2.00),
 (410, 'qtmtva8i0001.JPG', 1, 90, 1, 1, 1, 45, 2.00),
-(411, 'td7t7kk40079.JPG', 1, 91, 1, 2, 1, 58, 2.00);
+(411, 'td7t7kk40079.JPG', 1, 91, 1, 2, 1, 58, 2.00),
+(413, 'umkn91u20032.JPG', 1, 93, 1, 2, 1, 43, 2.00),
+(414, 'td7t7kk40056.JPG', 1, 94, 1, 2, 1, 58, 2.00);
 
 -- --------------------------------------------------------
 
@@ -465,6 +472,9 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `note` float(4,2) unsigned NOT NULL default '6.00',
   `nombreVotant` int(10) unsigned NOT NULL default '1',
   `openftp` mediumint(8) unsigned NOT NULL,
+  `TVA` smallint(6) NOT NULL default '0',
+  `isReady` tinyint(1) NOT NULL default '0',
+  `isTelephonePublique` tinyint(1) NOT NULL default '0',
   `rib_b` varchar(10) NOT NULL default '',
   `rib_g` varchar(10) NOT NULL default '',
   `rib_c` varchar(20) NOT NULL default '',
@@ -474,18 +484,18 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
   `id_utilisateur` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY  (`photographeID`),
   KEY `fk_photographe_user` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `Photographe`
 --
 
-INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `note`, `nombreVotant`, `openftp`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
-(12, 'JMG', '521000018', '+33620375962', '', '2010101800', 73, 6.00, 1, 0, '19106', '00021', '43622960800', '41', '', 'FR7619106000214362296080041', 28),
-(13, 'Lutigneaux Laetitia', '522874684', '', 'http://', '2010101801', 73, 6.00, 1, 0, '15899', '07910', '00055977303', '26', '', 'FR7615899079100005597730326', 29),
-(14, '', '000000000', '', 'http://', '2010101802', 73, 6.00, 1, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 30),
-(15, '', '525329272', '', 'http://www.photomentiel.fr', '2010101803', 73, 6.00, 1, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 31),
-(16, 'guillaume', '000000000', '0617724567', 'http://', '2010102000', 73, 6.00, 1, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 33);
+INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `note`, `nombreVotant`, `openftp`, `TVA`, `isReady`, `isTelephonePublique`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
+(12, 'JMG', '521000018', '+33620375962', '', '2010101800', 73, 6.00, 1, 0, 0, 0, 0, '19106', '00021', '43622960800', '41', '', 'FR7619106000214362296080041', 28),
+(13, 'Lutigneaux Laetitia', '522874684', '', 'http://', '2010101801', 73, 6.00, 1, 0, 0, 0, 0, '15899', '07910', '00055977303', '26', '', 'FR7615899079100005597730326', 29),
+(14, '', '000000000', '', 'http://', '2010101802', 73, 6.00, 1, 0, 0, 0, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 30),
+(15, '', '525329272', '', 'http://www.photomentiel.fr', '2010101803', 73, 6.00, 1, 0, 0, 0, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 31),
+(16, 'guillaume', '000000000', '0617724567', 'http://', '2010102000', 73, 6.00, 1, 0, 0, 0, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 33);
 
 -- --------------------------------------------------------
 
@@ -684,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `transactionID` (
 --
 
 INSERT INTO `transactionID` (`id`, `transactionID`) VALUES
-(1, 113220);
+(1, 113238);
 
 -- --------------------------------------------------------
 
@@ -741,7 +751,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateInscription` datetime NOT NULL,
   PRIMARY KEY  (`utilisateurID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- Contenu de la table `Utilisateur`
@@ -754,7 +764,8 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (31, 'jl@schee.fr', '8e64d8e22298f5d79edd4223ad2d54eb', 1, '2010-10-18 14:13:25'),
 (32, 'stevejulie@hotmail.fr', '02b8dfe1485a048c6dc6cf0ab41ccbc5', 1, '2010-10-18 17:14:58'),
 (33, 'jm-guillaume@orange.fr', '71a1f456f2cca7192d736a2d529960f3', 1, '2010-10-20 19:28:35'),
-(37, 'ge.calles@wanadoo.fr', '4fd8ed3f6d0d460e38fde11a12f45240', 1, '2010-10-24 18:08:47');
+(37, 'ge.calles@wanadoo.fr', '4fd8ed3f6d0d460e38fde11a12f45240', 1, '2010-10-24 18:08:47'),
+(41, 'gerard.calles@wanadoo.fr', '7e70782273b574b9175cc7aaed2308c8', 1, '2010-10-27 20:14:47');
 
 -- --------------------------------------------------------
 
