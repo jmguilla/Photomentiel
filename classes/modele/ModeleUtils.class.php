@@ -49,6 +49,8 @@ class ModeleUtils{
 			"Veuillez ne pas répondre à cet email, celui-ci a été généré automatiquement.\n",
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 
@@ -75,6 +77,8 @@ class ModeleUtils{
 			$content,
 			$headers
 			);
+		}else{
+			return true;
 		}
 	}
 }
