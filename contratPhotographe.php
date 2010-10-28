@@ -41,14 +41,14 @@ De ce fait, le Photographe accepte expressément et sans condition que Photoment
 
 
 <h1>Article 3 : Compte Photographe et Album</h1>
-<span class="start"></span>En accédant à son compte, le Photographe peut créer des albums publics ou privés :<br/>
+En accédant à son compte, le Photographe peut créer des albums publics ou privés :<br/>
 <ul>
 <li>Les albums publics peuvent être visible par tous visiteurs sur le site <span class="photomentiel">www.photomentiel.fr</span>. Les derniers albums publiés seront visible aussi sur la page d'accueil du site.</li>
-<li>- Les albums privés resteront cachés de tous visiteurs qui n'aura pas le code d'accés pour cet album. Le Photographe se doit de savoir qu'il est responsable de la diffusion de ce code et de faire respecter sa discrétion.</li>
+<li>Les albums privés resteront cachés de tous visiteurs qui n'aura pas le code d'accés pour cet album. Le Photographe se doit de savoir qu'il est responsable de la diffusion de ce code et de faire respecter sa discrétion.</li>
 </ul>
-<span class="start">Un album peut être créé sans contenir de photos, ce qui permet au Photographe d'obtenir ses cartes de visites et son code album. Il peut ensuite envoyer ses photos à son rythme via l'accés FTP qui lui est réservé ou sur rendez vous s'il est dans le département des Alpes Maritimes. Une fois le transfert terminé, il est validé par le Photographe puis l'album est vérifié par Photomentiel qui se réserve le droit de le publier si toutes les conditions de publication sont respectées.<br/>
+Un album peut être créé sans contenir de photos, ce qui permet au Photographe d'obtenir ses cartes de visites et son code album. Il peut ensuite envoyer ses photos à son rythme via l'accés FTP qui lui est réservé ou sur rendez vous s'il est dans le département des Alpes Maritimes. Une fois le transfert terminé, il est validé par le Photographe puis l'album est vérifié par Photomentiel qui se réserve le droit de le publier si toutes les conditions de publication sont respectées.<br/>
 L'album est alors disponible pour une période de 3 mois minimum, et reconductible par quinzaine si des nouvelles commandes sont passées.<br/>
-<span class="start">Lorsqu'un album est en instance d'être supprimé, il reste disponible tant qu'il y'a des commandes en cours sur cet album et jusqu'à ce que le montant dû pour cet album soit reversé au Photographe.<br/>
+<span class="start"></span>Lorsqu'un album est en instance d'être supprimé, il reste disponible tant qu'il y'a des commandes en cours sur cet album et jusqu'à ce que le montant dû pour cet album soit reversé au Photographe.<br/>
 Le Photographe peut supprimer un album manuellement, ce qui le place dans les conditions de suppression précédemment citées.<br/>
 
 
