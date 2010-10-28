@@ -139,8 +139,8 @@ div.contr {
 }
 div#p_contrat {
 	margin-top:5px;
-	margin-left:4%;
-	margin-right:3%;
+	margin-left:7%;
+	margin-right:6%;
 	height:450px;
 	text-align:justify;
 	font-size:13px;
@@ -150,10 +150,11 @@ div#p_contrat {
 	line-height:16px;
 	padding-left:25px;
 	padding-right:25px;
+	background-color:#E0E0E0;
 }
 div#finalize {
-	margin-left:4%;
-	margin-right:3%;
+	margin-left:7%;
+	margin-right:6%;
 	font-size:13px;
 	line-height:16px;
 	text-align:left;

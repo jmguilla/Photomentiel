@@ -9,13 +9,15 @@
  * Since : 1.0.0
  *
  */
+ //assert $utilisateurObj exist and is a photographe
 ?>
 <div id="title">CONTRAT LIANT LE PHOTOGRAPHE ET PHOTOMENTIEL</div>
 <br/><br/>
 <i>Ce contrat est établit, entre d'une part le photographe, ci-aprés dénommé "le Photographe" :</i><br/>
-La Société : TODO<br/>
-représenté par : TODO<br/>
-et dont le Numéro SIREN est : TODO<br/>
+La Société : <?php echo $utilisateurObj->getNomEntreprise(); ?><br/>
+<?php $adress = $utilisateurObj->getAdresse(); ?>
+représenté par : <?php echo $adress->getNom()." ".$adress->getPrenom(); ?><br/>
+et dont le Numéro SIREN est : <?php echo $utilisateurObj->getSiren(); ?><br/>
 <br/>
 <i>et d'autre part les associés Photomentiel, ci-aprés dénommé "Photomentiel" :</i><br/>
 Le service Photomentiel,<br/>

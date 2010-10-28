@@ -25,7 +25,7 @@ if ($utilisateurObj){
 }
 
 if ($photographMode && isset($_POST['pcontrat'])){
-	//TODO $utilisateurObj->validContrat();
+	$utilisateurObj->validContrat();
 }
 
 $accountRemoved = false;
@@ -49,7 +49,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 	<div class="separator10"></div>
 	<div id="content">
 		<?php
-			if (true/* TODO photograph has not yet read the contract */){
+			if ($utilisateurObj && !$utilisateurObj->isReady()){
 				/***************************** DISPLAY CONTACT ******************************/
 				echo '<div class="contr">Afin de pouvoir utiliser votre compte, vous devez avoir pris connaissance et accepter le présent contrat :</div>';
 				echo '<div id="p_contrat">';
