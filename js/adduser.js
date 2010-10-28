@@ -220,6 +220,8 @@ function createUserDataAction(){
 function updateUserDataAction(){
 	var o = new Object();
 	o.action = "update_"+(photographMode?"photographe":"utilisateur");
+	o.telephonePublic = ($('#telephone_r').attr('checked'))?"1":"0";
+	o.tva = $('#tva').val();
 	$('input[class=textfield]').each(function() {
 		if (this.name != "pwd2"){
 			eval('o.'+this.name+'="'+this.value+'"');

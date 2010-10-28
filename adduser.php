@@ -300,14 +300,14 @@ if (isset($_GET["np"])){
 					</tr>
 					<tr>
 						<td>
-							TVA appliqué : 
+							TVA appliquée : 
 						</td><td>
 							<select id="tva" name="tva">
 								<?php
 									$i = 0;
 									foreach($TVA as $t) {
 										$tvac = (!$createMode && $utilisateurObj->getTVA() == $i)?'selected="selected"':'';
-										echo '<option value="'.$i.'">'.$t.'</option>';
+										echo '<option value="'.$i.'" '.$tvac.'>'.$t.'</option>';
 										$i++;
 									}
 								?>
