@@ -12,6 +12,12 @@ class AlbumDAO extends DAO {
 		$dsn = DBTYPE."://".DBUSER.":".DBPWD."@".DBHOST."/".DBPHOTOMENTIEL;
 		parent::__construct($dsn);
 	}
+	public function getAlbumDepuisEtat($etat){
+		$sql = "select * from Album where etat = " .
+		mysql_real_escape_string($etat);
+		$tmp = $this->retrieve($sql);
+		return $this->extractArrayQuery($tmp, $this, "buildAlbumFromRow");
+	}
 	public function finirTransfert($a){
 		$query = "update Album set transfert = 0 where albumID = " .
 		mysql_real_escape_string($a->getAlbumID());

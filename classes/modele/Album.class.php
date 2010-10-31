@@ -34,6 +34,11 @@ class Album {
 		$this->module = $module;
 	}
 
+	public static function getAlbumDepuisEtat($etat){
+		$dao = new AlbumDAO();
+		return $dao->getAlbumDepuisEtat($etat);
+	}
+
 	/**
 	 * Renvoie les n derniers albums
 	 * si n n'est pas fournies, renvoies tous les derniers albums

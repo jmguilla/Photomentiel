@@ -42,6 +42,12 @@ class CommandeDAO extends DAO{
 			return false;
 		}
 	}
+	public function getCommandeDepuisID_Album($ida){
+		$sql = "select * from Commande left join AdresseCommande on commandeID = id_commande where id_album = " .
+		mysql_real_escape_string($ida);
+		$tmp = $this->retrieve($sql);
+		return $this->extractArrayQuery($tmp, $this, "buildCommandeFromRow");
+	}
 	public function getCommandeEtPhotosDepuisID_Album($ida){
 		$query = "select * from Commande as c left join CommandePhoto as cp on c.commandeID = cp.id_commande left join AdresseCommande as a on a.id_commande = c.commandeID where cp.id_album = " .
 		mysql_real_escape_string($ida);

@@ -39,6 +39,13 @@ class Commande{
 		$dao = new CommandeDAO();
 		return $dao->setEnCoursDePreparation($id, $prep);
 	}
+	public static function getCommandeDepuisID_Album($ida){
+		if(!isset($ida)){
+			return false;
+		}
+		$dao = new CommandeDAO();
+		return $dao->getCommandeDepuisID_Album($ida);
+	}
 	public static function getCommandeEtPhotosDepuisID_Album($ida){
 		if(!isset($ida)){
 			return false;
