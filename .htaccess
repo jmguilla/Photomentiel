@@ -15,7 +15,6 @@ RewriteRule ^cartes-de-visite-([A-Za-z0-9]+)\.pdf$ /card_pdf.php?al=$1 [L]
 RewriteRule ^active-([A-Za-z0-9]+)$ /validaccount.php?uid=$1 [L]
 RewriteRule ^err([0-9]+)\.htm$ /error.php?err=$1 [L]
 RewriteRule ^album-([A-Za-z0-9]+)\.php$ /viewalbum.php?al=$1 [L]
-RewriteRule ^p-contrat\.pdf$ /contratPhotographe.php [L]
 
 RewriteRule ^css/$ /error.php?err=403 [L]
 RewriteRule ^js/$ /error.php?err=403 [L]

@@ -4,23 +4,6 @@ div#choices_2 {
 	margin-right:auto;
 	font-size:14px;
 }
-div#left_button, div#right_button {
-	border:2px #0099FF solid;
-	border-bottom:1px #0099FF solid;
-	width:368px;
-	font-size:16px;
-	font-weight:bold;
-	padding-top:8px;
-	height:28px;
-	color:#0099FF;
-	background-color:#222222;
-}
-div#left_button:hover, div#right_button:hover {
-	border:2px #222222 solid;
-	border-bottom:1px #222222 solid;
-	color:#222222;
-	background-color:#0099FF;
-}
 div.description {
 	text-align:left;
 	border:1px #0099FF solid;

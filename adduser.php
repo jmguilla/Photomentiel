@@ -83,36 +83,34 @@ if (isset($_GET["np"])){
 		<div class="separator10" style="height:20px"></div>
 		<div id="choices_2">
 			<b>Veuillez choisir le type de compte que vous souhaitez créer<br/>en cliquant sur le bouton correspondant :</b><br/><br/>
-			<div class="separator10" style="height:20px"></div>
+			<div class="separator10" style="height:60px"></div>
 			<div id="choices_buttons_content">
 				<div style="float:left;">
 					<a href="?type=cl<?php echo $nextPage!='false'?'&np='.$nextPage:''; ?>">
-					<div id="left_button" onMouseOver="$('#desc_cli').css('border','1px #222222 solid');$('#desc_cli').css('background-color','#AAAAFF');" onMouseOut="$('#desc_cli').css('border','1px #0099FF solid');$('#desc_cli').css('background-color','#EEEEFF');">
-						Créer un compte <i><u>client</u></i>
-					</div>
+						<div id="desc_cli" class="description" onMouseOver="$('#desc_cli').css('border','1px #222222 solid');$('#desc_cli').css('background-color','#AAAAFF');" onMouseOut="$('#desc_cli').css('border','1px #0099FF solid');$('#desc_cli').css('background-color','#EEEEFF');">
+							<table><tr><td>
+							<div style="float:left;margin-right:5px;"><img height="70px" src="design/misc/create_account.png"/></div>
+							<font color="black"><b>Créer un compte <u><i>client</i></u></b> permet, si vous n'êtes pas photographe, de créer un compte simple client pour acheter des photos
+							disponibles au travers des albums. <br/>Il vous sera possible de parcourir les albums publics, d'accéder aux albums dont vous avez les codes,
+							ainsi que d'accéder à la gestion des événements.</font>
+							</td></tr></table>
+						</div>
 					</a>
-					<div class="separator2" style="height:0px"></div>
-					<div id="desc_cli" class="description"><table><tr><td>
-						<b>Créer un compte <u><i>client</i></u></b> permet, si vous n'êtes pas photographe, de créer un compte simple client pour acheter des photos
-						disponibles au travers des albums. <br/>Il vous sera possible de parcourir les albums publics, d'accéder aux albums dont vous avez les codes,
-						ainsi que d'accéder à la gestion des événements.</td></tr></table>
-					</div>
 				</div>
 				<div style="float:right;">
 					<a href="?type=ph<?php echo $nextPage!='false'?'&np='.$nextPage:''; ?>">
-					<div id="right_button" onMouseOver="$('#desc_pho').css('border','1px #222222 solid');$('#desc_pho').css('background-color','#AAAAFF');" onMouseOut="$('#desc_pho').css('border','1px #0099FF solid');$('#desc_pho').css('background-color','#EEEEFF');">
-						Créer un compte <i><u>Photographe</u></i>
-					</div>
+						<div id="desc_pho" class="description" onMouseOver="$('#desc_pho').css('border','1px #222222 solid');$('#desc_pho').css('background-color','#AAAAFF');" onMouseOut="$('#desc_pho').css('border','1px #0099FF solid');$('#desc_pho').css('background-color','#EEEEFF');">
+							<table><tr><td>
+							<div style="float:left;margin-right:5px;"><img height="70px" src="design/misc/photograph.png"/></div>
+							<font color="black"><b>Créer un compte <u><i>Photographe</i></u></b> permet, dans le cas où vous êtes photographe, de créer un compte vous permettant
+							d'ajouter des albums privés ou publics et d'y charger vos photos.<br/>
+							Pour plus de renseignements, rendez vous dans la rubrique <i>vous êtes photographe</i></font>
+							</td></tr></table>
+						</div>
 					</a>
-					<div class="separator2" style="height:0px"></div>
-					<div id="desc_pho" class="description"><table><tr><td>
-					<b>Créer un compte <u><i>Photographe</i></u></b> permet, dans le cas où vous êtes photographe, de créer un compte vous permettant
-					d'ajouter des albums privés ou publics et d'y charger vos photos.<br/>
-					Pour plus de renseignements, rendez vous dans la rubrique <a href="photograph.php">vous êtes photographe</a></td></tr></table>
-					</div>
 				</div>
 				<div class="separator2"></div>
-			</div>			<div class="separator10" style="height:44px"></div>
+			</div>			<div class="separator10" style="height:80px"></div>
 		</div>
 	<?php
 		/***************************************************************************************/

@@ -157,4 +157,7 @@ Le «double clic» associé à la procédure complète de création de compte, d
 <br/>
 <br/>
 <br/>
+Le <?php echo date("d/m/Y à H:i:s"); ?><br/>
+IP du Photographe : <?php echo $_SERVER['REMOTE_ADDR']; ?><br/>
+<br/>
 
