@@ -9,7 +9,7 @@ function eventString(eventObj, index) {
 	var user = eventObj.Utilisateur.fields;
 	var tmp = '<div '+idi+' class="event">';
 	tmp += '<span class="date"><b>Date</b> : '+convertUSDate(event.Date)+'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '+event.Type+'</span><br/><span class="content">';
-	tmp += '<span class="intitule"><a class="intitule" href="events.php?ev='+event.EvenementID+'"><b>Intitulé</b> : '+toNchar(event.Description,84)+'</a></span><br/>';
+	tmp += '<span class="intitule"><a class="intitule" href="events.php?ev='+event.EvenementID+'"><b>Intitulé</b> : '+toNchar(event.Description,100)+'</a></span><br/>';
 	if (event.Web != ''){
 		tmp += '<a target="_blank" href="'+event.Web+'">Plus de détails sur le lien officiel...</a><br/>';
 	} else {
@@ -45,7 +45,7 @@ function getEvents(){
 	if (d2!='') {param.d2=d2;}
 	if (kw!='') {param.query=kw;}
 	if (rg!=0) {param.idr=rg;}
-	if (tp!=0) {param.type=tp;}
+	if (tp!=-1) {param.type=tp;}
 	$('#search').attr('disabled', 'true');
 	$.ajax({
 		type:"POST",

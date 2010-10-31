@@ -52,6 +52,17 @@ var l = 0;
 var t = 0;
 var MonthLengths = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 
+
+function getXY( oElement ) {
+	var xReturnValue = 0;
+	var yReturnValue = 0;
+	while( oElement != null ) {
+		xReturnValue += oElement.offsetLeft;
+		yReturnValue += oElement.offsetTop;
+		oElement = oElement.offsetParent;
+	}
+	return {x:xReturnValue, y:yReturnValue};
+}
 /*
   Function: GetDate(control)
 
@@ -92,8 +103,9 @@ function GetDate() {
 
   /* Calendar is displayed 125 pixels above the destination element
   or (somewhat) over top of it. ;)*/
-  l = dest.offsetLeft + dest.offsetParent.offsetLeft;
-  t = dest.offsetTop - 125;
+  var xy = getXY(dest);
+  l = xy.x;
+  t = xy.y + 20;
   if(t < 0) t = 0;
   DrawCalendar();
 }

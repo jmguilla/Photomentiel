@@ -15,7 +15,7 @@ function albumString(albumObj, index) {
 	tmp += '<div class="album_pic"><a href="viewalbum.php?al='+stringID.StringID+'"><img height="88px" src="'+thumb+'"/></a></div>';
 	tmp += '<div class="album_link">';
 	tmp += '<span class="date"><b>Date</b> : '+convertUSDate(album.Date)+'</span><br/><span class="content">';
-	tmp += '<span class="intitule"><a class="intitule" href="viewalbum.php?al='+stringID.StringID+'"><b>Intitulé</b> : '+toNchar(album.Nom,92)+'</a></span><br/>';
+	tmp += '<span class="intitule"><a class="intitule" href="viewalbum.php?al='+stringID.StringID+'"><b>Intitulé</b> : '+toNchar(album.Nom,110)+'</a></span><br/>';
 	tmp += '<b>Photographe</b> : '+adress.Prenom+' '+adress.Nom+'<br/>';
 	tmp += '<b>Contact</b> : '+photograph.Telephone+'<br/>';
 	if (album.ID_Evenement != null && album.ID_Evenement != '') {

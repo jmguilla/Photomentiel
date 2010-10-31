@@ -116,45 +116,61 @@ if (isset($_POST['ftype'])){
 	</div>
 	<div class="separator10"></div>
 	<div id="events_content">
-		<div id="search">
-			<div id="stitle">Chercher des Evénements :</div>
-			<form onSubmit="getEvents();return false;">
-				Par dates :<br/>
-				du <input id="dc_from" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/>
-				( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/> )<br/>
-				Par mots-clés :<br/>
-				<input id="keywords" class="textfield" type="textfield" onFocus="this.select()"/><br/>
-				Par région :<br/>
-				<select id="region">
-					<option value="0"></option>
-					<?php
-						$regionList = Region::getRegions();
-						foreach($regionList as $region) {
-							echo '<option value="'.$region->getID_Region().'">'.$region->getNom().'</option>';
-						}
-					?>
-				</select><br/>
-				Par type :<br/>
-				<select id="type">
-					<option value="0"></option>
-					<?php
-						foreach($EVENTS_TYPES as $t) {
-							echo '<option value="'.$t.'">'.$t.'</option>';
-						}
-					?>
-				</select><br/>
-				<div class="sbutton_holder"><input id="search" class="button" type="submit" value="Chercher" title="Chercher des événements avec les critères sélectionnés"/></div>
-			</form>
+		<?php
+			$regionList = Region::getRegions();
+			if (!$addEvent) {
+		?>
 			<div id="create_event">
-			<?php
-				if ($utilisateurObj){
-					echo '<input id="create_event" class="button" type="button" value="Ajouter un événement" title="Ajouter un nouvel événement" onClick="document.location.href=\'events.php?action=add\';"/>';
-				} else {
-					echo 'Pour ajouter un événement, vous devez vous connecter ou <br/><a href="adduser.php?np=events.php">créer un compte</a>';
-				}
-			?>
+				<?php
+					if ($utilisateurObj){
+						echo '<font color="aqua">Pour ajouter un événement, </font><a href="events.php?action=add" title="Ajouter un nouvel événement">veuillez cliquer ici</a>';
+					} else {
+						echo '<font color="orange"><b>Pour ajouter un événement, vous devez vous connecter ou <a href="adduser.php?np=events.php">créer un compte</a></b></font>';
+					}
+				?>
 			</div>
-		</div>
+			<div class="separator5"></div>
+		<?php
+			}
+			if (!$addEvent){
+				echo '<div id="search">';
+			} else {
+				echo '<div id="search_alpha">';
+			}
+		?>
+				<div id="stitle">Chercher des Evénements :</div>
+				<form onSubmit="getEvents();return false;">
+					<table><tr><td>
+					Par dates :</td><td>
+					du <input id="dc_from" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/>
+					( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/> )
+					</td><td width="25px"></td><td>Par mots-clés :</td><td>
+					<input id="keywords" class="textfield" type="textfield" onFocus="this.select()"/></td></tr><tr><td>
+					Par région :</td><td>
+					<select id="region">
+						<option value="0"></option>
+						<?php
+							foreach($regionList as $region) {
+								echo '<option value="'.$region->getID_Region().'">'.$region->getNom().'</option>';
+							}
+						?>
+					</select></td><td width="25px"></td><td>
+					Par type :</td><td>
+					<select id="type">
+						<option value="-1"></option>
+						<?php
+							$i = 0;
+							foreach($EVENTS_TYPES as $t) {
+								echo '<option value="'.$i.'">'.$t.'</option>';
+								$i++;
+							}
+						?>
+					</select>
+					&nbsp;&nbsp;<input id="search" class="button" type="submit" value="Chercher" title="Chercher des événements avec les critères sélectionnés"/>
+					</td></tr></table>
+				</form>
+			</div>
+			<div class="separator5"></div>
 		<div id="right">
 			<div id="rtitle">
 			<?php
@@ -162,7 +178,7 @@ if (isset($_POST['ftype'])){
 					if ($eventSelected) {
 						echo 'Détails de l\'événement :';
 					} else {
-						echo 'Voici les derniers événements publics déposés :';
+						echo 'Voici les derniers événements déposés :';
 					}
 				} else {
 					if ($eventAdded){
@@ -173,7 +189,7 @@ if (isset($_POST['ftype'])){
 				}
 			?>
 			</div>
-			<div id="rcontent" style="height:525px;">
+			<div id="rcontent" <?php if (!$addEvent && !$eventSelected){ echo 'style="height:420px;"';} ?>>
 			<?php
 				if (!$addEvent) {
 					/***************************** VIEWING MODE  ******************************/
@@ -192,7 +208,7 @@ if (isset($_POST['ftype'])){
 								}
 								echo '<div '.$idi.' class="event">';
 								echo '<span class="date"><b>Date</b> : '.date("d/m/Y à G\hi",strtotime($tmp->getDate())).'&nbsp;&nbsp;&nbsp;&nbsp;<b>Type</b> : '.$EVENTS_TYPES[$tmp->getType()].'</span><br/><span class="content">';
-								echo '<span class="intitule"><a class="intitule" href="events.php?ev='.$tmp->getEvenementID().'"><b>Intitulé</b> : '.toNchar($tmp->getDescription(),84).'</a></span><br/>';
+								echo '<span class="intitule"><a class="intitule" href="events.php?ev='.$tmp->getEvenementID().'"><b>Intitulé</b> : '.toNchar($tmp->getDescription(),100).'</a></span><br/>';
 								if ($tmp->getWeb() != ''){
 									echo '<a target="_blank" href="'.$tmp->getWeb().'">Plus de détails sur le lien officiel...</a><br/>';
 								} else {
@@ -225,7 +241,7 @@ if (isset($_POST['ftype'])){
 								<tr><td><b>Date & heure : </b></td><td><span class="highlight">'.date("d/m/Y à G\hi",strtotime($evt->getDate())).'</span></td></tr>
 								<tr><td><b>Adresse : </b></td><td><span class="highlight">'.$evt->getAdresse().'</span></td></tr>';
 								if ($evt->getWeb() != ''){
-									echo '<tr><td colspan="2"><b>Lien vers l\'événement officiel : </b><a target="_blank" href="'.$evt->getWeb().'">'.toNchar($evt->getWeb(),60).'</a></td></tr>';
+									echo '<tr><td colspan="2"><b>Lien vers l\'événement officiel : </b><a target="_blank" href="'.$evt->getWeb().'">'.toNchar($evt->getWeb(),75).'</a></td></tr>';
 								} else {
 									echo '<tr><td colspan="2">Site internet non communiqué</td>';
 								}
@@ -389,7 +405,10 @@ if (isset($_POST['ftype'])){
 							</tr>
 						</table>
 						<div class="separator10"></div>						
-						<center><input type="submit" class="button" value="Soumettre"/></center>
+						<center>
+							<input type="button" class="button" value="Retour" onClick="history.back();" style="margin-right:100px;"/>
+							<input type="submit" class="button" value="Soumettre"/>
+						</center>
 						<div class="separator5"></div>
 					</form>
 					</div>

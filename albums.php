@@ -32,14 +32,15 @@ include_once("classes/modele/Adresse.class.php");
 		<div id="search">
 			<div id="stitle">Chercher des Albums :</div>
 			<form onSubmit="getAlbums();return false;">
-				Par dates :<br/>
+				Par dates :
 				du <input id="dc_from" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/>
-				( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/> )<br/>
-				Par mots-clés :<br/>
-				<input id="keywords" class="textfield" type="textfield" onFocus="this.select()"/><br/>
-				<div class="sbutton_holder"><input id="search" class="button" type="submit" value="Chercher" title="Chercher des albums avec les critères sélectionnés" /></div>
+				( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/> )
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Par mots-clés :
+				<input id="keywords" class="textfield" type="textfield" onFocus="this.select()"/>
+				<input id="search" class="button" type="submit" value="Chercher" title="Chercher des albums avec les critères sélectionnés" />
 			</form>
 		</div>
+		<div class="separator5"></div>
 		<div id="right">
 			<div id="rtitle">Voici les derniers albums publics déposés :</div>
 			<div id="rcontent">
@@ -61,7 +62,7 @@ include_once("classes/modele/Adresse.class.php");
 							echo '<div class="album_pic"><a href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><img src="'.$tmp["Thumb"].'"/></a></div>';
 							echo '<div class="album_link">';
 							echo '<span class="date"><b>Date</b> : '.date("d/m/Y",strtotime($tmp["Album"]->getDate())).'</span><br/><span class="content">';
-							echo '<span class="intitule"><a class="intitule" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><b>Intitulé</b> : '.toNchar($tmp["Album"]->getNom(),92).'</a></span><br/>';
+							echo '<span class="intitule"><a class="intitule" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><b>Intitulé</b> : '.toNchar($tmp["Album"]->getNom(),110).'</a></span><br/>';
 							echo '<b>Photographe</b> : '.$adress->getPrenom().' '.$adress->getNom().'<br/>';
 							echo '<b>Contact</b> : '.(($photograph->getTelephone()=='' || !$photograph->isTelephonePublique())?'Non communiqué':$photograph->getTelephone()).'<br/>';
 							if ($event) {
