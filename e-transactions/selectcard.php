@@ -61,9 +61,8 @@ function displayCards($p_module, $p_amount, $p_transactionID, $p_userID, $p_albu
 	//$parm="$parm logo_id2=";
 	$parm="$parm advert=advert.png";
 	//$parm="$parm background_id=";
-	if ($p_module === $SIREN_JL){//TODO remove and set it in parmcom.e-transaction
-		$parm="$parm templatefile=pm_template";
-	}
+	$parm="$parm templatefile=pm_template";
+
 
 	// Initialisation du chemin de l'executable request
 	// ex :
