@@ -47,11 +47,15 @@
 				fwrite($log, "real_cost = $coutReel\n");
 				//give this command the next state : archive is done when state goes from 0 to 1
 				$commandObj->etatSuivant();
-				//add x percent of this amout to this album
+				//************** compute photograph gain ***************
 				$album = $commandObj->getID_Album();
 				$album = Album::getAlbumDepuisID($album);
+				$percentApplied = Photographe::getPhotographeDepuisID($album->getID_Photographe())->getPourcentage();
+				$com = $amount*(100-$percentApplied)/100;
+				$amount = $amount - $com - toBankAmount($coutReel);
+				//************** compute photograph gain ***************
 				if ($album){
-					$album->updateAmounts(toFloatAmount($amount - toBankAmount($coutReel)));
+					$album->updateAmounts(toFloatAmount($amount));
 				}
 				//send mail with facture
 				ControleurUtils::sendFacture($commandObj);

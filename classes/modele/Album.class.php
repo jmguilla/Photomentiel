@@ -467,9 +467,6 @@ class Album {
 				return false;
 			}
 			//on récupère la vu la plus a jour
-			$album = Album::getAlbumDepuisID($this->getAlbumID());
-			$percentApplied = Photographe::getPhotographeDepuisID($this->getID_Photographe())->getPourcentage();
-			$amount = $amount*$percentApplied/100;
 			$this->balance += $amount;
 			$this->gainTotal += $amount;
 			if($dao->saveAmounts($this)){
