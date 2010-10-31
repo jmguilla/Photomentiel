@@ -127,22 +127,22 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 			</div>
 			<div id="right">
 				<div class="content_box" <?php echo $photographMode?'style="height:140px;"':'style="height:230px;"'; ?>>
-					<div class="title">Les événements qui m'intéressent :</div>
+					<div class="title">Les événements qui m'intéressent [<span id="displayEventsNb">0</span>] :</div>
 					<div class="content_flow" <?php echo $photographMode?'style="height:115px;"':'style="height:205px;"'; ?>>
 						<?php
 							/***************************** USER EVENTS  ******************************/
 							$events = EvenementEcouteur::getEvenementsAVenirDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
+							$eventsNb=0;
 							if ($events) {
-								$i=0;
 								foreach($events as $evt){
-									if ($i%2==0){
+									if ($eventsNb%2==0){
 										$idi = 'id="impair"'; 
 									} else {
 										$idi = '';
 									}
 									$date_e = date("d/m/Y à G\hi",strtotime($evt->getDate()));
 									echo '<a '.$idi.' class="event" href="events.php?ev='.$evt->getEvenementID().'"><div class="event"><span id="event" style="margin-left:0px;">Date : '.$date_e.'</span><span id="event">Lieu : '.$evt->getVille()->getNom().'('.$evt->getDepartement()->getNom().')</span><br/>'.toNchar($evt->getDescription(),90).'</div></a>';
-									$i++;
+									$eventsNb++;
 								}
 							} else {
 						?>
@@ -155,13 +155,13 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 					</div>
 				</div>
 				<div class="content_box" <?php echo $photographMode?'style="height:140px;"':'style="height:230px;"'; ?>>
-					<div class="title">Mes commandes :</div>
+					<div class="title">Mes commandes [<span id="displayCommandsNb">0</span>] :</div>
 					<div class="content_flow" <?php echo $photographMode?'style="height:115px;"':'style="height:205px;"'; ?>>
 						<?php
 							/***************************** USER COMMANDS  ******************************/
 							$commandes = Commande::getCommandesEtPhotosDepuisID_Utilisateur($utilisateurObj->getUtilisateurID());
+							$commandsNb=0;
 							if($commandes){
-								$i=1;
 								foreach($commandes as $commande){
 									$price = 0;
 									$nb = 0;
@@ -170,10 +170,10 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 										$nb += $cmd->getNombre();
 									}
 									$price += $commande->getFDP();
-									if ($i%2==0){
-										$idi = 'id="impair"'; 
-									} else {
+									if ($commandsNb%2==0){
 										$idi = '';
+									} else {
+										$idi = 'id="impair"'; 
 									}
 									$date_e = date("d/m/Y à G\hi",strtotime($commande->getDate()));
 									if ($commande->getEtat() == 0){
@@ -184,7 +184,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 										$cmdst = "<b>".$COMMAND_STATES[$commande->getEtat()]."</b>";
 									}
 									echo '<a '.$idi.' class="event" href="viewcommand.php?cmd='.$commande->getCommandeID().'"><div class="event"><span id="date">Date : '.$date_e.'</span><span id="event">Etat : '.$cmdst.'</span><br/>Nombre de photos : '.$nb.' - Prix Total : '.sprintf('%.2f',$price).' &#8364;</div></a>';
-									$i++;
+									$commandsNb++;
 								}
 							} else {
 						?>
@@ -201,19 +201,19 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 						/***************************** PHOTOGRAPH ALBUMS  ******************************/
 				?>
 				<div class="content_box" style="height:280px;">
-					<div class="title" style="text-decoration:none;"><u>Mes albums :</u> <span id="displayFullGain"></span></div>
+					<div class="title" style="text-decoration:none;"><u>Mes albums [<span id="displayAlbumsNb">0</span>] :</u> <span id="displayFullGain"></span></div>
 					<div class="content_flow" style="height:255px;">
 						<?php
 							$albums = Album::getAlbumEtImageEtStringIDDepuisID_Photographe($utilisateurObj->getPhotographeID(), false);
+							$albumsNb=0;
 							if ($albums) {
-								$i=1;
 								$total_a = 0;
 								$total_m = 0;
 								foreach($albums as $alb){
-									if ($i%2==0){
-										$idi = 'id="impair"'; 
-									} else {
+									if ($albumsNb%2==0){
 										$idi = '';
+									} else {
+										$idi = 'id="impair"'; 
 									}
 									if ($alb["Album"]->getEtat() == 0){
 										$albst = '<b>'.$ALBUM_STATES[$alb["Album"]->getEtat()].'</b> (en attente du transfert des photos)';
@@ -230,10 +230,13 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 										$picThumb = "/design/misc/waiting.png";
 									}
 									echo '<a '.$idi.' class="album" href="createalbum.php?action=update&al='.$alb["StringID"]->getStringID().'"><div id="album_pic"><img src="'.$picThumb.'"/></div><div id="album_link"><span id="date">'.date("d/m/Y",strtotime($alb["Album"]->getDate())).' - Code : <b>'.$alb["StringID"]->getStringID().'</b> - Etat : '.$albst.'</span><br/>'.toNchar($alb["Album"]->getNom(),90).'</div></a>';
-									$i++;
+									$albumsNb++;
 								}
 								?>
 								<script language="javascript">
+									$("#displayEventsNb").html("<?php echo $eventsNb; ?>");
+									$("#displayCommandsNb").html("<?php echo $commandsNb; ?>");
+									$("#displayAlbumsNb").html("<?php echo $albumsNb; ?>");
 									$("#displayFullGain").html("(Gain mensuel : <b><?php echo sprintf('%.2f',$total_m); ?> &#8364</b> - Gain total : <b><?php echo sprintf('%.2f',$total_a); ?> &#8364</b>)");
 								</script>
 								<?php
