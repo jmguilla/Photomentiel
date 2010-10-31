@@ -4,6 +4,8 @@ include_once $dir_administration_controleur_commande_php . "/../../classes/model
 
 switch($action){
 	case set_commande_foto:
+		$dir_administration_controleur_commande_php = dirname(__FILE__);
+		include_once $dir_administration_controleur_commande_php . "/../../classes/modele/CommandeFoto.class.php";
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id commande fournie<br/>";
 			break;
@@ -12,16 +14,29 @@ switch($action){
 			$_SESSION['message'] .= "numero de commande foto.com invalide<br/>";
 			break;
 		}
-		$number = trim($_POST['number']);
 		$commande = Commande::getCommandeDepuisID($_POST['id']);
 		if(!$commande){
 			$_SESSION['message'] .= "Aucune commande ne correspond a l'id #".$_POST['id']."#<br/>";
 			break;
 		}
-		if($commande->addCommandeFoto($number)){
-			$_SESSION['message'] .= "Changement effectue avec succes<br/>";
+		if(strstr($_POST['number'], ";")){
+			$numbers = explode(";", trim($_POST['number']));
 		}else{
-			$_SESSION['message'] .= "Impossible d'appliquer le changement<br/>";
+			$numbers = array($_POST['number']);
+		}
+		foreach($numbers as $number){
+			$number = trim($number);
+			if(!$number || ''===$number){
+				continue;
+			}
+			$cf = new CommandeFoto();
+			$cf->setCommandeFoto($number);
+			$cf->setID_Commande($_POST['id']);
+			if($cf->create()){
+				$_SESSION['message'] .= "CommandeFoto #".$number." creee avec succes<br/>";
+			}else{
+				$_SESSION['message'] .= "Impossible de creer la commandefoto #".$number."<br/>";
+			}
 		}
 	break;
 	case offrir_commande:

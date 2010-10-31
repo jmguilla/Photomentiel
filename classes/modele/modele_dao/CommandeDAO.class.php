@@ -11,20 +11,20 @@ class CommandeDAO extends DAO{
 		parent::__construct($dsn);
 	}
 
-	public function saveCommandeFoto($c){
-		$query = "update Commande set commandeFoto = '".
-		mysql_real_escape_string($c->getCommandeFoto()). "' where commandeID = " .
-		mysql_real_escape_string($c->getCommandeID());
-		$this->startTransaction();
-		$tmp = $this->update($query);
-		if($tmp && $this->getAffectedRows() == 1){
-			$this->commit();
-			return true;
-		}else{
-			$this->rollback();
-			return false;
-		}
-	}
+//	public function saveCommandeFoto($c){
+//		$query = "update Commande set commandeFoto = '".
+//		mysql_real_escape_string($c->getCommandeFoto()). "' where commandeID = " .
+//		mysql_real_escape_string($c->getCommandeID());
+//		$this->startTransaction();
+//		$tmp = $this->update($query);
+//		if($tmp && $this->getAffectedRows() == 1){
+//			$this->commit();
+//			return true;
+//		}else{
+//			$this->rollback();
+//			return false;
+//		}
+//	}
 
 	public function setTermineePourVielleCommandes(){
 		list($usec, $sec) = explode(" ", microtime());
@@ -350,7 +350,21 @@ class CommandeDAO extends DAO{
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildCommandeFromRow");
 	}
-	
+
+	public function setExpediee($c){
+		$sql = "update Commande set etat = 3 where etat = 2 and commandeID = " .
+		mysql_real_escape_string($c->getCommandeID());
+		$this->startTransaction();
+		$tmp = $this->update($sql);
+		if($tmp && $this->getAffectedRows() == 1){
+			$c->setEtat(3);
+			$this->commit();
+			return $c;
+		}else{
+			$this->rollback();
+			return false;
+		}
+	}
 
 	/*######################################
 	 * Helpers
@@ -370,7 +384,6 @@ class CommandeDAO extends DAO{
 		$numero = $row->offsetGet("numero");
 		$id_album = $row->offsetGet("id_album");
 		$prep = htmlspecialchars($row->offsetGet("preparateur"));
-		$cfoto = htmlspecialchars($row->offsetGet("commandeFoto"));
 		$result = new Commande();
 		$result->setAdresse($adresse);
 		$result->setFDP($fdp);
@@ -382,7 +395,6 @@ class CommandeDAO extends DAO{
 		$result->setEtat($s);
 		$result->setID_Album($id_album);
 		$result->setPreparateur($prep);
-		$result->setCommandeFoto($cfoto);
 		return $result;
 	}
 

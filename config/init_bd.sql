@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Jeu 28 Octobre 2010 à 19:46
+-- Généré le : Dim 31 Octobre 2010 à 11:32
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `AdresseCommande` (
   `id_commande` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`adresseCommandeID`),
   KEY `fk_adresseCommande_commande` (`id_commande`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
 
 --
 -- Contenu de la table `AdresseCommande`
@@ -93,7 +93,8 @@ INSERT INTO `AdresseCommande` (`adresseCommandeID`, `nom`, `prenom`, `nomRue`, `
 (90, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 90),
 (91, 'Léger', 'Anne-Sophie', '63 BD Croisette', 'Le Lerina', 'Cannes', '06400', 91),
 (93, 'callès', 'Gérard', 'Quartier de l''Oumède', '', 'RAMATUELLE', '83350', 93),
-(94, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 94);
+(94, 'Scheefer', 'Jean-Luc', '160 Chemin Des Combes', 'Les Bastides, Bermudes 3', 'Antibes', '06600', 94),
+(95, 'guillaume', 'michele', '6 rue du murier', '', 'les arcs', '83460', 95);
 
 -- --------------------------------------------------------
 
@@ -152,24 +153,24 @@ CREATE TABLE IF NOT EXISTS `Commande` (
   `preparateur` varchar(20) NOT NULL default '',
   `fdp` float NOT NULL default '0',
   `numero` varchar(15) NOT NULL default '',
-  `commandeFoto` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`commandeID`),
   KEY `fk_commande_utilisateur` (`id_utilisateur`),
   KEY `id_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
 
 --
 -- Contenu de la table `Commande`
 --
 
-INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, `id_album`, `etat`, `preparateur`, `fdp`, `numero`, `commandeFoto`) VALUES
-(85, '2010-10-18 17:18:11', NULL, 32, 38, 0, '', 2.9, '101018170', ''),
-(87, '2010-10-19 22:02:43', '2010-10-19 22:07:22', 28, 43, 2, 'jm', 2.9, '101019220', 'un numéro au hazard'),
-(88, '2010-10-19 23:08:46', '2010-10-19 23:09:33', 28, 43, 2, 'jm', 2.9, '101019230', ''),
-(90, '2010-10-20 14:49:25', NULL, 31, 45, 0, '', 2.9, '101020140', ''),
-(91, '2010-10-24 18:14:55', NULL, 28, 58, 0, '', 2.9, '101024180', ''),
-(93, '2010-10-27 20:18:40', NULL, 41, 43, 0, '', 2.9, '101027200', ''),
-(94, '2010-10-28 15:20:43', NULL, 31, 58, 0, '', 2.9, '101028150', '');
+INSERT INTO `Commande` (`commandeID`, `date`, `datePaiement`, `id_utilisateur`, `id_album`, `etat`, `preparateur`, `fdp`, `numero`) VALUES
+(85, '2010-10-18 17:18:11', NULL, 32, 38, 0, '', 2.9, '101018170'),
+(87, '2010-10-19 22:02:43', '2010-10-19 22:07:22', 28, 43, 2, 'jm', 2.9, '101019220'),
+(88, '2010-10-19 23:08:46', '2010-10-19 23:09:33', 28, 43, 1, 'jm', 2.9, '101019230'),
+(90, '2010-10-20 14:49:25', NULL, 31, 45, 0, '', 2.9, '101020140'),
+(91, '2010-10-24 18:14:55', NULL, 28, 58, 0, '', 2.9, '101024180'),
+(93, '2010-10-27 20:18:40', NULL, 41, 43, 0, '', 2.9, '101027200'),
+(94, '2010-10-28 15:20:43', NULL, 31, 58, 0, '', 2.9, '101028150'),
+(95, '2010-10-29 22:32:18', NULL, 33, 43, 0, '', 2.9, '101029220');
 
 -- --------------------------------------------------------
 
@@ -197,6 +198,26 @@ INSERT INTO `CommandeArchive` (`commandeArchiveID`, `date`, `id_utilisateur`, `n
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `CommandeFoto`
+--
+
+CREATE TABLE IF NOT EXISTS `CommandeFoto` (
+  `commandeFotoID` mediumint(9) NOT NULL auto_increment,
+  `id_commande` int(10) unsigned NOT NULL,
+  `commandeFoto` varchar(10) character set utf8 NOT NULL,
+  `expediee` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`commandeFotoID`),
+  KEY `fk_commandefoto_commande` (`id_commande`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `CommandeFoto`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `CommandePhoto`
 --
 
@@ -216,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `CommandePhoto` (
   KEY `fk_commandePhoto_couleur` (`id_couleur`),
   KEY `id_commande` (`id_commande`),
   KEY `fk_commandePhoto_album` (`id_album`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=415 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=417 ;
 
 --
 -- Contenu de la table `CommandePhoto`
@@ -239,7 +260,9 @@ INSERT INTO `CommandePhoto` (`commandePhotoID`, `photo`, `nombre`, `id_commande`
 (410, 'qtmtva8i0001.JPG', 1, 90, 1, 1, 1, 45, 2.00),
 (411, 'td7t7kk40079.JPG', 1, 91, 1, 2, 1, 58, 2.00),
 (413, 'umkn91u20032.JPG', 1, 93, 1, 2, 1, 43, 2.00),
-(414, 'td7t7kk40056.JPG', 1, 94, 1, 2, 1, 58, 2.00);
+(414, 'td7t7kk40056.JPG', 1, 94, 1, 2, 1, 58, 2.00),
+(415, 'umkn91u20011.JPG', 1, 95, 1, 2, 1, 43, 2.00),
+(416, 'umkn91u20013.JPG', 1, 95, 1, 2, 1, 43, 2.00);
 
 -- --------------------------------------------------------
 
@@ -491,10 +514,10 @@ CREATE TABLE IF NOT EXISTS `Photographe` (
 --
 
 INSERT INTO `Photographe` (`photographeID`, `nomEntreprise`, `siren`, `telephone`, `siteWeb`, `home`, `pourcentage`, `note`, `nombreVotant`, `openftp`, `TVA`, `isReady`, `isTelephonePublique`, `rib_b`, `rib_g`, `rib_c`, `rib_k`, `bic`, `iban`, `id_utilisateur`) VALUES
-(12, 'JMG', '521000018', '+33620375962', '', '2010101800', 73, 6.00, 1, 0, 0, 0, 0, '19106', '00021', '43622960800', '41', '', 'FR7619106000214362296080041', 28),
+(12, 'JMG', '521000018', '+33620375962', 'http://jeanmichel.guillaume.free.fr', '2010101800', 73, 6.00, 1, 0, 0, 0, 0, '19106', '00021', '43622960800', '41', '', 'FR7619106000214362296080041', 28),
 (13, 'Lutigneaux Laetitia', '522874684', '', 'http://', '2010101801', 73, 6.00, 1, 0, 0, 0, 0, '15899', '07910', '00055977303', '26', '', 'FR7615899079100005597730326', 29),
 (14, '', '000000000', '', 'http://', '2010101802', 73, 6.00, 1, 0, 0, 0, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 30),
-(15, '', '525329272', '', 'http://www.photomentiel.fr', '2010101803', 73, 6.00, 1, 0, 0, 0, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 31),
+(15, 'Scheefer Jean-Luc', '525329272', '0660644928', 'http://www.photomentiel.fr', '2010101803', 73, 6.00, 1, 0, 0, 0, 0, '30004', '01297', '00000104948', '17', '', 'FR7630004012970000010494817', 31),
 (16, 'guillaume', '000000000', '0617724567', 'http://', '2010102000', 73, 6.00, 1, 0, 0, 0, 0, '19106', '00021', '43511041644', '60', '', 'FR7619106000214351104164460', 33);
 
 -- --------------------------------------------------------
@@ -694,7 +717,7 @@ CREATE TABLE IF NOT EXISTS `transactionID` (
 --
 
 INSERT INTO `transactionID` (`id`, `transactionID`) VALUES
-(1, 113238);
+(1, 113247);
 
 -- --------------------------------------------------------
 
@@ -763,7 +786,7 @@ INSERT INTO `Utilisateur` (`utilisateurID`, `email`, `mdp`, `actif`, `dateInscri
 (30, 'cmasotti@netcourrier.com', '7bb0bb352ffb2f5245f25149889a0c76', 1, '2010-10-18 14:07:52'),
 (31, 'jl@schee.fr', '8e64d8e22298f5d79edd4223ad2d54eb', 1, '2010-10-18 14:13:25'),
 (32, 'stevejulie@hotmail.fr', '02b8dfe1485a048c6dc6cf0ab41ccbc5', 1, '2010-10-18 17:14:58'),
-(33, 'jm-guillaume@orange.fr', '71a1f456f2cca7192d736a2d529960f3', 1, '2010-10-20 19:28:35'),
+(33, 'jm-guillaume@orange.fr', '4d69d69b0374fe9beb86794bc8426525', 1, '2010-10-20 19:28:35'),
 (37, 'ge.calles@wanadoo.fr', '4fd8ed3f6d0d460e38fde11a12f45240', 1, '2010-10-24 18:08:47'),
 (41, 'gerard.calles@wanadoo.fr', '7e70782273b574b9175cc7aaed2308c8', 1, '2010-10-27 20:14:47');
 
@@ -35345,6 +35368,12 @@ ALTER TABLE `Album`
 ALTER TABLE `Commande`
   ADD CONSTRAINT `Commande_ibfk_1` FOREIGN KEY (`id_album`) REFERENCES `Album` (`albumID`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_commande_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `Utilisateur` (`utilisateurID`);
+
+--
+-- Contraintes pour la table `CommandeFoto`
+--
+ALTER TABLE `CommandeFoto`
+  ADD CONSTRAINT `fk_commandefoto_commande` FOREIGN KEY (`id_commande`) REFERENCES `Commande` (`commandeID`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `CommandePhoto`
