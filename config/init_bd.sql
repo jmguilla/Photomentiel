@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-17.bdb
--- Généré le : Dim 31 Octobre 2010 à 11:32
+-- Généré le : Dim 31 Octobre 2010 à 13:06
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny8
 
@@ -35339,6 +35339,26 @@ INSERT INTO `ville` (`id_ville`, `id_departement`, `nom`, `cp`, `lat`, `lon`) VA
 (34486, 61, 'Peslières', '63580', '45.4389571', '3.4618030'),
 (34487, 83, 'Les-Sables-d-Olonne', '85100', '46.4959696', '-1.7713487');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Virement`
+--
+
+CREATE TABLE IF NOT EXISTS `Virement` (
+  `virementID` int(10) unsigned NOT NULL auto_increment,
+  `id_photographe` mediumint(8) unsigned NOT NULL,
+  `montant` float(7,2) NOT NULL,
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`virementID`),
+  KEY `fk_virement_photographe` (`id_photographe`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `Virement`
+--
+
+
 --
 -- Contraintes pour les tables exportées
 --
@@ -35433,3 +35453,9 @@ ALTER TABLE `StringID`
 --
 ALTER TABLE `Upload`
   ADD CONSTRAINT `Upload_ibfk_1` FOREIGN KEY (`stringID`) REFERENCES `StringID` (`stringID`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `Virement`
+--
+ALTER TABLE `Virement`
+  ADD CONSTRAINT `fk_virement_photographe` FOREIGN KEY (`id_photographe`) REFERENCES `Photographe` (`photographeID`);

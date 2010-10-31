@@ -64,6 +64,16 @@ switch($action){
 				echo "<font color=\"red\">Impossible de reinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
 			}
 		}
+		$dir_administration_controleur_utilisateur_php = dirname(__FILE__);
+		include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Virement.class.php";
+		$virement = new Virement();
+		$virement->setID_Photographe($photographe->getPhotographeID());
+		$virement->setMontant($totalAVerser);
+		if($virement->create()){
+			echo "<h1>Nouvel objet versement associe en BD</h1>";
+		}else{
+			echo "<h1>/!\Impossible de creer l'objet versement associe/!\</h1>";
+		}
 		echo "<h1>Versement de " . $totalAVerser . " a effectuer sur le compte:</h1>";
 		echo "<h2>rib: " . $photographe->getRIB_b() . $photographe->getRIB_g() . $photographe->getRIB_c() . $photographe->getRIB_k() . "</h2>";
 		echo "<h2>iban: " . $photographe->getIBAN() . "</h2>";
