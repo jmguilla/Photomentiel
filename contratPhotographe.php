@@ -36,8 +36,8 @@ Le terme "client" utilisé dans le présent contrat désigne tout client du phot
 
 <h1>Article 2 : Service</h1>
 <span class="start"></span>Photomentiel offre principalement au Photographe un service en ligne de mise à disposition de ses albums pour ses clients. Photomentiel assure aussi le service de vente en ligne des photos par ses clients via un paiement internet sécurisé par carte bancaire, ainsi que les services d'impression et de livraison.<br/>
-Le Photographe sera informé par mail à chaque nouvelle commande effectuée sur ses albums et en recevra la facture, facturé en son nom.<br/>
-De ce fait, le Photographe accepte expressément et sans condition que Photomentiel facture ses clients en son nom. La facture est donc délivrée en 2 exemplaires (sur lesquels apparaîtra le nom de la société et les nom/prénom du Photographe), dont un est destiné au client et l'autre au Photographe.<br/>
+Photomentiel facturera chaque client effectuant son paiement en ligne sur le site <span class="photomentiel">www.photomentiel.fr</span>. Le Photographe pourra voir le détail de ses commandes en se rendant dans son espace personnel sur le site.<br/>
+Photomentiel émettra chaque mois une facture au nom du Photographe afin d'effectuer la reversion qui lui est dû.
 
 
 <h1>Article 3 : Compte Photographe et Album</h1>
@@ -53,9 +53,11 @@ Le Photographe peut supprimer un album manuellement, ce qui le place dans les co
 
 
 <h1>Article 4 : Paiement et reversion</h1>
-<span class="start"></span>A chaque paiement en ligne effectué par un client, la facture est émise par Photomentiel au nom du Photographe et le compte de Photomentiel est crédité pour le compte du Photographe. Le Photographe autorise de ce fait Photomentiel à collecter en son nom et pour son compte, directement ou par le biais d’un tiers les sommes correspondantes aux ventes réalisées par l’intermédiaire de la fonction de paiement en ligne sécurisée.<br/>
+<span class="start"></span>A chaque paiement en ligne effectué par un client, la facture est émise par Photomentiel et le compte de Photomentiel est crédité d'autant.
 <span class="start"></span>Le paiement de la reversion au Photographe liée aux commandes effectuées et validées sur le site <span class="photomentiel">www.photomentiel.fr</span> s'effectue tous les 15 du mois. Photomentiel prélèvera une commission dont le montant est défini ci-aprés.<br/>
-<span class="start"></span>Photomentiel facturera au Photographe le montant de cette commission et procèdera au paiement par virement bancaire de la différence. Le virement sera effectué aux coordonnées bancaires du Photographe grâce au RIB qu'il a fourni lors de la création de son compte.<br/>
+<span class="start"></span>Tous les 15 du mois, Photomentiel génèrera une facture au nom du Photographe dont le montant est la reversion dûe et procèdera au paiement par virement bancaire de cette même facture. Le virement sera effectué aux coordonnées bancaires du Photographe grâce au RIB qu'il a fourni lors de la création de son compte.<br/>
+De ce fait, le Photographe accepte expressément et sans condition que Photomentiel émette une facture en son nom. La facture sera délivrée en 2 exemplaires (sur lesquels apparaîtra le nom de la société et les nom/prénom du Photographe émettant la facture), dont un est destiné au Photographe et l'autre au service Photomentiel.<br/>
+Cette facture au format numérique PDF sera envoyée par mail et contiendra un emplacement vide en lieu et place du numéro de facture afin que le photographe puisse y renseigner son numéro de facture dans le modèle de sa facturation personnelle.<br/>
 Pour chaque commande payée par un client et validée par la banque, Photomentiel prélève :<br/>
 <ul>
 	<li>une commission de <?php echo (100-PHOTOGRAPH_INITIAL_PERCENT); ?>% (pourcentage initial par défaut : voir article 10) sur le chiffre d'affaire (montant de la commande client)
@@ -111,14 +113,14 @@ Toutefois, par dérogation à ce qui précède, Photomentiel pourra prendre tout
 
 
 <h1>Article 6 : Responsabilité pour l'encaissement et la rémunération</H1>
-<span class="start"></span>Le Photographe déclare et garantit à Photomentiel qu’il a procédé ou procédera, à ses frais et sous sa seule responsabilité, à l’ensemble des formalités, déclarations administratives et fiscales qui pourraient être nécessaires pour l’utilisation des services, et, en particulier l’encaissement régulier de rémunération, ces formalités et déclarations variants selon la situation spécifique de chaque Photographe, qu’il s’agisse d’une personne morale ou physique soumise a l’impôt sur les société ou sur les revenus.<br/>
+<span class="start"></span>Le Photographe déclare et garantit à Photomentiel qu’il a procédé ou procédera, à ses frais et sous sa seule responsabilité, à l’ensemble des formalités, déclarations administratives et fiscales qui pourraient être nécessaires pour l’utilisation des services, et, en particulier l’encaissement régulier de rémunération, ces formalités et déclarations variants selon la situation spécifique de chaque Photographe, qu’il s’agisse d’une personne morale ou physique soumise à l’impôt sur les société ou sur les revenus.<br/>
 
 
 <h1>Article 7 : Informations personnelles et professionnelles du Photographe</h1>
 <span class="start"></span>Lors de son inscription, le Photographe doit valider le présent contrat et assure qu'il a renseigné les données suivantes, dont la fourniture est obligatoire au regard des dispositions de la loi sur la confiance dans l’économie numérique (dite : LCEN) du 21 juin 2004 : <br/>
 <ul>
 	<li>Sa dénomination sociale, l’adresse de son siège social, son numéro de téléphone, son numéro de Siret, son adresse mail, le montant de son capital social ainsi que le nom du dirigeant</li>
-	<li>Conformément aux dispositions de l’article 6 III -1 b,c,d de la LCEN, les factures émisent par Photomentiel au nom du Photographe comportera l’ensemble de ces informations, en d’autres termes ces informations seront publiques</li>
+	<li>Conformément aux dispositions de l’article 6 III -1 b,c,d de la LCEN, les factures émisent par Photomentiel au nom du Photographe comporteront l’ensemble de ces informations</li>
 	<li>Le Photographe garantit aussi que les données qu’il communique sont exactes, complètes et à jour. Photomentiel ne disposant d’aucun moyen pour les vérifier, le Photographe s’engage à mettre à jour ses informations lui-même via l’interface d’administration qui est mise a sa disposition</li>
 </ul><br/>
 
