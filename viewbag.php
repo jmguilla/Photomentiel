@@ -93,7 +93,7 @@ include("header.php");
 				?>
 				<span>Photographe :</span> <?php echo $adresseObj->getPrenom()." ".$adresseObj->getNom(); ?>
 				<br/>
-				<span>Contact :</span> <?php echo ($photographObj->getTelephone()=='')?'Non communiqué':$photographObj->getTelephone(); ?>
+				<span>Contact :</span> <?php echo ($photographObj->getTelephone()=='' || !$photographObj->isTelephonePublique())?'Non communiqué':$photographObj->getTelephone(); ?>
 				<?php
 					if ($albumObj->getID_Evenement() != null && $albumObj->getID_Evenement() != ''){
 				?>

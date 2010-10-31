@@ -63,7 +63,7 @@ include_once("classes/modele/Adresse.class.php");
 							echo '<span class="date"><b>Date</b> : '.date("d/m/Y",strtotime($tmp["Album"]->getDate())).'</span><br/><span class="content">';
 							echo '<span class="intitule"><a class="intitule" href="viewalbum.php?al='.$tmp["StringID"]->getStringID().'"><b>Intitulé</b> : '.toNchar($tmp["Album"]->getNom(),92).'</a></span><br/>';
 							echo '<b>Photographe</b> : '.$adress->getPrenom().' '.$adress->getNom().'<br/>';
-							echo '<b>Contact</b> : '.(($photograph->getTelephone()=='')?'Non communiqué':$photograph->getTelephone()).'<br/>';
+							echo '<b>Contact</b> : '.(($photograph->getTelephone()=='' || !$photograph->isTelephonePublique())?'Non communiqué':$photograph->getTelephone()).'<br/>';
 							if ($event) {
 								echo '<b>Evénement</b> : <a href="events.php?ev='.$tmp["Album"]->getID_Evenement().'">'.$event->getDescription().'</a><br/>';
 							}
