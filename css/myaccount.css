@@ -11,14 +11,40 @@ div#content_unknown {
 }
 div#left {
 	float:left;
-	margin-left:3px;
 	margin-right:20px;
 	width:180px;
 	border:1px blue solid;
+	border-bottom:0px;
 	background-color:#DDEEFF;
-	padding-top:5px;
-	padding-bottom:5px;
 }
+div#left div.left_c {
+	height:30px;
+	width:175px;
+	border-bottom:1px darkblue solid;
+	line-height:30px;
+	font-weight:bold;
+	text-align:left;
+	padding-left:5px;
+}
+div#left div.left_c_indispo {
+	text-align:left;
+	padding-left:5px;
+	padding-right:3px;
+	padding-top:3px;
+	padding-bottom:5px;
+	font-size:11px;
+	color:darkred;
+	line-height:11px;
+	border-bottom:1px darkblue solid;
+	width:172px;
+}
+div#left div.left_c:hover {
+	background-color:#333333;
+	color:aqua;
+	cursor:pointer;
+    cursor:hand;
+}
+
 div#quotas {
 	margin-left:10px;
 	width:100%;
@@ -29,11 +55,6 @@ div#left input.button {
 	margin-top:2px;
 	margin-bottom:2px;
 	height:30px;
-}
-hr#separator {
-	margin-top:10px;
-	width:50%;
-	margin-bottom:10px
 }
 div#right {
 	float:left;
@@ -120,13 +141,6 @@ span#displayFullGain {
 	color:#444444;
 	font-weight:normal;
 	text-decoration:none;
-}
-div#indispo {
-	width:96%;
-	text-align:left;
-	padding:5px;
-	font-size:11px;
-	color:darkred;
 }
 
 /*linked to contract*/

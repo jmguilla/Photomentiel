@@ -50,7 +50,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 	<div id="content">
 		<?php
 			if ($utilisateurObj && !$utilisateurObj->isReady()){
-				/***************************** DISPLAY CONTACT ******************************/
+				/***************************** DISPLAY CONTRACT *****************************/
 				echo '<div class="contr">Afin de pouvoir utiliser votre compte, vous devez avoir pris connaissance et accepter le présent contrat :</div>';
 				echo '<div id="p_contrat">';
 				include("contratPhotographe.php");
@@ -91,24 +91,39 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 					if($photographMode) {
 						if (FTP_MAINTENANCE){
 				?>
-						<input id="create_album" type="button" class="button" value="Créer un nouvel album" disabled="true"/><br>
-						<div id="indispo">La création d'album est temporairement indisponible. Elle sera rétablie dans les plus brefs délais.</div>
+						<div class="left_c_indispo">
+							La création d'album est temporairement indisponible. Elle sera rétablie dans les plus brefs délais.
+						</div>
+						
 				<?php
 						} else {
 				?>
-						<input id="create_album" type="button" class="button" value="Créer un nouvel album" onClick="document.location.href='createalbum.php';"/><br>
+						<div class="left_c" onClick="document.location.href='createalbum.php';">
+							Créer un nouvel album
+						</div>
 				<?php
 						}
 				?>
-				<center><hr id="separator"/><center>
+				<div style="border:1px orange solid;"></div>
 				<?php
 					}
 				?>
-				<input id="accueil" type="button" class="button" value="Accueil" onClick="document.location.href='index.php';"/><br>
-				<input id="update_account" type="button" class="button" value="Modifier mon compte" onClick="document.location.href='adduser.php?np=myaccount.php';"/><br>
-				<center><hr id="separator"/><center>
-				<input id="view_albums" type="button" class="button" value="Voir les albums publics" onClick="document.location.href='albums.php';"/><br>
-				<input id="view_events" type="button" class="button" value="Voir les événements" onClick="document.location.href='events.php';"/><br>
+				<div class="left_c" onClick="document.location.href='index.php';">
+					Accueil
+				</div>
+				<div class="left_c" onClick="document.location.href='adduser.php?np=myaccount.php';">
+					Modifier mon compte
+				</div>
+				<div class="left_c" onClick="document.location.href='contact.php';">
+					Nous contacter
+				</div>
+				<div style="border:1px orange solid;"></div>
+				<div class="left_c" onClick="document.location.href='albums.php';">
+					Voir les albums publics
+				</div>
+				<div class="left_c" onClick="document.location.href='events.php';">
+					Voir les événements
+				</div>
 			</div>
 			<div id="right">
 				<div class="content_box" <?php echo $photographMode?'style="height:140px;"':'style="height:230px;"'; ?>>
