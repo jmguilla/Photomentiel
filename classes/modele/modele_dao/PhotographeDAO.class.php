@@ -3,6 +3,7 @@ $dir_photographedao_class_php = dirname(__FILE__);
 include_once $dir_photographedao_class_php . "/../../Config.php";
 include_once ($dir_photographedao_class_php . "/UtilisateurDAO.class.php");
 include_once ($dir_photographedao_class_php . "/ModeleDAOUtils.class.php");
+include_once $dir_photographedao_class_php . "/../../controleur/ControleurUtils.class.php";
 
 class PhotographeDAO extends UtilisateurDAO{
 	public function __construct() {
@@ -94,6 +95,27 @@ class PhotographeDAO extends UtilisateurDAO{
 		$tmp = $this->retrieve($query);
 		return $this->extractArrayQuery($tmp, $this, "buildUtilisateurFromRow");
 	}
+
+	public function lockTableCreate(){
+		$query = "lock tables Photographe write, Utilisateur write, Activate write, Adresse write";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function unlockTable(){
+		$query = "unlock tables";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	/**
 	 * cree le photographe passe en parametre en BD et le
 	 * retourne avec ses champs mis a jour.
@@ -110,43 +132,71 @@ class PhotographeDAO extends UtilisateurDAO{
 			throw new CreateUtilisateurException("Email already in use");
 		}
 
-		$this->startTransaction();
-		//creation de l'utilisateur
-		$utilisateur = $this->createUtilisateur($photographe, $activateID);
-
-		if(!$utilisateur){
-			$this->rollback();
-			throw new CreateUtilisateurException("Cannot get the newly created user.");
-		}
-		$photographe->setUtilisateurID($utilisateur->getUtilisateurID());
-		//creation du photographe
-		$photographe = $this->createPhotographe($photographe);
-		if(!$photographe){
-			$this->rollback();
-			throw new CreateUtilisateurException("Cannot create the photographe.");
-		}
-
-		$adresse = $photographe->getAdresse();
-		if(isset($adresse)){
-			$adresse->setID_Utilisateur($photographe->getUtilisateurID());
-			if(0 < $adresse->getAdresseID()){
-				$adao = new AdresseDAO();
-				$adresse = $adao->save($adresse);
-				if(!$adresse){
-					$this->rollback();
-					throw new CreateUtilisateurException("Impossible de sauver la nouvelle adresse.");
+		try{
+			if(!$this->lockTableCreate()){
+				$this->unlockTable();
+				ControleurUtils::addError("Impossible de locker tables a la creation photographe", true);
+				return false;
+			}
+			$this->startTransaction();
+			//creation de l'utilisateur
+			$utilisateur = $this->createUtilisateur($photographe, $activateID);
+	
+			if(!$utilisateur){
+				$this->rollback();
+				if(!$this->unlockTable()){
+					ControleurUtils::addError("Unlock table error, creation photographe, impossible de creer utilisateur", true);
 				}
-			}else{
-				$adao = new AdresseDAO();
-				$adresse = $adao->create($adresse);
-				if(!$adresse){
-					$this->rollback();
-					throw new CreateUtilisateurException("Impossible de creer la nouvelle adresse.");
+				throw new CreateUtilisateurException("Cannot get the newly created user.");
+			}
+			$photographe->setUtilisateurID($utilisateur->getUtilisateurID());
+			//creation du photographe
+			$photographe = $this->createPhotographe($photographe);
+			if(!$photographe){
+				$this->rollback();
+				if(!$this->unlockTable()){
+					ControleurUtils::addError("Unlock table error, creation photographe, impossible de creer photographe", true);
+				}
+				throw new CreateUtilisateurException("Cannot create the photographe.");
+			}
+	
+			$adresse = $photographe->getAdresse();
+			if(isset($adresse)){
+				$adresse->setID_Utilisateur($photographe->getUtilisateurID());
+				if(0 < $adresse->getAdresseID()){
+					$adao = new AdresseDAO();
+					$adresse = $adao->save($adresse);
+					if(!$adresse){
+						$this->rollback();
+						if(!$this->unlockTable()){
+							ControleurUtils::addError("Unlock table error, creation photographe, impossible de sauver adresse", true);
+						}
+						throw new CreateUtilisateurException("Impossible de sauver la nouvelle adresse.");
+					}
+				}else{
+					$adao = new AdresseDAO();
+					$adresse = $adao->create($adresse);
+					if(!$adresse){
+						$this->rollback();
+						if(!$this->unlockTable()){
+							ControleurUtils::addError("Unlock table error, creation photographe, impossible de creer adresse", true);
+						}
+						throw new CreateUtilisateurException("Impossible de creer la nouvelle adresse.");
+					}
 				}
 			}
+			$this->commit();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Unlock table error, creation photographe", true);
+			}
+			return $photographe;
+		}catch(Exception $exception){
+			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Unlock table error, creation photographe sur catch", true);
+			}
+			return false;
 		}
-		$this->commit();
-		return $photographe;
 	}
 
 	/**
