@@ -3,6 +3,7 @@ $dir_commandedao_class_php = dirname(__FILE__);
 include_once $dir_commandedao_class_php . "/daophp5/DAO.class.php";
 include_once $dir_commandedao_class_php . "/CommandePhotoDAO.class.php";
 include_once $dir_commandedao_class_php . "/../Commande.class.php";
+include_once $dir_commandedao_class_php . "/../../controleur/ControleurUtils.class.php";
 include_once $dir_commandedao_class_php . "/../../Config.php";
 
 class CommandeDAO extends DAO{
@@ -130,52 +131,134 @@ class CommandeDAO extends DAO{
 		$dir_commandedao_class_php = dirname(__FILE__);
 		include_once $dir_commandedao_class_php . "/../Album.class.php";
 		include_once $dir_commandedao_class_php . "/../Photographe.class.php";
-		$query = "update Commande set etat = " .
-		mysql_real_escape_string($commande->getEtat());
-		if($commande->getEtat() == 1){
-			$query .= ", datePaiement = now() ";
-		}
-		$query .= " where commandeID = " .
-		mysql_real_escape_string($commande->getCommandeID());
-		$this->startTransaction();
-		$tmp = $this->update($query);
-		if($tmp && $this->getAffectedRows() >= 0){
+		try{
+			if(!$this->lockTableChangementEtat()){
+				ControleurUtils::addError("Impossible de locker talbe pour changement etat commande");
+				$this->unlockTable();
+				return false;
+			}
+			$this->startTransaction();
+			$query = "update Commande set etat = " .
+			mysql_real_escape_string($commande->getEtat());
 			if($commande->getEtat() == 1){
-				//on récupère les lignes
-				$commandePhotos = $commande->getCommandesPhoto(); 
-				if(!isset($commandePhotos) || count($commandePhotos) == 0){
-					$commande = Commande::getCommandeEtPhotosDepuisID($commande->getCommandeID());
-				}
-				//on récupère le photographe & album
-				if($commande->getCommandesPhoto() > 0){
+				$numero = $this->getNumeroCommande();
+				$query .= ", datePaiement = now(), numero = '" .
+				mysql_real_escape_string($numero) . "' ";
+			}
+			$query .= " where commandeID = " .
+			mysql_real_escape_string($commande->getCommandeID());
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() >= 0){
+				if($commande->getEtat() == 1){
+					//on récupère les lignes
 					$commandePhotos = $commande->getCommandesPhoto(); 
-					$idalbum = $commandePhotos[0]->getID_Album();
-					$album = Album::getAlbumDepuisID($idalbum);
-					$idphotographe = $album->getID_Photographe();
-				}
-				$commandePhotos = $commande->getCommandesPhoto();
-				$prix = $commande->getFDP();
-				foreach($commandePhotos as $commandePhoto){
-					$prix += $commandePhoto->getPrix();
-				}
-				$query = "insert into CommandeArchive (date, id_utilisateur, numero, id_photographe, prix) values ('" .
-				mysql_real_escape_string($commande->getDate()) . "', " .
-				mysql_real_escape_string($commande->getID_Utilisateur()) . ", " .
-				mysql_real_escape_string($commande->getNumero()) . ", " .
-				mysql_real_escape_string($idphotographe) . ", " .
-				mysql_real_escape_string($prix) . ")";
-				$this->update($query);
-				if($tmp && $this->getAffectedRows() >= 0){					
+					if(!isset($commandePhotos) || count($commandePhotos) == 0){
+						$commande = Commande::getCommandeEtPhotosDepuisID($commande->getCommandeID());
+					}
+					//on récupère le photographe & album
+					if($commande->getCommandesPhoto() > 0){
+						$commandePhotos = $commande->getCommandesPhoto(); 
+						$idalbum = $commandePhotos[0]->getID_Album();
+						$album = Album::getAlbumDepuisID($idalbum);
+						$idphotographe = $album->getID_Photographe();
+					}
+					$commandePhotos = $commande->getCommandesPhoto();
+					$prix = $commande->getFDP();
+					foreach($commandePhotos as $commandePhoto){
+						$prix += $commandePhoto->getPrix();
+					}
+					$query = "insert into CommandeArchive (date, id_utilisateur, numero, id_photographe, prix) values ('" .
+					mysql_real_escape_string($commande->getDate()) . "', " .
+					mysql_real_escape_string($commande->getID_Utilisateur()) . ", " .
+					mysql_real_escape_string($commande->getNumero()) . ", " .
+					mysql_real_escape_string($idphotographe) . ", " .
+					mysql_real_escape_string($prix) . ")";
+					$this->update($query);
+					if($tmp && $this->getAffectedRows() >= 0){					
+						$this->commit();		
+						if(!$this->unlockTable()){
+							ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
+						}
+						return true;
+					}
+				}else{
 					$this->commit();
+					if(!$this->unlockTable()){
+						ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
+					}
 					return true;
 				}
-			}else{
-				$this->commit();
-				return true;
 			}
+			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
+			}
+			return false;
+		}catch(Exception $exception){
+			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
+			}
+			return false;
 		}
-		$this->rollback();
-		return false;
+	}
+	/**
+	 * Retourne un numero de commande valide
+	 */
+	private function getNumeroCommande(){
+		$numTmp = date('Ym');
+		$query = "select count(*) as num from Commande where numero like '" . $numTmp . "%'";
+		$tmp = $this->retrieve($query);
+		foreach($tmp as $count){
+			$numDelta = $count['num'];
+			break;
+		}
+		$numero = sprintf('%d%04d', $numTmp, $numDelta);
+		return $numero;
+	}
+	/**
+	 * Retourne un numero de commande avant encaissement...
+	 */
+	private function getFauxNumeroCommande(){
+		$year = date('Y');
+		$year = $year - 42;
+		$month = date('m');
+		$numTmp = sprintf('%4d%2d', $year, $month);
+		$query = "select count(*) as num from Commande where numero like '" . $numTmp . "%'";
+		$tmp = $this->retrieve($query);
+		foreach($tmp as $count){
+			$numDelta = $count['num'];
+			break;
+		}
+		$numero = sprintf('%d%04d', $numTmp, $numDelta);
+		return $numero;
+	}
+	public function unlockTable(){
+		$query = "unlock tables";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function lockTableCreateCommande(){
+		$query = "lock tables Commande write, Commande as c write, CommandePhoto as cp write, AdresseCommande write";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function lockTableChangementEtat(){
+		$query = "lock tables Commande write, CommandeArchive write";
+		$tmp = $this->update($query);
+		if($tmp){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	/**
 	 * cree la commande en base de donnée et retourne
@@ -183,80 +266,101 @@ class CommandeDAO extends DAO{
 	 * @param Commande $commande
 	 */
 	public function create($commande){
-		//d'abord on calcul le numéro de la commande
-		$numTmp = date('ymdH');
-		$query = "select count(*) as num from Commande where numero like '" . $numTmp . "%'";
-		$tmp = $this->retrieve($query);
-		foreach($tmp as $count){
-			$numDelta = $count['num'];
-			break;
-		}
-		$numero = $numTmp . $numDelta;
-		$id_album = $commande->getID_Album(); 
-		if(isset($id_album)){
-			$query = "insert into Commande (date, id_album, id_utilisateur, etat, fdp, numero) values (now(), ".
-			mysql_real_escape_string($id_album) . ", ";		
-		}else{
-			$query = "insert into Commande (date, id_utilisateur, etat, fdp, numero) values (now(), ";
-		}
-		$query .= mysql_real_escape_string($commande->getID_Utilisateur()) . ", " . 
-		mysql_real_escape_string($commande->getEtat()) . ", " .
-		mysql_real_escape_string($commande->getFDP()) . ", '" .
-		mysql_real_escape_string($numero) . "')";
-		$this->startTransaction();
-		$tmp = $this->update($query);
-		if($tmp && $this->getAffectedRows() >= 0){
-			$commande->setCommandeID($this->lastInsertedID());
-			//maintenant on cree chaque commandePhoto
-			$commandesPhoto = $commande->getCommandesPhoto();
-			$createdPhotos = array();
-			try{
-				foreach($commandesPhoto as $commandePhoto){
-					$commandePhoto->setID_Commande($commande->getCommandeID());
-					$isCPCreated = $commandePhoto->create();
-					if(!$isCPCreated){
-						$this->rollback();
-						return false;
-					}else{
-						$createdPhotos[] = $isCPCreated;
-					}
-				}
-				$commande->setCommandesPhoto($createdPhotos);
-				
-				//maintenant on cree l'adresse
-				$dir_commandedao_class_php = dirname(__FILE__);
-				include_once $dir_commandedao_class_php . "/AdresseCommandeDAO.class.php";
-				include_once $dir_commandedao_class_php . "/../AdresseCommande.class.php";
-				$adresse = $commande->getAdresse();
-				$adresse->setID_Commande($commande->getCommandeID());
-				if(isset($adresse)){
-					$adao = new AdresseCommandeDAO();
-					if(0 < $adresse->getAdresseCommandeID()){
-						$adresse = $adao->save($adresse);
-						if(!$adresse){
-							$this->rollback();
-							return false;
-						}
-					}else{
-						$adresse = $adao->create($adresse);
-						if(!$adresse){
-							$this->rollback();
-							return false;
-						}
-					}
-					$commande->setAdresse($adresse);
-				}
-
-				$this->commit();
-				return $commande;
-			}catch(Exception $e){
-				echo $e->getMessage();
-				$this->rollback();
+		try{
+			if(!$this->lockTableCreateCommande()){
+				ControleurUtils::addError("Impossible de locker table commande pour creation", true);
+				$this->unlockTable();
 				return false;
-			}	
+			}
+			$this->startTransaction();
+			$numero = $this->getFauxNumeroCommande();
+			$id_album = $commande->getID_Album(); 
+			if(isset($id_album)){
+				$query = "insert into Commande (date, id_album, id_utilisateur, etat, fdp, numero) values (now(), ".
+				mysql_real_escape_string($id_album) . ", ";		
+			}else{
+				$query = "insert into Commande (date, id_utilisateur, etat, fdp, numero) values (now(), ";
+			}
+			$query .= mysql_real_escape_string($commande->getID_Utilisateur()) . ", " . 
+			mysql_real_escape_string($commande->getEtat()) . ", " .
+			mysql_real_escape_string($commande->getFDP()) . ", '" .
+			mysql_real_escape_string($numero) . "')";
+			$tmp = $this->update($query);
+			if($tmp && $this->getAffectedRows() >= 0){
+				$commande->setCommandeID($this->lastInsertedID());
+				//maintenant on cree chaque commandePhoto
+				$commandesPhoto = $commande->getCommandesPhoto();
+				$createdPhotos = array();
+				try{
+					foreach($commandesPhoto as $commandePhoto){
+						$commandePhoto->setID_Commande($commande->getCommandeID());
+						$isCPCreated = $commandePhoto->create();
+						if(!$isCPCreated){
+							$this->rollback();
+							if(!$this->unlockTable()){
+								ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation, !isCPCreated est true", true);
+							}
+							return false;
+						}else{
+							$createdPhotos[] = $isCPCreated;
+						}
+					}
+					$commande->setCommandesPhoto($createdPhotos);
+					
+					//maintenant on cree l'adresse
+					$dir_commandedao_class_php = dirname(__FILE__);
+					include_once $dir_commandedao_class_php . "/AdresseCommandeDAO.class.php";
+					include_once $dir_commandedao_class_php . "/../AdresseCommande.class.php";
+					$adresse = $commande->getAdresse();
+					$adresse->setID_Commande($commande->getCommandeID());
+					if(isset($adresse)){
+						$adao = new AdresseCommandeDAO();
+						if(0 < $adresse->getAdresseCommandeID()){
+							$adresse = $adao->save($adresse);
+							if(!$adresse){
+								$this->rollback();
+								if(!$this->unlockTable()){
+									ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation a la sauvegarde de ladresse", true);
+								}
+								return false;
+							}
+						}else{
+							$adresse = $adao->create($adresse);
+							if(!$adresse){
+								$this->rollback();
+								if(!$this->unlockTable()){
+									ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation a la creation de ladresse", true);
+								}
+								return false;
+							}
+						}
+						$commande->setAdresse($adresse);
+					}
+					$this->commit();
+					if(!$this->unlockTable()){
+						ControleurUtils::addError("Impossible de unlocker commande pour creation sur resultat correct", true);
+					}
+					return $commande;
+				}catch(Exception $e){
+					$this->rollback();
+					if(!$this->unlockTable()){
+						ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation sur catch 1", true);
+					}
+					return false;
+				}	
+			}
+			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation sur resultat faux", true);
+			}
+			return false;
+		}catch(Exception $exception){
+			$this->rollback();
+			if(!$this->unlockTable()){
+				ControleurUtils::addError("Impossible de unlocker commande sur erreur pour creation sur catch 2", true);
+			}
+			return false;
 		}
-		$this->rollback();
-		return false;
 	}
 	/**
 	 * Pour effacer la commande de la base de donnée
