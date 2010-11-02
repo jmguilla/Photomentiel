@@ -300,4 +300,169 @@ function makeCard($stringID, $album, $photographe, $dest=null){
 		$PDF->Output($dest, "F");
 	}
 }
+
+/*
+ * Create pdf file from every albums as a facture from photograph to photomentiel
+ * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
+ */
+function makePDFVirement($albums, $photograph, $siren, $pm_numFacture, $dest=null){
+	$adresse = $photograph->getAdresse();
+	$PDF = new phpToPDF();
+	$PDF->AddPage();
+	//Photograph informations
+	$x = 15;$y = 10;
+	$PDF->SetFont('Times','B',12);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, $photograph->getNomEntreprise());
+	$y += 5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, $adresse->getNomRue());
+	if ($adresse->getComplement() != null && $adresse->getComplement() != ''){
+		$y += 5;
+		$PDF->SetXY($x,$y);
+		$PDF->Write(10, $adresse->getComplement());
+	}
+	$y += 5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, $adresse->getCodePostal()." ". $adresse->getVille());
+	$y+=5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "SIREN No ".$photograph->getSiren());
+	if ($photograph->getTVA() == 2){
+		$y+=5;
+		$PDF->SetFont('Times','',9);
+		$PDF->SetXY($x,$y);
+		$PDF->Write(10, "Dispensé d'immatriculation au registre du commerce");
+		$y+=5;
+		$PDF->SetXY($x,$y);
+		$PDF->Write(10, "et des sociétés (RCS) et au répertoire des métiers (RM)");
+	}
+	//Photomentiel informations
+	$x = 130;$y = 25;
+	$PDF->SetFont('Times','',12);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "- PHOTOMENTIEL -");
+	$y+=5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "www.photomentiel.fr");
+	$y+=5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "contact@photomentiel.fr");
+	$y+=5;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "SIREN No ".$siren);
+	//date
+	$PDF->SetFont('Times','B',12);
+	$x = 102;$y += 8;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Reversion effectuée le ".date("d/m/Y"));
+	//numero de facture
+	$PDF->SetFont('Times','B',14);
+	$x = 15;$y += 12;
+	$PDF->SetXY($x,$y);
+	$PDF->Cell(70,10,'Facture n° ...............................',1,1,'C');
+	$PDF->SetFont('Times','',9);
+	$x = 88;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "($pm_numFacture)");
+	// Définition des propriétés du tableau.
+	$proprietesTableau = array(
+		'TB_ALIGN' => 'C',
+		'L_MARGIN' => 1,
+		'BRD_COLOR' => array(0,92,177),
+		'BRD_SIZE' => '0.3',
+		);
+	// Définition des propriétés du header du tableau.
+	$proprieteHeader = array(
+		'T_COLOR' => array(150,10,10),
+		'T_SIZE' => 11,
+		'T_FONT' => 'Arial',
+		'T_ALIGN' => 'C',
+		'V_ALIGN' => 'M',
+		'T_TYPE' => 'B',
+		'LN_SIZE' => 7,
+		'BG_COLOR_COL0' => array(170, 240, 230),
+		'BG_COLOR' => array(170, 240, 230),
+		'BRD_COLOR' => array(0,92,177),
+		'BRD_SIZE' => 0.2,
+		'BRD_TYPE' => '1',
+		'BRD_TYPE_NEW_PAGE' => '',
+		);
+	// Contenu du header du tableau.
+	$contenuHeader = array(
+		50, 44, 44, 44,
+		"Album", "Nombre de commandes", "Total commandé (Euro ttc)", "Revenu net (Euro ttc)",
+	);
+	// Définition des propriétés du reste du contenu du tableau.
+	$proprieteContenu = array(
+		'T_COLOR' => array(0,0,0),
+		'T_SIZE' => 10,
+		'T_FONT' => 'Arial',
+		'T_ALIGN_COL0' => 'C',
+		'T_ALIGN' => 'C',
+		'V_ALIGN' => 'M',
+		'T_TYPE' => '',
+		'LN_SIZE' => 6,
+		'BG_COLOR_COL0' => array(255, 255, 255),
+		'BG_COLOR' => array(255,255,255),
+		'BRD_COLOR' => array(0,92,177),
+		'BRD_SIZE' => 0.1,
+		'BRD_TYPE' => '1',
+		'BRD_TYPE_NEW_PAGE' => '',
+	);
+	// Contenu du tableau.
+	/*$tabContent = array();
+	$index = 0;
+	$tot = 0;
+	$lines = $command->getCommandesPhoto();
+	foreach ($lines as $line){
+		$tabContent[$index++] = removeExtension($line->getPhoto());
+		$tabContent[$index++] = $photosFormatDim[$line->getID_TaillePapier()];
+		$tabContent[$index++] = $line->getNombre();
+		$tabContent[$index++] = sprintf('%.2f',$line->getPrix());
+		$tot += $line->getPrix();
+	}
+	//display tab
+	$y += 12;
+	$PDF->SetXY($x,$y);
+	$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $tabContent);
+	//FDP
+	$x = 130;$y+=sizeof($lines)*6+7;
+	$PDF->SetFont('Times','',11);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Frais de port : ");
+	$PDF->SetFont('Times','',11);
+	$PDF->SetXY($x+33,$y+2);
+	$PDF->Cell(34,6,$command->getFDP()==0?"Offert!":sprintf('%.2f',$command->getFDP()),1,1,'C');
+	//Total
+	$y+=7;
+	$PDF->SetFont('Times','',12);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Total (Euro ttc) : ");
+	$PDF->SetFont('Times','B',12);
+	$PDF->SetXY($x+33,$y+2);
+	$PDF->Cell(34,6,sprintf('%.2f',$command->getFDP()+$tot),1,1,'C');
+	//mention
+	$PDF->SetFont('Times','',8);
+	$y += 6;
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "TVA non applicable, art. 293 B du CGI");
+	//payment date
+	$x = 15;$y+=5;
+	$PDF->SetFont('Times','',9);
+	$PDF->SetXY(15,$y);
+	$PDF->Write(10, "Date de paiement : ".date("d/m/Y H:i",strtotime($command->getDatePaiement())));*/
+	//footer
+	$x = 78;$y = 266;
+	$PDF->SetFont('Times','',8);
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "www.photomentiel.fr - Tous droits réservés");
+	//Print
+	if ($dest==null){
+		$PDF->Output();
+	} else {
+		$PDF->Output($dest, "F");
+	}
+}
+
 ?>
