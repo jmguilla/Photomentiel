@@ -49,18 +49,10 @@ for($j = 1; $j <= $numMessage; $j++){
 				$piece = imap_fetchbody($mbox,$j,$h);
 				if ($part->encoding == "3") {
 					$nbparam =  count($part->parameters);
-					for ($i = 0; $i < $nbparam ; $i++){
-						//Récupération du nom de la pièce jointe
-						$param = $part->parameters[$i];
-						if ($param->attribute == "NAME"){
-							$nom_fichier = $param->value;
-						}else{
-							$nom_fichier = "Nom de fichier introuvable";
-						}
-					}
+					$nom_fichier = $commande[1];
 					$piece = imap_base64($piece);
-					$nom_fichier = str_replace(".pdf","",$nom_fichier);
-					$path_to_save= $prefix_path_to_save.$nom_fichier.$h.".pdf";
+					//$nom_fichier = str_replace(".pdf","",$nom_fichier);
+					$path_to_save= $prefix_path_to_save.$nom_fichier."-".$h.".pdf";
 					$newfichier = fopen($path_to_save,"w+");
 					fwrite($newfichier,$piece);
 					fclose($newfichier);
@@ -68,11 +60,13 @@ for($j = 1; $j <= $numMessage; $j++){
 				}
 			}
 			//imap_mail_copy($mbox, $i, "INBOX.factures"); //move email non gere en pop3?
+			//imap_delete($mbox, $i);
 		}else{
 			//pas de multipart
 		}
 	}
 }
+imap_expunge($mbox);//valid deletion
 imap_close($mbox);
 
 //maintenant on fait le point sur les commandes photomentiel
