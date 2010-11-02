@@ -103,7 +103,7 @@ if (isset($_GET["np"])){
 							<table><tr><td>
 							<div style="float:left;margin-right:5px;"><img height="70px" src="design/misc/photograph.png"/></div>
 							<font color="black"><b>Créer un compte <u><i>Photographe</i></u></b> permet, dans le cas où vous êtes photographe, de créer un compte vous permettant
-							d'ajouter des albums privés ou publics et d'y charger vos photos.<br/>
+							d'ajouter des albums privés ou publics et d'y charger vos photos.<br/><br/>
 							Pour plus de renseignements, rendez vous dans la rubrique <i>vous êtes photographe</i></font>
 							</td></tr></table>
 						</div>
@@ -127,7 +127,7 @@ if (isset($_GET["np"])){
 		<?php
 			if ($createMode){
 				$star = '*';
-				echo "Afin de créer votre compte, merci de bien vouloir renseigner les champs ci-dessous, puis cliquer sur <i>Créer mon compte</i> :<br/>";
+				echo "Afin de créer votre compte, merci de renseigner les champs ci-dessous, puis cliquer sur <i>Créer mon compte</i> :<br/>";
 			} else {
 				$star = '';
 				echo "Vous pouvez mettre à jour les champs souhaités, et cliquez sur <i>Modifier mon compte</i> pour valider :<br/>";
@@ -289,7 +289,7 @@ if (isset($_GET["np"])){
 					</tr>
 					<tr>
 						<td>
-							N° Tel : 
+							N° Tel* : 
 						</td><td>
 							<input name="telephone" class="textfield" type="text" id="telephone" maxlength="12" regexp="^[+]?[0-9]+$" required="required" <?php echo $createMode?'':'value="'.$utilisateurObj->getTelephone().'"'; ?>/><br/>
 							<input style="margin-top:2px;" type="checkbox" name="telephone_r" id="telephone_r" <?php echo (!$createMode && $utilisateurObj->isTelephonePublique())?'checked="checked"':''; ?> /> Rendre mon numéro public
@@ -299,7 +299,7 @@ if (isset($_GET["np"])){
 					</tr>
 					<tr>
 						<td>
-							TVA appliquée : 
+							TVA appliquée* : 
 						</td><td>
 							<select id="tva" name="tva">
 								<?php

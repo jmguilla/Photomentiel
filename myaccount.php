@@ -24,7 +24,7 @@ if ($utilisateurObj){
 	$photographMode = $_SESSION['userClass'] === 'Photographe';
 }
 
-if ($photographMode && isset($_POST['pcontrat'])){
+if ($utilisateurObj && $photographMode && isset($_POST['pcontrat'])){
 	$utilisateurObj->validContrat();
 }
 

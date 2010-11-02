@@ -4,12 +4,12 @@ include_once $dir_administration_imap_factures . "/../../classes/modele/Commande
 include_once $dir_administration_imap_factures . "/../../classes/modele/Commande.class.php";
 include_once $dir_administration_imap_factures . "/../../classes/controleur/ControleurUtils.class.php";
 
-$prefix_path_to_save = "/homez.368/photomen/cgi-bin/factures/foto.com/" . date("mY") . "/";
-//$prefix_path_to_save = "D:\\EasyPHP-5.3.3\\www\\" . date("mY") . "\\";
+$prefix_path_to_save = "/homez.368/photomen/cgi-bin/factures/foto.com/" . date("Ym") . "/";
+//$prefix_path_to_save = "D:\\EasyPHP-5.3.3\\www\\" . date("Ym") . "\\";
 if(!is_dir($prefix_path_to_save)){
 	if(!mkdir($prefix_path_to_save, 0755)){
 		echo "Impossible de creer repertoire pour sauvegarde factures<br/>";
-		ControleurUtils::addError("Impossible de creer repertoire pour sauvegarde factures $prefix_path_to_save");
+		ControleurUtils::addError("Impossible de creer repertoire pour sauvegarde factures '$prefix_path_to_save'");
 		return;
 	}
 }
@@ -21,24 +21,25 @@ $commandesTraitees = array();
 for($j = 1; $j <= $numMessage; $j++){
 	$header = imap_header ($mbox,$j);
 	$from = $header->from[0];
-		if((strstr($from->host, "foto.com") != false) && (strstr($header->subject,"Facture") != false)){
-//	if((strstr($from->mailbox, "guillauj") != false)){
+	$sujet = $header->subject;
+	if((strstr($from->host, "foto.com") != false) && (strstr($sujet,"Facture") != false)){
+		//if((strstr($from->mailbox, "guillauj") != false)){
 		$commandes = array();
-		preg_match_all('/>N&#176;&nbsp;(\d+)</', imap_body($mbox, $j), $commandes, PREG_SET_ORDER);
+		//preg_match_all('/>N&#176;&nbsp;(\d+)</', imap_body($mbox, $j), $commandes, PREG_SET_ORDER);
+		preg_match_all('/Facture (\d+)/', $sujet, $commandes, PREG_SET_ORDER);
 		foreach($commandes as $commande){
 			//$commande[1] vaut un numero de commande foto.com
 			$commandeFoto = CommandeFoto::getCommandeFotoDepuisCommandeFoto($commande[1]);
 			if($commandeFoto){
 				if($commandeFoto->expediee()){
 					echo $commandeFoto->getCommandeFotoID() . " marque expediee<br/>";
-					$commandesTraitees[$commandeFoto->getID_Commande()] = true;				
+					$commandesTraitees[$commandeFoto->getID_Commande()] = true;
 				}
 			}else{
 				echo "Aucune commande foto ne correspond au numero " . $commande[1] . "<br/>";
 			}
 		}
 		//maintenant on extrait le pdf si pdf il y a
-		$sujet = $header->subject;	
 		$struct = imap_fetchstructure($mbox,$j);
 		if ($struct->type == 1){
 			$nbrparts = !$struct->parts ? "1" : count($struct->parts);
@@ -66,7 +67,7 @@ for($j = 1; $j <= $numMessage; $j++){
 					echo "facture " . $path_to_save . " sauvee<br/>";
 				}
 			}
-//		imap_mail_copy($mbox, $i, "INBOX.factures"); //move email non gere en pop3?
+			//imap_mail_copy($mbox, $i, "INBOX.factures"); //move email non gere en pop3?
 		}else{
 			//pas de multipart
 		}
@@ -92,3 +93,4 @@ foreach($commandesTraitees as $i => $bool){
 	}
 }
 ?>
+

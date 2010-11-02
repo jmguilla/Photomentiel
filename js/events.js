@@ -19,8 +19,9 @@ function eventString(eventObj, index) {
 	return tmp;
 }
 //*********************************************************************
-//get all events between 2 dates
+//get all events between 2 dates and region, keywords and type params
 function getEvents(){
+	$("#rcontent").css('height','420px');
 	var d1 = $('#dc_from').val();
 	var d2 = $('#dc_to').val();
 	var kw = $('#keywords').val();
