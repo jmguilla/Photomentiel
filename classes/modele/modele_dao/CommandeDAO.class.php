@@ -140,8 +140,10 @@ class CommandeDAO extends DAO{
 			$this->startTransaction();
 			$query = "update Commande set etat = " .
 			mysql_real_escape_string($commande->getEtat());
+			$previousNumero = $commande->getNumero();
 			if($commande->getEtat() == 1){
 				$numero = $this->getNumeroCommande();
+				$commande->setNumero($numero);
 				$query .= ", datePaiement = now(), numero = '" .
 				mysql_real_escape_string($numero) . "' ";
 			}
@@ -193,12 +195,14 @@ class CommandeDAO extends DAO{
 			if(!$this->unlockTable()){
 				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
 			}
+			$commande->setNumero($previousNumero);
 			return false;
 		}catch(Exception $exception){
 			$this->rollback();
 			if(!$this->unlockTable()){
 				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
 			}
+			$commande->setNumero($previousNumero);
 			return false;
 		}
 	}
