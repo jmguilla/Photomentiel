@@ -10,6 +10,7 @@
  *
  */
 include("phptopdf/phpToPDF.php");
+include_once("classes/modele/StringID.class.php");
 
 /* 
  * Return the given value troncated to the given length.
@@ -156,7 +157,7 @@ function makePDF($command, $user, $photosFormatDim, $siren, $dest=null){
 		'TB_ALIGN' => 'C',
 		'L_MARGIN' => 1,
 		'BRD_COLOR' => array(0,92,177),
-		'BRD_SIZE' => '0.3',
+		'BRD_SIZE' => '0.3'
 		);
 	// Définition des propriétés du header du tableau.
 	$proprieteHeader = array(
@@ -172,12 +173,12 @@ function makePDF($command, $user, $photosFormatDim, $siren, $dest=null){
 		'BRD_COLOR' => array(0,92,177),
 		'BRD_SIZE' => 0.2,
 		'BRD_TYPE' => '1',
-		'BRD_TYPE_NEW_PAGE' => '',
+		'BRD_TYPE_NEW_PAGE' => ''
 		);
 	// Contenu du header du tableau.
 	$contenuHeader = array(
 		80, 34, 34, 34,
-		"Référence", "Format", "Quantité", "Total (Euro ttc)",
+		"Référence", "Format", "Quantité", "Total (Euro ttc)"
 	);
 	// Définition des propriétés du reste du contenu du tableau.
 	$proprieteContenu = array(
@@ -194,7 +195,7 @@ function makePDF($command, $user, $photosFormatDim, $siren, $dest=null){
 		'BRD_COLOR' => array(0,92,177),
 		'BRD_SIZE' => 0.1,
 		'BRD_TYPE' => '1',
-		'BRD_TYPE_NEW_PAGE' => '',
+		'BRD_TYPE_NEW_PAGE' => ''
 	);
 	// Contenu du tableau.
 	$tabContent = array();
@@ -305,7 +306,7 @@ function makeCard($stringID, $album, $photographe, $dest=null){
  * Create pdf file from every albums as a facture from photograph to photomentiel
  * Display pdf on output if 'dest' is not specified or null. Otherwise, create and fill the file 'dest'
  */
-function makePDFVirement($albums, $photograph, $siren, $pm_numFacture, $dest=null){
+function makePDFVirement($tva, $albums, $photograph, $siren, $pm_numFacture, $dest=null){
 	$adresse = $photograph->getAdresse();
 	$PDF = new phpToPDF();
 	$PDF->AddPage();
@@ -390,8 +391,8 @@ function makePDFVirement($albums, $photograph, $siren, $pm_numFacture, $dest=nul
 		);
 	// Contenu du header du tableau.
 	$contenuHeader = array(
-		50, 44, 44, 44,
-		"Album", "Nombre de commandes", "Total commandé (Euro ttc)", "Revenu net (Euro ttc)",
+		130, 52,
+		"Code Album", "Revenu net (Euro ttc)"
 	);
 	// Définition des propriétés du reste du contenu du tableau.
 	$proprieteContenu = array(
@@ -411,47 +412,53 @@ function makePDFVirement($albums, $photograph, $siren, $pm_numFacture, $dest=nul
 		'BRD_TYPE_NEW_PAGE' => '',
 	);
 	// Contenu du tableau.
-	/*$tabContent = array();
+	$tabContent = array();
 	$index = 0;
 	$tot = 0;
-	$lines = $command->getCommandesPhoto();
-	foreach ($lines as $line){
-		$tabContent[$index++] = removeExtension($line->getPhoto());
-		$tabContent[$index++] = $photosFormatDim[$line->getID_TaillePapier()];
-		$tabContent[$index++] = $line->getNombre();
-		$tabContent[$index++] = sprintf('%.2f',$line->getPrix());
-		$tot += $line->getPrix();
+	foreach ($albums as $alb){
+		if ($alb->getBalance() > 0){
+			$sid = StringID::getStringIDDepuisID_Album($alb->getAlbumID());
+			if (!$sid){
+				echo "ERROR : String ID not found for album #".$alb->getAlbumID();
+			}
+			$tabContent[$index++] = $sid->getStringID();
+			$tabContent[$index++] = sprintf('%.2f',$alb->getBalance());
+			$tot += $alb->getBalance();
+		}
 	}
 	//display tab
 	$y += 12;
 	$PDF->SetXY($x,$y);
 	$PDF->drawTableau($PDF, $proprietesTableau, $proprieteHeader, $contenuHeader, $proprieteContenu, $tabContent);
-	//FDP
-	$x = 130;$y+=sizeof($lines)*6+7;
-	$PDF->SetFont('Times','',11);
-	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "Frais de port : ");
-	$PDF->SetFont('Times','',11);
-	$PDF->SetXY($x+33,$y+2);
-	$PDF->Cell(34,6,$command->getFDP()==0?"Offert!":sprintf('%.2f',$command->getFDP()),1,1,'C');
 	//Total
-	$y+=7;
+	$x = 130;$y+=sizeof($albums)*6+7;
 	$PDF->SetFont('Times','',12);
 	$PDF->SetXY($x,$y);
 	$PDF->Write(10, "Total (Euro ttc) : ");
-	$PDF->SetFont('Times','B',12);
+	$PDF->SetFont('Times','B',11);
 	$PDF->SetXY($x+33,$y+2);
-	$PDF->Cell(34,6,sprintf('%.2f',$command->getFDP()+$tot),1,1,'C');
-	//mention
-	$PDF->SetFont('Times','',8);
-	$y += 6;
-	$PDF->SetXY($x,$y);
-	$PDF->Write(10, "TVA non applicable, art. 293 B du CGI");
+	$PDF->Cell(34,6,sprintf('%.2f',$tot),1,1,'C');
+	//TVA
+	if ($photograph->getTVA() != 2){
+		$y+=7;
+		$PDF->SetFont('Times','',10);
+		$PDF->SetXY($x,$y);
+		$PDF->Write(10, "Dont TVA (".$tva[$photograph->getTVA()]."%) : ");
+		$PDF->SetFont('Times','',10);
+		$PDF->SetXY($x+33,$y+2);
+		$PDF->Cell(34,6,sprintf('%.2f',$tot-($tot/(1+$tva[$photograph->getTVA()]/100))),1,1,'C');
+	} else {
+		//mention obligatoire pour les non-assujettis
+		$y += 6;
+		$PDF->SetFont('Times','',8);
+		$PDF->SetXY($x,$y);
+		$PDF->Write(10, "TVA non applicable, art. 293 B du CGI");
+	}
 	//payment date
-	$x = 15;$y+=5;
+	$x = 30;$y+=6;
 	$PDF->SetFont('Times','',9);
-	$PDF->SetXY(15,$y);
-	$PDF->Write(10, "Date de paiement : ".date("d/m/Y H:i",strtotime($command->getDatePaiement())));*/
+	$PDF->SetXY($x,$y);
+	$PDF->Write(10, "Paiement effectué par virement le même jour.");
 	//footer
 	$x = 78;$y = 266;
 	$PDF->SetFont('Times','',8);
