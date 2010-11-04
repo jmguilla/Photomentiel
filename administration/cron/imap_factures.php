@@ -60,7 +60,7 @@ for($j = 1; $j <= $numMessage; $j++){
 				}
 			}
 			//imap_mail_copy($mbox, $i, "INBOX.factures"); //move email non gere en pop3?
-			//imap_delete($mbox, $i);
+			imap_delete($mbox, $i);
 		}else{
 			//pas de multipart
 		}

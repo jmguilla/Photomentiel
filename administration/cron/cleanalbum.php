@@ -1,8 +1,8 @@
 <?php
 $dir_cron_cleanalbum_php = dirname(__FILE__);
-include_once '/../../classes/modele/Album.class.php';
-include_once '/../../classes/modele/Commande.class.php';
-include_once '/../../classes/Config.php';
+include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Album.class.php';
+include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Commande.class.php';
+include_once $dir_cron_cleanalbum_php . '/../../classes/Config.php';
 
 $albums = Album::getAlbumDepuisEtat(count($ALBUM_STATES) - 1);
 if($albums){
@@ -29,5 +29,7 @@ if($albums){
 			echo "Commandes en attente pour l'album cloture #" . $album->getAlbumID() . "<br/>";
 		}
 	}
+} else {
+	echo "Aucun album n'est en etat de suppression";
 }
 ?>

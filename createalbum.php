@@ -328,7 +328,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 			</table>
 		</fieldset>
 		<fieldset>
-			<legend> Mailing liste </legend>
+			<legend> Liste de mails </legend>
 			<table>
 			<tr>
 				<td colspan="3" height="66px;">
@@ -427,18 +427,18 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 			</table>
 		</fieldset>
 		<fieldset>
-			<legend> Reversions </legend>
+			<legend> Gains pour l'album </legend>
 			<table cellspacing="0px">
 			<tr <?php echo ($albumObj->getEtat()<2)?'':'style="background-color:lightgreen;"'; ?>>
 				<td width="182px;" height="22px">
-					Gain pour le mois : 
+					Gains pour le mois : 
 				</td><td colspan="2">
 					<b><?php echo $albumObj->getBalance(); ?> &#8364;&nbsp;</b>
 				</td>
 			</tr>
 			<tr>
 				<td height="22px">
-					Gain total : 
+					Gains depuis la création : 
 				</td><td colspan="2">
 					<?php echo $albumObj->getGainTotal(); ?> &#8364;
 				</td>
@@ -449,7 +449,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				if ($continueUpdateState){
 			?>
 		<fieldset>
-			<legend> Gestion de votre mailing liste </legend>
+			<legend> Gestion de votre liste de mails </legend>
 			<table>
 			<tr>
 				<td colspan="3" height="66px;">

@@ -5,7 +5,7 @@ include_once $dir_album_class_php . "/../Config.php";
 
 class Album {
 	private $albumID;
-	private $filigramme = 'www.photomentiel.fr';
+	private $filigramme = 'photomentiel';
 	private $isPublique;
 	private $nom;
 	private $id_photographe;

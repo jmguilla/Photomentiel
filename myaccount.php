@@ -237,7 +237,7 @@ if ($utilisateurObj && isset($_GET['action']) && $_GET['action']==='remove'){
 									$("#displayEventsNb").html("<?php echo $eventsNb; ?>");
 									$("#displayCommandsNb").html("<?php echo $commandsNb; ?>");
 									$("#displayAlbumsNb").html("<?php echo $albumsNb; ?>");
-									$("#displayFullGain").html("(Gain mensuel : <b><?php echo sprintf('%.2f',$total_m); ?> &#8364</b> - Gain total : <b><?php echo sprintf('%.2f',$total_a); ?> &#8364</b>)");
+									$("#displayFullGain").html("(Gain mensuel total : <b><?php echo sprintf('%.2f',$total_m); ?> &#8364</b> - Gain total : <b><?php echo sprintf('%.2f',$total_a); ?> &#8364</b>)");
 								</script>
 								<?php
 							} else {
