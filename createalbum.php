@@ -415,10 +415,20 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 				<td>
 					Formats & tarifs : 
 				</td><td colspan="2">
-					<table width="200px" style="margin-top:4px;" class="fandp">
+					<table width="720px" style="margin-top:4px;" class="fandp">
 					<?php
 						foreach ($photoFormatsPrice as $id => $p) {
-							echo "<tr><td>".$photoFormatsDim[$id]." cm</td><td>".sprintf('%.2f',$p)." &#8364;</td></tr>";
+							//echo "<tr><td>".$photoFormatsDim[$id]." cm</td><td>".sprintf('%.2f',$p)." &#8364;</td></tr>";
+							echo 
+							'<tr>
+								<td width="65px">
+									'.$photoFormatsDim[$id].' :
+								</td><td class="price" width="350px">
+									<input type="text" class="textfield" value="'.sprintf('%.2f',$p).'" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'."TODO".'" id="'.$id.'" name="'.$id.'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'."TODO".' &#8364;</b> - conseillé: <b>'."TODO".' &#8364;</b> )</span>
+								</td><td width="290px">
+									<div class="checkform" id="r'.$id.'"></div>
+								</td>
+							</tr>';
 						}
 					?>
 					</table>
@@ -472,18 +482,15 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 		</fieldset>
 			<?php
 				}
-				if ($continueUpdateState){
 			?>
 		<div class="separator10"></div>
 		<center>
 			<input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/>
 			<input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/>
 		<center/>
-			<?php
-				}
-			?>
 		</form>
-		<div class="separator10" style="height:20px;"></div>
+
+		<div class="separator10" style="height:10px;"></div>
 			<?php
 				if($albumObj->getEtat() == 0){
 					echo '<div id="catitle3">Votre album est <u>en attente de téléchargement</u> de photos : (voir les instructions ci-dessous)</div>';
