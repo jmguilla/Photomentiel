@@ -51,12 +51,14 @@ function displayAlbum(albumId){
 		$('#tl_error').show();
 		return false;
 	}
+	$('#card_valider').attr("disabled","true");
 	$.ajax({
 		type: "GET",
 		url: "/dispatcher.php",
 		data:"action=get_stringid&sid="+albumId,
 		dataType:"json",
 		success:function(data){
+			$('#card_valider').removeAttr("disabled");
 			$('#tl_error').hide();
 			if(data.value[0] != false){
 				if (data.value[1]){
@@ -103,12 +105,14 @@ function getEvents(){
 	if (d1!=''){param+="&d1="+d1;}
 	if (d2!=''){param+="&d2="+d2;}
 	$('#search_event').attr('disabled', 'true');
+	$('#jq_load').html('<img src="design/misc/form_loading.gif"></img>');
 	$.ajax({
 		type:"GET",
 		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
+			$('#jq_load').html('');
 			$('#search_event').removeAttr('disabled');
 			if (data.result == false){
 				alert('Impossible de récupérer des événements !');
@@ -135,6 +139,7 @@ function getEvents(){
 			$('#events_height').html(tmp);
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
+			$('#jq_load').html('');
 			alert('Error with code 7');
 		}
 	});

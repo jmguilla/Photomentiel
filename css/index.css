@@ -167,13 +167,7 @@ input#dc_from, input#dc_to {
 
 input#search_event, input#card_valider {
 	height:20px;
-	width:70px;
-}
-input#card_valider {
-	margin-bottom:5px;
-}
-input#search_event {
-	margin-top:1px;
+	width:75px;
 }
 
 div#know_more {

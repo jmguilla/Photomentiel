@@ -48,12 +48,14 @@ function getEvents(){
 	if (rg!=0) {param.idr=rg;}
 	if (tp!=-1) {param.type=tp;}
 	$('#search').attr('disabled', 'true');
+	$('#jq_load').html('<img src="design/misc/form_loading.gif"></img>');
 	$.ajax({
 		type:"POST",
 		url:"/dispatcher.php",
 		data:param,
 		dataType:"json",
 		success:function(data){
+			$('#jq_load').html('');
 			$('#search').removeAttr('disabled');
 			if (data.result == false){
 				alert('Impossible de récupérer des évenements !');
@@ -71,6 +73,7 @@ function getEvents(){
 			$('#rtitle').html("Résultat de votre recherche :");
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
+			$('#jq_load').html('');
 			alert('Error with code 11');
 		}
 	});

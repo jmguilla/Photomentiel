@@ -10,6 +10,8 @@
  *
  */
  //assert $utilisateurObj exist and is a photographe
+
+$PHOTOGRAPH_PERCENT = $utilisateurObj->getPourcentage();
 ?>
 <div id="title">CONTRAT LIANT LE PHOTOGRAPHE ET PHOTOMENTIEL</div>
 <br/><br/>
@@ -60,7 +62,7 @@ De ce fait, le Photographe accepte expressément et sans condition que Photoment
 Cette facture au format numérique PDF sera envoyée par mail et contiendra un emplacement vide en lieu et place du numéro de facture afin que le photographe puisse y renseigner son numéro de facture dans le modèle de sa facturation personnelle.<br/>
 Pour chaque commande payée par un client et validée par la banque, Photomentiel prélève :<br/>
 <ul>
-	<li>une commission de <?php echo (100-PHOTOGRAPH_INITIAL_PERCENT); ?>% (pourcentage initial par défaut : voir article 10) sur le chiffre d'affaire (montant de la commande client)
+	<li>une commission de <?php echo (100-$PHOTOGRAPH_PERCENT); ?>% (pourcentage initial par défaut : voir article 10) sur le chiffre d'affaire (montant de la commande client)
 	<li>les coûts de productions et frais de port, dont voici les détails :
 		<ul>
 			<li>Frais de port : <?php echo SHIPPING_RATE; ?> &#8364;</li>
@@ -79,7 +81,7 @@ Pour chaque commande payée par un client et validée par la banque, Photomentie
 A titre d'exemple, pour une commande client de <?php echo $nb1; ?> formats <?php echo $papers[3]->getDimensions(); ?> à <?php echo $papers[3]->getPrixConseille(); ?>&#8364; et <?php echo $nb2; ?> formats <?php echo $papers[7]->getDimensions(); ?> à <?php echo $papers[7]->getPrixConseille(); ?>&#8364; :<br/>
 <ul>
 	<li>Paiement enregistré (chiffre d'affaire) : <?php echo $nb1; ?>*<?php echo $papers[3]->getPrixConseille(); ?> + <?php echo $nb2; ?>*<?php echo $papers[7]->getPrixConseille(); ?> = <?php $ca = $nb1*$papers[3]->getPrixConseille()+$nb2*$papers[7]->getPrixConseille();echo sprintf('%.2f',$ca); ?>&#8364; ttc</li>
-	<li>Commission Photomentiel : <?php echo $ca."*".(100-PHOTOGRAPH_INITIAL_PERCENT); ?>% = <?php $com=$ca*(100-PHOTOGRAPH_INITIAL_PERCENT)/100;echo sprintf('%.2f',$com); ?>&#8364;</li>
+	<li>Commission Photomentiel : <?php echo $ca."*".(100-$PHOTOGRAPH_PERCENT); ?>% = <?php $com=$ca*(100-$PHOTOGRAPH_PERCENT)/100;echo sprintf('%.2f',$com); ?>&#8364;</li>
 	<li>Coût de production : <?php echo $nb1; ?>*<?php echo $papers[3]->getPrixFournisseur(); ?> + <?php echo $nb2; ?>*<?php echo $papers[7]->getPrixFournisseur(); ?> = <?php $cp = $nb1*$papers[3]->getPrixFournisseur()+$nb2*$papers[7]->getPrixFournisseur();echo sprintf('%.2f',$cp); ?>&#8364;</li>
 	<li>Frais d'envoi : <?php echo sprintf('%.2f',SHIPPING_RATE); ?>&#8364;</li>
 	<li>Revenu net Photographe : <?php echo sprintf('%.2f',$ca); ?> - <?php echo sprintf('%.2f',$com); ?> - <?php echo sprintf('%.2f',$cp); ?> - <?php echo sprintf('%.2f',SHIPPING_RATE); ?> = <?php echo sprintf('%.2f',$ca-$com-$cp-SHIPPING_RATE); ?> &#8364; ttc</li>
@@ -146,7 +148,7 @@ Il peut prendre fin pour les raisons suivantes :<br/>
 
 
 <h1>Article 10 : Pourcentage de reversion</h1>
-<span class="start"></span>Photomentiel s'engage à reverser au photographe <?php echo PHOTOGRAPH_INITIAL_PERCENT; ?>% des bénéfices de ces ventes déduit des différents frais de traitement cités plus haut, le reste étant utilisé pour assurer le bon fonctionnement de ce service. Photomentiel précise aussi que le pourcentage reversé au photographe faisant foi est celui qui apparaît sur le présent contrat. Si Photomentiel est amené à augmenter ce pourcentage, il ne sera pas changé pour les photographes ayant déjà un compte sur le site sans leur accord préalable.<br/>
+<span class="start"></span>Photomentiel s'engage à reverser au photographe <?php echo $PHOTOGRAPH_PERCENT; ?>% des bénéfices de ces ventes déduit des différents frais de traitement cités plus haut, le reste étant utilisé pour assurer le bon fonctionnement de ce service. Photomentiel précise aussi que le pourcentage reversé au photographe faisant foi est celui qui apparaît sur le présent contrat. Si Photomentiel est amené à augmenter ce pourcentage, il ne sera pas changé pour les photographes ayant déjà un compte sur le site sans leur accord préalable.<br/>
 <span class="start"></span>En créant un compte, le photographe s'engage à accepter tous les termes évoqués dans les différents articles du présent contrat. Il s'engage aussi à conserver une copie de ce document afin de fixer le pourcentage qui lui a été attribué au jour de son inscription. Si toutefois il ne pouvait pas le prouver, le pourcentage appliqué serait alors immédiatement le pourcentage en vigueur appliqué pour les nouveaux contrats.<br/>
 
 

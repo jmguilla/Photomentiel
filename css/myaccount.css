@@ -12,14 +12,14 @@ div#content_unknown {
 div#left {
 	float:left;
 	margin-right:20px;
-	width:180px;
+	width:185px;
 	border:1px blue solid;
 	border-bottom:0px;
 	background-color:#DDEEFF;
 }
 div#left div.left_c {
 	height:30px;
-	width:175px;
+	width:180px;
 	border-bottom:1px darkblue solid;
 	line-height:30px;
 	font-weight:bold;
@@ -60,7 +60,7 @@ div#right {
 	float:left;
 	margin-left:3px;
 	margin-right:6px;
-	width:730px;
+	width:725px;
 }
 
 div.content_box {

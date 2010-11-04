@@ -33,7 +33,6 @@ input#dc_from, input#dc_to {
 input#search {
 	height:21px;
 	width:100px;
-	margin-bottom:2px;
 }
 input#keywords {
 	width:206px;

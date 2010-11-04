@@ -11,32 +11,40 @@ function radioChange(){
 		}
 }
 function queryCPFromVille(ville){
-	$.ajax({
-		type: "GET",
-		url: "/dispatcher.php",
-		data:"action=get_ville_from_nom&nom="+ville,
-		dataType:"json",
-		success:function(data){
-			if(data.result == true && $('#code_postal').val() == ''){
-				$('#code_postal').val(data.value[0].fields.CodePostal);
-				checkMaxChar('code_postal');
+	if ($('#code_postal').val() == ''){
+		$('#rville').css('background-image','url(design/misc/form_loading.gif)');
+		$.ajax({
+			type: "GET",
+			url: "/dispatcher.php",
+			data:"action=get_ville_from_nom&nom="+ville,
+			dataType:"json",
+			success:function(data){
+				$('#rville').css('background-image','url(null)');
+				if(data.result == true && $('#code_postal').val() == ''){
+					$('#code_postal').val(data.value[0].fields.CodePostal);
+					checkMaxChar('code_postal');
+				}
 			}
-		}
-	});
+		});
+	}
 }
 function queryVilleFromCP(cp){
-	$.ajax({
-		type: "GET",
-		url: "/dispatcher.php",
-		data:"action=get_ville_from_cp&cp="+cp,
-		dataType:"json",
-		success:function(data){
-			if(data.result == true && $('#ville').val() == ''){
-				$('#ville').val(data.value[0].fields.Nom);
-				checkRequired('ville');
+	if($('#ville').val() == ''){
+		$('#rcode_postal').css('background-image','url(design/misc/form_loading.gif)');
+		$.ajax({
+			type: "GET",
+			url: "/dispatcher.php",
+			data:"action=get_ville_from_cp&cp="+cp,
+			dataType:"json",
+			success:function(data){
+				$('#rcode_postal').css('background-image','url(null)');
+				if(data.result == true && $('#ville').val() == ''){
+					$('#ville').val(data.value[0].fields.Nom);
+					checkRequired('ville');
+				}
 			}
-		}
-	});
+		});
+	}
 }
 $(function() {
 	$("input[name=adresses]").change(radioChange);

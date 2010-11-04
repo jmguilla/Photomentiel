@@ -66,32 +66,40 @@ function checkMail(){
     return { "error" : errorEmail, "mess" : mess };
 }
 function queryCPFromVille(ville){
-	$.ajax({
-		type: "GET",
-		url: "/dispatcher.php",
-		data:"action=get_ville_from_nom&nom="+ville,
-		dataType:"json",
-		success:function(data){
-			if(data.result == true && $('#code_postal').val() == ''){
-				$('#code_postal').val(data.value[0].fields.CodePostal);
-				checkMaxChar('code_postal');
+	if ($('#code_postal').val() == ''){
+		$('#rville').css('background-image','url(design/misc/form_loading.gif)');
+		$.ajax({
+			type: "GET",
+			url: "/dispatcher.php",
+			data:"action=get_ville_from_nom&nom="+ville,
+			dataType:"json",
+			success:function(data){
+				$('#rville').css('background-image','url(null)');
+				if(data.result == true && $('#code_postal').val() == ''){
+					$('#code_postal').val(data.value[0].fields.CodePostal);
+					checkMaxChar('code_postal');
+				}
 			}
-		}
-	});
+		});
+	}
 }
 function queryVilleFromCP(cp){
-	$.ajax({
-		type: "GET",
-		url: "/dispatcher.php",
-		data:"action=get_ville_from_cp&cp="+cp,
-		dataType:"json",
-		success:function(data){
-			if(data.result == true && $('#ville').val() == ''){
-				$('#ville').val(data.value[0].fields.Nom);
-				checkRequired('ville');
+	if($('#ville').val() == ''){
+		$('#rcode_postal').css('background-image','url(design/misc/form_loading.gif)');
+		$.ajax({
+			type: "GET",
+			url: "/dispatcher.php",
+			data:"action=get_ville_from_cp&cp="+cp,
+			dataType:"json",
+			success:function(data){
+				$('#rcode_postal').css('background-image','url(null)');
+				if(data.result == true && $('#ville').val() == ''){
+					$('#ville').val(data.value[0].fields.Nom);
+					checkRequired('ville');
+				}
 			}
-		}
-	});
+		});
+	}
 }
 function checkSIREN(){
 	var errorSiren = false;
@@ -312,12 +320,14 @@ $(document).ready(function() {
 		var isValid = checkForm();
 		if(!isValid.error) {
 			$('#userSubmit').attr("disabled","true");
+			$('#jq_load').html('<img src="design/misc/form_loading.gif"></img>');
 			$.ajax({
 				type: "POST",
 				url: "/dispatcher.php",
 				data: createUserDataAction(),
 				dataType:"json",
 				success:function(data){
+					$('#jq_load').html('');
 					if(data.result == false){
 						alert(data.cause);
 						return;
@@ -336,6 +346,7 @@ $(document).ready(function() {
 					$('#userSubmit').removeAttr("disabled");
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
+					$('#jq_load').html('');
 					alert('Error with code 3');
 				}
 			});
@@ -348,12 +359,14 @@ $(document).ready(function() {
 		var isValid = checkForm();
 		if(!isValid.error) {
 			$('#userSubmit').attr("disabled","true");
+			$('#jq_load').html('<img src="design/misc/form_loading.gif"></img>');
 			$.ajax({
 				type: "POST",
 				url: "/dispatcher.php",
 				data: updateUserDataAction(),
 				dataType:"json",
 				success:function(data){
+					$('#jq_load').html('');
 					if(data.result == false){
 						alert(data.cause);
 						return;
@@ -370,6 +383,7 @@ $(document).ready(function() {
 					}
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown){
+					$('#jq_load').html('');
 					alert('Error with code 8');
 				}
 			});

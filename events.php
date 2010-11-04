@@ -166,7 +166,7 @@ if (isset($_POST['ftype'])){
 							}
 						?>
 					</select>
-					&nbsp;&nbsp;<input id="search" class="button" type="submit" value="Chercher" title="Chercher des événements avec les critères sélectionnés"/>
+					&nbsp;&nbsp;<input id="search" class="button" type="submit" value="Chercher" title="Chercher des événements avec les critères sélectionnés"/> <span id="jq_load"></span>
 					</td></tr></table>
 				</form>
 			</div>

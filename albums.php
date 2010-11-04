@@ -37,7 +37,7 @@ include_once("classes/modele/Adresse.class.php");
 				( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this,false);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();" onFocus="this.select()"/> )
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Par mots-clés :
 				<input id="keywords" class="textfield" type="textfield" onFocus="this.select()"/>
-				<input id="search" class="button" type="submit" value="Chercher" title="Chercher des albums avec les critères sélectionnés" />
+				<input id="search" class="button" type="submit" value="Chercher" title="Chercher des albums avec les critères sélectionnés" /> <span id="jq_load"></span>
 			</form>
 		</div>
 		<div class="separator5"></div>

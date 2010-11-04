@@ -141,7 +141,7 @@ include_once("classes/modele/Evenement.class.php");
 			<div class="separator10" style="height:15px"></div>
 			Evénements du <input id="dc_from" class="textfield" type="text" onClick="GetDate(this);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();"></input> 
 			( au <input id="dc_to" class="textfield" type="text" onClick="GetDate(this);" onBlur="destroyCalendarOnOut();" onKeyDown="DestroyCalendar();"></input> )
-			&nbsp;<input id="search_event" class="button" type="button" value="Chercher" title="Chercher des événements par date" onClick="getEvents();"></input>
+			&nbsp;<input id="search_event" class="button" type="button" value="Chercher" title="Chercher des événements par date" onClick="getEvents();"></input> <span id="jq_load"></span>
 		</div>
 	</div>
 	<div id="square_bot"></div>
