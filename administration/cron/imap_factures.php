@@ -5,7 +5,6 @@ include_once $dir_administration_imap_factures . "/../../classes/modele/Commande
 include_once $dir_administration_imap_factures . "/../../classes/controleur/ControleurUtils.class.php";
 
 $prefix_path_to_save = "/homez.368/photomen/cgi-bin/factures/foto.com/" . date("Ym") . "/";
-//$prefix_path_to_save = "D:\\EasyPHP-5.3.3\\www\\" . date("Ym") . "\\";
 if(!is_dir($prefix_path_to_save)){
 	if(!mkdir($prefix_path_to_save, 0755)){
 		echo "Impossible de creer repertoire pour sauvegarde factures<br/>";
@@ -15,7 +14,7 @@ if(!is_dir($prefix_path_to_save)){
 }
 
 echo "Traitement commande foto.com:<br/>";
-$mbox = imap_open ("{pop3.photomentiel.fr:110/pop3}INBOX", "jean-michel.guillaume@photomentiel.fr", "adJL13adJM08");
+$mbox = imap_open ("{pop3.photomentiel.fr:110/pop3}INBOX", "foto.com@photomentiel.fr", "adJLadJM");
 $numMessage = imap_num_msg($mbox);
 $commandesTraitees = array();
 for($j = 1; $j <= $numMessage; $j++){
