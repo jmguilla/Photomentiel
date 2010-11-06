@@ -5,6 +5,7 @@ include_once $dir_administration_controleur_album_php . "/../../classes/modele/S
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Photographe.class.php";
 include_once $dir_administration_controleur_album_php . "/../../classes/modele/Utilisateur.class.php";
 include_once $dir_administration_controleur_album_php . "/../../functions.php";
+include_once $dir_administration_controleur_album_php . "/../../classes/controleur/ControleurUtils.class.php";
 
 switch($action){
 	case supprimer_photo:
@@ -212,6 +213,13 @@ switch($action){
 				$_SESSION['message'] .= "Aucun stringid fourni, httppost(rmrf.php) non operationnel.<br/>";
 			}else{
 				httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/rmrf.php","stringID=".$_POST['stringid'], false);
+			}
+			$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
+			if($photographe){
+				ControleurUtils::sendMail($utilisateur, "Album publié sur www.photomentiel.fr", 
+				"Félicitation! Votre album \"$album->getNom()\" - \"" . $_POST['stringid'] . "\" vient d'être publié!\n\n");
+			}else{
+				$_SESSION['message'] .= "Impossible d'envoyer email de confirmation au photographe<br/>";
 			}
 		}else{
 			$_SESSION['message'] .= "Un problème est survenue pendant la validation de l'album #" . $album->getAlbumID() . "<br/>";
