@@ -33,7 +33,7 @@ class AlbumDAO extends DAO {
 		}
 	}
 	public function lockTableResetBalance(){
-	$query = "lock tables Album write";
+	$query = "lock tables Album write, StringID read";
 		$tmp = $this->update($query);
 		if($tmp){
 			return true;

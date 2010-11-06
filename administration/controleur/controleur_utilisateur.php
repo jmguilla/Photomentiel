@@ -4,21 +4,9 @@ include_once $dir_administration_controleur_utilisateur_php . "/../../classes/mo
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Photographe.class.php";
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Album.class.php";
 include_once $dir_administration_controleur_utilisateur_php . "/../../classes/controleur/ControleurUtils.class.php";
+include_once $dir_administration_controleur_utilisateur_php . "/../../functions.php";
 
 switch($action){
-	case envoyer_confirmation_paiement:
-		if(!isset($_POST['id'])){
-			echo "<h1>Aucun id photographe fournie</h1>";
-			exit();
-		}
-		$photographe = Photographe::getPhotographeDepuisID($_POST['id']);
-		if(ControleurUtils::sendPaiementPhotographeEmail($photographe)){
-			echo "<h1>Email de confirmation envoye!</h1>";
-		}else{
-			echo "<h1>Impossible d'envoyer l'email de confirmation</h1>";
-		}
-		exit();
-	break;
 	case modifier_photographe:
 		if(!isset($_POST['id'])){
 			$_SESSION['message'] .= "Aucun id fourni, annulation.<br1>";
@@ -53,33 +41,67 @@ switch($action){
 			echo "<h1>Aucun photographe ne correspond à cet id.</h1>";
 			exit();
 		}
-		$albums = Album::getAlbumDepuisID_Photographe($photographe->getPhotographeID(), false);
-		$totalAVerser = 0;
-		foreach($albums as $album){
-			$previousBalance = $album->resetBalance();
-			if($previousBalance >= 0){
-				$totalAVerser += $previousBalance;
-				echo "<h3>Balance reinitialisee pour l'album #" . $album->getAlbumID() . ".</h3>";
+		if(!Album::lockTableResetBalance()){
+			echo "<h1>Impossible de locker les tables</h1>";
+			exit();
+		}
+		try{
+			//on génère le pdf et on l'envoie
+			 $albums = Album::getAlbumDepuisID_Photographe($photographe->getPhotographeID(), false);
+			 $siren = "123456789";//celui qui fait le virement
+			 $pm_numFacture = $photographe->getHome()."-".date("Ymd");
+			
+			 //create facture path
+			 $pm_file = "/homez.368/photomen/cgi-bin/factures/photographes/".date("Ym");
+			 if (!file_exists($pm_file)){
+				 mkdir($pm_file, 0755);
+			 }
+			 $pm_file = $pm_file."/".$pm_numFacture.".pdf";
+			 makePDFVirement($TVA, $albums, $photographe, $siren, $pm_numFacture, $pm_file);
+			 //on envoie
+			if(ControleurUtils::sendMailEtPDF($photographe,
+				"Paiement www.photomentiel.fr",
+				"Ci-joint la facture de vos gains sur www.photomentiel.fr\n\n" .
+				"Merci d'utiliser www.photomentiel.fr",
+				$pm_file)){
+				echo "<h1>Email de confirmation envoye!</h1>";
 			}else{
-				echo "<font color=\"red\">Impossible de reinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
+				echo "<h1>Impossible d'envoyer l'email de confirmation</h1>";
 			}
+			 //on reset les balances
+			$albums = Album::getAlbumDepuisID_Photographe($photographe->getPhotographeID(), false);
+			$totalAVerser = 0;
+			foreach($albums as $album){
+				$previousBalance = $album->resetBalance();
+				if($previousBalance >= 0){
+					$totalAVerser += $previousBalance;
+					echo "<h3>Balance reinitialisee pour l'album #" . $album->getAlbumID() . ".</h3>";
+				}else{
+					echo "<font color=\"red\">Impossible de reinitialiser la balance de l'album #" . $album->getAlbumID() . ".</font><br/>";
+				}
+			}
+			$dir_administration_controleur_utilisateur_php = dirname(__FILE__);
+			include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Virement.class.php";
+			$virement = new Virement();
+			$virement->setID_Photographe($photographe->getPhotographeID());
+			$virement->setMontant($totalAVerser);
+			if($virement->create()){
+				echo "<h1>Nouvel objet versement associe en BD</h1>";
+			}else{
+				echo "<h1>/!\Impossible de creer l'objet versement associe/!\</h1>";
+			}
+			echo "<h1>Versement de " . $totalAVerser . " a effectuer sur le compte:</h1>";
+			echo "<h2>rib: " . $photographe->getRIB_b() . $photographe->getRIB_g() . $photographe->getRIB_c() . $photographe->getRIB_k() . "</h2>";
+			echo "<h2>iban: " . $photographe->getIBAN() . "</h2>";
+			echo "<h2>pour le photographe:</h2>";
+			echo "<h2>" . $photographe->getAdresse()->getPrenom() . " " . $photographe->getAdresse()->getNom() . "</h2>";
+			if(!Album::unlockTables()){
+				echo "<h1>Impossible d'unlocker les tables.</h1>";
+			}
+		}catch(Exception $e){
+			ControleurUtils::addError("Erreur pdt reversion au photographe " . $e->getMessage(), true);
+			Album::unlockTables();
 		}
-		$dir_administration_controleur_utilisateur_php = dirname(__FILE__);
-		include_once $dir_administration_controleur_utilisateur_php . "/../../classes/modele/Virement.class.php";
-		$virement = new Virement();
-		$virement->setID_Photographe($photographe->getPhotographeID());
-		$virement->setMontant($totalAVerser);
-		if($virement->create()){
-			echo "<h1>Nouvel objet versement associe en BD</h1>";
-		}else{
-			echo "<h1>/!\Impossible de creer l'objet versement associe/!\</h1>";
-		}
-		echo "<h1>Versement de " . $totalAVerser . " a effectuer sur le compte:</h1>";
-		echo "<h2>rib: " . $photographe->getRIB_b() . $photographe->getRIB_g() . $photographe->getRIB_c() . $photographe->getRIB_k() . "</h2>";
-		echo "<h2>iban: " . $photographe->getIBAN() . "</h2>";
-		echo "<h2>pour le photographe:</h2>";
-		echo "<h2>" . $photographe->getAdresse()->getPrenom() . " " . $photographe->getAdresse()->getNom() . "</h2>";
-		echo '<form method="post" action="dispatcher.php" target="_blank"><input type="hidden" name="action" value="envoyer_confirmation_paiement"/><input type="hidden" name="id" value="'.$photographe->getPhotographeID().'"/><input type="submit" value="envoyer confirmation"/></form>';
 		exit();
 	case reinitialiser_mdp:
 		if(!isset($_POST['id'])){

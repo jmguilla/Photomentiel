@@ -421,6 +421,26 @@ class Album {
 	public function setFiligramme($fili){
 		$this->filigramme = $fili;
 	}
+	public static function lockTableResetBalance(){
+		$dao = new AlbumDAO();
+		if($dao->lockTableResetBalance()){
+			return true;
+		}else{
+			ControleurUtils::addError("Impossible de locker la table Album pour reset balance, demande par Album.class", true);
+			$dao->unlockTable();
+			return false;
+		}
+	}
+	public static function unlockTables(){
+		$dao = new AlbumDAO();
+		if($dao->unlockTable()){
+			return true;
+		}else{
+			ControleurUtils::addError("Impossible d'unlocker talbes, demande par Album.class", true);
+			$dao->unlockTable();
+			return false;
+		}
+	}
 	/**
 	 * Remet la balance à 0 et sauve en BD
 	 */
@@ -429,26 +449,15 @@ class Album {
 		include_once $dir_album_class_php . "/../controleur/ControleurUtils.class.php";
 		$dao = new AlbumDAO();
 		try{
-		if(!$dao->lockTableResetBalance()){
-				ControleurUtils::addError("Impossible de prendre le lock sur table Album pendant reset balance de l'album #" . $this->albumID);
-				return false;
-		}
-		$previousBalance = $dao->resetBalance($this);
-		if($previousBalance >= 0){
-			$this->balance = 0;
-			if(!$dao->unlockTable()){
-				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
+			$previousBalance = $dao->resetBalance($this);
+			if($previousBalance >= 0){
+				$this->balance = 0;
+				return $previousBalance;
+			}else{
+				ControleurUtils::addError("Impossible de reset la balance de l'album #" . $this->albumID, true);
+				return $previousBalance;
 			}
-			return $previousBalance;
-		}else{
-			ControleurUtils::addError("Impossible de reset la balance de l'album #" . $this->albumID, true);
-			if(!$dao->unlockTable()){
-				ControleurUtils::addError("Impossible de relacher lock pendant reset balance de l'album #" . $this->albumID, true);
-			}
-			return $previousBalance;
-		}
 		}catch(Exception $e){
-			$dao->unlockTable();
 			ControleurUtils::addError("Une exception s'est produit pdt un reset balance de l'album #" . $this->albumID . "\n" .$e->getMessage());
 		}
 	}
