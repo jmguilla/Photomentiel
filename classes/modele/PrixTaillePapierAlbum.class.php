@@ -38,6 +38,14 @@ class PrixTaillePapierAlbum{
 		$dao = new PrixTaillePapierAlbumDAO();
 		return $dao->delete($this);
 	}
+	
+	/**
+	 * Sauve l'objet en BD
+	 */
+	public function save(){
+		$dao = new PrixTaillePapierAlbumDAO();
+		return $dao->save($this);
+	}
 
 	/*####################################
 	 * Getters & Setters

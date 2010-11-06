@@ -114,10 +114,12 @@ function validForm(update){
 	var tmp = checkRequired();
 	error = error || tmp.error;
 	mess += tmp.mess;
-	//pour les champs radio
-	tmp = checkRadio();
-	error = error || tmp.error;
-	mess += tmp.mess;
+	if (!update){
+		//pour les champs radio
+		tmp = checkRadio();
+		error = error || tmp.error;
+		mess += tmp.mess;
+	}
 	//pour les champs avec une regexp
 	tmp = checkRegexp();
 	error = error || tmp.error;
@@ -130,11 +132,11 @@ function validForm(update){
 		
 	}
 	//check mailing list
-    	tmp = checkRegexp('mails');
-    	error = error || tmp.error;
-    	mess += tmp.mess;
+	tmp = checkRegexp('mails');
+	error = error || tmp.error;
+	mess += tmp.mess;
 	//check format fields
-	if (checkNotCompliant() && !confirm("Vous avez sélectionné des formats dont les ratios ne sont pas compatibles.\nCeci peut avoir des répercussions négatives sur l'impression des photos de vos clients.\nContinuer quand même ?")) {
+	if (!update && checkNotCompliant() && !confirm("Vous avez sélectionné des formats dont les ratios ne sont pas compatibles.\nCeci peut avoir des répercussions négatives sur l'impression des photos de vos clients.\nContinuer quand même ?")) {
 		return;
 	}
 	//result
@@ -142,12 +144,12 @@ function validForm(update){
 		alert(mess);
 		return;
 	} else {
+		$('input[min]').each(function() {
+			$('#'+ this.id).val($('#'+ this.id).val().replace(",","."));
+	    });
 		if (update){
 			$('#update_form').submit();
 		} else {
-			$('input[min]').each(function() {
-				$('#'+ this.id).val($('#'+ this.id).val().replace(",","."));
-		    	});
 			$("#create_submit").attr("disabled","true");
 			$('#create_form').submit();
 		}

@@ -45,11 +45,40 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 	if ($albumObj->getID_Photographe() != $utilisateurObj->getPhotographeID()){
 		photomentiel_die(new PMError("Album inaproprié !","Cet album ne vous appartient pas, que faites vous là ?"), false);
 	}
-	//update mailing if needed
-	if(isset($_POST['mails']) && $_POST['mails'] != $albumObj->getMailing()){
-		$albumObj->setMailing($_POST['mails']);
-		$albumObj->save();
-		$albumSaved = true;
+
+	//prepare photo formats and price
+	$tmp = TaillePapier::getTaillePapiers();
+	$photoFormatsDim = array();
+	foreach($tmp as $tp){
+		$photoFormatsDim[$tp->getTaillePapierID()] = $tp;
+	}
+	$photoFormatsPrice = array();
+	$prixTaillePapiers = array();
+	$tmp = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($albumObj->getAlbumID());
+	foreach($tmp as $ptpa){
+		$photoFormatsPrice[$ptpa->getID_TaillePapier()] = $ptpa;
+		$prixTaillePapiers[$ptpa->getPrixTaillePapierAlbumID()] = $ptpa;
+	}
+
+	//update mailing and prices if needed
+	if (isset($_POST['up_account'])){
+		//update mailing
+		if(isset($_POST['mails']) && $_POST['mails'] != $albumObj->getMailing()){
+			$albumObj->setMailing($_POST['mails']);
+			$albumObj->save();
+			$albumSaved = true;
+		}
+		//update prices
+		foreach ($_POST as $postId => $postVal) {
+			if ($postId !== 'mails' && $postId !== 'up_account'){
+				$ptpa = $prixTaillePapiers[$postId];
+				if ($postVal != $ptpa->getPrix() && $postVal >= $photoFormatsDim[$ptpa->getID_TaillePapier()]->getPrixMinimum()){
+					$ptpa->setPrix($postVal);
+					$ptpa->save();
+					$albumSaved = true;
+				}
+			}
+		}
 	}
 	//check if state change is demanded
 	if (isset($_POST['cb_gonext']) && $albumObj->getEtat() == 0){
@@ -148,20 +177,20 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			$sidObj = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID());
 		}
 	}
-}
-if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['title'])){
+	
 	//prepare photo formats and price
 	$tmp = TaillePapier::getTaillePapiers();
 	$photoFormatsDim = array();
 	foreach($tmp as $tp){
-		$photoFormatsDim[$tp->getTaillePapierID()] = $tp->getDimensions();
+		$photoFormatsDim[$tp->getTaillePapierID()] = $tp;
 	}
 	$photoFormatsPrice = array();
 	$tmp = PrixTaillePapierAlbum::getPrixTaillePapiersDepuisID_Album($albumObj->getAlbumID());
 	foreach($tmp as $ptpa){
-		$photoFormatsPrice[$ptpa->getID_TaillePapier()] = $ptpa->getPrix();
+		$photoFormatsPrice[$ptpa->getID_TaillePapier()] = $ptpa;
 	}
 }
+
 
 ?>
 <script type="text/javascript" src="js/calendar.js"></script>
@@ -353,7 +382,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 		<center>
 			<input type="button" class="button" value="Annuler" onClick="document.location.href='myaccount.php'"/>
 			<input id="create_submit" type="button" class="button" value="Créer mon album" onClick="validForm();"/>
-		<center/>
+		</center>
 		</form>
 		<?php
 			} else if ($updateMode){
@@ -422,35 +451,16 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 							echo 
 							'<tr>
 								<td width="65px">
-									'.$photoFormatsDim[$id].' :
+									'.$photoFormatsDim[$id]->getDimensions().' :
 								</td><td class="price" width="350px">
-									<input type="text" class="textfield" value="'.sprintf('%.2f',$p).'" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'."TODO".'" id="'.$id.'" name="'.$id.'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'."TODO".' &#8364;</b> - conseillé: <b>'."TODO".' &#8364;</b> )</span>
+									<input type="text" class="textfield" value="'.sprintf('%.2f',$p->getPrix()).'" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$photoFormatsDim[$id]->getPrixMinimum().'" id="'.$p->getPrixTaillePapierAlbumID().'" name="'.$p->getPrixTaillePapierAlbumID().'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'.$photoFormatsDim[$id]->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$photoFormatsDim[$id]->getPrixConseille().' &#8364;</b> )</span>
 								</td><td width="290px">
-									<div class="checkform" id="r'.$id.'"></div>
+									<div class="checkform" id="r'.$p->getPrixTaillePapierAlbumID().'"></div>
 								</td>
 							</tr>';
 						}
 					?>
 					</table>
-				</td>
-			</tr>
-			</table>
-		</fieldset>
-		<fieldset>
-			<legend> Gains pour l'album </legend>
-			<table cellspacing="0px">
-			<tr <?php echo ($albumObj->getEtat()<2)?'':'style="background-color:lightgreen;"'; ?>>
-				<td width="182px;" height="22px">
-					Gains pour le mois : 
-				</td><td colspan="2">
-					<b><?php echo $albumObj->getBalance(); ?> &#8364;&nbsp;</b>
-				</td>
-			</tr>
-			<tr>
-				<td height="22px">
-					Gains depuis la création : 
-				</td><td colspan="2">
-					<?php echo $albumObj->getGainTotal(); ?> &#8364;
 				</td>
 			</tr>
 			</table>
@@ -485,10 +495,30 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 			?>
 		<div class="separator10"></div>
 		<center>
+			<input type="hidden" name="up_account" value="1"/>
 			<input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/>
 			<input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/>
-		<center/>
+		</center>
 		</form>
+		<fieldset>
+			<legend> Gains pour l'album </legend>
+			<table cellspacing="0px">
+			<tr <?php echo ($albumObj->getEtat()<2)?'':'style="background-color:lightgreen;"'; ?>>
+				<td width="182px;" height="22px">
+					Gains pour le mois : 
+				</td><td colspan="2">
+					<b><?php echo $albumObj->getBalance(); ?> &#8364;&nbsp;</b>
+				</td>
+			</tr>
+			<tr>
+				<td height="22px">
+					Gains depuis la création : 
+				</td><td colspan="2">
+					<?php echo $albumObj->getGainTotal(); ?> &#8364;
+				</td>
+			</tr>
+			</table>
+		</fieldset>
 
 		<div class="separator10" style="height:10px;"></div>
 			<?php
@@ -519,7 +549,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 					<div id="dl">
 						Il existe plusieurs moyens de nous faire parvenir vos photos :
 						<ol>
-							<li>Utiliser <a href="#cftpq" onClick="$('#ftp_help').css('display','inline');return true;">un client FTP quelconque</a>* en vous connectant à cette adresse : <b><?php echo "ftp://".FTP_TRANSFER_IP."</b> sur le port <b>".FTP_PORT; ?></b> avec vos identifiants Photomentiel. Un dossier <b><?php echo $sid; ?></b> a été créé pour vous, vous n'aurez plus qu'à placer vos photos à l'intérieur. (<i>Aucun autre dossier ne doit être créé</i>)</li>
+							<li>Utiliser <a href="#cftpq" onClick="$('#ftp_help').css('display','inline');return true;">un client FTP quelconque</a> en vous connectant à cette adresse : <b><?php echo "ftp://".FTP_TRANSFER_IP."</b> sur le port <b>".FTP_PORT; ?></b> avec vos identifiants Photomentiel. Un dossier <b><?php echo $sid; ?></b> a été créé pour vous, vous n'aurez plus qu'à placer vos photos à l'intérieur. (<i>Aucun autre dossier ne doit être créé</i>)</li>
 							<li>Utiliser notre client FTP <a href="/pictures/<?php echo $sidObj->getHomePhotographe()."/".$sid; ?>/client.jnlp">en cliquant ici.</a> (<i>Java doit être installé sur votre ordinateur</i>)</li>
 							<li>Ou enfin en main propre, sur rendez-vous si vous êtes de la région. <a href="contact.php">Nous contacter...</a></li>
 						</ol>
@@ -529,16 +559,18 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 						<span class="warning"><u><b>IMPORTANT</b></u> : Ignorez cette étape si vous ne transférez pas vous même vos photos (cas décrit dans le point 3).</span></span>
 					</div>
 					<div class="separator10"></div>
+					<center>
 					<div id="enddl">
 						<form method="POST" action="?action=update&al=<?php echo $sid; ?>" onSubmit="return changeAlbumState();">
 							<input type="checkbox" name="cb_gonext" id="cb_gonext"/> J'ai terminé de télécharger mes photos
 							<input type="submit" class="button" name="b_gonext" id="b_gonext" value="valider"/>
 						</form>
 					</div>
+					</center>
 					<div class="separator10"></div>
 					<div id="ftp_help" id="ftp_help">
 						<center><hr/></center>
-						<a name="cftpq"></a>*Si vous n'êtes pas familier avec ce genre de client, nous en avons choisi un pour vous dont voici la procédure à suivre pour télécharger vos photos :
+						<a name="cftpq"></a>Si vous n'êtes pas familier avec ce genre de client, nous en avons choisi un pour vous dont voici la procédure à suivre pour télécharger vos photos :
 						<h4>Téléchargement du client sur votre ordinateur :</h4>
 						<ol>
 						<li>Télécharger FileZilla à l'adresse suivante : <a target="_blank" href="http://filezilla-project.org/download.php?type=client">http://filezilla-project.org/download.php?type=client</a></li>
@@ -604,7 +636,7 @@ if ((isset($_GET['action']) && $_GET['action'] === 'update') || isset($_POST['ti
 <?php
 include("footer.php");
 if ($albumSaved){
-	echo '<script type="text/javascript">alert("Votre liste de mails a bien été mise à jour");</script>';
+	echo '<script type="text/javascript">alert("Votre album a bien été mise à jour");</script>';
 }
 }catch (Exception $e){
 	echo "Internal server error !";

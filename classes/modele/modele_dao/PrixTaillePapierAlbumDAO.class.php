@@ -73,6 +73,22 @@ class PrixTaillePapierAlbumDAO extends DAO{
 			return false;
 		}
 	}
+	
+	/**
+	 * sauve l'objet en parametre en BD et le retourne en cas de succes.
+	 * en cas d'erreur, retourne false;
+	 */
+	public function save($ptpa){
+		$query = "update PrixTaillePapierAlbum set prix = '" .
+		mysql_real_escape_string($ptpa->getPrix()) . "' where prixTaillePapierAlbumID = " .
+		mysql_real_escape_string($ptpa->getPrixTaillePapierAlbumID());
+		$tmp = $this->retrieve($query);
+		if($tmp && $this->getAffectedRows() >= 0){
+			return $ptpa;
+		}else{
+			return false;
+		}
+	}
 
 	/*############################
 	 * Helpers
