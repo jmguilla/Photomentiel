@@ -1,4 +1,5 @@
 <?php
+$_SERVER['SERVER_ADDR'] = "213.186.33.16";
 $dir_administration_imap_factures = dirname(__FILE__);
 include_once $dir_administration_imap_factures . "/../../classes/modele/CommandeFoto.class.php";
 include_once $dir_administration_imap_factures . "/../../classes/modele/Commande.class.php";

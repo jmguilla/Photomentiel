@@ -1,4 +1,5 @@
 <?php
+$_SERVER['SERVER_ADDR'] = "213.186.33.16";
 $dir_cron_cleanalbum_php = dirname(__FILE__);
 include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Album.class.php';
 include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Commande.class.php';
