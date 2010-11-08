@@ -356,9 +356,11 @@ class Album {
 			include_once $dir_album_class_php . "/Commande.class.php";
 			include_once $dir_album_class_php . "/CommandePhoto.class.php";
 			$commandes = Commande::getCommandeEtPhotosDepuisID_Album($this->getAlbumID());
-			foreach($commandes as $commande){
-				if($commande->getEtat() == 0){
-					$commande->delete();
+			if($commandes){
+				foreach($commandes as $commande){
+					if($commande->getEtat() == 0){
+						$commande->delete();
+					}
 				}
 			}
 			return true;
