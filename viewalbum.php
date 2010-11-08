@@ -278,6 +278,7 @@ include("head.php");
 			<br/>
 			<form id="form_mailing" method="POST" onSubmit="return mailingCheckMail();">
 				Votre E-mail : <input name="mailing" id="mailing" type="text" class="texfield" <?php echo isset($utilisateurObj)?'value="'.$utilisateurObj->getEmail().'"':''; ?> ></input>
+				<input type="hidden" name="<?php echo $get_var_album; ?>" value="<?php echo $albumStringID; ?>"/> 
 				<input id="mailing_submit" type="submit" class="button" value="Valider"></input>
 			</form>
 		<?php
