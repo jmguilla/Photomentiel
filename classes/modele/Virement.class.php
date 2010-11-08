@@ -1,6 +1,6 @@
 <?php
 $dir_virement_php = dirname(__FILE__);
-include_once '/modele_dao/VirementDAO.class.php';
+include_once $dir_virement_php . '/modele_dao/VirementDAO.class.php';
 
 class Virement{
 	private $id = -1;
