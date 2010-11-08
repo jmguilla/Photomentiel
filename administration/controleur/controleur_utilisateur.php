@@ -63,7 +63,7 @@ switch($action){
 				"Paiement",
 				"Ci-joint la facture de vos gains sur Photomentiel\n\n" .
 				"Merci d'utiliser www.photomentiel.fr",
-				$pm_file)){
+				$pm_file, $pm_numFacture . ".pdf")){
 				echo "<h1>Email de confirmation envoye!</h1>";
 			}else{
 				echo "<h1>Impossible d'envoyer l'email de confirmation</h1>";
