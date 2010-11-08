@@ -53,13 +53,15 @@ function getHashFromArray($kvArray){
 }
 
 /* 
- * Return an hashcode of the given array
+ * Convert GET array into URL syntax get variables
  */
-function getRequestParamFromPost(){
+function getRequestParamFromGET(){
 	$kvArray = $_GET;
 	$h = '';
 	foreach ($kvArray as $k => $v) {
-		$h = $h.$k."=".$v."&";
+		if ($k !== 'action'  || $v !== 'disc'){
+			$h = $h.$k."=".$v."&";
+		}
 	}
 	return $h;
 }

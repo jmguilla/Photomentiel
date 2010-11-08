@@ -21,6 +21,7 @@ include_once ("classes/modele/EvenementEcouteur.class.php");
 include_once ("classes/modele/Commande.class.php");
 $MYACCOUNT_PHP = true;
 
+$photographMode = false;
 if ($utilisateurObj){
 	$photographMode = $_SESSION['userClass'] === 'Photographe';
 }

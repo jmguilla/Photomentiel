@@ -61,8 +61,8 @@ div.checkform {
 input#create_submit,input#update_submit {
 	margin-left:100px;
 }
-table.fandp td {
-	text-align:center;
+table td {
+	text-align:left;
 }
 span.intitule {
 	color:#333333;

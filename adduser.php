@@ -130,7 +130,7 @@ if (isset($_GET["np"])){
 				echo "Afin de créer votre compte, merci de renseigner les champs ci-dessous, puis cliquer sur <i>Créer mon compte</i> :<br/>";
 			} else {
 				$star = '';
-				echo "Vous pouvez mettre à jour les champs souhaités, et cliquez sur <i>Modifier mon compte</i> pour valider :<br/>";
+				echo "Vous pouvez mettre à jour les champs souhaités, et cliquez sur <i>Sauvegarder les modifications</i> pour valider :<br/>";
 			}
 		?>
 	</div>

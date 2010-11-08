@@ -33,6 +33,11 @@ if (!isset($MYACCOUNT_PHP)){
 					echo '<a '.$idi.' class="event" href="events.php?ev='.$evt->getEvenementID().'"><div class="event"><span id="event" style="margin-left:0px;">Date : '.$date_e.'</span><span id="event">Lieu : '.$evt->getVille()->getNom().'('.$evt->getDepartement()->getNom().')</span><br/>'.toNchar($evt->getDescription(),90).'</div></a>';
 					$eventsNb++;
 				}
+				?>
+				<script language="javascript">
+					$("#displayEventsNb").html("<?php echo $eventsNb; ?>");
+				</script>
+				<?php
 			} else {
 		?>
 			<table>
@@ -75,6 +80,11 @@ if (!isset($MYACCOUNT_PHP)){
 					echo '<a '.$idi.' class="event" href="viewcommand.php?cmd='.$commande->getCommandeID().'"><div class="event"><span id="date">Date : '.$date_e.'</span><span id="event">Etat : '.$cmdst.'</span><br/>Nombre de photos : '.$nb.' - Prix Total : '.sprintf('%.2f',$price).' &#8364;</div></a>';
 					$commandsNb++;
 				}
+				?>
+				<script language="javascript">
+					$("#displayCommandsNb").html("<?php echo $commandsNb; ?>");
+				</script>
+				<?php
 			} else {
 		?>
 			<table>
@@ -123,8 +133,6 @@ if (!isset($MYACCOUNT_PHP)){
 				}
 				?>
 				<script language="javascript">
-					$("#displayEventsNb").html("<?php echo $eventsNb; ?>");
-					$("#displayCommandsNb").html("<?php echo $commandsNb; ?>");
 					$("#displayAlbumsNb").html("<?php echo $albumsNb; ?>");
 					$("#displayFullGain").html("(Gain mensuel total : <b><?php echo sprintf('%.2f',$total_m); ?> &#8364</b> - Gain total : <b><?php echo sprintf('%.2f',$total_a); ?> &#8364</b>)");
 				</script>

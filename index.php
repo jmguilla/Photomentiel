@@ -16,6 +16,11 @@ include("header.php");
 include_once("classes/modele/Album.class.php");
 include_once("classes/modele/Evenement.class.php");
 
+$photographMode = false;
+if ($utilisateurObj){
+	$photographMode = $_SESSION['userClass'] === 'Photographe';
+}
+
 ?>
 <script type="text/javascript" src="js/calendar.js"></script>
 <script type="text/javascript">
@@ -163,9 +168,20 @@ include_once("classes/modele/Evenement.class.php");
 					<a title="Accéder à l'espace photographe" class="know_more_item" id="photographe" href="photograph.php"><img height="45px" width="45px" align="middle" src="design/misc/photograph.png"/>Vous êtes photographe ?</a>
 			<?php
 				}
+				if ($utilisateurObj && $photographMode){
 			?>
-			<?php $account_text = isset($_SESSION['userID'])?'Modifier mes infos':'<b>Créer un compte</b>'; ?>
-			<a title="<?php echo isset($_SESSION['userID'])?'Modifier mes infos':'Créer un compte'; ?>" class="know_more_item" id="create_account" href="adduser.php?np=index.php"><img height="45px" width="45px" align="middle" src="design/misc/<?php echo isset($_SESSION['userID'])?'update_account.png':'create_account.png'; ?>"/><?php echo $account_text; ?></a>
+			<a title="Créer un album" class="know_more_item" id="create_account" href="createalbum.php"><img height="45px" width="45px" align="middle" src="design/misc/waiting.png"/><b>Créer un nouvel album</b></a>
+			<?php
+				} elseif($utilisateurObj){
+			?>
+			<a title="Modifier mes informations personnelles" class="know_more_item" id="create_account" href="adduser.php?np=index.php"><img height="45px" width="45px" align="middle" src="design/misc/update_account.png"/>Modifier mes informations personnelles</a>
+			<?php	
+				} else {
+			?>
+			<a title="Créer un compte" class="know_more_item" id="create_account" href="adduser.php?np=index.php"><img height="45px" width="45px" align="middle" src="design/misc/create_account.png"/><b>Créer un compte</b></a>
+			<?php	
+				}
+			?>	
 			<a title="Les réponses à toutes vos questions" class="know_more_item" href="faq.php"><img height="45px" width="45px" align="middle" src="design/misc/help.png"/>Foire aux questions</a>
 			<a title="Cliquez si vous désirez retirer une photo" class="know_more_item" href="privacy.php"><img height="45px" width="45px" align="middle" src="design/misc/key.png"/>Vie privée et retrait de photos</a>
 		</div>

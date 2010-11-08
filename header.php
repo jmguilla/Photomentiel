@@ -23,7 +23,7 @@ include("userconnection.php");
 		<?php
 			if (!$utilisateurObj){
 		?>
-				<form id="form_connect" method="POST" action="?<?php echo getRequestParamFromPost(); ?>">
+				<form id="form_connect" method="POST" action="?<?php echo getRequestParamFromGET(); ?>">
 					E-mail : <input name="user_email" id="user_email" class="email" type="text" title="Entrez votre adresse E-mail"/>
 					Mot de passe : <input name="user_pwd" id="user_pwd" class="password" style="width:100px;" type="password" title="Entrez votre mot de passe"/>
 					<input class="button" id="valider" type="submit" value="Go" title="Me connecter" onClick="return checkUserOrConnect('<?php echo Utils::getScriptName();?>');"/>

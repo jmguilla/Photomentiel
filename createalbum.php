@@ -19,13 +19,13 @@ include_once("classes/modele/Evenement.class.php");
 include_once("classes/modele/TaillePapier.class.php");
 include_once("classes/modele/PrixTaillePapierAlbum.class.php");
 
-if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] === 'Photographe')){
-	photomentiel_die(new PMError("Accés interdit !","Cet accés est strictement réservé à nos photographes, que faites vous là ?"));
-}
-
 $HEADER_TITLE = "Création et gestion d'album";
 $HEADER_DESCRIPTION = "Créer et gérer vos albums sur cette page";
 include("header.php");
+
+if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] === 'Photographe')){
+	photomentiel_die(new PMError("Accés interdit !","Cet accés est strictement réservé à nos photographes, que faites vous là ?"), false);
+}
 
 $updateMode = false;
 $albumCreated = false;
@@ -444,7 +444,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 				<td>
 					Formats & tarifs : 
 				</td><td colspan="2">
-					<table width="720px" style="margin-top:4px;" class="fandp">
+					<table width="720px" style="margin-top:4px;">
 					<?php
 						foreach ($photoFormatsPrice as $id => $p) {
 							//echo "<tr><td>".$photoFormatsDim[$id]." cm</td><td>".sprintf('%.2f',$p)." &#8364;</td></tr>";
