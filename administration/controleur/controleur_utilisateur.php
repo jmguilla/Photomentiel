@@ -60,8 +60,8 @@ switch($action){
 			 makePDFVirement($TVA, $albums, $photographe, $siren, $pm_numFacture, $pm_file);
 			 //on envoie
 			if(ControleurUtils::sendMailEtPDF($photographe,
-				"Paiement www.photomentiel.fr",
-				"Ci-joint la facture de vos gains sur www.photomentiel.fr\n\n" .
+				"Paiement",
+				"Ci-joint la facture de vos gains sur Photomentiel\n\n" .
 				"Merci d'utiliser www.photomentiel.fr",
 				$pm_file)){
 				echo "<h1>Email de confirmation envoye!</h1>";

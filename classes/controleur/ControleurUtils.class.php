@@ -13,7 +13,7 @@ class ControleurUtils{
      		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
      		$headers .='Content-Transfer-Encoding: 8bit'; 
 			return mail($utilisateur->getEmail(),
-			$sujet,
+			"Photomentiel - " . $sujet,
 			$content,
 			$headers
 			);
@@ -21,7 +21,7 @@ class ControleurUtils{
 			return true;
 		}
 	}
-	public static function sendMailEtPDF($utilisateur, $sujet, $content, $pathVersPDF){
+	public static function sendMailEtPDF($utilisateur, $sujet, $content, $pathVersPDF, $nomPieceJointe = 'fichier.pdf'){
 		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
 			$boundary = "azertyuioppoiuytrezaqsdfghjklmmlkjhgfdsq";
 			$headers = 'From: "Photomentiel"<contact@photomentiel.fr>'."\n";
@@ -32,33 +32,15 @@ class ControleurUtils{
      		$body .= 'Content-Type: text/plain; charset="utf-8"'."\n\n";
      		$body .= $content . "\n\n";
      		$body .= '--' . $boundary . "\n";
-     		$body .= 'Content-Type: application/pdf; name="fichier.pdf"'."\n";
+     		$body .= 'Content-Type: application/pdf; name="'.$nomPieceJointe.'"'."\n";
      		$body .= "Content-Transfer-Encoding: base64\n";
-			$body .= "Content-Disposition: attachment; filename=\"fichier.pdf\"\n\n";
+		$body .= "Content-Disposition: attachment; filename=\"".$nomPieceJointe."\"\n\n";
      		$fichier=file_get_contents($pathVersPDF);
 			$fichier=chunk_split(base64_encode($fichier));
 			$body .= $fichier;
 			return mail($utilisateur->getEmail(),
-			$sujet,
+			"Photomentiel - " . $sujet,
 			$body,
-			$headers
-			);
-		}else{
-			return true;
-		}
-	}
-
-	public static function sendPaiementPhotographeEmail($utilisateur){
-		if(($_SERVER['SERVER_ADDR'] != "127.0.0.1") && $utilisateur){
-			$headers ='From: "Photomentiel"<contact@photomentiel.fr>'."\n";
-	     	$headers .='Reply-To: no-reply@photomentiel.fr'."\n"; 
-     		$headers .='Content-Type: text/plain; charset="utf-8"'."\n"; 
-     		$headers .='Content-Transfer-Encoding: 8bit'; 
-			return mail($utilisateur->getEmail(),
-			"Paiement photomentiel.fr",
-			"Un paiement vient d'être éffectué en votre faveur par".
-			" l'équipe photomentiel.\n\n".
-			"Merci d'utiliser www.photomentiel.fr",
 			$headers
 			);
 		}else{
