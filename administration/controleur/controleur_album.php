@@ -216,7 +216,7 @@ switch($action){
 			}
 			$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
 			if($photographe){
-				ControleurUtils::sendMail($utilisateur, "Album publié sur www.photomentiel.fr", 
+				ControleurUtils::sendMail($photographe, "Album publié sur www.photomentiel.fr", 
 				"Félicitation! Votre album \"$album->getNom()\" - \"" . $_POST['stringid'] . "\" vient d'être publié!\n\n");
 			}else{
 				$_SESSION['message'] .= "Impossible d'envoyer email de confirmation au photographe<br/>";
