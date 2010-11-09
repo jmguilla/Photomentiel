@@ -125,6 +125,7 @@ class CommandeDAO extends DAO{
 	/**
 	 * Sauve en BD seulement l'état de la commande. Si l'état est $COMMAND_STATES[1],
 	 * doit en plus archiver la commande.
+	 * appele seulement apres un etatSuivant... On check en plus l'etat precedent...
 	 * @param Commande $commande
 	 */
 	public function saveEtat($commande){
@@ -137,6 +138,7 @@ class CommandeDAO extends DAO{
 				$this->unlockTable();
 				return false;
 			}
+			$previousState = $commande->getEtat() - 1;
 			$this->startTransaction();
 			$query = "update Commande set etat = " .
 			mysql_real_escape_string($commande->getEtat());
@@ -149,6 +151,12 @@ class CommandeDAO extends DAO{
 			}
 			$query .= " where commandeID = " .
 			mysql_real_escape_string($commande->getCommandeID());
+			global $COMMAND_STATES;
+			if($previousState >= 0 && $previousState < count($COMMAND_STATES)){
+				$query .= " and etat = " .
+				mysql_real_escape_string($previousState);
+			}
+			echo $query;
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
 				if($commande->getEtat() == 1){
