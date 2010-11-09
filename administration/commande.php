@@ -3,6 +3,7 @@
 $dir_administration_commande_php = dirname(__FILE__);
 include_once $dir_administration_commande_php . "/../classes/modele/Commande.class.php";
 include_once $dir_administration_commande_php . "/../classes/modele/CommandePhoto.class.php";
+include_once $dir_administration_commande_php . "/../classes/modele/CommandeFoto.class.php";
 include $dir_administration_commande_php . "/header.php";
 
 if(isset($_SESSION['message'])){
@@ -54,7 +55,16 @@ if($commandes){
 				$prix += $commandePhoto->getPrix();
 			}
 		}
-		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="detail_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="détail"/></form></td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="commande_expediee"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit"  onclick="return confirm(\'Vous êtes sur le point de changer un état de commande.\nContinuer?\');"  value="état = expédié"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="set_commande_foto"/><input type="hidden" name="number" value=""/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit"  onclick="this.form.number.value = prompt(\'Commande foto.com associee:\', \'numero de commande foto.com\');"  value="#cmd foto.com"/></form></td></tr>' . "\n";
+		$commandesFoto = CommandeFoto::getCommandeFotoDepuisID_Commande($commande->getCommandeID());
+		if($commandesFoto){
+			$previousCommandesFoto = '';
+			foreach($commandesFoto as $commandeFoto){
+				$previousCommandesFoto .= $commandeFoto->getCommandeFoto() . ';';
+			}
+		}else{
+			$previousCommandesFoto = 'mettre numero commande foto.com';
+		}
+		echo '<tr><td>#' . $commande->getCommandeID() . ' - </td><td> ' . $commande->getAdresse()->getPrenom() . " " . $commande->getAdresse()->getNom() . "</td><td>" . $commande->getDate() . "</td><td> pour " . $prix . ' &#x20AC; </td><td>préparée par ' . $commande->getPreparateur() . '</td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="detail_commande"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="détail"/></form></td><td><form action="dispatcher.php" method="post" target="_blank"><input type="hidden" name="action" value="download_commande_xml"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit" value="download xml"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="commande_expediee"/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit"  onclick="return confirm(\'Vous êtes sur le point de changer un état de commande.\nContinuer?\');"  value="état = expédié"/></form></td><td><form action="dispatcher.php" method="post"><input type="hidden" name="action" value="set_commande_foto"/><input type="hidden" name="number" value=""/><input type="hidden" name="id" value="' . $commande->getCommandeID() . '"/><input type="submit"  onclick="this.form.number.value = prompt(\'Commande foto.com associee:\', \''.$previousCommandesFoto.'\');"  value="#cmd foto.com"/></form></td></tr>' . "\n";
 	}
 	echo '	</table>';
 ?>

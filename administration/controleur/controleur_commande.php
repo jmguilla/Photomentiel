@@ -19,6 +19,11 @@ switch($action){
 			$_SESSION['message'] .= "Aucune commande ne correspond a l'id #".$_POST['id']."#<br/>";
 			break;
 		}
+		$previousCommandesfoto = CommandeFoto::getCommandeFotoDepuisID_Commande($commande->getCommandeID());
+		//si on n'a pas de commande foto jusqu'a present
+		if(!$previousCommandesfoto){
+			$previousCommandesfoto = array();
+		}
 		if(strstr($_POST['number'], ";")){
 			$numbers = explode(";", trim($_POST['number']));
 		}else{
@@ -27,6 +32,16 @@ switch($action){
 		foreach($numbers as $number){
 			$number = trim($number);
 			if(!$number || ''===$number){
+				continue;
+			}
+			//on controle l'ajout des nouvelles seulement
+			$alreadyExists = false;
+			foreach($previousCommandesfoto as $previousCommandefoto){
+				if($number === $previousCommandefoto->getCommandeFoto()){
+					$alreadyExists = true;
+				}
+			}
+			if($alreadyExists){
 				continue;
 			}
 			$cf = new CommandeFoto();
