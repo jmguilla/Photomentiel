@@ -43,7 +43,7 @@ define('AUTHOR','Photomentiel');
 define('DOMAIN_NAME','photomentiel');
 define('DOMAIN_EXT','fr');
 define('SHIPPING_RATE',3.90);
-define('SHIPPING_RATE_UNTIL',45);
+define('SHIPPING_RATE_UNTIL',39);
 define('PHOTOGRAPH_INITIAL_PERCENT', 75);
 
 define('ADRESSE1','Photomentiel');
