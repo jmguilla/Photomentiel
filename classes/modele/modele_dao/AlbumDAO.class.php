@@ -740,10 +740,12 @@ class AlbumDAO extends DAO {
 	 * @param Album $album
 	 */
 	public function saveEtat($album){
+		$previousState = $album->getEtat() -1;
 		$query = "update Album set etat = " .
 		mysql_real_escape_string($album->getEtat()) .
 		" where albumID = " .
-		mysql_real_escape_string($album->getAlbumID());
+		mysql_real_escape_string($album->getAlbumID()) . " and etat = ".
+		mysql_real_escape_string($previousState);
 		$this->startTransaction();
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() >= 0){
@@ -762,36 +764,133 @@ class AlbumDAO extends DAO {
 		$dir_albumdao_class_php = dirname(__FILE__);
 		include_once $dir_albumdao_class_php . "/../Photographe.class.php";
 		include_once $dir_albumdao_class_php . "/PhotographeDAO.class.php";
-		$daoStringID = new StringIDDAO();
-		$stringID = $daoStringID->getStringIDDepuisID_Album($album->getAlbumID());
-		if(!$stringID){
-			return false;
-		}
-		$this->startTransaction();
-		$query = "delete from Album where albumID = " . 
-		mysql_real_escape_string($album->getAlbumID());
-		$tmp = $this->retrieve($query);
-		if($tmp){
-			$daoPhotographe = new PhotographeDAO();
-			$photographe = $daoPhotographe->getPhotographeDepuisID($album->getID_Photographe());
-			if($photographe){
-				$albumRootDirectory = PHOTOGRAPHE_ROOT_DIRECTORY . $photographe->getHome() .
-				DIRECTORY_SEPARATOR . $stringID->getStringID();
-				if(!$this->deleteAlbumDirectory($albumRootDirectory)){
+		switch ($album->getEtat()){
+			//si l'album est ouvert, on le cloture
+			//le cron le supprimera
+			case 2:
+				return $album->etatSuivant();
+			//il faut dans tous les cas supprimer les fichiers
+			//sur OVH...
+			//suppression demande par cron...
+			case 3:
+				if(!$this->checkBalanceIsNulle($album) || !$this->checkNoCommandesEnAttente($album)){
+					return false;
+				}
+			//suppression demande par user ou nous via admin
+			case 0:
+			case 1:
+				$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
+				if(!$photographe){
+					return false;
+				}
+				$stringID = StringID::getStringIDDepuisID_Album($album->getAlbumID());
+				if(!$stringID){
+					return false;
+				}
+				$this->startTransaction();
+				if(!$this->deleteAlbumFromBDAndDirectory($album, $photographe, $stringID)){
 					$this->rollback();
 					return false;
 				}else{
 					$this->commit();
-					return true;
 				}
-			}else{
-				$this->rollback();
+				//on calcul la requete a envoyer au server maison
+				if($album->getEtat() == 3){
+					$httpPostRequest = 'mode=2&homePhotograph='.$stringID->getHomePhotographe().'&stringID='.$stringID->getStringID();
+				}else{
+					//etat == 0 || etat == 1
+					$openFTP = $this->calculOpenFTP($album);
+					$httpPostRequest = 'mode=1&login='.$photographe->getEmail()."&openAlbum=".openFTP."&homePhotograph=".$stringID->getHomePhotographe()."&stringID=".$stringID->getStringID();
+				}
+				break;
+			default:
+				ControleurUtils::addError("etat album inconnue dans delete: " . $album->getEtat(), true);
 				return false;
+		}
+		//fin du switch, reste le call au server maison...
+		include_once $dir_albumdao_class_php . "/../../../functions.php";
+		if(httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/delete_album.php", $httpPostRequest)!=0){
+			ControleurUtils::addError("Code retour != 0 pour delete_album.php sur server maison", true);
+			return false;
+		}else{
+			return true;
+		}
+	}
+	/**
+	 * Retourne le nombre de ftp ouvert
+	 * pour le proprietaire de l'album
+	 */
+	private function calculOpenFTP($album){
+		//il faut locker la table album pour compter
+		$this->lockTableOpenFTP();
+		//le nombre d'album non encore publie
+		$sql = "select count(*) as count from Album where etat < 2 and id_photographe = " .
+		mysql_real_escape_string($album->getID_Photographe());
+		$tmp = $this->retrieve($sql);
+		if($tmp){
+			foreach($tmp as $row){
+				$result = $row->offsetGet("count");
 			}
 		}else{
-			$this->rollback();
+			//par securite on laisse la possibilite d'uploader??
+			$result = 1;
+		}
+		if(!$this->unlockTable()){
+			ControleurUtils::addError("Impossible d'unlocker table pour calcul openFTP", true);
+		}
+		return $result;
+	}
+	private function lockTableOpenFTP(){
+		$sql = "lock tables Album write";
+		$tmp = $this->update($sql);
+		if($tmp){
+			return true;
+		}else{
+			ControleurUtils::addError("Impossible de locker table pour openftp", true);
 			return false;
 		}
+	}
+	/**
+	 * On supprime l'album de la bd et le
+	 * repertoire associe
+	 * retourne true si succes, false sinon
+	 */
+	private function deleteAlbumFromBDAndDirectory($album, $photographe, $stringID){
+		$query = "delete from Album where albumID = " . 
+		mysql_real_escape_string($album->getAlbumID());
+		$tmp = $this->retrieve($query);
+		if($tmp){
+			if(!$this->deleteAlbumDirectory($album, $photographe, $stringID)){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * Retourne false si la balance
+	 * du parametre est differente de 0
+	 */
+	private function checkBalanceIsNulle($album){
+		return $album->getBalance() == 0;
+	}
+	/**
+	 * Retourne false si au moins une commandes est
+	 * en cours pour cet album
+	 */
+	private function checkNoCommandesEnAttente($album){
+		$dir_albumdao_class_php = dirname(__FILE__);
+		include_once $dir_albumdao_class_php . "/../Commande.class.php";
+		$commandes = Commande::getCommandeDepuisID_Album($album->getAlbumID());
+		$canDelete = true;
+		if($commandes){
+			foreach($commandes as $commande){
+				$canDelete = $canDelete && ($commande->getEtat()!=1 && $commande->getEtat()!=2 && $commande->getEtat()!=3);
+			}
+		}
+		return caDelete;
 	}
 	/**
 	 * Method destinée a sauver seulement la liste de mails de l'album
@@ -1042,8 +1141,10 @@ class AlbumDAO extends DAO {
 		}
 	}
 
-	private function deleteAlbumDirectory($dir_nom){
-		return $this->rrmdir($dir_nom);
+	private function deleteAlbumDirectory($album, $photographe, $stringID){
+		$albumRootDirectory = PHOTOGRAPHE_ROOT_DIRECTORY . $photographe->getHome() .
+		DIRECTORY_SEPARATOR . $stringID->getStringID();
+		return $this->rrmdir($albumRootDirectory);
 	}
 
 	private function rrmdir($dir) {

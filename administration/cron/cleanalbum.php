@@ -4,7 +4,7 @@ $dir_cron_cleanalbum_php = dirname(__FILE__);
 include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Album.class.php';
 include_once $dir_cron_cleanalbum_php . '/../../classes/modele/Commande.class.php';
 include_once $dir_cron_cleanalbum_php . '/../../classes/Config.php';
-
+global $ALBUM_STATES;
 $albums = Album::getAlbumDepuisEtat(count($ALBUM_STATES) - 1);
 if($albums){
 	foreach($albums as $album){
@@ -13,6 +13,7 @@ if($albums){
 		$canDelete = true;
 		if($commandes){
 			foreach($commandes as $commande){
+				//on peut supprimer si l'etat de la commande est cree ou terminee
 				$canDelete = $canDelete && ($commande->getEtat()!=1 && $commande->getEtat()!=2 && $commande->getEtat()!=3);
 			}
 		}
