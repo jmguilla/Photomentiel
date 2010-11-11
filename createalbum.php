@@ -324,14 +324,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 					<font color="darkred"><b>Veuillez aussi prendre soin de choisir les formats en respectant vos ratios de résolution</b></font>.<br/>
 					(Par exemple, gardez le format 10x15 si vos photos sont larges, 10x13 pour des photos en 4/3 - Les formats en <b>gras</b> sont les formats larges).<br/>
 					En règle générale, vous ne devez pas avoir à choisir 2 formats dont le premier nombre est équivalent (ex. <b>10</b>x13 et <b>10</b>x15).</span><br/>
-					<u>Sélectionnez les formats de photos qui seront disponibles pour cet album, ainsi que les prix que vous <br/>souhaitez leur attribuer :</u><br/>
+					<br/><u>Sélectionnez les formats de photos qui seront disponibles pour cet album, ainsi que les prix que vous souhaitez leur attribuer:</u><span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span><br/><br/>
 				</td>
 			</tr>
 			<tr>
-				<td width="180px">
-					Formats & tarifs : <br/>
-					<span class="note2">(Remplissez seulement les formats que vous souhaitez vendre)</span>
-				</td><td colspan="2">
+				<td>
 					<table>
 						<?php
 							$papers = TaillePapier::getTaillePapiers();
@@ -343,10 +340,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 								'<tr>
 									<td width="65px">
 										'.$tft.' :
-									</td><td class="price" width="350px">
+									</td><td class="price" width="360px">
 										<input type="text" class="textfield" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$paper->getPrixMinimum().'" id="'.$paper->getTaillePapierID().'" name="'.$paper->getTaillePapierID().'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'.$paper->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$paper->getPrixConseille().' &#8364;</b> )</span>
-									</td><td width="290px">
-										<div class="checkform" id="r'.$paper->getTaillePapierID().'"></div>
+									</td><td width="400px">
+										<div style="width:250px;" class="checkform" id="r'.$paper->getTaillePapierID().'"></div>
 									</td>
 								</tr>';
 							}
@@ -455,7 +452,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 								</td><td class="price" width="350px">
 									<input type="text" class="textfield" value="'.sprintf('%.2f',$p->getPrix()).'" regexp="^([0-9]{1,3}|[0-9]{1,3}[.,][0-9]{1,2})$" min="'.$photoFormatsDim[$id]->getPrixMinimum().'" id="'.$p->getPrixTaillePapierAlbumID().'" name="'.$p->getPrixTaillePapierAlbumID().'"/>&nbsp;&#8364;<span class="prix_conseille">( Prix min: <b>'.$photoFormatsDim[$id]->getPrixMinimum().' &#8364;</b> - conseillé: <b>'.$photoFormatsDim[$id]->getPrixConseille().' &#8364;</b> )</span>
 								</td><td width="290px">
-									<div class="checkform" id="r'.$p->getPrixTaillePapierAlbumID().'"></div>
+									<div class="checkform" style="width:250px;" id="r'.$p->getPrixTaillePapierAlbumID().'"></div>
 								</td>
 							</tr>';
 						}
