@@ -132,6 +132,7 @@ class CommandeDAO extends DAO{
 		$dir_commandedao_class_php = dirname(__FILE__);
 		include_once $dir_commandedao_class_php . "/../Album.class.php";
 		include_once $dir_commandedao_class_php . "/../Photographe.class.php";
+		$previousNumero = $commande->getNumero();
 		try{
 			if(!$this->lockTableChangementEtat()){
 				ControleurUtils::addError("Impossible de locker talbe pour changement etat commande");
@@ -142,8 +143,9 @@ class CommandeDAO extends DAO{
 			$this->startTransaction();
 			$query = "update Commande set etat = " .
 			mysql_real_escape_string($commande->getEtat());
-			$previousNumero = $commande->getNumero();
 			if($commande->getEtat() == 1){
+				//on recupere le numero de commande et
+				//on increment pour le prochain
 				$numero = $this->getNumeroCommande();
 				$commande->setNumero($numero);
 				$query .= ", datePaiement = now(), numero = '" .
@@ -209,6 +211,7 @@ class CommandeDAO extends DAO{
 			if(!$this->unlockTable()){
 				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
 			}
+			ControleurUtils::addError("Impossible de sauver l'etat de la facture: " . $exception->getMessage());
 			$commande->setNumero($previousNumero);
 			return false;
 		}
@@ -217,14 +220,21 @@ class CommandeDAO extends DAO{
 	 * Retourne un numero de commande valide
 	 */
 	private function getNumeroCommande(){
+		$dir_commandedao_class_php = dirname(__FILE__);
+		include_once '/NumeroCommandeDAO.class.php';
+		include_once '/../NumeroCommande.class.php';
+		$dao = new NumeroCommandeDAO();
+		$prochain = $dao->getProchain();
+		//on doit verifier le prochain sur ce pattern
 		$numTmp = date('Ym');
-		$query = "select count(*) as num from Commande where numero like '" . $numTmp . "%'";
-		$tmp = $this->retrieve($query);
-		foreach($tmp as $count){
-			$numDelta = $count['num'];
-			break;
+		if(preg_match("/^".$numTmp."[0-9]+$/", $prochain->getProchain()) == 0){
+			//le pattern ne match pas, on remet a 1 puisqu'on prend le 0...
+			$numero = sprintf('%d%04d', $numTmp, 0);
+		}else{
+			$numero = $prochain->getProchain();
 		}
-		$numero = sprintf('%d%04d', $numTmp, $numDelta);
+		$prochainNumeroCommande = $numero + 1;
+		$dao->setProchain($prochainNumeroCommande);
 		return $numero;
 	}
 	/**
@@ -263,7 +273,7 @@ class CommandeDAO extends DAO{
 		}
 	}
 	public function lockTableChangementEtat(){
-		$query = "lock tables Commande write, CommandeArchive write";
+		$query = "lock tables Commande write, CommandeArchive write, NumeroCommande write";
 		$tmp = $this->update($query);
 		if($tmp){
 			return true;
