@@ -830,6 +830,7 @@ class AlbumDAO extends DAO {
 		if($tmp){
 			foreach($tmp as $row){
 				$result = $row->offsetGet("count");
+				break;
 			}
 		}else{
 			//par securite on laisse la possibilite d'uploader??
