@@ -330,9 +330,11 @@ class Album {
 				$dir_album_class_php = dirname(__FILE__);
 				include_once $dir_album_class_php . "/Commande.class.php";
 				$commandes = Commande::getCommandeEtPhotosDepuisID_Album($this->getAlbumID());
-				foreach($commandes as $commande){
-					if($commande->getEtat() == 0){
-						$commande->delete();
+				if ($commandes){
+					foreach($commandes as $commande){
+						if($commande->getEtat() == 0){
+							$commande->delete();
+						}
 					}
 				}
 			}

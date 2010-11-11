@@ -166,3 +166,9 @@ function changeAlbumState(){
 	}
 }
 
+function confirmDelAlbum(albsid){
+	if (confirm("Etes vous vraiment sûr de vouloir cloturer l'album ?")){
+		document.location.href='createalbum.php?action=del&al='+albsid;
+	}
+}
+

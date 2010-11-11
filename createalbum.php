@@ -30,7 +30,7 @@ if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] === 'Photographe')
 $updateMode = false;
 $albumCreated = false;
 $albumSaved = false;
-if (isset($_GET['action']) && $_GET['action'] === 'update'){
+if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] === 'del')){
 	if (!isSet($_GET['al']) || $_GET['al'] == ''){
 		photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"), false);
 	}
@@ -101,6 +101,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 					$postParam."\n" .
 					"Code retour : ".($retcode?$retcode:"Serveur semble injoignable"));
 		}
+	}
+	if ($_GET['action'] === 'del'){
+		$albumObj->delete();
 	}
 	$updateMode = true;
 } else if (isset($_POST['title'])) {
@@ -191,7 +194,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 	}
 }
 
-
 ?>
 <script type="text/javascript" src="js/calendar.js"></script>
 <div id="full_content_top">
@@ -224,11 +226,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 				echo '<div id="catitle2">Votre album a été créé avec succés !</div>';
 			}
 			$continueUpdateState = $albumObj->getEtat() == 0 || $albumObj->getEtat() == 1;
+			echo '<table width="100%"><tr><td>';
 			if ($continueUpdateState){
-				echo 'Pour modifier votre album veuillez remplir ou compléter les champs suivants et appuyer sur <i>Mettre à jour</i>';
+				echo 'Pour modifier votre album vous pouvez remplir les champs et appuyer sur <i>Mettre à jour</i></td><td id="del_alb"><a title="Supprimer cet album" href="javascript:confirmDelAlbum(\''.$sid.'\');">Supprimer l\'album...</a>';
 			} else {
-				echo 'Voici l\'état actuel de votre album :';
+				echo 'Voici l\'état actuel de votre album :</td><td id="del_alb"><a title="Cloturer cet album en vue d\'une suppression" href="javascript:confirmDelAlbum(\''.$sid.'\');">Cloturer l\'album...</a>';
 			}
+			echo '</td></tr></table>';
 		} else {
 			echo 'Pour créer un album, veuillez renseigner les champs suivants et appuyer sur le bouton <i>Créer mon album</i> :';
 		}
@@ -386,7 +390,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 				//set at top
 				//$sid = StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID();
 		?>
-		<form id="update_form" method="POST" action="?action=update&al=<?php echo $sid ?>">
+		<form id="update_form" method="POST" action="?action=update&al=<?php echo $sid; ?>">
 		<fieldset>
 			<legend> Description de l'album </legend>
 			<table>
@@ -437,6 +441,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 					?>
 				</td>
 			</tr>
+			<?php 
+			if ($albumObj->getEtat() <= 2) {
+			?>
 			<tr>
 				<td>
 					Formats & tarifs : 
@@ -460,6 +467,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 					</table>
 				</td>
 			</tr>
+			<?php 
+			}
+			?>
 			</table>
 		</fieldset>
 			<?php
@@ -487,15 +497,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 			</tr>
 			</table>
 		</fieldset>
-			<?php
-				}
-			?>
+		<?php
+			}
+			if ($albumObj->getEtat() <= 2) {
+		?>
 		<div class="separator10"></div>
 		<center>
 			<input type="hidden" name="up_account" value="1"/>
 			<input type="button" class="button" value="Retour" onClick="document.location.href='myaccount.php'"/>
 			<input id="update_submit" type="button" class="button" value="Mettre à jour" onClick="validForm(true);"/>
 		</center>
+		<?php 
+		}
+		?>
 		</form>
 		<fieldset>
 			<legend> Gains pour l'album </legend>
@@ -527,7 +541,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'update'){
 				} else if($albumObj->getEtat() == 2){
 					echo '<div id="catitle2">Votre album est actuellement ouvert à la vente.&nbsp;&nbsp;<a href="viewalbum.php?al='.StringID::getStringIDDepuisID_Album($albumObj->getAlbumID())->getStringID().'">Aller voir l\'album...</a></div>';
 				} else {
-					echo '<div id="catitle3">Votre album a été <u>fermé</u>, il n\'est plus accessible à la vente.<br/>les photos seront supprimées sous peu.</div>';
+					echo '<div id="catitle3">Votre album a été <u>cloturé</u>, il n\'est plus accessible à la vente.<br/>L\'album sera complètement supprimé dès lors que toutes les commandes auront été honorées.</div>';
 					echo '<div class="separator10" style="height:150px;"></div>';
 				}
 

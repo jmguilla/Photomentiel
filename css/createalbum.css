@@ -64,6 +64,10 @@ input#create_submit,input#update_submit {
 table td {
 	text-align:left;
 }
+td#del_alb {
+	font-size:12px;
+	text-align:right;
+}
 span.intitule {
 	color:#333333;
 }

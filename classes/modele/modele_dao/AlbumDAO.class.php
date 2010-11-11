@@ -800,7 +800,7 @@ class AlbumDAO extends DAO {
 				}else{
 					//etat == 0 || etat == 1
 					$openFTP = $this->calculOpenFTP($album);
-					$httpPostRequest = 'mode=1&login='.$photographe->getEmail()."&openAlbum=".openFTP."&homePhotograph=".$stringID->getHomePhotographe()."&stringID=".$stringID->getStringID();
+					$httpPostRequest = 'mode=1&login='.$photographe->getEmail()."&openAlbum=".$openFTP."&homePhotograph=".$stringID->getHomePhotographe()."&stringID=".$stringID->getStringID();
 				}
 				break;
 			default:
@@ -891,7 +891,7 @@ class AlbumDAO extends DAO {
 				$canDelete = $canDelete && ($commande->getEtat()!=1 && $commande->getEtat()!=2 && $commande->getEtat()!=3);
 			}
 		}
-		return caDelete;
+		return $canDelete;
 	}
 	/**
 	 * Method destinée a sauver seulement la liste de mails de l'album
