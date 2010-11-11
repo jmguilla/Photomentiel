@@ -156,7 +156,6 @@ class CommandeDAO extends DAO{
 				$query .= " and etat = " .
 				mysql_real_escape_string($previousState);
 			}
-			echo $query;
 			$tmp = $this->update($query);
 			if($tmp && $this->getAffectedRows() >= 0){
 				if($commande->getEtat() == 1){

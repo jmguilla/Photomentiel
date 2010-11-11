@@ -796,7 +796,7 @@ class AlbumDAO extends DAO {
 				}
 				//on calcul la requete a envoyer au server maison
 				if($album->getEtat() == 3){
-					$httpPostRequest = 'mode=2&homePhotograph='.$stringID->getHomePhotographe().'&stringID='.$stringID->getStringID();
+					$httpPostRequest = 'mode=0&homePhotograph='.$stringID->getHomePhotographe().'&stringID='.$stringID->getStringID();
 				}else{
 					//etat == 0 || etat == 1
 					$openFTP = $this->calculOpenFTP($album);
