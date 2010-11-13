@@ -44,7 +44,7 @@ switch($action){
             "&stringID=".$stringID->getStringID().
             "&openAlbum=".$photographe->getOpenFTP().
             "&watermark=".$album->getFiligramme(), false);
-		if ($retcode !== "0"){
+		if ($retcode != "0"){
 			ControleurUtils::addError(
 					"Erreur d'appel sur http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/close_ftp.php\n".
 					$postParam."\n" .

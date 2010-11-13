@@ -809,7 +809,7 @@ class AlbumDAO extends DAO {
 		}
 		//fin du switch, reste le call au server maison...
 		include_once $dir_albumdao_class_php . "/../../../functions.php";
-		if(httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/delete_album.php", $httpPostRequest)!=0){
+		if(httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/delete_album.php", $httpPostRequest)!="0"){
 			ControleurUtils::addError("Code retour != 0 pour delete_album.php sur server maison", true);
 			return false;
 		}else{
