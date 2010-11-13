@@ -159,7 +159,7 @@ class CommandeDAO extends DAO{
 				mysql_real_escape_string($previousState);
 			}
 			$tmp = $this->update($query);
-			if($tmp && $this->getAffectedRows() >= 0){
+			if($tmp && $this->getAffectedRows() == 1){
 				if($commande->getEtat() == 1){
 					//on récupère les lignes
 					$commandePhotos = $commande->getCommandesPhoto(); 
@@ -205,6 +205,7 @@ class CommandeDAO extends DAO{
 				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
 			}
 			$commande->setNumero($previousNumero);
+			ControleurUtils::addError("Impossible de changer etat de commande: " . $query);
 			return false;
 		}catch(Exception $exception){
 			$this->rollback();
