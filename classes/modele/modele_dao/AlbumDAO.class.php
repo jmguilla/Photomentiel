@@ -783,6 +783,10 @@ class AlbumDAO extends DAO {
 				if(!$photographe){
 					return false;
 				}
+				if($album->getEtat() == 0){
+					//en plus, on doit decrementer openftp
+					$photographe->decOpenFTP();
+				}
 				$stringID = StringID::getStringIDDepuisID_Album($album->getAlbumID());
 				if(!$stringID){
 					return false;
@@ -799,7 +803,7 @@ class AlbumDAO extends DAO {
 					$httpPostRequest = 'mode=0&homePhotograph='.$stringID->getHomePhotographe().'&stringID='.$stringID->getStringID();
 				}else{
 					//etat == 0 || etat == 1
-					$openFTP = $this->calculOpenFTP($album);
+					$openFTP = $photographe->getOpenFTP();
 					$httpPostRequest = 'mode=1&login='.$photographe->getEmail()."&openAlbum=".$openFTP."&homePhotograph=".$stringID->getHomePhotographe()."&stringID=".$stringID->getStringID();
 				}
 				break;
@@ -814,41 +818,6 @@ class AlbumDAO extends DAO {
 			return false;
 		}else{
 			return true;
-		}
-	}
-	/**
-	 * Retourne le nombre de ftp ouvert
-	 * pour le proprietaire de l'album
-	 */
-	private function calculOpenFTP($album){
-		//il faut locker la table album pour compter
-		$this->lockTableOpenFTP();
-		//le nombre d'album non encore publie
-		$sql = "select count(*) as count from Album where etat < 2 and id_photographe = " .
-		mysql_real_escape_string($album->getID_Photographe());
-		$tmp = $this->retrieve($sql);
-		if($tmp){
-			foreach($tmp as $row){
-				$result = $row->offsetGet("count");
-				break;
-			}
-		}else{
-			//par securite on laisse la possibilite d'uploader??
-			$result = 1;
-		}
-		if(!$this->unlockTable()){
-			ControleurUtils::addError("Impossible d'unlocker table pour calcul openFTP", true);
-		}
-		return $result;
-	}
-	private function lockTableOpenFTP(){
-		$sql = "lock tables Album write";
-		$tmp = $this->update($sql);
-		if($tmp){
-			return true;
-		}else{
-			ControleurUtils::addError("Impossible de locker table pour openftp", true);
-			return false;
 		}
 	}
 	/**
