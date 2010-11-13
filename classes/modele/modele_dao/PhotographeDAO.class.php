@@ -33,7 +33,8 @@ class PhotographeDAO extends UtilisateurDAO{
 		$next = $current + 1;
 		$query = "update Photographe set openftp = " .
 		mysql_real_escape_string($next) . " where photographeID = " .
-		mysql_real_escape_string($ph->getPhotographeID());
+		mysql_real_escape_string($ph->getPhotographeID()) . " and openftp = " .
+		mysql_real_escape_string($current);
 		$this->startTransaction();
 		$tmp = $this->update($query);
 		if($tmp && $this->getAffectedRows() == 1){
@@ -57,7 +58,7 @@ class PhotographeDAO extends UtilisateurDAO{
 		}
 		$query = "update Photographe set openftp = " .
 		mysql_real_escape_string($next) . " where photographeID = " .
-		mysql_real_escape_string($ph->getPhotographeID()) . " and opendftp = " .
+		mysql_real_escape_string($ph->getPhotographeID()) . " and openftp = " .
 		mysql_real_escape_string($current);
 		$this->startTransaction();
 		$tmp = $this->update($query);

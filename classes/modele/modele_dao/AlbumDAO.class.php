@@ -758,6 +758,7 @@ class AlbumDAO extends DAO {
 	}
 	/**
 	 * retire cet album de la BD.
+	 * @return 0 si pas marché, 1 si reste en BD et etat = 3, 2 sinon
 	 * @param unknown_type $album
 	 */
 	public function delete($album){
@@ -768,20 +769,24 @@ class AlbumDAO extends DAO {
 			//si l'album est ouvert, on le cloture
 			//le cron le supprimera
 			case 2:
-				return $album->etatSuivant();
+				if($album->etatSuivant()){
+					return 1;
+				}else{
+					return 0;
+				}
 			//il faut dans tous les cas supprimer les fichiers
 			//sur OVH...
 			//suppression demande par cron...
 			case 3:
 				if(!$this->checkBalanceIsNulle($album) || !$this->checkNoCommandesEnAttente($album)){
-					return false;
+					return 0;
 				}
 			//suppression demande par user ou nous via admin
 			case 0:
 			case 1:
 				$photographe = Photographe::getPhotographeDepuisID($album->getID_Photographe());
 				if(!$photographe){
-					return false;
+					return 0;
 				}
 				if($album->getEtat() == 0){
 					//en plus, on doit decrementer openftp
@@ -789,12 +794,12 @@ class AlbumDAO extends DAO {
 				}
 				$stringID = StringID::getStringIDDepuisID_Album($album->getAlbumID());
 				if(!$stringID){
-					return false;
+					return 0;
 				}
 				$this->startTransaction();
 				if(!$this->deleteAlbumFromBDAndDirectory($album, $photographe, $stringID)){
 					$this->rollback();
-					return false;
+					return 0;
 				}else{
 					$this->commit();
 				}
@@ -809,15 +814,15 @@ class AlbumDAO extends DAO {
 				break;
 			default:
 				ControleurUtils::addError("etat album inconnue dans delete: " . $album->getEtat(), true);
-				return false;
+				return 0;
 		}
 		//fin du switch, reste le call au server maison...
 		include_once $dir_albumdao_class_php . "/../../../functions.php";
 		if(httpPost("http://".FTP_TRANSFER_IP.":".HTTP_PORT."/private/delete_album.php", $httpPostRequest)!="0"){
 			ControleurUtils::addError("Code retour != 0 pour delete_album.php sur server maison", true);
-			return false;
+			return 0;
 		}else{
-			return true;
+			return 2;
 		}
 	}
 	/**
