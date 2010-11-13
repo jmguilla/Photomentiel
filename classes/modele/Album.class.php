@@ -329,6 +329,7 @@ class Album {
 			if($this->etat == (count($ALBUM_STATES) - 1)){
 				$dir_album_class_php = dirname(__FILE__);
 				include_once $dir_album_class_php . "/Commande.class.php";
+				include_once $dir_album_class_php . "/CommandePhoto.class.php";
 				$commandes = Commande::getCommandeEtPhotosDepuisID_Album($this->getAlbumID());
 				if ($commandes){
 					foreach($commandes as $commande){
