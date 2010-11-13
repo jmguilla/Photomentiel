@@ -30,6 +30,7 @@ if (!(isset($_SESSION['userClass']) && $_SESSION['userClass'] === 'Photographe')
 $updateMode = false;
 $albumCreated = false;
 $albumSaved = false;
+$albumDeleted = false;
 if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] === 'del')){
 	if (!isSet($_GET['al']) || $_GET['al'] == ''){
 		photomentiel_die(new PMError("Aucun album spécifié !","Aucun code album n'a été spécifié, que faites vous là ?"), false);
@@ -103,7 +104,9 @@ if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] =
 		}
 	}
 	if ($_GET['action'] === 'del'){
-		$albumObj->delete();
+		if ($albumObj->delete() == 2){
+			$albumDeleted = true;
+		}
 	}
 	$updateMode = true;
 } else if (isset($_POST['title'])) {
@@ -219,6 +222,24 @@ if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] =
 		?>
 	</div>
 	<div class="separator10"></div>
+	<?php
+		if ($albumDeleted){
+			/**************************** ALBUM DELETED ****************************/
+	?>
+			<div id="content_deleted">
+				<div class="separator10" style="height:140px;"></div>
+				Votre album a été supprimé avec succés.<br/>
+				<div class="separator10"></div>
+				<input type="button" class="button" value="Retour Accueil" onClick="document.location.href='index.php'"></input>
+				<input style="width:210px;margin-left:50px;" type="button" class="button" value="Retour à mon compte" onClick="document.location.href='myaccount.php'"></input>
+				<div class="separator10" style="height:150px;"></div>
+			</div>
+	<?php
+		
+		} else {
+	?>
+	
+	
 	<div id="catitle">
 		<?php
 		if ($updateMode){
@@ -229,8 +250,10 @@ if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] =
 			echo '<table width="100%"><tr><td>';
 			if ($continueUpdateState){
 				echo 'Pour modifier votre album vous pouvez remplir les champs et appuyer sur <i>Mettre à jour</i></td><td id="del_alb"><a title="Supprimer cet album" href="javascript:confirmDelAlbum(\''.$sid.'\');">Supprimer l\'album...</a>';
-			} else {
+			} else if($albumObj->getEtat() < 3) {
 				echo 'Voici l\'état actuel de votre album :</td><td id="del_alb"><a title="Cloturer cet album en vue d\'une suppression" href="javascript:confirmDelAlbum(\''.$sid.'\');">Cloturer l\'album...</a>';
+			} else {
+				echo 'Voici l\'état actuel de votre album :</td><td>';
 			}
 			echo '</td></tr></table>';
 		} else {
@@ -266,9 +289,10 @@ if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] =
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" height="66px;">
+				<td colspan="3" height="74px;">
 					<span class="note">Les photos exposées seront filigranées, indiquez ici si vous souhaitez choisir notre filigrane par défaut,<br/>
-					ou le filigrane de votre choix en entrant le texte désiré dans le champ suivant.</span><br/>
+					ou le filigrane de votre choix en entrant le texte désiré dans le champ suivant.<br/>
+					Si vous laissez ce <b>champ vide</b>, le filigrane <i><b>photomentiel</i> sera utilisé</b>.</span><br/>
 					<u>Si vous souhaitez un filigrane personnalisé, veuillez renseigner le champ suivant, sinon laissez le vide :</u>
 				</td>
 			</tr>
@@ -642,6 +666,9 @@ if (isset($_GET['action']) && ($_GET['action'] === 'update' || $_GET['action'] =
 		?>
 		<div class="separator10"></div>
 	</div>
+	<?php 
+	}
+	?>
 </div>
 <div id="full_content_bot"></div>
 <?php

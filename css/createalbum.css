@@ -145,3 +145,10 @@ div#ftp_help ul li {
 div#ftp_help ul li b {
 	font-size:12px;
 }
+
+div#content_deleted {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	line-height:30px;
+}
