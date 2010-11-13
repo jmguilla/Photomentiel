@@ -205,7 +205,7 @@ class CommandeDAO extends DAO{
 				ControleurUtils::addError("Impossible unlock table sur changement etat commande", true);
 			}
 			$commande->setNumero($previousNumero);
-			ControleurUtils::addError("Impossible de changer etat de commande: " . $query);
+			ControleurUtils::addError("Impossible de sauver etat de commande: " . $query, true);
 			return false;
 		}catch(Exception $exception){
 			$this->rollback();
@@ -222,8 +222,8 @@ class CommandeDAO extends DAO{
 	 */
 	private function getNumeroCommande(){
 		$dir_commandedao_class_php = dirname(__FILE__);
-		include_once '/NumeroCommandeDAO.class.php';
-		include_once '/../NumeroCommande.class.php';
+		include_once $dir_commandedao_class_php . '/NumeroCommandeDAO.class.php';
+		include_once $dir_commandedao_class_php . '/../NumeroCommande.class.php';
 		$dao = new NumeroCommandeDAO();
 		$prochain = $dao->getProchain();
 		//on doit verifier le prochain sur ce pattern
